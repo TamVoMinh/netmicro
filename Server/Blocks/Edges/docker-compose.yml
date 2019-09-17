@@ -16,7 +16,7 @@ services:
     environment:
       ES_JAVA_OPTS: "-Xmx512m -Xms256m"
     networks:
-      - elk
+      - netmicro
 
   logstash:
     build:
@@ -38,7 +38,7 @@ services:
       LS_OUTPUT_SLACK: $LS_OUTPUT_SLACK
     privileged: true
     networks:
-      - elk
+      - netmicro
     depends_on:
       - elasticsearch
 
@@ -52,7 +52,7 @@ services:
     ports:
       - "5601:5601"
     networks:
-      - elk
+      - netmicro
     depends_on:
       - elasticsearch
 
@@ -66,7 +66,7 @@ services:
     ports:
       - "8200:8200"
     networks:
-      - elk
+      - netmicro
     depends_on:
       - elasticsearch
 
@@ -80,7 +80,7 @@ services:
       COMMAND: /usr/share/curator/config/delete_log_files_curator.yml
       UNIT_COUNT: 8
     networks:
-      - elk
+      - netmicro
     depends_on:
       - elasticsearch
 
@@ -91,9 +91,9 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
       ROUTE_URIS: logstash://logstash:5000
-      LOGSTASH_TAGS: docker-elk
+      LOGSTASH_TAGS: docker-netmicro
     networks:
-      - elk
+      - netmicro
     depends_on:
       - logstash
     restart: on-failure
@@ -103,5 +103,5 @@ volumes:
     driver: local
 
 networks:
-  elk:
+  netmicro:
     driver: bridge
