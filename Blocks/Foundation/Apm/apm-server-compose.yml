@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 
 services:
   apm-server:
@@ -13,4 +13,4 @@ services:
     networks:
       - elk
     depends_on:
-      - elasticsearch
+      - netmicro

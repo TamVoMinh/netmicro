@@ -9,4 +9,4 @@ RUN dotnet restore -nowarn:msb3202,nu1503 &\
 FROM microsoft/dotnet:2.2-aspnetcore-runtime
 WORKDIR /app
 COPY --from=build /released/out ./
-ENTRYPOINT ["dotnet", "Nmro.Uaa.dll"]
+ENTRYPOINT ["dotnet", "Nmro.Oidc.dll"]
