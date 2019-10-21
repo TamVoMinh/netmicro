@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using IdentityServer4.Models;
-
-internal class Resources {
-    public static IEnumerable<IdentityResource> GetIdentityResources() {
-        return new List<IdentityResource> {
+namespace Nmro.Oidc.Storage
+{
+    internal class Resources
+    {
+        public static IEnumerable<IdentityResource> GetIdentityResources() => new List<IdentityResource> {
             new IdentityResources.OpenId(),
             new IdentityResources.Profile(),
             new IdentityResources.Email(),
@@ -12,10 +13,8 @@ internal class Resources {
                 UserClaims = new List<string> {"role"}
             }
         };
-    }
 
-    public static IEnumerable<ApiResource> GetApiResources() {
-        return new List<ApiResource> {
+        public static IEnumerable<ApiResource> GetApiResources() => new List<ApiResource> {
             new ApiResource {
                 Name = "customAPI",
                 DisplayName = "Custom API",

@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { CONST } from 'nmcro-lib';
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Short date format {CONST.FORMAT_SHORT_DATE}
         </a>
       </header>
     </div>
