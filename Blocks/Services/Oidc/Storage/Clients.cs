@@ -15,7 +15,7 @@ namespace Nmro.Oidc.Storage
                 AllowedScopes = new List<string> {"customAPI.read"}
             },
             new Client {
-                ClientId = "openIdConnectClient",
+                ClientId = "nmro-website",
                 ClientName = "Example Implicit Client Application",
                 AllowedGrantTypes = GrantTypes.Implicit,
                 AllowedScopes = new List<string>
@@ -26,8 +26,8 @@ namespace Nmro.Oidc.Storage
                     "role",
                     "customAPI.write"
                 },
-                RedirectUris = new List<string> {"https://localhost:5001/signin-oidc"},
-                PostLogoutRedirectUris = new List<string> {"https://localhost:5001"}
+                RedirectUris = new List<string> {"http://localhost:5000/signin-oidc"},
+                PostLogoutRedirectUris = new List<string> {"http://localhost:5000"}
             }
         };
     }
