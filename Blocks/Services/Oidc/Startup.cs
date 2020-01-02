@@ -25,6 +25,10 @@ namespace Nmro.Oidc
                 .AddInMemoryApiResources(Storage.Resources.GetApiResources())
                 .AddTestUsers(Storage.Users.Get())
                 .AddDeveloperSigningCredential();
+
+            services.AddControllers();
+            services.AddControllersWithViews();
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,7 +45,17 @@ namespace Nmro.Oidc
                 app.UseHttpsRedirection();
             }
 
+            app.UseStaticFiles();
+
             app.UseIdentityServer();
+
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapDefaultControllerRoute();
+                endpoints.MapControllers();
+            });
         }
     }
 }
