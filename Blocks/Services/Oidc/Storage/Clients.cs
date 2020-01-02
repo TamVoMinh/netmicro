@@ -16,18 +16,21 @@ namespace Nmro.Oidc.Storage
             },
             new Client {
                 ClientId = "nmro-website",
-                ClientName = "Example Implicit Client Application",
-                AllowedGrantTypes = GrantTypes.Implicit,
+                ClientName = "Nmro MVC client - Hybrid Grant",
+                ClientSecrets = new List<Secret>{new Secret("nmro-website-Secret".Sha256())}  ,
+                AllowedGrantTypes = GrantTypes.Hybrid,
+                AllowAccessTokensViaBrowser = false,
+                RequireConsent = false,
+                AlwaysIncludeUserClaimsInIdToken = true,
                 AllowedScopes = new List<string>
                 {
                     IdentityServerConstants.StandardScopes.OpenId,
                     IdentityServerConstants.StandardScopes.Profile,
                     IdentityServerConstants.StandardScopes.Email,
-                    "role",
-                    "customAPI.write"
+                    "member"
                 },
-                RedirectUris = new List<string> {"http://localhost:5000/signin-oidc"},
-                PostLogoutRedirectUris = new List<string> {"http://localhost:5000"}
+                RedirectUris = new List<string> {"http://localhost:8080/signin-oidc"},
+                PostLogoutRedirectUris = new List<string> {"http://localhost:8080/signout-callback-oidc"}
             }
         };
     }
