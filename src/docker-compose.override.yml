@@ -12,11 +12,8 @@ services:
       - ./Reverseproxy/html:/etc/nginx/html:ro
 
   oidc:
-    ports:
-      - 80:80
-      - 443:443
     networks: 
-      netmicro:
+      nmro-network:
         aliases:
           - oidc.${PUBLIC_ORIGIN:-nmro.local}
   website:

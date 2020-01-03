@@ -1,4 +1,5 @@
 version: '3.5'
+
 services:
   proxy:
     image: ${DOCKER_REGISTRY:-nmro}/proxy
@@ -7,9 +8,10 @@ services:
       dockerfile: Reverseproxy/Dockerfile
     depends_on: 
       - oidc
+      - apigateway
       - website
     networks: 
-      - netmicro
+      - nmro-network
 
   oidc:
     image: ${DOCKER_REGISTRY:-nmro}/oidc
@@ -17,10 +19,24 @@ services:
       context: .
       dockerfile: Services/Oidc/Dockerfile
     networks: 
-      - netmicro
+      - nmro-network
 
   website:
     image: ${DOCKER_REGISTRY:-nmro}/website
     build:
       context: .
       dockerfile: Website/Dockerfile
+    networks: 
+      - nmro-network
+
+  apigateway:
+    image: ${DOCKER_REGISTRY:-nmro}/apigateway
+    build:
+      context: .
+      dockerfile: Gateways/ApiGateway/Dockerfile
+    networks:
+      - nmro-network
+
+networks:
+  nmro-network:
+    driver: bridge
