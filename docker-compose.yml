@@ -1,0 +1,26 @@
+version: '3.5'
+services:
+  proxy:
+    image: ${DOCKER_REGISTRY:-nmro}/proxy
+    build:
+      context: .
+      dockerfile: Reverseproxy/Dockerfile
+    depends_on: 
+      - oidc
+      - website
+    networks: 
+      - netmicro
+
+  oidc:
+    image: ${DOCKER_REGISTRY:-nmro}/oidc
+    build:
+      context: .
+      dockerfile: Services/Oidc/Dockerfile
+    networks: 
+      - netmicro
+
+  website:
+    image: ${DOCKER_REGISTRY:-nmro}/website
+    build:
+      context: .
+      dockerfile: Website/Dockerfile

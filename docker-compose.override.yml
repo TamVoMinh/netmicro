@@ -1,0 +1,24 @@
+version: '3.5'
+services:
+  proxy:
+    ports:
+      - 80:80
+      - 443:443
+    environment:
+      PUBLIC_ORIGIN: ${PUBLIC_ORIGIN:-nmro.local}
+    command: /bin/sh -c "envsubst '$$PUBLIC_ORIGIN' < /etc/nginx/domains.template > /etc/nginx/nginx.conf && exec nginx-debug -g 'daemon off;'"
+    volumes:
+      - ./Reverseproxy/config/domains.template:/etc/nginx/domains.template:ro
+      - ./Reverseproxy/html:/etc/nginx/html:ro
+
+  oidc:
+    ports:
+      - 80:80
+      - 443:443
+    networks: 
+      netmicro:
+        aliases:
+          - oidc.${PUBLIC_ORIGIN:-nmro.local}
+  website:
+      environment:
+          PUBLIC_ORIGIN: ${PUBLIC_ORIGIN:-nmro.local}

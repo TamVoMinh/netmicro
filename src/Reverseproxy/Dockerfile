@@ -1,2 +1,2 @@
-FROM 1.17.3-alpine
-COPY config/${TARGET_ENV}/nginx.conf /etc/nginx/nginx.conf
+FROM nginx:1.17.6-alpine
+RUN apk --no-cache add curl
