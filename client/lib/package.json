@@ -1,0 +1,9 @@
+{
+  "name": "nmcro-lib",
+  "version": "0.0.1",
+  "description": "Net Micro client libraries",
+  "main": "index.js",
+  "private": true,
+  "author": "tamvominh.212@gmail.com",
+  "license": "MIT"
+}
