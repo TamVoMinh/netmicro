@@ -7,7 +7,7 @@ FROM mcr.microsoft.com/dotnet/core/sdk:3.0-alpine3.9 AS build
 WORKDIR /src
 
 ADD "Services/Oidc" "Services/Oidc"
-
+COPY "Services/Oidc/wwwroot" "Services/Oidc/wwwroot"
 
 WORKDIR /src/Services/Oidc
 RUN dotnet restore -nowarn:msb3202,nu1503
