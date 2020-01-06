@@ -1,12 +1,12 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.0 AS base
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.0-alpine3.9 AS base
+RUN apk --no-cache add curl
 WORKDIR /app
 EXPOSE 80
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0-alpine3.9 AS build
 WORKDIR /src
 
-ADD "Gateways/ApiGateway" "Gateways/ApiGateway"
-
+COPY "Gateways/ApiGateway" "Gateways/ApiGateway"
 
 WORKDIR /src/Gateways/ApiGateway
 RUN dotnet restore -nowarn:msb3202,nu1503

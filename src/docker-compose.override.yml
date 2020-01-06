@@ -17,5 +17,6 @@ services:
         aliases:
           - oidc.${PUBLIC_ORIGIN:-nmro.local}
   website:
-      environment:
-          PUBLIC_ORIGIN: ${PUBLIC_ORIGIN:-nmro.local}
+    environment:
+      IdentityUrl: http://oidc.${PUBLIC_ORIGIN:-nmro.local}
+      CallBackUrl: http://${PUBLIC_ORIGIN:-nmro.local}

@@ -1,0 +1,21 @@
+﻿{
+    "ReRoutes": [
+        {
+          "DownstreamPathTemplate": "/iam/{everything}",
+          "DownstreamScheme": "http",
+          "DownstreamHostAndPorts": [
+            {
+              "Host": "iam-api",
+              "Port": 80
+            }
+          ],
+          "UpstreamPathTemplate": "/iam/{everything}",
+          "UpstreamHttpMethod": [ "GET", "POST","DELETE","PUT","OPTION" ],
+          "ReRouteIsCaseSensitive": false
+        }
+      ],
+      "GlobalConfiguration": {
+        "RequestIdKey": "nmro-api-gateway",
+        "BaseUrl": "http://api.nmro.local"
+      }
+}

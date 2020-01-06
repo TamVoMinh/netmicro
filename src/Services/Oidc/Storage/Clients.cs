@@ -29,8 +29,8 @@ namespace Nmro.Oidc.Storage
                     IdentityServerConstants.StandardScopes.Email,
                     "member"
                 },
-                RedirectUris = new List<string> {"http://localhost:8080/signin-oidc"},
-                PostLogoutRedirectUris = new List<string> {"http://localhost:8080/signout-callback-oidc"}
+                RedirectUris = new List<string> {"http://nmro.local/signin-oidc"},
+                PostLogoutRedirectUris = new List<string> {"http://nmro.local/signout-callback-oidc"}
             }
         };
     }

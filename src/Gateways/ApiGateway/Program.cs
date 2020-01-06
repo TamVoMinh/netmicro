@@ -1,10 +1,11 @@
 using System;
 using System.IO;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using Ocelot.DependencyInjection;
 using Serilog;
-using Serilog.Events;
 
 namespace Nmro.ApiGateway
 {
@@ -36,13 +37,12 @@ namespace Nmro.ApiGateway
             }
         }
 
-        public static IHostBuilder CreateWebHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
-
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((hostingContext, config) =>{
+                    config.AddOcelot(hostingContext.HostingEnvironment);
+                })                
+                .UseStartup<Startup>();
         
         private static IConfiguration GetConfiguration()
         {
