@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Builder;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 
-namespace Nmro.Oidc
+namespace Nmro.IAM
 {
     public class Startup
     {
@@ -18,20 +20,12 @@ namespace Nmro.Oidc
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services
-                .AddIdentityServer()
-                .AddInMemoryClients(Storage.Clients.Get())
-                .AddInMemoryIdentityResources(Storage.Resources.GetIdentityResources())
-                .AddInMemoryApiResources(Storage.Resources.GetApiResources())
-                .AddTestUsers(Storage.Users.Get())
-                .AddDeveloperSigningCredential();
-
             services.AddControllers();
-            services.AddControllersWithViews();
-            services.AddRazorPages();
-
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Nmro.IAM", Version = "v1" });
+            });
             services.AddHealthChecks();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,27 +35,28 @@ namespace Nmro.Oidc
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-                app.UseHttpsRedirection();
-            }
+            
+            app.UsePathBase("/iam");
 
-            app.UseStaticFiles();
+            app.UseSwagger(c => {
+                c.RouteTemplate = "oas/{documentName}/swagger.json";
+                c.PreSerializeFilters.Add((swaggerDoc, httpReq) =>
+                {
+                    swaggerDoc.Servers = new List<OpenApiServer> { new OpenApiServer { Url = $"{httpReq.Scheme}://{httpReq.Host.Value}/iam" } };
+                });
+            });
 
-            app.UseIdentityServer();
+            app.UseHttpsRedirection();
 
             app.UseRouting();
 
+            app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapDefaultControllerRoute();
                 endpoints.MapControllers();
                 endpoints.MapHealthChecks("/hc");
             });
-
-
         }
     }
 }

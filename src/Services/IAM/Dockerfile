@@ -6,9 +6,9 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0-alpine3.9 AS build
 WORKDIR /src
 
-COPY "Gateways/ApiGateway" "Gateways/ApiGateway"
+ADD "Services/IAM" "Services/IAM"
 
-WORKDIR /src/Gateways/ApiGateway
+WORKDIR /src/Services/IAM
 RUN dotnet restore -nowarn:msb3202,nu1503
 RUN dotnet build --no-restore -c Release -o /app
 
@@ -18,4 +18,4 @@ RUN dotnet publish --no-restore -c Release -o /app
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
-ENTRYPOINT ["dotnet", "Nmro.ApiGateway.dll"]
+ENTRYPOINT ["dotnet", "Nmro.IAM.dll"]
