@@ -13,7 +13,16 @@
 ```powershell
     > set-executionpolicy unrestricted
     # Then cd to root folder and execute
-    > .\dns.local.ps1
+    > .\Deploy\dns.local.ps1
+```
+1. Copy & rename environment variable
+```powershell
+    # copy .\Deploy\variables.env.template .env
+```
+
+1. run up with docker-compose 
+```powershell
+    > docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
 ```
 
 ## Coding conventions
