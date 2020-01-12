@@ -18,5 +18,5 @@ services:
           - oidc.${PUBLIC_ORIGIN:-nmro.local}
   website:
     environment:
-      IdentityUrl: http://ids.${PUBLIC_ORIGIN:-nmro.local}
+      IdentityUrl: http://oidc.${PUBLIC_ORIGIN:-nmro.local}
       CallBackUrl: http://${PUBLIC_ORIGIN:-nmro.local}
