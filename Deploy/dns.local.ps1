@@ -41,5 +41,6 @@ $entries = @{
     'nmro.local' = "127.0.0.1"
     'oidc.nmro.local' = "127.0.0.1"
     'api.nmro.local' = "127.0.0.1"
+    'kibana.nmro.local' = "127.0.0.1"
 };
 setHostEntries($entries)
