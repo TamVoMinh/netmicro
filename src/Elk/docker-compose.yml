@@ -33,7 +33,7 @@ services:
       - "9600:9600"
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
-      LS_OUTPUT_SLACK: $LS_OUTPUT_SLACK
+      LS_NOTIFY_HOOK: $LS_NOTIFY_HOOK
       LOGSPOUT: ignore
       DROP_NON_JSON: 'false'
       STDOUT: 'true'
