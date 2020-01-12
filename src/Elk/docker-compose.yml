@@ -86,7 +86,7 @@ services:
       CRON: 0 0 * * *
       CONFIG_FILE: /usr/share/curator/config/curator.yml
       COMMAND: /usr/share/curator/config/delete_log_files_curator.yml
-      UNIT_COUNT: 8
+      UNIT_COUNT: 1
       LOGSPOUT: ignore
     networks:
       - nmro-network
