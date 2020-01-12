@@ -22,10 +22,18 @@
         # copy src\Deploy\variables.env.template to src/env
     ```
 
-1. run up with docker-compose
+1. Run up with docker-compose
 
     ```powershell
-        > docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
+        > docker-compose -f docker-compose.yml -f docker-compose.override.yml up -f Elk/docker-compose.yml -d
+    ```
+
+1. Clean Up local docker containers
+
+    ```powershell
+        > docker stop $(docker ps -q)
+        > docker rm $(docker ps -aq)
+        > docker system prune
     ```
 
 ## Coding conventions

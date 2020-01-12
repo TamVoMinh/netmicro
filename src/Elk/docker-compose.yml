@@ -1,12 +1,13 @@
 version: '3.5'
 services:
   elasticsearch:
+    image: ${DOCKER_REGISTRY:-nmro}/elk/elasticsearch
     build:
-      context: elasticsearch/
+      context: Elk/Elasticsearch/
       args:
         ELK_VERSION: $ELK_VERSION
     volumes:
-      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+      - ./Elk/Elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
       - esdata:/usr/share/elasticsearch/data
     ports:
       - "9200:9200"
@@ -14,84 +15,95 @@ services:
     environment:
       ES_JAVA_OPTS: "-Xmx512m -Xms256m"
     networks:
-      - netmicro
+      - nmro-network
 
   logstash:
+    image: ${DOCKER_REGISTRY:-nmro}/elk/logstash
     build:
-      context: logstash/
+      context: Elk/Logstash/
       args:
         ELK_VERSION: $ELK_VERSION
     volumes:
-      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
-      - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
-      - ./logstash/templates:/usr/share/logstash/templates:ro
+      - ./Elk/Logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+      - ./Elk/Logstash/pipeline:/usr/share/logstash/pipeline:ro
+      - ./Elk/Logstash/templates:/usr/share/logstash/templates:ro
     ports:
-      - "5000:5000"
       - "5000:5000/udp"
-      - "5001:5001/udp"
       - "5002:5002/udp"
       - "9600:9600"
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
-      LS_OUTPUT_SLACK: $LS_OUTPUT_SLACK
+      LS_NOTIFY_HOOK: $LS_NOTIFY_HOOK
+      LOGSPOUT: ignore
+      DROP_NON_JSON: 'false'
+      STDOUT: 'true'
     privileged: true
     networks:
-      - netmicro
+      - nmro-network
     depends_on:
       - elasticsearch
 
   kibana:
+    image: ${DOCKER_REGISTRY:-nmro}/elk/kibana
     build:
-      context: kibana/
+      context: Elk/Kibana/
       args:
         ELK_VERSION: $ELK_VERSION
     volumes:
-      - ./kibana/config/:/usr/share/kibana/config:ro
+      - ./Elk/Kibana/config/:/usr/share/kibana/config:ro
     ports:
       - "5601:5601"
+    environment:
+      LOGSPOUT: ignore
     networks:
-      - netmicro
+      - nmro-network
     depends_on:
       - elasticsearch
 
   apm-server:
+    image: ${DOCKER_REGISTRY:-nmro}/elk/apm-server
     build:
-      context: extensions/apm-server/
+      context: Elk/Apm/
       args:
         ELK_VERSION: $ELK_VERSION
     volumes:
-      - ./apm-server/config/apm-server.yml:/usr/share/apm-server/config/apm-server.yml:ro
+      - ./Elk/Apm/config/apm-server.yml:/usr/share/apm-server/config/apm-server.yml:ro
     ports:
       - "8200:8200"
+    environment:
+      LOGSPOUT: ignore
     networks:
-      - netmicro
+      - nmro-network
     depends_on:
       - elasticsearch
 
   curator:
+    image: ${DOCKER_REGISTRY:-nmro}/elk/curator
     build:
-      context: extensions/curator/
+      context: Elk/Curator/
     environment:
       ELASTICSEARCH_HOST: elasticsearch
       CRON: 0 0 * * *
       CONFIG_FILE: /usr/share/curator/config/curator.yml
       COMMAND: /usr/share/curator/config/delete_log_files_curator.yml
       UNIT_COUNT: 8
+      LOGSPOUT: ignore
     networks:
-      - netmicro
+      - nmro-network
     depends_on:
       - elasticsearch
 
   logspout:
+    image: ${DOCKER_REGISTRY:-nmro}/elk/logspout
     build:
-      context: extensions/logspout
+      context: Elk/logspout
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
       ROUTE_URIS: logstash://logstash:5000
-      LOGSTASH_TAGS: docker-netmicro
+      LOGSTASH_TAGS: docker-nmro
     networks:
-      - netmicro
+      - nmro-network
     depends_on:
       - logstash
     restart: on-failure
@@ -99,7 +111,3 @@ services:
 volumes:
   esdata:
     driver: local
-
-networks:
-  netmicro:
-    driver: bridge
