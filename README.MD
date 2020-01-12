@@ -25,16 +25,20 @@
 1. Run up with docker-compose
 
     ```powershell
-        > docker-compose -f docker-compose.yml -f docker-compose.override.yml up -f Elk/docker-compose.yml -d
+        > docker-compose -f docker-compose.yml -f docker-compose.override.yml -f Elk/docker-compose.yml up -d
     ```
 
 1. Clean Up local docker containers
 
     ```powershell
-        > docker stop $(docker ps -q)
-        > docker rm $(docker ps -aq)
+        > docker stop $(docker ps -q); docker rm $(docker ps -aq)
         > docker system prune
     ```
+
+### Playground with
+
+1. Default [webiste writen on netcore MVC](http://nmro.local)
+2. Analysis logging with [Kibana](http://kibanan.nmro.local)
 
 ## Coding conventions
 

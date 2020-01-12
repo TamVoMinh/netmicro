@@ -51,8 +51,6 @@ services:
         ELK_VERSION: $ELK_VERSION
     volumes:
       - ./Elk/Kibana/config/:/usr/share/kibana/config:ro
-    ports:
-      - "5601:5601"
     environment:
       LOGSPOUT: ignore
     networks:
