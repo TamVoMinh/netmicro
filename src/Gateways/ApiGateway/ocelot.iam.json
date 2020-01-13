@@ -15,7 +15,6 @@
         }
       ],
       "GlobalConfiguration": {
-        "RequestIdKey": "nmro-api-gateway",
         "BaseUrl": "http://api.nmro.local"
       }
 }
