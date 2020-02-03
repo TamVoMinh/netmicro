@@ -35,6 +35,11 @@
         > docker system prune
     ```
 
+1. Known issues:
+
+- "logspout" service failed to build (ref: https://github.com/TamVoMinh/netmicro/issues/11)
+
+
 ### Playground with
 
 1. Default [webiste writen on netcore MVC](http://nmro.local)
