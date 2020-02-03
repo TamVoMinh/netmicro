@@ -13,13 +13,13 @@
     ```powershell
         > set-executionpolicy unrestricted
         # Then cd to root folder and execute
-        > src\Deploy\dns.local.ps1
+        > Deploy\dns.local.ps1
     ```
 
 1. Copy & rename environment variable
 
     ```powershell
-        # copy src\Deploy\variables.env.template to src/env
+        # copy Deploy/variables.env.template to src/.env
     ```
 
 1. Run up with docker-compose
@@ -38,7 +38,7 @@
 ### Playground with
 
 1. Default [webiste writen on netcore MVC](http://nmro.local)
-2. Analysis logging with [Kibana](http://kibanan.nmro.local)
+2. Analysis logging with [Kibana](http://kibana.nmro.local)
 
 ## Coding conventions
 
