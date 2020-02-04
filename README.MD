@@ -13,7 +13,7 @@
     ```powershell
         > set-executionpolicy unrestricted
         # Then cd to root folder and execute
-        > src\Deploy\dns.local.ps1
+        > Deploy\dns.local.ps1
     ```
 
 1. Copy & rename environment variable
@@ -35,10 +35,15 @@
         > docker system prune
     ```
 
+1. Known issues:
+
+- "logspout" service failed to build (ref: https://github.com/TamVoMinh/netmicro/issues/11)
+
+
 ### Playground with
 
 1. Default [webiste writen on netcore MVC](http://nmro.local)
-2. Analysis logging with [Kibana](http://kibanan.nmro.local)
+2. Analysis logging with [Kibana](http://kibana.nmro.local)
 
 ## Coding conventions
 
