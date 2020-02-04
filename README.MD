@@ -13,13 +13,13 @@
     ```powershell
         > set-executionpolicy unrestricted
         # Then cd to root folder and execute
-        > Deploy\dns.local.ps1
+        > Scripts\dns.local.ps1
     ```
 
 1. Copy & rename environment variable
 
     ```powershell
-        > Move-Item -Path src\Deploy\variables.env.template -Destination src/.env
+        > Move-Item -Path Scripts\variables.env.template -Destination .env
     ```
 
 1. Run up with docker-compose
@@ -37,7 +37,7 @@
 
 1. Known issues:
 
-- "logspout" service failed to build (ref: https://github.com/TamVoMinh/netmicro/issues/11)
+- "logspout" service failed to build on windown (ref: https://github.com/TamVoMinh/netmicro/issues/11)
 
 
 ### Playground with
@@ -45,7 +45,11 @@
 1. Default [webiste writen on netcore MVC](http://nmro.local)
 2. Analysis logging with [Kibana](http://kibana.nmro.local)
 
-## Coding conventions
+## Coding conventions & Style
+
+### Editors and IDEs
+
+* For `define and maintain consistent` between different editors and IDEs [use EditorConfig](http://editorconfig.org)
 
 ### Server side projects in `C#`
 
