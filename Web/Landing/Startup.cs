@@ -5,10 +5,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Logging;
-using Nmro.Website.Extentions;
+using Nmro.Landing.Extentions;
 using Serilog;
 
-namespace Nmro.Website
+namespace Nmro.Landing
 {
     public class Startup
     {

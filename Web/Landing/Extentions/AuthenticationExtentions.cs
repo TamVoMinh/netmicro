@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Nmro.Website.Extentions
+namespace Nmro.Landing.Extentions
 {
     public static class AuthenticationExtentions{
         public static IServiceCollection AddCustomAuthentication(this IServiceCollection services, IConfiguration configuration)

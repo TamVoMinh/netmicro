@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace Nmro.Website.Controllers
+namespace Nmro.Landing.Controllers
 {
     [Authorize(AuthenticationSchemes = "OpenIdConnect")]
     public class ProfileController : Controller

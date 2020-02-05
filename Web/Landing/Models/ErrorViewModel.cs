@@ -1,6 +1,6 @@
 using System;
 
-namespace Nmro.Website.Models
+namespace Nmro.Landing.Models
 {
     public class ErrorViewModel
     {

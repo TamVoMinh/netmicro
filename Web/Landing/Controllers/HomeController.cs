@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Nmro.Website.Models;
+using Nmro.Landing.Models;
 
-namespace Nmro.Website.Controllers
+namespace Nmro.Landing.Controllers
 {
     public class HomeController : Controller
     {
