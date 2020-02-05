@@ -43,7 +43,8 @@
 ### Playground with
 
 1. Default [webiste writen on netcore MVC](http://nmro.local)
-2. Analysis logging with [Kibana](http://kibana.nmro.local)
+1. Analysis logging with [Kibana](http://kibana.nmro.local)
+1. user/pass: admin/admin
 
 ## Coding conventions & Style
 
