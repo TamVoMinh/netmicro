@@ -6,11 +6,11 @@ services:
     build:
       context: .
       dockerfile: Gateways/ReverseProxy/Dockerfile
-    depends_on: 
+    depends_on:
       - oidc
       - apigateway
-      - website
-    networks: 
+      - landing
+    networks:
       - nmro-network
 
   oidc:
@@ -18,15 +18,15 @@ services:
     build:
       context: .
       dockerfile: Services/Oidc/Dockerfile
-    networks: 
+    networks:
       - nmro-network
 
-  website:
-    image: ${DOCKER_REGISTRY:-nmro}/website
+  landing:
+    image: ${DOCKER_REGISTRY:-nmro}/landing
     build:
       context: .
-      dockerfile: Website/Dockerfile
-    networks: 
+      dockerfile: Web/Landing/Dockerfile
+    networks:
       - nmro-network
 
   apigateway:
@@ -44,7 +44,7 @@ services:
       dockerfile: Services/IAM/Dockerfile
     networks:
       - nmro-network
-    ports: 
+    ports:
       - 8080:80
 
 networks:

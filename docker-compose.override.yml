@@ -12,11 +12,11 @@ services:
       - ./Gateways/ReverseProxy/html:/etc/nginx/html:ro
 
   oidc:
-    networks: 
+    networks:
       nmro-network:
         aliases:
           - oidc.${PUBLIC_ORIGIN:-nmro.local}
-  website:
+  landing:
     environment:
       IdentityUrl: http://oidc.${PUBLIC_ORIGIN:-nmro.local}
       CallBackUrl: http://${PUBLIC_ORIGIN:-nmro.local}
