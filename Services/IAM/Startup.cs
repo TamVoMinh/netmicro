@@ -7,6 +7,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Serilog;
+using System.Reflection;
+using AutoMapper;
 
 namespace Nmro.IAM
 {
@@ -22,11 +24,18 @@ namespace Nmro.IAM
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(typeof(Startup));
+
             services.AddLogging(logging => {
                 logging.ClearProviders();
                 logging.AddSerilog(dispose: true);
             });
-            
+
+            services.AddIAMDbcontext(
+                Configuration.GetConnectionString("DefaultConnection"),
+                typeof(Startup).GetTypeInfo().Assembly.GetName().Name
+            );
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -42,7 +51,7 @@ namespace Nmro.IAM
             {
                 app.UseDeveloperExceptionPage();
             }
-            
+
             app.UsePathBase("/iam");
 
             app.UseSwagger(c => {
@@ -52,8 +61,6 @@ namespace Nmro.IAM
                     swaggerDoc.Servers = new List<OpenApiServer> { new OpenApiServer { Url = $"{httpReq.Scheme}://{httpReq.Host.Value}/iam" } };
                 });
             });
-
-            app.UseHttpsRedirection();
 
             app.UseRouting();
 

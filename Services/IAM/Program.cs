@@ -1,9 +1,17 @@
 using System;
 using System.IO;
+
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
+
 using Serilog;
+using Nmro.IAM.Extensions;
+using Nmro.IAM.Reposistory;
+
 
 namespace Nmro.IAM
 {
@@ -12,14 +20,22 @@ namespace Nmro.IAM
         public static int Main(string[] args)
         {
             var configuration = GetConfiguration();
-            
+
             Log.Logger = CreateSerilogLogger(configuration);
 
             try
             {
                 Log.Information("Configuring web host");
                 var host = CreateWebHostBuilder(args).Build();
-                
+
+                Log.Information("Applying migrations");
+                host.MigrateDbContext<IAMDbcontext>((context, services) => {
+                    var logger = services.GetService<ILogger<IdentityUserContextSeed>>();
+                    new IdentityUserContextSeed()
+                        .SeedAsync(context, logger)
+                        .Wait();
+                 });
+
                 Log.Information("Starting web host");
                 host.Run();
                 return 0;
@@ -35,14 +51,11 @@ namespace Nmro.IAM
             }
         }
 
-        public static IHostBuilder CreateWebHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args)=>
+            WebHost
+                .CreateDefaultBuilder(args)
+                .UseStartup<Startup>();
 
-        
         private static IConfiguration GetConfiguration()
         {
             var builder = new ConfigurationBuilder()
