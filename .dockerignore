@@ -1,0 +1,15 @@
+.dockerignore
+.env
+.git
+.gitignore
+.vs
+.vscode
+docker-compose*.yml
+*.sln
+*.md
+**/bin/
+**/obj/
+**/node_modules/
+**/bower_components/
+**/node_modules
+

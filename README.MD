@@ -19,7 +19,7 @@
 1. Copy & rename environment variable
 
     ```powershell
-        > Move-Item -Path Scripts\variables.env.template -Destination .env
+        > Copy-Item -Path Scripts\variables.env.template -Destination .env
     ```
 
 1. Run up with docker-compose
