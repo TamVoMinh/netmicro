@@ -41,7 +41,7 @@ services:
     image: ${DOCKER_REGISTRY:-nmro}/api/iam
     build:
       context: .
-      dockerfile: Services/IAM/API/Dockerfile
+      dockerfile: Services/IAM/Dockerfile
     networks:
       - nmro-network
     ports:
