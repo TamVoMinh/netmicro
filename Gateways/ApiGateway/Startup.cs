@@ -4,10 +4,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Nmro.ApiGateway.Extentions;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 using Serilog;
+using Nmro.ApiGateway.Extentions;
 
 namespace Nmro.ApiGateway
 {
@@ -21,12 +21,20 @@ namespace Nmro.ApiGateway
         public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
-        {       
+        {
             services.AddLogging(logging => {
                 logging.ClearProviders();
                 logging.AddSerilog(dispose: true);
             });
-                 
+
+            services.AddCors(options =>{
+                options.AddPolicy(Configuration.GetCorsPolicyName(), corsPolicy =>{
+                    corsPolicy.WithOrigins(Configuration.GetAllowOrigns());
+                    corsPolicy.AllowAnyHeader();
+                    corsPolicy.AllowAnyMethod();
+                });
+            });
+
             services.AddOcelot();
             services.AddHealthChecks();
         }
@@ -37,6 +45,8 @@ namespace Nmro.ApiGateway
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(Configuration.GetCorsPolicyName());
 
             app.UseRouting();
 

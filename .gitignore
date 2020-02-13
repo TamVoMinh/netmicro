@@ -41,3 +41,7 @@ msbuild.wrn
 .vscode
 
 #Enviroment variables
+.env
+
+#nodejs
+node_modules/
