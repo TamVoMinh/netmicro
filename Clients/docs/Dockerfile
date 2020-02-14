@@ -6,7 +6,8 @@ FROM node:10.16.0-alpine as build
 WORKDIR /app
 
 COPY Clients/docs /app
-RUN npm i && npm run build
+RUN yarn install --verbose
+RUN yarn run build
 
 
 FROM base as final
