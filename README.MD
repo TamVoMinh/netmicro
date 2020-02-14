@@ -25,7 +25,7 @@
 1. Run up with docker-compose
 
     ```powershell
-        > docker-compose -f docker-compose.yml -f docker-compose.override.yml -f DevOnly/docker-compose.database.yml -f Elk/docker-compose.yml up -d
+        > docker-compose -f docker-compose.yml -f docker-compose.override.yml -f DevOnly/docker-compose.yml -f Elk/docker-compose.yml -f Clients/docker-compose.yml up -d
     ```
 
 1. Clean Up local docker containers
