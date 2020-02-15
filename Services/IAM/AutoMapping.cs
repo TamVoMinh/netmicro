@@ -9,6 +9,7 @@ namespace Nmro.IAM
         public AutoMapping()
         {
             CreateMap<IdentityUser, IdentityUserModel>().ReverseMap();
+            CreateMap<IdentityUser, UserProfileModel>().ReverseMap();
         }
     }
 }

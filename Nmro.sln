@@ -1,21 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateways", "Gateways", "{6B642FEC-8322-4B87-9F8B-CD875872E088}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nmro.ApiGateway", "Gateways\ApiGateway\Nmro.ApiGateway.csproj", "{9C0AFF50-AE5F-4DD2-ACCA-4BC9E5016071}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nmro.ApiGateway", "Gateways\ApiGateway\Nmro.ApiGateway.csproj", "{9C0AFF50-AE5F-4DD2-ACCA-4BC9E5016071}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{EBA68191-4137-4F63-A86C-8E363B9BD74E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nmro.Oidc", "Services\Oidc\Nmro.Oidc.csproj", "{39FF0A23-7609-4EF0-8330-C1FEF4467057}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nmro.Oidc", "Services\Oidc\Nmro.Oidc.csproj", "{39FF0A23-7609-4EF0-8330-C1FEF4467057}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nmro.IAM", "Services\IAM\Nmro.IAM.csproj", "{D9E416A0-93D6-48B8-8A8A-52E542688DDD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nmro.IAM", "Services\IAM\Nmro.IAM.csproj", "{D9E416A0-93D6-48B8-8A8A-52E542688DDD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{6F5678C3-772E-4B82-848E-45016ABFFAF6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nmro.Landing", "Web\Landing\Nmro.Landing.csproj", "{B703E86C-B7D1-4CB5-8BFF-03A1AF6C3B8F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nmro.Landing", "Web\Landing\Nmro.Landing.csproj", "{B703E86C-B7D1-4CB5-8BFF-03A1AF6C3B8F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,9 +25,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{9C0AFF50-AE5F-4DD2-ACCA-4BC9E5016071}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -79,10 +76,16 @@ Global
 		{B703E86C-B7D1-4CB5-8BFF-03A1AF6C3B8F}.Release|x86.ActiveCfg = Release|Any CPU
 		{B703E86C-B7D1-4CB5-8BFF-03A1AF6C3B8F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{9C0AFF50-AE5F-4DD2-ACCA-4BC9E5016071} = {6B642FEC-8322-4B87-9F8B-CD875872E088}
 		{39FF0A23-7609-4EF0-8330-C1FEF4467057} = {EBA68191-4137-4F63-A86C-8E363B9BD74E}
 		{D9E416A0-93D6-48B8-8A8A-52E542688DDD} = {EBA68191-4137-4F63-A86C-8E363B9BD74E}
 		{B703E86C-B7D1-4CB5-8BFF-03A1AF6C3B8F} = {6F5678C3-772E-4B82-848E-45016ABFFAF6}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {72E63FED-A619-460A-A78A-2EEC95176D2A}
 	EndGlobalSection
 EndGlobal

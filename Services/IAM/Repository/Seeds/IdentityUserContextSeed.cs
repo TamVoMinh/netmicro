@@ -23,22 +23,23 @@ public class IdentityUserContextSeed
 
     }
 
-    private List<IdentityUser> TestingUsers(){
+    private List<IdentityUser> TestingUsers()
+    {
         return new List<IdentityUser>{
             new IdentityUser{ UserName = "admin", Password="admin123", Email="admin@nmro.local" }
         };
     }
 
-     private AsyncRetryPolicy CreatePolicy( ILogger<IdentityUserContextSeed> logger, string prefix,int retries = 3)
-        {
-            return Policy.Handle<NpgsqlException>().
-                WaitAndRetryAsync(
-                    retryCount: retries,
-                    sleepDurationProvider: retry => TimeSpan.FromSeconds(5),
-                    onRetry: (exception, timeSpan, retry, ctx) =>
-                    {
-                        logger.LogWarning(exception, "[{prefix}] Exception {ExceptionType} with message {Message} detected on attempt {retry} of {retries}", prefix, exception.GetType().Name, exception.Message, retry, retries);
-                    }
-                );
-        }
+    private AsyncRetryPolicy CreatePolicy(ILogger<IdentityUserContextSeed> logger, string prefix, int retries = 3)
+    {
+        return Policy.Handle<NpgsqlException>().
+            WaitAndRetryAsync(
+                retryCount: retries,
+                sleepDurationProvider: retry => TimeSpan.FromSeconds(5),
+                onRetry: (exception, timeSpan, retry, ctx) =>
+                {
+                    logger.LogWarning(exception, "[{prefix}] Exception {ExceptionType} with message {Message} detected on attempt {retry} of {retries}", prefix, exception.GetType().Name, exception.Message, retry, retries);
+                }
+            );
+    }
 }
