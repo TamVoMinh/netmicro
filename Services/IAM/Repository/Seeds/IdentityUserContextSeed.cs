@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Nmro.IAM.Reposistory;
@@ -14,16 +15,21 @@ public class IdentityUserContextSeed
     {
         var policy = CreatePolicy(logger, nameof(IdentityUserContextSeed));
 
+        logger.LogInformation("Start seeding...");
+
         await policy.ExecuteAsync(async () =>
         {
-            await context.IdentityUsers.AddRangeAsync(TestingUsers());
-            await context.SaveChangesAsync();
+            if (!context.IdentityUsers.Any())
+            {
+                await context.IdentityUsers.AddRangeAsync(SeedUsers());
+                await context.SaveChangesAsync();
+            }
         });
 
-
+        logger.LogInformation("End seeding.");
     }
 
-    private List<IdentityUser> TestingUsers()
+    private List<IdentityUser> SeedUsers()
     {
         return new List<IdentityUser>{
             new IdentityUser{ UserName = "admin", Password="admin123", Email="admin@nmro.local" }
