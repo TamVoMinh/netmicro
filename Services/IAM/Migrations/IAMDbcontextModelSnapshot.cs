@@ -3,7 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Nmro.IAM.Reposistory;
+using Nmro.IAM.Repository;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Nmro.IAM.Migrations

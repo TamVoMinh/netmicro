@@ -2,7 +2,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Nmro.IAM.Reposistory.Entities
+namespace Nmro.IAM.Repository.Entities
 {
     public class IdentityUser : EntityBase<long>
     {

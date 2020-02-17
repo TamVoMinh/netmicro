@@ -1,6 +1,6 @@
 using AutoMapper;
 using Nmro.IAM.Models;
-using Nmro.IAM.Reposistory.Entities;
+using Nmro.IAM.Repository.Entities;
 
 namespace Nmro.IAM
 {

@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 using Serilog;
 using Nmro.IAM.Extensions;
-using Nmro.IAM.Reposistory;
+using Nmro.IAM.Repository;
 
 
 namespace Nmro.IAM
