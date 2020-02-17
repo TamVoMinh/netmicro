@@ -5,7 +5,7 @@ WORKDIR /app
 FROM node:10.16.0-alpine as build
 WORKDIR /app
 
-COPY Clients/docs /app
+COPY Clients/dashboard /app
 RUN yarn install && yarn run build
 
 
