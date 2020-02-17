@@ -1,11 +1,21 @@
 version: '3.5'
 services:
   api-docs:
-    image: ${DOCKER_REGISTRY:-nmro}/api/docs
+    image: ${DOCKER_REGISTRY:-nmro}/clients/api-docs
     build:
       context: .
       dockerfile: Clients/docs/Dockerfile
     networks:
       - nmro-network
     volumes:
-      - ./Clients/docs/nginx/default.conf:/etc/nginx/nginx.conf:ro
+      - ./Clients/nginx/default.conf:/etc/nginx/nginx.conf:ro
+  dashboard:
+    image: ${DOCKER_REGISTRY:-nmro}/clients/dashboard
+    build:
+      context: .
+      dockerfile: Clients/dashboard/Dockerfile
+    networks:
+      - nmro-network
+    volumes:
+      - ./Clients/nginx/default.conf:/etc/nginx/nginx.conf:ro
+
