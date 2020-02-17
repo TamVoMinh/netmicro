@@ -67,7 +67,17 @@ namespace Nmro.IAM.Repository.Entities
             EntityTypeBuilder<Client> entityTable = builder.Entity<Client>();
 
             entityTable.HasKey(en => en.Id);
+
             entityTable.Property(en => en.Id).ValueGeneratedOnAdd();
+            entityTable.Property(e => e.AllowedScopes)
+                         .HasConversion(v => string.Join(',', v), v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
+            entityTable.Property(e => e.AllowedGrantTypes)
+                         .HasConversion(v => string.Join(',', v), v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
+            entityTable.Property(e => e.RedirectUris)
+                         .HasConversion(v => string.Join(',', v), v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
+            entityTable.Property(e => e.PostLogoutRedirectUris)
+                         .HasConversion(v => string.Join(',', v), v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
+
             entityTable.HasIndex(en => en.ClientId).IsUnique();
 
             return builder;

@@ -29,9 +29,5 @@ namespace Nmro.IAM.Repository.Entities
         //     List of accociated user claims that should be included when this resource is
         //     requested.
         public ICollection<string> UserClaims { get; set; }
-        //
-        // Summary:
-        //     Gets or sets the custom properties for the resource.
-        public IDictionary<string, string> Properties { get; set; }
     }
 }

@@ -35,6 +35,8 @@ namespace Nmro.IAM.Repository.Entities
 
             entityTable.HasKey(en => en.Id);
             entityTable.Property(en => en.Id).ValueGeneratedOnAdd();
+            entityTable.Property(e => e.UserClaims)
+                         .HasConversion(v => string.Join(',', v), v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
 
             return builder;
         }
