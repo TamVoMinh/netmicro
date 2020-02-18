@@ -16,10 +16,22 @@ services:
       nmro-network:
         aliases:
           - oidc.${PUBLIC_ORIGIN:-nmro.local}
+
+  apigateway:
+    networks:
+      nmro-network:
+        aliases:
+          - api.${PUBLIC_ORIGIN:-nmro.local}
+
   landing:
     environment:
       IdentityUrl: http://oidc.${PUBLIC_ORIGIN:-nmro.local}
       CallBackUrl: http://${PUBLIC_ORIGIN:-nmro.local}
+
+  health:
+    environment:
+      IdentityUrl: http://oidc.${PUBLIC_ORIGIN:-nmro.local}
+      HealthChecksUI__Webhooks__Uri: "https://${LS_NOTIFY_HOOK}"
 
   iam-api:
     environment:

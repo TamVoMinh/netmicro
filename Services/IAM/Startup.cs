@@ -9,6 +9,8 @@ using Microsoft.OpenApi.Models;
 using Serilog;
 using System.Reflection;
 using AutoMapper;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using HealthChecks.UI.Client;
 
 namespace Nmro.IAM
 {
@@ -69,7 +71,12 @@ namespace Nmro.IAM
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHealthChecks("/hc");
+            });
+
+            app.UseHealthChecks("/health", new HealthCheckOptions()
+            {
+                Predicate = _ => true,
+                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
             });
         }
     }

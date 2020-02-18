@@ -8,6 +8,8 @@ using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 using Serilog;
 using Nmro.ApiGateway.Extentions;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using HealthChecks.UI.Client;
 
 namespace Nmro.ApiGateway
 {
@@ -50,7 +52,11 @@ namespace Nmro.ApiGateway
 
             app.UseRouting();
 
-            app.UseHealthChecks("/hc");
+            app.UseHealthChecks("/health", new HealthCheckOptions()
+            {
+                Predicate = _ => true,
+                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+            });
 
             app.UseOcelot().Wait();
 
