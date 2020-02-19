@@ -1,5 +1,7 @@
 using IdentityServer4.Validation;
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -84,10 +86,13 @@ namespace Nmro.Oidc
             {
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapControllers();
-                endpoints.MapHealthChecks("/hc");
             });
 
-
+            app.UseHealthChecks("/health", new HealthCheckOptions()
+            {
+                Predicate = _ => true,
+                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+            });
         }
     }
 }

@@ -45,3 +45,6 @@ msbuild.wrn
 
 #nodejs
 node_modules/
+
+#health-check
+Web/Health/healthchecksdb
