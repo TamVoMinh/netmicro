@@ -29,6 +29,14 @@ services:
     networks:
       - nmro-network
 
+  health:
+    image: ${DOCKER_REGISTRY:-nmro}/health
+    build:
+      context: .
+      dockerfile: Web/Health/Dockerfile
+    networks:
+      - nmro-network
+
   apigateway:
     image: ${DOCKER_REGISTRY:-nmro}/apigateway
     build:
