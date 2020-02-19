@@ -38,7 +38,6 @@ namespace Nmro.Oidc
 
             services
                 .AddIdentityServer()
-                .AddResourceOwnerValidator<ResourceOwnerPasswordValidator>()
                 .AddInMemoryClients(Storage.Clients.Get())
                 .AddInMemoryIdentityResources(Storage.Resources.GetIdentityResources())
                 .AddInMemoryApiResources(Storage.Resources.GetApiResources())
