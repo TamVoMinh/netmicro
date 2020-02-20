@@ -67,14 +67,3 @@
 
 ## Contributors
 
-[//]: contributor-faces
-
-<a href="https://github.com/TamVoMinh"><img src="https://avatars1.githubusercontent.com/u/21242164?s=460&v=4" title="TamVoMinh" width="80" height="80"></a>
-
-<a href="https://github.com/duybt"><img src="https://avatars1.githubusercontent.com/u/16505992?s=460&v=4" title="TamVoMinh" width="80" height="80"></a>
-
-<a href="https://github.com/minhhuan2210"><img src="https://avatars0.githubusercontent.com/u/43345758?s=460&v=4" title="TamVoMinh" width="80" height="80"></a>
-
-<a href="https://github.com/htduy262"><img src="https://avatars1.githubusercontent.com/u/14125876?s=460&v=4" title="TamVoMinh" width="80" height="80"></a>
-
-[//]: contributor-faces
