@@ -1,4 +1,5 @@
-﻿using HealthChecks.UI.Client;
+using IdentityServer4.Validation;
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
@@ -6,7 +7,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Http;
+using Nmro.Oidc.Services;
+using Nmro.Oidc.Storage;
 using Serilog;
+using System;
+using Nmro.Oidc.Extensions;
+using IdentityServer4.Services;
+using Nmro.Oidc.Application;
 
 namespace Nmro.Oidc
 {
@@ -22,22 +30,32 @@ namespace Nmro.Oidc
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddLogging(logging => {
+            services.AddLogging(logging =>
+            {
                 logging.ClearProviders();
                 logging.AddSerilog(dispose: true);
             });
-            
+
+            services.Configure<AppSettings>(Configuration);
+
             services
                 .AddIdentityServer()
                 .AddInMemoryClients(Storage.Clients.Get())
                 .AddInMemoryIdentityResources(Storage.Resources.GetIdentityResources())
                 .AddInMemoryApiResources(Storage.Resources.GetApiResources())
-                .AddTestUsers(Storage.Users.Get())
                 .AddDeveloperSigningCredential();
+
+            services.AddHttpClient("iam", opts =>
+            {
+                opts.BaseAddress = new Uri(Configuration.GetValue<string>("IdentityApiEndpoint") ?? "http://iam-api");
+            });
 
             services.AddControllers();
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            // Register services
+            services.AddScoped<IUserService, UserService>();
 
             services.AddHealthChecks();
 

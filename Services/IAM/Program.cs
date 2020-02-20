@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 using Serilog;
 using Nmro.IAM.Extensions;
-using Nmro.IAM.Reposistory;
+using Nmro.IAM.Repository;
 
 
 namespace Nmro.IAM
@@ -19,7 +19,8 @@ namespace Nmro.IAM
     {
         public static int Main(string[] args)
         {
-            var configuration = GetConfiguration();
+            var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            var configuration = GetConfiguration(env);
 
             Log.Logger = CreateSerilogLogger(configuration);
 
@@ -56,11 +57,12 @@ namespace Nmro.IAM
                 .CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
 
-        private static IConfiguration GetConfiguration()
+        private static IConfiguration GetConfiguration(string env)
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env}.json", optional: true)
                 .AddEnvironmentVariables();
 
             var config = builder.Build();

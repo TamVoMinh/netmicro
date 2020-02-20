@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Nmro.Oidc.Extensions;
 using Nmro.Oidc.Storage;
 using System;
 using System.Collections.Generic;

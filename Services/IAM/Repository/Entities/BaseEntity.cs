@@ -1,6 +1,6 @@
 using System;
 
-namespace Nmro.IAM.Reposistory.Entities
+namespace Nmro.IAM.Repository.Entities
 {
     public abstract class EntityBase<ID>
     {

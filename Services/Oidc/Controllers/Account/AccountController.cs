@@ -5,11 +5,15 @@ using IdentityServer4.Models;
 using IdentityServer4.Services;
 using IdentityServer4.Stores;
 using IdentityServer4.Test;
+using IdentityServer4.Validation;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Nmro.Oidc.Extensions;
+using Nmro.Oidc.Services;
 using Nmro.Oidc.Storage;
+using Serilog;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,25 +29,31 @@ namespace Nmro.Oidc
     [AllowAnonymous]
     public class AccountController : Controller
     {
-        private readonly TestUserStore _users;
+        private readonly TestUserStore __userService;
+        private readonly IUserService _userService;
+        private readonly IResourceOwnerPasswordValidator _validator;
         private readonly IIdentityServerInteractionService _interaction;
         private readonly IClientStore _clientStore;
         private readonly IAuthenticationSchemeProvider _schemeProvider;
         private readonly IEventService _events;
 
         public AccountController(
+            IResourceOwnerPasswordValidator validator,
             IIdentityServerInteractionService interaction,
             IClientStore clientStore,
             IAuthenticationSchemeProvider schemeProvider,
+            IUserService userService,
             IEventService events,
             TestUserStore users = null)
         {
             // if the TestUserStore is not in DI, then we'll just use the global users collection
             // this is where you would plug in your own custom identity management library (e.g. ASP.NET Identity)
-            _users = users ?? new TestUserStore(Users.Get());
+            __userService = users ?? new TestUserStore(Users.Get());
 
+            _validator = validator;
             _interaction = interaction;
             _clientStore = clientStore;
+            _userService = userService;
             _schemeProvider = schemeProvider;
             _events = events;
         }
@@ -106,9 +116,9 @@ namespace Nmro.Oidc
             if (ModelState.IsValid)
             {
                 // validate username/password against in-memory store
-                if (_users.ValidateCredentials(model.Username, model.Password))
+                if (await _userService.ValidateCredentials(model.Username, model.Password))
                 {
-                    var user = _users.FindByUsername(model.Username);
+                    var user = await _userService.FindByUsername(model.Username);
                     await _events.RaiseAsync(new UserLoginSuccessEvent(user.Username, user.SubjectId, user.Username, clientId: context?.ClientId));
 
                     // only set explicit expiration here if user chooses "remember me". 
@@ -155,7 +165,7 @@ namespace Nmro.Oidc
                     }
                 }
 
-                await _events.RaiseAsync(new UserLoginFailureEvent(model.Username, "invalid credentials", clientId:context?.ClientId));
+                await _events.RaiseAsync(new UserLoginFailureEvent(model.Username, "invalid credentials", clientId: context?.ClientId));
                 ModelState.AddModelError(string.Empty, AccountOptions.InvalidCredentialsErrorMessage);
             }
 
@@ -164,7 +174,7 @@ namespace Nmro.Oidc
             return View(vm);
         }
 
-        
+
         /// <summary>
         /// Show logout page
         /// </summary>
