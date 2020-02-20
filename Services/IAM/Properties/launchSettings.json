@@ -4,7 +4,7 @@
     "Nmro.IAM": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "weatherforecast",
+      "launchUrl": "identityuser",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

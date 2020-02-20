@@ -46,7 +46,7 @@ namespace Nmro.IAM.Controllers
         }
 
         [HttpPost("credential-validation")]
-        public async Task<ActionResult<bool>> ValidateCredential([FromBody] UserCredentialModel credential)
+        public async Task<ActionResult<bool>> ValidateCredential([FromBody] CredentialModel credential)
         {
             var user = await _context.IdentityUsers.FirstOrDefaultAsync(e => e.UserName.Equals(credential.Username));
 
