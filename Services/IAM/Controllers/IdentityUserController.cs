@@ -13,13 +13,13 @@ namespace Nmro.IAM.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class IdentityController : ControllerBase
+    public class IdentityUserController : ControllerBase
     {
-        private readonly ILogger<IdentityController> _logger;
+        private readonly ILogger<IdentityUserController> _logger;
         private readonly IMapper _mapper;
         private readonly IAMDbcontext _context;
 
-        public IdentityController(ILogger<IdentityController> logger, IAMDbcontext context, IMapper mapper)
+        public IdentityUserController(ILogger<IdentityUserController> logger, IAMDbcontext context, IMapper mapper)
         {
             _logger = logger;
             _context = context;

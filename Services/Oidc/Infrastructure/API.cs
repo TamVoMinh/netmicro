@@ -15,5 +15,9 @@ namespace Nmro.Oidc.Infrastructure
             public static string ValidateCredentials() => $"identity/credential-validation";
         }
 
+        public static class Client
+        {
+            public static string GetClientById(string clientId) => $"client?clientId={clientId}";
+        }
     }
 }

@@ -10,6 +10,10 @@ namespace Nmro.IAM
         {
             CreateMap<IdentityUser, IdentityUserModel>().ReverseMap();
             CreateMap<IdentityUser, UserProfileModel>().ReverseMap();
+
+            CreateMap<Client, ClientModel>().ReverseMap();
+
+            CreateMap<Secret, SecretModel>().ReverseMap();
         }
     }
 }
