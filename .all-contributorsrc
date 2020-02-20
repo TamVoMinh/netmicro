@@ -1,5 +1,7 @@
 {
-  "files": ["README.md"],
+  "files": [
+    "README.md"
+  ],
   "imageSize": 100,
   "contributorsPerLine": 7,
   "badgeTemplate": "[![All Contributors](https://img.shields.io/badge/all_contributors-<%= contributors.length %>-orange.svg?style=flat-square)](#contributors)",
@@ -11,6 +13,20 @@
       "link": "[<%= symbol %>](<%= url %> \"<%= description %>\"),"
     }
   },
-  "skipCi": "true",
-  "contributors": []
+  "skipCi": true,
+  "contributors": [
+    {
+      "login": "TamVoMinh",
+      "name": "TamVo",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/21242164?v=4",
+      "profile": "https://github.com/TamVoMinh",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "projectName": "netmicro",
+  "projectOwner": "TamVoMinh",
+  "repoType": "github",
+  "repoHost": "https://github.com"
 }
