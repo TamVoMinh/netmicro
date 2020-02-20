@@ -4,6 +4,7 @@
 #
 server.name: kibana
 server.host: "0"
+server.basePath: /elk
 elasticsearch.hosts: http://elasticsearch:9200
 apm_oss.indexPattern: apm-*
 apm_oss.errorIndices: apm-*

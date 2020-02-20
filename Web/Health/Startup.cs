@@ -31,7 +31,6 @@ namespace Nmro.Health
                 logging.AddSerilog(dispose: true);
             });
 
-            services.AddControllersWithViews();
             services.AddHealthChecksUI();
         }
 
@@ -44,21 +43,22 @@ namespace Nmro.Health
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
                 app.UseHttpsRedirection();
             }
-            app.UseStaticFiles();
+
+            app.UsePathBase("/health");
 
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapHealthChecksUI();
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapHealthChecksUI(options => {
+                    options.UIPath = "/status";
+                    options.ApiPath = "/health/api";
+                    options.ResourcesPath = "/health/resources";
+                });
             });
         }
     }
