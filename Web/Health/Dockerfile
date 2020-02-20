@@ -7,7 +7,6 @@ FROM mcr.microsoft.com/dotnet/core/sdk:3.1-alpine3.10 AS build
 WORKDIR /Web
 
 ADD "/Web/Health" "/Web/Health"
-COPY "/Web/Health/wwwroot" "/Web/Health/wwwroot"
 
 WORKDIR /Web/Health
 RUN dotnet restore -nowarn:msb3202,nu1503

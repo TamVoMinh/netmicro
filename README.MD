@@ -43,8 +43,10 @@
 ### Playground with
 
 1. Default [webiste writen on netcore MVC](http://nmro.local)
-1. Analysis logging with [Kibana](http://kibana.nmro.local)
-1. user/pass: admin/admin
+1. Analysis logging with [Kibana](http://isys.nmro.local/elk)
+1. Monitor health with [healthchecks-ui](http://isys.nmro.local/health/status)
+1. Api document with [swagger-ui](http://isys.nmro.local/health/status)
+1. user/pass: admin/admin123
 
 ## Coding conventions & Style
 
