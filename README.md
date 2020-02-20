@@ -66,4 +66,11 @@
 * For `Markdown` document use [style-guide](https://arcticicestudio.github.io/styleguide-markdown/rules/)
 
 ## Contributors
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 
