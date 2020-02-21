@@ -67,6 +67,20 @@
 
 ## Contributors
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-13-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors)
 <!-- ALL-CONTRIBUTORS-BADGE:END --> 
+ <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/TamVoMinh"><img src="https://avatars2.githubusercontent.com/u/21242164?v=4" width="100px;" alt=""/><br /><sub><b>TamVo</b></sub></a></td>
+    <td align="center"><a href="https://github.com/minhhuan2210"><img src="https://avatars1.githubusercontent.com/u/43345758?v=4" width="100px;" alt=""/><br /><sub><b>Minh Huan</b></sub></a></td>
+    <td align="center"><a href="https://github.com/duybt"><img src="https://avatars3.githubusercontent.com/u/16505992?v=4" width="100px;" alt=""/><br /><sub><b>Duy Bui</b></sub></a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 

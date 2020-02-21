@@ -23,6 +23,24 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "minhhuan2210",
+      "name": "Minh Huan",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/43345758?v=4",
+      "profile": "https://github.com/minhhuan2210",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "duybt",
+      "name": "Duy Bui",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/16505992?v=4",
+      "profile": "https://github.com/duybt",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "projectName": "netmicro",
