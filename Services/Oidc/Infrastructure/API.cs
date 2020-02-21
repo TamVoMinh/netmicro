@@ -19,5 +19,16 @@ namespace Nmro.Oidc.Infrastructure
         {
             public static string GetClientById(string clientId) => $"client?clientId={clientId}";
         }
+
+        public static class Resource
+        {
+            public static string GetApiResourceByName(string resourceName) => $"resources?resourceName={resourceName}";
+
+            public static string GetApiResourceByScope(string scopeName) => $"resources/api-resource?scope={scopeName}";
+
+            public static string GetIdentityResourceByScope(string scopeName) => $"resources/identity-resource?scope={scopeName}";
+
+            public static string GetAllResources() => $"resources";
+        }
     }
 }
