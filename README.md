@@ -43,8 +43,10 @@
 ### Playground with
 
 1. Default [webiste writen on netcore MVC](http://nmro.local)
-1. Analysis logging with [Kibana](http://kibana.nmro.local)
-1. user/pass: admin/admin
+1. Analysis logging with [Kibana](http://isys.nmro.local/elk)
+1. Monitor health with [healthchecks-ui](http://isys.nmro.local/health/status)
+1. Api document with [swagger-ui](http://isys.nmro.local/health/status)
+1. user/pass: admin/admin123
 
 ## Coding conventions & Style
 
@@ -62,3 +64,23 @@
 * For `Typescript & Angular` [Use angular style guide](https://angular.io/guide/styleguide)
 * For `Javascript` module reply on jslint/eslint and be supported by prettier
 * For `Markdown` document use [style-guide](https://arcticicestudio.github.io/styleguide-markdown/rules/)
+
+## Contributors
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors)
+<!-- ALL-CONTRIBUTORS-BADGE:END --> 
+ <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/TamVoMinh"><img src="https://avatars2.githubusercontent.com/u/21242164?v=4" width="100px;" alt=""/><br /><sub><b>TamVo</b></sub></a></td>
+    <td align="center"><a href="https://github.com/minhhuan2210"><img src="https://avatars1.githubusercontent.com/u/43345758?v=4" width="100px;" alt=""/><br /><sub><b>Minh Huan</b></sub></a></td>
+    <td align="center"><a href="https://github.com/duybt"><img src="https://avatars3.githubusercontent.com/u/16505992?v=4" width="100px;" alt=""/><br /><sub><b>Duy Bui</b></sub></a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
