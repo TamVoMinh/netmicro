@@ -22,11 +22,11 @@ namespace Nmro.Oidc.Infrastructure
 
         public static class Resource
         {
-            public static string GetApiResourceByName(string resourceName) => $"resources?resourceName={resourceName}";
+            public static string GetApiResourceByName(string resourcename) => $"resources/api-resource?resourcename={resourcename}";
 
-            public static string GetApiResourceByScope(string scopeName) => $"resources/api-resource?scope={scopeName}";
+            public static string GetApiResourceByScope() => $"resources/api-resource";
 
-            public static string GetIdentityResourceByScope(string scopeName) => $"resources/identity-resource?scope={scopeName}";
+            public static string GetIdentityResourceByScope() => $"resources/identity-resource";
 
             public static string GetAllResources() => $"resources";
         }
