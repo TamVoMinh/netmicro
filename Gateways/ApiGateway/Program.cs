@@ -13,15 +13,16 @@ namespace Nmro.ApiGateway
     {
         public static int Main(string[] args)
         {
-            var configuration = GetConfiguration();
-            
+            var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            var configuration = GetConfiguration(env);
+
             Log.Logger = CreateSerilogLogger(configuration);
 
             try
             {
                 Log.Information("Configuring api host");
                 var host = CreateWebHostBuilder(args).Build();
-                
+
                 Log.Information("Starting api host");
                 host.Run();
                 return 0;
@@ -41,14 +42,15 @@ namespace Nmro.ApiGateway
             WebHost.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((hostingContext, config) =>{
                     config.AddOcelot(hostingContext.HostingEnvironment);
-                })                
+                })
                 .UseStartup<Startup>();
-        
-        private static IConfiguration GetConfiguration()
+
+        private static IConfiguration GetConfiguration(string env)
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env}.json", optional: true)
                 .AddEnvironmentVariables();
 
             var config = builder.Build();
