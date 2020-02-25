@@ -11,8 +11,8 @@ namespace Nmro.Landing
     {
         public static int Main(string[] args)
         {
-            var configuration = GetConfiguration();
-
+            var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            var configuration = GetConfiguration(env);
             Log.Logger = CreateSerilogLogger(configuration);
 
             try
@@ -43,11 +43,12 @@ namespace Nmro.Landing
                 });
 
 
-        private static IConfiguration GetConfiguration()
+        private static IConfiguration GetConfiguration(string env)
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env}.json", optional: true)
                 .AddEnvironmentVariables();
 
             var config = builder.Build();
