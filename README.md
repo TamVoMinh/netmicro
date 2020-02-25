@@ -37,7 +37,7 @@
 
 1. Known issues:
 
-- "logspout" service failed to build on windown (ref: https://github.com/TamVoMinh/netmicro/issues/11)
+- "logspout" service failed to build on windown, reference [issues/11](https://github.com/TamVoMinh/netmicro/issues/11)
 
 
 ### Playground with
@@ -45,8 +45,8 @@
 1. Default [webiste writen on netcore MVC](http://nmro.local)
 1. Analysis logging with [Kibana](http://isys.nmro.local/elk)
 1. Monitor health with [healthchecks-ui](http://isys.nmro.local/health/status)
-1. Api document with [swagger-ui](http://isys.nmro.local/health/status)
-1. user/pass: admin/admin123
+1. Api document with [swagger-ui](http://docs.nmro.local/)
+1. User/Pass: admin/admin123
 
 ## Coding conventions & Style
 
