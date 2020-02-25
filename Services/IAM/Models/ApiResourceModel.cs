@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Nmro.IAM.Models
 {
-    public class ApiResourceModel : ResourceModel
+    public class ApiResourceModel : ResourceBaseModel
     {
         public ICollection<Secret> ApiSecrets { get; set; }
         

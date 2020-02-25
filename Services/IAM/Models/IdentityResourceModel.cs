@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Nmro.IAM.Models
 {
-    public class IdentityResourceModel : ResourceModel
+    public class IdentityResourceModel : ResourceBaseModel
     {
         public bool Required { get; set; }
         
