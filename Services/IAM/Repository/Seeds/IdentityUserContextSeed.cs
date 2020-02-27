@@ -43,6 +43,12 @@ public class IdentityUserContextSeed
                 await context.ApiResources.AddRangeAsync(SeedApiResources());
                 await context.SaveChangesAsync();
             }
+
+            if (!context.Secrets.Any())
+            {
+                await context.Secrets.AddRangeAsync(SeedSecrets());
+                await context.SaveChangesAsync();
+            }
         });
 
         logger.LogInformation("End seeding.");
@@ -55,27 +61,30 @@ public class IdentityUserContextSeed
         };
     }
 
-    private List<Client> SeedClients()
+    private List<Nmro.IAM.Repository.Entities.Client> SeedClients()
     {
-        return new List<Client> {
-            new Client {
+        return new List<Nmro.IAM.Repository.Entities.Client> {
+            new Nmro.IAM.Repository.Entities.Client {
+                Id = 1,
                 ClientId = "oauthClient",
                 ClientName = "Example Client Credentials Client Application",
-                AllowedGrantTypes = new[] { GrantType.ClientCredentials}, // GrantTypes.ClientCredentials
-                ClientSecrets = new List<Secret>
-                {
-                    new Secret { Value = "superSecretPassword".Sha256() }
-                },
+                AllowedGrantTypes =  new string[] { GrantType.ClientCredentials}, // GrantTypes.ClientCredentials
+                //ClientSecrets = new List<Secret>
+                //{
+                    
+                //    new Secret { Value = "superSecretPassword".Sha256() }
+                //},
                 AllowedScopes = new List<string> {"customAPI.read"}
             },
-            new Client {
+            new Nmro.IAM.Repository.Entities.Client {
+                Id = 2,
                 ClientId = "nmro-website",
                 ClientName = "Nmro MVC client - Hybrid Grant",
-                ClientSecrets = new List<Secret>
-                {
-                    new Secret { Value = "nmro-website-Secret".Sha256() }
-                },
-                AllowedGrantTypes = new[] { GrantType.Hybrid}, // GrantTypes.Hybrid
+                //ClientSecrets = new List<Secret>
+                //{
+                //    new Secret { Value = "nmro-website-Secret".Sha256() }
+                //},
+                AllowedGrantTypes = new string[] { GrantType.Hybrid}, // GrantTypes.Hybrid
                 AllowAccessTokensViaBrowser = false,
                 RequireConsent = false,
                 AlwaysIncludeUserClaimsInIdToken = true,
@@ -92,18 +101,18 @@ public class IdentityUserContextSeed
         };
     }
 
-    private List<IdentityResource> SeedIdentityResources()
+    private List<Nmro.IAM.Repository.Entities.IdentityResource> SeedIdentityResources()
     {
-        return new List<IdentityResource>
+        return new List<Nmro.IAM.Repository.Entities.IdentityResource>
         {
-            new IdentityResource // new IdentityResources.OpenId(),
+            new Nmro.IAM.Repository.Entities.IdentityResource // new IdentityResources.OpenId(),
             {
                 Name = StandardScopes.OpenId,
                 DisplayName = "Your user identifier",
                 Required = true,
                 UserClaims = new List<string> {JwtClaimTypes.Subject },
             },
-            new IdentityResource // new IdentityResources.Profile(),
+            new Nmro.IAM.Repository.Entities.IdentityResource // new IdentityResources.Profile(),
             {
                 Name = StandardScopes.Profile,
                 DisplayName = "User profile",
@@ -126,7 +135,7 @@ public class IdentityUserContextSeed
                     JwtClaimTypes.UpdatedAt
                 }
             },
-            new IdentityResource // new IdentityResources.Email(),
+            new Nmro.IAM.Repository.Entities.IdentityResource // new IdentityResources.Email(),
             {
                 Name = StandardScopes.Email,
                 DisplayName = "Your email address",
@@ -136,28 +145,38 @@ public class IdentityUserContextSeed
                     JwtClaimTypes.EmailVerified
                 }
             },
-            new IdentityResource {
+            new Nmro.IAM.Repository.Entities.IdentityResource {
                 Name = "role",
                 UserClaims = new List<string> {"role"}
             }
         };
     }
 
-    private List<ApiResource> SeedApiResources()
+    private List<Nmro.IAM.Repository.Entities.ApiResource> SeedApiResources()
     {
-        return new List<ApiResource> {
-            new ApiResource {
+        return new List<Nmro.IAM.Repository.Entities.ApiResource> {
+            new Nmro.IAM.Repository.Entities.ApiResource {
+                Id = 1,
                 Name = "member",
                 DisplayName = "member API",
                 Description = "member API Access",
                 UserClaims = new List<string> {"role"},
-                ApiSecrets = new List<Secret> { new Secret { Value = "scopeSecret".Sha256() }},
-                Scopes = new List<Scope> {
-                    new Scope { Name = "member" },
-                    new Scope { Name ="member.read" },
-                    new Scope { Name ="member.write" }
+                //ApiSecrets = new List<Secret> { new Secret { Value = "scopeSecret".Sha256() }},
+                Scopes = new List<Nmro.IAM.Repository.Entities.Scope> {
+                    new Nmro.IAM.Repository.Entities.Scope { Name = "member" },
+                    new Nmro.IAM.Repository.Entities.Scope { Name ="member.read" },
+                    new Nmro.IAM.Repository.Entities.Scope { Name ="member.write" }
                 }
             }
+        };
+    }
+
+    private List<Nmro.IAM.Repository.Entities.Secret> SeedSecrets()
+    {
+        return new List<Nmro.IAM.Repository.Entities.Secret> {
+            new Nmro.IAM.Repository.Entities.Secret { Value = "superSecretPassword".Sha256(), ClientId = 1 },
+            new Nmro.IAM.Repository.Entities.Secret { Value = "nmro-website-Secret".Sha256(), ClientId = 2 },
+            new Nmro.IAM.Repository.Entities.Secret { Value = "scopeSecret".Sha256(), ApiResourceId = 1 }
         };
     }
 

@@ -238,10 +238,10 @@ namespace Nmro.IAM.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int>("ApiResourceId")
+                    b.Property<int?>("ApiResourceId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("ClientId")
+                    b.Property<int?>("ClientId")
                         .HasColumnType("integer");
 
                     b.Property<long?>("CreatedBy")
@@ -288,17 +288,13 @@ namespace Nmro.IAM.Migrations
 
             modelBuilder.Entity("Nmro.IAM.Repository.Entities.Secret", b =>
                 {
-                    b.HasOne("Nmro.IAM.Repository.Entities.ApiResource", "ApiResource")
+                    b.HasOne("Nmro.IAM.Repository.Entities.ApiResource", null)
                         .WithMany("ApiSecrets")
-                        .HasForeignKey("ApiResourceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ApiResourceId");
 
-                    b.HasOne("Nmro.IAM.Repository.Entities.Client", "Client")
+                    b.HasOne("Nmro.IAM.Repository.Entities.Client", null)
                         .WithMany("ClientSecrets")
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ClientId");
                 });
 #pragma warning restore 612, 618
         }

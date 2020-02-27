@@ -40,16 +40,16 @@ namespace Nmro.Oidc
 
             services
                 .AddIdentityServer()
-                //.AddInMemoryClients(Storage.Clients.Get())
                 .AddClientStore<ClientStore>()
-                .AddResourceStore<ResourceStore>()
-                //.AddInMemoryIdentityResources(Storage.Resources.GetIdentityResources())
-                //.AddInMemoryApiResources(Storage.Resources.GetApiResources())
+                //.AddResourceStore<ResourceStore>()
+                //.AddInMemoryClients(Storage.Clients.Get())
+                .AddInMemoryIdentityResources(Storage.Resources.GetIdentityResources())
+                .AddInMemoryApiResources(Storage.Resources.GetApiResources())
                 .AddDeveloperSigningCredential();
 
             services.AddHttpClient("iam", opts =>
             {
-                opts.BaseAddress = new Uri(Configuration.GetValue<string>("IdentityApiEndpoint") ?? "http://iam-api");
+                opts.BaseAddress = new Uri(Configuration.GetValue<string>("IdentityApiEndpoint") ?? "http://iam-api/iam");
             });
 
             services.AddControllers();

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Nmro.IAM.Models
+namespace Nmro.Oidc.Models
 {
     public class SecretModel
     {
@@ -11,5 +11,11 @@ namespace Nmro.IAM.Models
         public string Value { get; set; }
         public DateTime? Expiration { get; set; }
         public string Type { get; set; }
+
+        public int ClientId { get; set; }
+
+        public int ApiResourceId { get; set; }
+
+        public ClientModel Client { get; set; }
     }
 }

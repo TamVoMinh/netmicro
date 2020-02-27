@@ -8,6 +8,7 @@ using Nmro.IAM.Repository;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using Serilog;
+using System.Linq;
 
 namespace Nmro.IAM.Controllers
 {
@@ -38,18 +39,13 @@ namespace Nmro.IAM.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<ClientModel>>> GetAll()
+        public async Task<ActionResult<ClientModel>> GetByClientId(string clientId)
         {
-            var clients = await _context.Clients.ToListAsync();
-            var result = _mapper.Map<List<ClientModel>>(clients);
+            var client = await _context.Clients
+                .Where(e => e.ClientId.Equals(clientId))
+                .Include(e => e.ClientSecrets)
+                .FirstOrDefaultAsync();
 
-            return result;
-        }
-
-        [HttpGet]
-        public async Task<ActionResult<ClientModel>> GetByClientId([FromQuery]string clientId)
-        {
-            var client = await _context.Clients.FirstOrDefaultAsync(e => e.ClientId.Equals(clientId));
             var result = _mapper.Map<ClientModel>(client);
 
             return result;
