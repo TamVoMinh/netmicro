@@ -36,7 +36,7 @@ namespace Nmro.Oidc.Storage
                 ClientId = "nmro-reactjs-client",
                 ClientName = "Nmro ReactJS client",
                 AllowedGrantTypes = GrantTypes.Implicit,
-                AllowAccessTokensViaBrowser = false,
+                AllowAccessTokensViaBrowser = true,
                 RequireConsent = false,
                 AlwaysIncludeUserClaimsInIdToken = true,
                 AllowedScopes = new List<string>
@@ -46,8 +46,8 @@ namespace Nmro.Oidc.Storage
                     IdentityServerConstants.StandardScopes.Email,
                     "member"
                 },
-                RedirectUris = new List<string> {""},
-                PostLogoutRedirectUris = new List<string> {""},
+                RedirectUris = new List<string> {"http://localhost:3000/signin-callback.html"},
+                PostLogoutRedirectUris = new List<string> {"http://localhost:3000"},
                 AllowedCorsOrigins = new List<string> { "http://localhost:3000" }
             }
         };

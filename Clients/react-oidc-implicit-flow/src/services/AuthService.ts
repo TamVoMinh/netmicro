@@ -12,8 +12,8 @@ export class AuthService {
       
       // tslint:disable-next-line:object-literal-sort-keys
       
-      silent_redirect_uri: `${Constants.clientRoot}silent-renew.html`,
-      redirect_uri: `${Constants.clientRoot}signin-callback.html`,
+      silent_redirect_uri: `${Constants.clientRoot}/silent-renew.html`,
+      redirect_uri: `${Constants.clientRoot}/signin-callback.html`,
       signout_callback_oidc: `${Constants.clientRoot}`,
       post_logout_redirect_uri: `${Constants.clientRoot}`,
       response_type: 'id_token token',
