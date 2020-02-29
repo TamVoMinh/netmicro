@@ -46,9 +46,9 @@ namespace Nmro.Oidc.Storage
                     IdentityServerConstants.StandardScopes.Email,
                     "member"
                 },
-                RedirectUris = new List<string> {"http://localhost:3000/signin-callback.html"},
-                PostLogoutRedirectUris = new List<string> {"http://localhost:3000"},
-                AllowedCorsOrigins = new List<string> { "http://localhost:3000" }
+                RedirectUris = new List<string> {"http://engage.nmro.local/signin-callback.html"},
+                PostLogoutRedirectUris = new List<string> {"http://engage.nmro.local"},
+                AllowedCorsOrigins = new List<string> { "http://engage.nmro.local" }
             }
         };
     }

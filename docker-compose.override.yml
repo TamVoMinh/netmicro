@@ -1,6 +1,7 @@
 version: '3.5'
 services:
   consul:
+    command: agent -server -bootstrap-expect 1 -ui -client 0.0.0.0
     ports:
       - 53:53/udp
   proxy:
