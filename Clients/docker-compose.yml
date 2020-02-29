@@ -18,4 +18,13 @@ services:
       - nmro-network
     volumes:
       - ./Clients/nginx/default.conf:/etc/nginx/nginx.conf:ro
+  engage:
+    image: ${DOCKER_REGISTRY:-nmro}/clients/engage
+    build:
+      context: .
+      dockerfile: Clients/engage/Dockerfile
+    networks:
+      - nmro-network
+    volumes:
+      - ./Clients/nginx/default.conf:/etc/nginx/nginx.conf:ro
 
