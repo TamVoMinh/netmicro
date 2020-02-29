@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Logging;
+using Nmro.BuildingBlocks.WebHost.ServiceDiscovery;
 using Nmro.Landing.Extentions;
 using Serilog;
 
@@ -40,11 +41,7 @@ namespace Nmro.Landing
 
             services.Configure<ServiceDiscovery>(Configuration.GetSection("ServiceDiscovery"));
 
-            services.AddSingleton<IConsulClient, ConsulClient>(p => new ConsulClient(config =>
-            {
-                string registrarUrl = Configuration["ServiceDiscovery:RegistrarUrl"];
-                config.Address = new Uri(registrarUrl);
-            }));
+            services.RegisterConsulServices(Configuration.GetServiceConfig());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

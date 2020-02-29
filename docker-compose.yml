@@ -17,6 +17,12 @@ services:
       - apigateway
       - landing
 
+  slnbased:
+    image: nmro-based
+    build:
+      context: .
+      dockerfile: BuildingBlocks/SlnBased/Dockerfile
+
   oidc:
     image: ${DOCKER_REGISTRY:-nmro}/oidc
     build:
@@ -28,6 +34,8 @@ services:
     build:
       context: .
       dockerfile: Web/Landing/Dockerfile
+    depends_on:
+      - slnbased
 
   health:
     image: ${DOCKER_REGISTRY:-nmro}/health
