@@ -42,9 +42,10 @@
 
 ### Playground with
 
-1. Default [webiste writen on netcore MVC](http://nmro.local)
-1. Analysis logging with [Kibana](http://isys.nmro.local/elk)
-1. Monitor health with [healthchecks-ui](http://isys.nmro.local/health/status)
+1. Start playing around with [Default webiste](http://nmro.local/)
+1. Discovery servcies with [Consul](http://isys.nmro.local/)
+1. Analysis logging with [Kibana](http://isys.nmro.local/elk/)
+1. Monitor health with [healthchecks-ui](http://isys.nmro.local/health/status/)
 1. Api document with [swagger-ui](http://docs.nmro.local/)
 1. User/Pass: admin/admin123
 

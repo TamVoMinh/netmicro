@@ -5,8 +5,6 @@ services:
     build:
       context: .
       dockerfile: Clients/docs/Dockerfile
-    networks:
-      - nmro-network
     volumes:
       - ./Clients/nginx/default.conf:/etc/nginx/nginx.conf:ro
   dashboard:
@@ -14,8 +12,6 @@ services:
     build:
       context: .
       dockerfile: Clients/dashboard/Dockerfile
-    networks:
-      - nmro-network
     volumes:
       - ./Clients/nginx/default.conf:/etc/nginx/nginx.conf:ro
   engage:

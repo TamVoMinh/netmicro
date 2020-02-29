@@ -1,6 +1,12 @@
 version: '3.5'
 
 services:
+  consul:
+    image: ${DOCKER_REGISTRY:-nmro}/service-discovery
+    build:
+      context: .
+      dockerfile: Discovery/Dockerfile
+
   proxy:
     image: ${DOCKER_REGISTRY:-nmro}/proxy
     build:
@@ -10,51 +16,41 @@ services:
       - oidc
       - apigateway
       - landing
-    networks:
-      - nmro-network
+
+  slnbased:
+    image: nmro-based
+    build:
+      context: .
+      dockerfile: BuildingBlocks/SlnBased/Dockerfile
 
   oidc:
     image: ${DOCKER_REGISTRY:-nmro}/oidc
     build:
       context: .
       dockerfile: Services/Oidc/Dockerfile
-    networks:
-      - nmro-network
 
   landing:
     image: ${DOCKER_REGISTRY:-nmro}/landing
     build:
       context: .
       dockerfile: Web/Landing/Dockerfile
-    networks:
-      - nmro-network
+    depends_on:
+      - slnbased
 
   health:
     image: ${DOCKER_REGISTRY:-nmro}/health
     build:
       context: .
       dockerfile: Web/Health/Dockerfile
-    networks:
-      - nmro-network
 
   apigateway:
     image: ${DOCKER_REGISTRY:-nmro}/apigateway
     build:
       context: .
       dockerfile: Gateways/ApiGateway/Dockerfile
-    networks:
-      - nmro-network
 
   iam-api:
     image: ${DOCKER_REGISTRY:-nmro}/api/iam
     build:
       context: .
       dockerfile: Services/IAM/Dockerfile
-    networks:
-      - nmro-network
-    ports:
-      - 8080:80
-
-networks:
-  nmro-network:
-    driver: bridge
