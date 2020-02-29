@@ -46,7 +46,8 @@
 1. Discovery servcies with [Consul](http://isys.nmro.local/)
 1. Analysis logging with [Kibana](http://isys.nmro.local/elk/)
 1. Monitor health with [healthchecks-ui](http://isys.nmro.local/health/status/)
-1. Api document with [swagger-ui](http://docs.nmro.local/)
+1. Enjoy [ReactJs app at](http://engage.nmro.local/)
+1. Enjoy document with [swagger-ui](http://docs.nmro.local/)
 1. User/Pass: admin/admin123
 
 ## Coding conventions & Style
