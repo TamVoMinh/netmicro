@@ -6,8 +6,6 @@ using Nmro.IAM.Repository.Entities;
 using Nmro.IAM.Models;
 using Nmro.IAM.Repository;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using Serilog;
 using System.Linq;
 
 namespace Nmro.IAM.Controllers
@@ -46,7 +44,10 @@ namespace Nmro.IAM.Controllers
                 .Include(e => e.ClientSecrets)
                 .FirstOrDefaultAsync();
 
+
             var result = _mapper.Map<ClientModel>(client);
+
+            _logger.LogInformation("[GET] Client {@result}", result);
 
             return result;
         }

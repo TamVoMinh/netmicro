@@ -6,8 +6,6 @@ using Nmro.IAM.Repository.Entities;
 using Nmro.IAM.Models;
 using Nmro.IAM.Repository;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using Serilog;
 
 namespace Nmro.IAM.Controllers
 {

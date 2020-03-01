@@ -2,9 +2,6 @@ using IdentityServer4.Models;
 using IdentityServer4.Stores;
 using Newtonsoft.Json;
 using Nmro.Oidc.Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
