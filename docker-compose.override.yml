@@ -1,5 +1,9 @@
 version: '3.5'
 services:
+  consul:
+    command: agent -server -bootstrap-expect 1 -ui -client 0.0.0.0
+    ports:
+      - 53:53/udp
   proxy:
     ports:
       - 80:80
@@ -13,13 +17,13 @@ services:
 
   oidc:
     networks:
-      nmro-network:
+      default:
         aliases:
           - oidc.${PUBLIC_ORIGIN:-nmro.local}
 
   apigateway:
     networks:
-      nmro-network:
+      default:
         aliases:
           - api.${PUBLIC_ORIGIN:-nmro.local}
 
@@ -35,5 +39,9 @@ services:
 
   iam-api:
     environment:
-      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Development}
       - ConnectionStrings__DefaultConnection=${DB_POSTGRES:-Server=db-postgres;port=5432;Database=iam_db;UserId=nmro_dbadmin;Password=theForest&;Pooling=true}
+
+networks:
+  default:
+    name: nmro-network
+    driver: bridge

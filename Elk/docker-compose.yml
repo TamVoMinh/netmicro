@@ -14,8 +14,6 @@ services:
       - "9300:9300"
     environment:
       ES_JAVA_OPTS: "-Xmx512m -Xms256m"
-    networks:
-      - nmro-network
 
   logstash:
     image: ${DOCKER_REGISTRY:-nmro}/elk/logstash
@@ -38,8 +36,6 @@ services:
       DROP_NON_JSON: 'false'
       STDOUT: 'true'
     privileged: true
-    networks:
-      - nmro-network
     depends_on:
       - elasticsearch
 
@@ -53,8 +49,6 @@ services:
       - ./Elk/Kibana/config/:/usr/share/kibana/config:ro
     environment:
       LOGSPOUT: ignore
-    networks:
-      - nmro-network
     depends_on:
       - elasticsearch
 
@@ -70,8 +64,6 @@ services:
       - "8200:8200"
     environment:
       LOGSPOUT: ignore
-    networks:
-      - nmro-network
     depends_on:
       - elasticsearch
 
@@ -86,8 +78,6 @@ services:
       COMMAND: /usr/share/curator/config/delete_log_files_curator.yml
       UNIT_COUNT: 1
       LOGSPOUT: ignore
-    networks:
-      - nmro-network
     depends_on:
       - elasticsearch
 
@@ -100,8 +90,6 @@ services:
     environment:
       ROUTE_URIS: logstash://logstash:5000
       LOGSTASH_TAGS: docker-nmro
-    networks:
-      - nmro-network
     depends_on:
       - logstash
     restart: on-failure
