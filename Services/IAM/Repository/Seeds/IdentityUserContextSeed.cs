@@ -81,7 +81,7 @@ public class IdentityUserContextSeed
                 ClientName = "Nmro MVC client - Hybrid Grant",
                 ClientSecrets = new List<Secret>
                 {
-                   new Secret { Value = "nmro-website-Secret".Sha256() }
+                   new Secret { Value = "nmro-website-Secret".Sha256(), Type = "SharedSecret" }
                 },
                 AllowedGrantTypes = new string[] { GrantType.Hybrid},
                 AllowAccessTokensViaBrowser = false,
@@ -103,7 +103,7 @@ public class IdentityUserContextSeed
                 ClientName = "Nmro Default Website - Hybrid Grant",
                 ClientSecrets = new List<Secret>
                 {
-                   new Secret { Value = "nmro-website-Secret-localhost".Sha256() }
+                   new Secret { Value = "nmro-website-Secret-localhost".Sha256(), Type = "SharedSecret" }
                 },
                 AllowedGrantTypes = new string[] { GrantType.Hybrid},
                 AllowAccessTokensViaBrowser = false,
