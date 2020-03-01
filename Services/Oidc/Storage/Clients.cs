@@ -31,6 +31,24 @@ namespace Nmro.Oidc.Storage
                 },
                 RedirectUris = new List<string> {"http://nmro.local/signin-oidc"},
                 PostLogoutRedirectUris = new List<string> {"http://nmro.local/signout-callback-oidc"}
+            },
+            new Client {
+                ClientId = "nmro-reactjs-client",
+                ClientName = "Nmro ReactJS client",
+                AllowedGrantTypes = GrantTypes.Implicit,
+                AllowAccessTokensViaBrowser = true,
+                RequireConsent = false,
+                AlwaysIncludeUserClaimsInIdToken = true,
+                AllowedScopes = new List<string>
+                {
+                    IdentityServerConstants.StandardScopes.OpenId,
+                    IdentityServerConstants.StandardScopes.Profile,
+                    IdentityServerConstants.StandardScopes.Email,
+                    "member"
+                },
+                RedirectUris = new List<string> {"http://engage.nmro.local/signin-callback.html"},
+                PostLogoutRedirectUris = new List<string> {"http://engage.nmro.local"},
+                AllowedCorsOrigins = new List<string> { "http://engage.nmro.local" }
             }
         };
     }

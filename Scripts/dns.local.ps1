@@ -43,5 +43,6 @@ $entries = @{
     'api.nmro.local' = "127.0.0.1"
     'docs.nmro.local' = "127.0.0.1"
     'isys.nmro.local' = "127.0.0.1"
+    'engage.nmro.local' = "127.0.0.1"
 };
 setHostEntries($entries)

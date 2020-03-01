@@ -5,17 +5,22 @@ services:
     build:
       context: .
       dockerfile: Clients/docs/Dockerfile
-    networks:
-      - nmro-network
     volumes:
       - ./Clients/nginx/default.conf:/etc/nginx/nginx.conf:ro
+
   dashboard:
     image: ${DOCKER_REGISTRY:-nmro}/clients/dashboard
     build:
       context: .
       dockerfile: Clients/dashboard/Dockerfile
-    networks:
-      - nmro-network
+    volumes:
+      - ./Clients/nginx/default.conf:/etc/nginx/nginx.conf:ro
+
+  engage:
+    image: ${DOCKER_REGISTRY:-nmro}/clients/engage
+    build:
+      context: .
+      dockerfile: Clients/engage/Dockerfile
     volumes:
       - ./Clients/nginx/default.conf:/etc/nginx/nginx.conf:ro
 
