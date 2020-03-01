@@ -68,23 +68,22 @@ public class IdentityUserContextSeed
                 Id = 1,
                 ClientId = "oauthClient",
                 ClientName = "Example Client Credentials Client Application",
-                AllowedGrantTypes =  new string[] { GrantType.ClientCredentials}, // GrantTypes.ClientCredentials
-                //ClientSecrets = new List<Secret>
-                //{
-                    
-                //    new Secret { Value = "superSecretPassword".Sha256() }
-                //},
+                AllowedGrantTypes =  new string[] { GrantType.ClientCredentials},
+                ClientSecrets = new List<Secret>
+                {
+                   new Secret { Value = "superSecretPassword".Sha256() }
+                },
                 AllowedScopes = new List<string> {"customAPI.read"}
             },
             new Nmro.IAM.Repository.Entities.Client {
                 Id = 2,
                 ClientId = "nmro-website",
                 ClientName = "Nmro MVC client - Hybrid Grant",
-                //ClientSecrets = new List<Secret>
-                //{
-                //    new Secret { Value = "nmro-website-Secret".Sha256() }
-                //},
-                AllowedGrantTypes = new string[] { GrantType.Hybrid}, // GrantTypes.Hybrid
+                ClientSecrets = new List<Secret>
+                {
+                   new Secret { Value = "nmro-website-Secret".Sha256(), Type = "SharedSecret" }
+                },
+                AllowedGrantTypes = new string[] { GrantType.Hybrid},
                 AllowAccessTokensViaBrowser = false,
                 RequireConsent = false,
                 AlwaysIncludeUserClaimsInIdToken = true,
@@ -97,6 +96,28 @@ public class IdentityUserContextSeed
                 },
                 RedirectUris = new List<string> {"http://nmro.local/signin-oidc"},
                 PostLogoutRedirectUris = new List<string> {"http://nmro.local/signout-callback-oidc"}
+            },
+            new Nmro.IAM.Repository.Entities.Client {
+                Id = 3,
+                ClientId = "nmro-website-localhost",
+                ClientName = "Nmro Default Website - Hybrid Grant",
+                ClientSecrets = new List<Secret>
+                {
+                   new Secret { Value = "nmro-website-Secret-localhost".Sha256(), Type = "SharedSecret" }
+                },
+                AllowedGrantTypes = new string[] { GrantType.Hybrid},
+                AllowAccessTokensViaBrowser = false,
+                RequireConsent = false,
+                AlwaysIncludeUserClaimsInIdToken = true,
+                AllowedScopes = new List<string>
+                {
+                    StandardScopes.OpenId,
+                    StandardScopes.Profile,
+                    StandardScopes.Email,
+                    "member"
+                },
+                RedirectUris = new List<string> {"http://localhost:8080/signin-oidc"},
+                PostLogoutRedirectUris = new List<string> {"http://localhost:8080/signout-callback-oidc"}
             }
         };
     }
