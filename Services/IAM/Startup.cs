@@ -11,6 +11,7 @@ using System.Reflection;
 using AutoMapper;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using HealthChecks.UI.Client;
+using Nmro.BuildingBlocks.WebHost.ServiceDiscovery;
 
 namespace Nmro.IAM
 {
@@ -44,6 +45,9 @@ namespace Nmro.IAM
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Nmro.IAM", Version = "v1" });
             });
             services.AddHealthChecks();
+
+            services.RegisterConsulServices(Configuration);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

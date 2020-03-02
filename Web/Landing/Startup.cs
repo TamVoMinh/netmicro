@@ -40,7 +40,7 @@ namespace Nmro.Landing
 
             services.AddCustomAuthentication(Configuration);
 
-            //services.RegisterConsulServices(Configuration.GetServiceConfig());
+            services.RegisterConsulServices(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

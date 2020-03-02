@@ -9,6 +9,10 @@
     <PackageReference Include="AspNetCore.HealthChecks.UI" Version="3.0.9" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\BuildingBlocks\WebHost\WebHost.csproj" />
+  </ItemGroup>
+
 
 
 </Project>
