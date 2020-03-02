@@ -13,6 +13,7 @@ services:
       context: .
       dockerfile: Gateways/ReverseProxy/Dockerfile
     depends_on:
+      - consul
       - oidc
       - apigateway
       - landing
@@ -28,6 +29,9 @@ services:
     build:
       context: .
       dockerfile: Services/Oidc/Dockerfile
+    depends_on:
+      - consul
+      - slnbased
 
   landing:
     image: ${DOCKER_REGISTRY:-nmro}/landing
@@ -36,6 +40,7 @@ services:
       dockerfile: Web/Landing/Dockerfile
     depends_on:
       - slnbased
+      - consul
 
   health:
     image: ${DOCKER_REGISTRY:-nmro}/health
@@ -48,9 +53,15 @@ services:
     build:
       context: .
       dockerfile: Gateways/ApiGateway/Dockerfile
+    depends_on:
+      - slnbased
+      - consul
 
   iam-api:
     image: ${DOCKER_REGISTRY:-nmro}/api/iam
     build:
       context: .
       dockerfile: Services/IAM/Dockerfile
+    depends_on:
+      - slnbased
+      - consul

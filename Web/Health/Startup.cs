@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
-
+using Nmro.BuildingBlocks.WebHost.ServiceDiscovery;
 
 namespace Nmro.Health
 {
@@ -32,6 +32,7 @@ namespace Nmro.Health
             });
 
             services.AddHealthChecksUI();
+            services.RegisterConsulServices(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

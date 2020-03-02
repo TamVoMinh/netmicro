@@ -10,6 +10,7 @@ using Serilog;
 using Nmro.ApiGateway.Extentions;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using HealthChecks.UI.Client;
+using Nmro.BuildingBlocks.WebHost.ServiceDiscovery;
 
 namespace Nmro.ApiGateway
 {
@@ -39,6 +40,9 @@ namespace Nmro.ApiGateway
 
             services.AddOcelot();
             services.AddHealthChecks();
+
+            services.RegisterConsulServices(Configuration);
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -1,4 +1,3 @@
-using IdentityServer4.Validation;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -7,14 +6,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Http;
 using Nmro.Oidc.Services;
-using Nmro.Oidc.Storage;
 using Serilog;
 using System;
-using Nmro.Oidc.Extensions;
-using IdentityServer4.Services;
 using Nmro.Oidc.Application;
+using Nmro.BuildingBlocks.WebHost.ServiceDiscovery;
 
 namespace Nmro.Oidc
 {
@@ -58,6 +54,8 @@ namespace Nmro.Oidc
             services.AddScoped<IUserService, UserService>();
 
             services.AddHealthChecks();
+
+            services.RegisterConsulServices(Configuration);
 
         }
 

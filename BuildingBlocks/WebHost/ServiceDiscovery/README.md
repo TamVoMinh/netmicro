@@ -18,9 +18,14 @@
 using Nmro.BuildingBlocks.WebHost.ServiceDiscovery;
 //...
 
+public Startup(IConfiguration configuration)
+{
+    Configuration = configuration;
+}
+
 public void ConfigureServices(IServiceCollection services)
 {
     //...
-    services.RegisterConsulServices(Configuration.GetServiceDiscoveryOptions());
+    services.RegisterConsulServices(Configuration);
 }
 ```
