@@ -35,13 +35,12 @@ namespace Nmro.Landing
 
             services.AddControllers();
 
-            IdentityModelEventSource.ShowPII = true;       // Caution! Do NOT use in production: https://aka.ms/IdentityModel/PII
+            // Caution! Do NOT use in production: https://aka.ms/IdentityModel/PII
+            IdentityModelEventSource.ShowPII = true;
 
             services.AddCustomAuthentication(Configuration);
 
-            services.Configure<ServiceDiscovery>(Configuration.GetSection("ServiceDiscovery"));
-
-            services.RegisterConsulServices(Configuration.GetServiceConfig());
+            services.RegisterConsulServices(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

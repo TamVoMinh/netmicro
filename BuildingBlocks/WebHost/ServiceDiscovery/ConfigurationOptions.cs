@@ -2,7 +2,7 @@
 
 namespace Nmro.BuildingBlocks.WebHost.ServiceDiscovery
 {
-    public class ServiceConfig
+    public class ConfigurationOptions
     {
         public Uri ServiceDiscoveryAddress { get; set; }
         public Uri ServiceAddress { get; set; }
