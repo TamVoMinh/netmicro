@@ -11,4 +11,8 @@
     <PackageReference Include="ocelot" Version="14.0.3" />
     <PackageReference Include="Serilog.AspNetCore" Version="3.2.0" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\BuildingBlocks\WebHost\WebHost.csproj" />
+  </ItemGroup>
 </Project>

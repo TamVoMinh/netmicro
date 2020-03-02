@@ -3,20 +3,16 @@ RUN apk --no-cache add curl
 WORKDIR /app
 EXPOSE 80
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1-alpine3.10 AS build
-WORKDIR /src
+FROM nmro-based AS build
 
-ADD "Services/Oidc" "Services/Oidc"
-COPY "Services/Oidc/wwwroot" "Services/Oidc/wwwroot"
-
-WORKDIR /src/Services/Oidc
+WORKDIR /netmicro/Services/Oidc
 RUN dotnet restore -nowarn:msb3202,nu1503
-RUN dotnet build --no-restore -c Release -o /app
+RUN dotnet build --no-restore -c Release -o /artifact
 
 FROM build AS publish
-RUN dotnet publish --no-restore -c Release -o /app
+RUN dotnet publish --no-restore -c Release -o /artifact
 
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /app .
+COPY --from=publish /artifact .
 ENTRYPOINT ["dotnet", "Nmro.Oidc.dll"]
