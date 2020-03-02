@@ -12,7 +12,7 @@ using Nmro.IAM.Repository.Entities;
 
 namespace Nmro.IAM.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class ResourcesController : ControllerBase
     {

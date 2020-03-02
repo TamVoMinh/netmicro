@@ -6,18 +6,20 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Nmro.Oidc.Infrastructure;
 using Newtonsoft.Json;
+using Serilog;
+using Microsoft.Extensions.Logging;
 
 namespace Nmro.Oidc.Storage
 {
-    public class ResourceStore: IResourceStore
+    public class ResourceStore : IResourceStore
     {
-        private readonly IHttpClientFactory _clientFactory;
         private readonly HttpClient iamClient;
+        private readonly ILogger<ResourceStore> _logger;
 
-        public ResourceStore(IHttpClientFactory clientFactory)
+        public ResourceStore(IHttpClientFactory clientFactory, ILogger<ResourceStore> logger)
         {
-            _clientFactory = clientFactory;
             iamClient = clientFactory.CreateClient("iam");
+            _logger = logger;
         }
 
         public async Task<ApiResource> FindApiResourceAsync(string name)
@@ -29,22 +31,22 @@ namespace Nmro.Oidc.Storage
             var responseString = await response.Content.ReadAsStringAsync();
 
             var client = JsonConvert.DeserializeObject<ApiResource>(responseString);
+
             return client;
         }
 
         public async Task<IEnumerable<ApiResource>> FindApiResourcesByScopeAsync(IEnumerable<string> scopeNames)
         {
             var dataJson = new StringContent(JsonConvert.SerializeObject(scopeNames));
-            HttpRequestMessage request = new HttpRequestMessage
-            {
-                Method = HttpMethod.Post,
-                RequestUri = new Uri(API.Resource.GetApiResourceByScope()),
-                Content = dataJson
-            };
-            
-            var response = await iamClient.SendAsync(request);
+
+            var uri = API.Resource.GetApiResourceByScope();
+
+            var response = await iamClient.PostAsync(uri, dataJson);
+
             var responseString = await response.Content.ReadAsStringAsync();
+
             List<ApiResource> apiResources = JsonConvert.DeserializeObject<List<ApiResource>>(responseString);
+
             return apiResources;
         }
 
@@ -52,16 +54,21 @@ namespace Nmro.Oidc.Storage
         {
 
             var dataJson = new StringContent(JsonConvert.SerializeObject(scopeNames));
-            HttpRequestMessage request = new HttpRequestMessage
-            {
-                Method = HttpMethod.Post,
-                RequestUri = new Uri(API.Resource.GetIdentityResourceByScope()),
-                Content = dataJson
-            };
+           
+            var uri = API.Resource.GetIdentityResourceByScope();
 
-            var response = await iamClient.SendAsync(request);
+            var response = await iamClient.PostAsync(uri, dataJson);
+
             var responseString = await response.Content.ReadAsStringAsync();
-            List<IdentityResource> identityResources = JsonConvert.DeserializeObject<List<IdentityResource>>(responseString);
+
+            var identityResources = new List<IdentityResource>();
+
+            foreach (var strObj in JsonConvert.DeserializeObject<IEnumerable<string>>(responseString))
+            {
+                var identityResource = JsonConvert.DeserializeObject<IdentityResource>(strObj);
+                identityResources.Add(identityResource);
+            }
+
             return identityResources;
         }
 
