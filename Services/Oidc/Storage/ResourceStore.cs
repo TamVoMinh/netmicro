@@ -37,11 +37,11 @@ namespace Nmro.Oidc.Storage
 
         public async Task<IEnumerable<ApiResource>> FindApiResourcesByScopeAsync(IEnumerable<string> scopeNames)
         {
-            var dataJson = new StringContent(JsonConvert.SerializeObject(scopeNames));
+            //var dataJson = new StringContent(JsonConvert.SerializeObject(scopeNames));
+            var query = "?scopename=openid&scopename=profile&scopename=member";
+            var uri = API.Resource.GetApiResourceByScope() + query;
 
-            var uri = API.Resource.GetApiResourceByScope();
-
-            var response = await iamClient.PostAsync(uri, dataJson);
+            var response = await iamClient.GetAsync(uri);
 
             var responseString = await response.Content.ReadAsStringAsync();
 
@@ -52,22 +52,17 @@ namespace Nmro.Oidc.Storage
 
         public async Task<IEnumerable<IdentityResource>> FindIdentityResourcesByScopeAsync(IEnumerable<string> scopeNames)
         {
-
-            var dataJson = new StringContent(JsonConvert.SerializeObject(scopeNames));
+            var query = "?scopename=openid&scopename=profile&scopename=member";
            
-            var uri = API.Resource.GetIdentityResourceByScope();
+            var uri = API.Resource.GetIdentityResourceByScope() + query;
 
-            var response = await iamClient.PostAsync(uri, dataJson);
+            var response = await iamClient.GetAsync(uri);
 
             var responseString = await response.Content.ReadAsStringAsync();
 
-            var identityResources = new List<IdentityResource>();
+            _logger.LogInformation("RESPONSE: {responseString}", responseString);
 
-            foreach (var strObj in JsonConvert.DeserializeObject<IEnumerable<string>>(responseString))
-            {
-                var identityResource = JsonConvert.DeserializeObject<IdentityResource>(strObj);
-                identityResources.Add(identityResource);
-            }
+            var identityResources = JsonConvert.DeserializeObject<IEnumerable<IdentityResource>>(responseString);
 
             return identityResources;
         }

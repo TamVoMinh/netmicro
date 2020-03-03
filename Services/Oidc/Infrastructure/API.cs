@@ -24,7 +24,7 @@ namespace Nmro.Oidc.Infrastructure
         {
             public static string GetApiResourceByName(string resourcename) => $"resources/api-resource?resourcename={resourcename}";
 
-            public static string GetApiResourceByScope() => $"resources/api-resource";
+            public static string GetApiResourceByScope() => $"resources/api-resource/scope";
 
             public static string GetIdentityResourceByScope() => $"resources/identity-resource";
 

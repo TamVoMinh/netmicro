@@ -47,17 +47,19 @@ namespace Nmro.IAM.Controllers
             return result;
         }
 
-        [HttpPost("api-resource")]
-        public async Task<List<ApiResourceModel>> GetApiResourceByScopeName([FromBody] IEnumerable<string> scopename)
+        [HttpGet("api-resource/scope")]
+        public async Task<List<ApiResourceModel>> GetApiResourceByScopeName([FromQuery] List<string> scopename)
         {
+            List<ApiResource> a = await _context.ApiResources.ToListAsync();
             List<ApiResource> resources = await _context.ApiResources.Where(x => x.Scopes.Any(s => scopename.Contains(s.Name))).ToListAsync();
             List<ApiResourceModel> result = _mapper.Map<List<ApiResourceModel>>(resources);
             return result;
         }
 
-        [HttpPost("identity-resource")]
-        public async Task<List<IdentityResourceModel>> GetIdentityResourceByScopeName([FromBody] IEnumerable<string> scopename)
+        [HttpGet("identity-resource")]
+        public async Task<List<IdentityResourceModel>> GetIdentityResourceByScopeName([FromQuery] List<string> scopename)
         {
+            List<IdentityResource> a = await _context.IdentityResources.ToListAsync();
             List<IdentityResource> resources = await _context.IdentityResources.Where(x => scopename.Contains(x.Name)).ToListAsync();
             List<IdentityResourceModel> result = _mapper.Map<List<IdentityResourceModel>>(resources);
             return result;

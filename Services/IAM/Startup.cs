@@ -46,7 +46,7 @@ namespace Nmro.IAM
             });
             services.AddHealthChecks();
 
-            services.RegisterConsulServices(Configuration);
+            //services.RegisterConsulServices(Configuration);
 
         }
 
