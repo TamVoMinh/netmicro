@@ -3,7 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  oidc: {
+    stsServer: "http://oidc.nmro.local",
+    client_id: 'nmro-angular-client-localhost',
+    log_console_debug_active: true,
+  }
 };
 
 /*

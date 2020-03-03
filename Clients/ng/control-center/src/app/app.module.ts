@@ -1,24 +1,26 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, APP_INITIALIZER } from '@angular/core';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
-import { AuthModule, ConfigResult, OidcConfigService, OidcSecurityService, OpenIdConfiguration } from 'angular-auth-oidc-client';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule, APP_INITIALIZER } from "@angular/core";
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { HttpClientModule } from "@angular/common/http";
+import {
+  AuthModule,
+  ConfigResult,
+  OidcSecurityService,
+  OidcConfigService,
+  OpenIdConfiguration
+} from "angular-auth-oidc-client";
+import { environment } from "../environments/environment";
 
-// const oidc_configuration = './assets/auth.clientConfiguration.json';
-
-// export function loadConfig(oidcConfigService: OidcConfigService) {
-//   return () => oidcConfigService.load(oidc_configuration);
-// }
-export function loadConfig(oidcConfigService: OidcConfigService) {
-  return () => oidcConfigService.load_using_stsServer('http://oidc.nmro.local');
+export function loadOidcConfiguration(oidcConfigService: OidcConfigService) {
+  return () =>
+    oidcConfigService.load_using_custom_stsServer(
+      `${environment.oidc.stsServer}/.well-known/openid-configuration`
+    );
 }
-
+declare const window: Window;
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -29,7 +31,7 @@ export function loadConfig(oidcConfigService: OidcConfigService) {
     OidcConfigService,
     {
       provide: APP_INITIALIZER,
-      useFactory: loadConfig,
+      useFactory: loadOidcConfiguration,
       deps: [OidcConfigService],
       multi: true
     }
@@ -41,18 +43,26 @@ export class AppModule {
     private oidcSecurityService: OidcSecurityService,
     private oidcConfigService: OidcConfigService
   ) {
-    this.oidcConfigService.onConfigurationLoaded.subscribe((configResult: ConfigResult) => {
-      const config: OpenIdConfiguration = {
-        stsServer: configResult.customConfig.stsServer,
-        redirect_url: 'http://engage.nmro.local/signin-callback.html',
-        client_id: 'nmro-angular-client',
-        scope: 'openid profile email',
-        response_type: 'code',
-        silent_renew: true,
-        silent_renew_url: 'https://localhost:4200/silent-renew.html',
-        log_console_debug_active: true,
-      };
-      this.oidcSecurityService.setupModule(config, configResult.authWellknownEndpoints);
-    });
+    this.oidcConfigService.onConfigurationLoaded.subscribe(
+      (configResult: ConfigResult) => {
+        // Use the configResult to set the configurations
+        const hostOrigin = `${window.location.protocol}//${window.location.hostname}${!!window.location.port? ":" + window.location.port : ""}`
+        const config: OpenIdConfiguration = {
+          stsServer: configResult.customConfig.stsServer,
+          redirect_url: `${hostOrigin}/signin-callback.html`,
+          client_id: environment.oidc.client_id,
+          scope: "openid profile email",
+          response_type: "id_token token",
+          silent_renew: true,
+          silent_renew_url: `${hostOrigin}/silent-renew.html`,
+          log_console_debug_active: true
+        };
+
+        this.oidcSecurityService.setupModule(
+          config,
+          configResult.authWellknownEndpoints
+        );
+      }
+    );
   }
 }
