@@ -47,6 +47,9 @@ services:
     build:
       context: .
       dockerfile: Web/Health/Dockerfile
+    depends_on:
+      - consul
+      - slnbased
 
   apigateway:
     image: ${DOCKER_REGISTRY:-nmro}/apigateway
