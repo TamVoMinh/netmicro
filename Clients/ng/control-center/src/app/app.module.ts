@@ -49,7 +49,7 @@ export class AppModule {
         const hostOrigin = `${window.location.protocol}//${window.location.hostname}${!!window.location.port? ":" + window.location.port : ""}`
         const config: OpenIdConfiguration = {
           stsServer: configResult.customConfig.stsServer,
-          redirect_url: `${hostOrigin}/signin-callback.html`,
+          redirect_url: `${hostOrigin}`,
           client_id: environment.oidc.client_id,
           scope: "openid profile email",
           response_type: "id_token token",
