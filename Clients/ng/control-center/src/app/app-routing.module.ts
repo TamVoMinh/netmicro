@@ -1,24 +1,24 @@
-import { AppComponent } from './app.component';
+import { AppComponent } from './core/app/app.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LayoutComponent } from './core/layout/layout.component';
+import { LoginComponent } from './core/login/login.component';
 
 
 const routes: Routes = [
   {
     path: '',
-    component: AppComponent
+    redirectTo: 'web',
+    pathMatch: 'full'
   },
   {
-    path: 'home',
-    component: AppComponent
+    path: 'web',
+    component: LayoutComponent,
+    loadChildren: () => import('./web/web.module').then(m => m.WebModule)
   },
   {
-    path: 'forbidden',
-    component: AppComponent
-  },
-  {
-    path: 'unauthorized',
-    component: AppComponent
+    path: '**',
+    redirectTo: '/web/home'
   }
 ];
 
