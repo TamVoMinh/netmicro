@@ -51,6 +51,24 @@ namespace Nmro.Oidc.Storage
                 AllowedCorsOrigins = new List<string> { "http://engage.nmro.local" }
             },
             new Client {
+                ClientId = "nmro-angular-client-localhost",
+                ClientName = "Nmro Angular client - localhost",
+                AllowedGrantTypes = GrantTypes.Implicit,
+                AllowAccessTokensViaBrowser = true,
+                RequireConsent = false,
+                AlwaysIncludeUserClaimsInIdToken = true,
+                AllowedScopes = new List<string>
+                {
+                    IdentityServerConstants.StandardScopes.OpenId,
+                    IdentityServerConstants.StandardScopes.Profile,
+                    IdentityServerConstants.StandardScopes.Email,
+                    "member"
+                },
+                RedirectUris = new List<string> {"http://localhost:4200"},
+                PostLogoutRedirectUris = new List<string> {"http://localhost:4200"},
+                AllowedCorsOrigins = new List<string> { "http://localhost:4200" }
+            },
+             new Client {
                 ClientId = "nmro-angular-client",
                 ClientName = "Nmro Angular client",
                 AllowedGrantTypes = GrantTypes.Implicit,
@@ -64,9 +82,9 @@ namespace Nmro.Oidc.Storage
                     IdentityServerConstants.StandardScopes.Email,
                     "member"
                 },
-                RedirectUris = new List<string> {"http://engage.nmro.local/signin-callback.html"},
-                PostLogoutRedirectUris = new List<string> {"http://engage.nmro.local"},
-                AllowedCorsOrigins = new List<string> { "http://engage.nmro.local" }
+                RedirectUris = new List<string> {"http://control-centre.nmro.local"},
+                PostLogoutRedirectUris = new List<string> {"http://control-centre.nmro.local"},
+                AllowedCorsOrigins = new List<string> { "http://control-centre.nmro.local" }
             }
         };
     }
