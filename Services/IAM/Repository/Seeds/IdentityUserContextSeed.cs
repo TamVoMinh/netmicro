@@ -43,12 +43,6 @@ public class IdentityUserContextSeed
                 await context.ApiResources.AddRangeAsync(SeedApiResources());
                 await context.SaveChangesAsync();
             }
-
-            if (!context.Secrets.Any())
-            {
-                await context.Secrets.AddRangeAsync(SeedSecrets());
-                await context.SaveChangesAsync();
-            }
         });
 
         logger.LogInformation("End seeding.");
@@ -118,6 +112,83 @@ public class IdentityUserContextSeed
                 },
                 RedirectUris = new List<string> {"http://localhost:8080/signin-oidc"},
                 PostLogoutRedirectUris = new List<string> {"http://localhost:8080/signout-callback-oidc"}
+            },
+            new Nmro.IAM.Repository.Entities.Client {
+                Id = 4,
+                ClientId = "nmro-reactjs-client",
+                ClientName = "Nmro ReactJS client",
+                AllowedGrantTypes = new string[] { GrantType.Implicit},
+                AllowAccessTokensViaBrowser = true,
+                RequireConsent = false,
+                AlwaysIncludeUserClaimsInIdToken = true,
+                AllowedScopes = new List<string>
+                {
+                    StandardScopes.OpenId,
+                    StandardScopes.Profile,
+                    StandardScopes.Email,
+                    "member"
+                },
+                RedirectUris = new List<string> {"http://engage.nmro.local/signin-callback.html"},
+                PostLogoutRedirectUris = new List<string> {"http://engage.nmro.local"},
+                AllowedCorsOrigins = new List<string> { "http://engage.nmro.local" }
+            },
+            new Nmro.IAM.Repository.Entities.Client {
+                Id = 5,
+                ClientId = "nmro-angular-client-localhost",
+                ClientName = "Nmro Angular client - localhost",
+                AccessTokenLifetime = 3600,
+                IdentityTokenLifetime = 30,
+                RequireClientSecret = false,
+                AllowedGrantTypes = new string[] { GrantType.AuthorizationCode}, // GrantTypes.Code
+                RequirePkce = true,
+                AllowAccessTokensViaBrowser = true,
+                AllowedScopes = new List<string>
+                {
+                    StandardScopes.OpenId,
+                    StandardScopes.Profile,
+                    StandardScopes.Email,
+                    "member"
+                },
+                RedirectUris = new List<string> {
+                    "http://localhost:4200",
+                    "http://localhost:4200/silent-renew.html"
+                },
+                PostLogoutRedirectUris = new List<string> {
+                    "http://localhost:4200",
+                    "http://localhost:4200/web/unauthorized"
+                },
+                AllowedCorsOrigins = new List<string> {
+                    "http://localhost:4200"
+                }
+            },
+            new Nmro.IAM.Repository.Entities.Client {
+                Id = 6,
+                ClientId = "nmro-angular-client",
+                ClientName = "Nmro Angular client",
+                AccessTokenLifetime = 3600,
+                IdentityTokenLifetime = 30,
+                RequireClientSecret = false,
+                AllowedGrantTypes = new string[] { GrantType.AuthorizationCode}, // GrantTypes.Code
+                RequirePkce = true,
+                AllowAccessTokensViaBrowser = true,
+                AllowedScopes = new List<string>
+                {
+                    StandardScopes.OpenId,
+                    StandardScopes.Profile,
+                    StandardScopes.Email,
+                    "member"
+                },
+                RedirectUris = new List<string>
+                {
+                    "http://control-centre.nmro.local",
+                    "http://control-centre.nmro.local/silent-renew.html"
+                },
+                PostLogoutRedirectUris = new List<string>
+                {
+                    "http://control-centre.nmro.local",
+                    "http://control-centre.nmro.local/web/unauthorized"
+                },
+                AllowedCorsOrigins = new List<string> { "http://control-centre.nmro.local" }
             }
         };
     }
@@ -132,6 +203,7 @@ public class IdentityUserContextSeed
                 DisplayName = "Your user identifier",
                 Required = true,
                 UserClaims = new List<string> {JwtClaimTypes.Subject },
+                Enabled = true
             },
             new Nmro.IAM.Repository.Entities.IdentityResource // new IdentityResources.Profile(),
             {
@@ -154,7 +226,8 @@ public class IdentityUserContextSeed
                     JwtClaimTypes.ZoneInfo,
                     JwtClaimTypes.Locale,
                     JwtClaimTypes.UpdatedAt
-                }
+                },
+                Enabled = true
             },
             new Nmro.IAM.Repository.Entities.IdentityResource // new IdentityResources.Email(),
             {
@@ -164,11 +237,13 @@ public class IdentityUserContextSeed
                 UserClaims = new List<string> { // (Constants.ScopeToClaimsMapping[IdentityServerConstants.StandardScopes.Email].ToList())
                     JwtClaimTypes.Email,
                     JwtClaimTypes.EmailVerified
-                }
+                },
+                Enabled = true
             },
             new Nmro.IAM.Repository.Entities.IdentityResource {
                 Name = "role",
-                UserClaims = new List<string> {"role"}
+                UserClaims = new List<string> {"role"},
+                Enabled = true
             }
         };
     }
@@ -182,22 +257,14 @@ public class IdentityUserContextSeed
                 DisplayName = "member API",
                 Description = "member API Access",
                 UserClaims = new List<string> {"role"},
-                //ApiSecrets = new List<Secret> { new Secret { Value = "scopeSecret".Sha256() }},
+                Enabled = true,
+                ApiSecrets = new List<Secret> { new Secret { Value = "scopeSecret".Sha256() } },
                 Scopes = new List<Nmro.IAM.Repository.Entities.Scope> {
                     new Nmro.IAM.Repository.Entities.Scope { Name = "member" },
                     new Nmro.IAM.Repository.Entities.Scope { Name ="member.read" },
                     new Nmro.IAM.Repository.Entities.Scope { Name ="member.write" }
                 }
             }
-        };
-    }
-
-    private List<Nmro.IAM.Repository.Entities.Secret> SeedSecrets()
-    {
-        return new List<Nmro.IAM.Repository.Entities.Secret> {
-            new Nmro.IAM.Repository.Entities.Secret { Value = "superSecretPassword".Sha256(), ClientId = 1 },
-            new Nmro.IAM.Repository.Entities.Secret { Value = "nmro-website-Secret".Sha256(), ClientId = 2 },
-            new Nmro.IAM.Repository.Entities.Secret { Value = "scopeSecret".Sha256(), ApiResourceId = 1 }
         };
     }
 

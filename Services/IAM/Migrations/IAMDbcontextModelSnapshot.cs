@@ -65,8 +65,14 @@ namespace Nmro.IAM.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+                    b.Property<int>("AccessTokenLifetime")
+                        .HasColumnType("integer");
+
                     b.Property<bool>("AllowAccessTokensViaBrowser")
                         .HasColumnType("boolean");
+
+                    b.Property<string>("AllowedCorsOrigins")
+                        .HasColumnType("text");
 
                     b.Property<string>("AllowedGrantTypes")
                         .HasColumnType("text");
@@ -89,13 +95,22 @@ namespace Nmro.IAM.Migrations
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("timestamp without time zone");
 
+                    b.Property<int>("IdentityTokenLifetime")
+                        .HasColumnType("integer");
+
                     b.Property<string>("PostLogoutRedirectUris")
                         .HasColumnType("text");
 
                     b.Property<string>("RedirectUris")
                         .HasColumnType("text");
 
+                    b.Property<bool>("RequireClientSecret")
+                        .HasColumnType("boolean");
+
                     b.Property<bool>("RequireConsent")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("RequirePkce")
                         .HasColumnType("boolean");
 
                     b.Property<long?>("UpdatedBy")

@@ -47,7 +47,12 @@ namespace Nmro.IAM.Migrations
                     AllowedGrantTypes = table.Column<string>(nullable: true),
                     AllowAccessTokensViaBrowser = table.Column<bool>(nullable: false),
                     RedirectUris = table.Column<string>(nullable: true),
-                    PostLogoutRedirectUris = table.Column<string>(nullable: true)
+                    PostLogoutRedirectUris = table.Column<string>(nullable: true),
+                    AllowedCorsOrigins = table.Column<string>(nullable: true),
+                    AccessTokenLifetime = table.Column<int>(nullable: false),
+                    IdentityTokenLifetime = table.Column<int>(nullable: false),
+                    RequireClientSecret = table.Column<bool>(nullable: false),
+                    RequirePkce = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
