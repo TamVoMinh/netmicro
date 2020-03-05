@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { Observable } from 'rxjs';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { AuthService } from 'src/app/shared/common/_service/auth/auth.service';

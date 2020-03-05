@@ -1,5 +1,5 @@
 <ng-container>
-    <app-toolbar [isAuthorized$]="isAuthorized$" (toggle)="toggleSideBar($event)" (logout)="logout()" (login)="login()"></app-toolbar>
+    <app-toolbar [isAuthorized$]="isAuthorized$" (toggle)="toggleSideBar()" (logout)="logout()" (login)="login()"></app-toolbar>
     <app-sidenav #sidebar [isAuthorized$]="isAuthorized$">
       <div class="container" style="height: 100vh">
           <!-- <app-alert></app-alert> -->
