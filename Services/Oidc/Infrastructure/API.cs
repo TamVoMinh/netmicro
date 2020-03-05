@@ -22,7 +22,7 @@ namespace Nmro.Oidc.Infrastructure
 
         public static class Resource
         {
-            public static string GetApiResourceByName(string resourcename) => $"resources/api-resource?resourcename={resourcename}";
+            public static string GetApiResourceByName(string resourcename) => $"resources/api-resource/name?resourcename={resourcename}";
 
             public static string GetApiResourceByScope(string scopes) => $"resources/api-resource?{scopes}";
 

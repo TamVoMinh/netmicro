@@ -39,7 +39,7 @@ namespace Nmro.IAM.Controllers
             return resources;
         }
 
-        [HttpGet("api-resource")]
+        [HttpGet("api-resource/name")]
         public async Task<ApiResourceModel> GetApiResourceByName([FromQuery] string resourcename)
         {
             ApiResource resource = await _context.ApiResources.FirstOrDefaultAsync(x => x.Name.Equals(resourcename));
@@ -50,8 +50,9 @@ namespace Nmro.IAM.Controllers
         [HttpGet("api-resource")]
         public async Task<List<ApiResourceModel>> GetApiResourceByScopeName([FromQuery] List<string> scopename)
         {
-            List<ApiResource> a = await _context.ApiResources.ToListAsync();
-            List<ApiResource> resources = await _context.ApiResources.Include(x => x.Scopes).Include(x => x.ApiSecrets).Where(x => x.Scopes.Any(s => scopename.Contains(s.Name))).ToListAsync();
+            List<ApiResource> resources = await _context.ApiResources.Where(x => x.Scopes.Any(s => scopename.Contains(s.Name)))
+                .Include(x => x.Scopes)
+                .Include(x => x.ApiSecrets).ToListAsync();
             List<ApiResourceModel> result = _mapper.Map<List<ApiResourceModel>>(resources);
             return result;
         }
