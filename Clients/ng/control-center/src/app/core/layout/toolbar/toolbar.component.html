@@ -1,0 +1,19 @@
+<mat-toolbar color="accent">
+    <mat-toolbar-row>
+      <button (click)="toggleSideBar()"  mat-icon-button>
+        <i class="material-icons">menu</i>
+      </button>
+      <h1>Net Micro</h1>
+      <span class="menu-spacer"></span>
+      <div style="display: flex; justify-content: space-between;">
+        <div>
+          <a mat-button [routerLink]="[{outlets: { primary: ['/'], web: ['/web/home'] }}]">Home</a>
+          <a mat-button [routerLink]="['/web/dashboard']"> Dashboard </a>
+        </div>
+        <div>
+          <a *ngIf="!(isAuthorized$ | async)" mat-button (click)="this.login.emit()">Log in</a>
+          <a *ngIf="isAuthorized$ | async" mat-button (click)="this.logout.emit()">Log out</a>
+        </div>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
