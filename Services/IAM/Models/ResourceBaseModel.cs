@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Nmro.IAM.Models
 {
-    public class ResourceBaseModel
+    public class ResourceBaseModel: BaseEntityModel<int>
     {
         public bool Enabled { get; set; }
         

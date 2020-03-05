@@ -31,7 +31,7 @@ namespace Nmro.IAM.Controllers
         public async Task<ResourcesModel> GetAll()
         {
             ResourcesModel resources = new ResourcesModel();
-            List<ApiResource> apiResources = await _context.ApiResources.ToListAsync();
+            List<ApiResource> apiResources = await _context.ApiResources.Include(x => x.Scopes).Include(x => x.ApiSecrets).ToListAsync();
             List<IdentityResource> identityResources = await _context.IdentityResources.ToListAsync();
 
             resources.ApiResources = _mapper.Map<List<ApiResourceModel>>(apiResources);
@@ -51,7 +51,7 @@ namespace Nmro.IAM.Controllers
         public async Task<List<ApiResourceModel>> GetApiResourceByScopeName([FromQuery] List<string> scopename)
         {
             List<ApiResource> a = await _context.ApiResources.ToListAsync();
-            List<ApiResource> resources = await _context.ApiResources.Where(x => x.Scopes.Any(s => scopename.Contains(s.Name))).ToListAsync();
+            List<ApiResource> resources = await _context.ApiResources.Include(x => x.Scopes).Include(x => x.ApiSecrets).Where(x => x.Scopes.Any(s => scopename.Contains(s.Name))).ToListAsync();
             List<ApiResourceModel> result = _mapper.Map<List<ApiResourceModel>>(resources);
             return result;
         }

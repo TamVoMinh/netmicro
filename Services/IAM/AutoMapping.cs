@@ -13,6 +13,7 @@ namespace Nmro.IAM
             CreateMap<Client, ClientModel>().ReverseMap();
             CreateMap<Secret, SecretModel>().ReverseMap();
             CreateMap<ApiResource, ApiResourceModel>().ReverseMap();
+            CreateMap<Scope, ScopeModel>().ReverseMap();
             CreateMap<IdentityResource, IdentityResourceModel>().ReverseMap();
         }
     }
