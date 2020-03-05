@@ -47,7 +47,7 @@ namespace Nmro.IAM.Controllers
             return result;
         }
 
-        [HttpGet("api-resource/scope")]
+        [HttpGet("api-resource")]
         public async Task<List<ApiResourceModel>> GetApiResourceByScopeName([FromQuery] List<string> scopename)
         {
             List<ApiResource> a = await _context.ApiResources.ToListAsync();

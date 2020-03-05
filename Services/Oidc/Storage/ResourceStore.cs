@@ -37,9 +37,9 @@ namespace Nmro.Oidc.Storage
 
         public async Task<IEnumerable<ApiResource>> FindApiResourcesByScopeAsync(IEnumerable<string> scopeNames)
         {
-            var queryString = $"?scopename={string.Join("&scopename=", scopeNames)}";
+            var queryString = $"scopename={string.Join("&scopename=", scopeNames)}";
 
-            var uri = API.Resource.GetApiResourceByScope() + queryString;
+            var uri = API.Resource.GetApiResourceByScope(queryString);
 
             var response = await iamClient.GetAsync(uri);
 
@@ -52,9 +52,9 @@ namespace Nmro.Oidc.Storage
 
         public async Task<IEnumerable<IdentityResource>> FindIdentityResourcesByScopeAsync(IEnumerable<string> scopeNames)
         {
-            var queryString = $"?scopename={string.Join("&scopename=", scopeNames)}";
-           
-            var uri = API.Resource.GetIdentityResourceByScope() + queryString;
+            var queryString = $"scopename={string.Join("&scopename=", scopeNames)}";
+
+            var uri = API.Resource.GetIdentityResourceByScope(queryString);
 
             var response = await iamClient.GetAsync(uri);
 
