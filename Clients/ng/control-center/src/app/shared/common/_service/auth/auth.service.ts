@@ -37,7 +37,7 @@ export class AuthService extends BaseService implements OnDestroy  {
       stsServer: this.authUrl,
       redirect_url: this.originUrl,
       client_id: environment.oidc.client_id,
-      response_type: 'id_token token',
+      response_type: 'code',
       scope: "openid profile email",
       post_logout_redirect_uri: this.originUrl,
       forbidden_route: '/web/forbidden',

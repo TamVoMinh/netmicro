@@ -53,10 +53,12 @@ namespace Nmro.Oidc.Storage
             new Client {
                 ClientId = "nmro-angular-client-localhost",
                 ClientName = "Nmro Angular client - localhost",
-                AllowedGrantTypes = GrantTypes.Implicit,
+                AccessTokenLifetime = 3600,
+                IdentityTokenLifetime = 30,
+                RequireClientSecret = false,
+                AllowedGrantTypes = GrantTypes.Code,
+                RequirePkce = true,
                 AllowAccessTokensViaBrowser = true,
-                RequireConsent = false,
-                AlwaysIncludeUserClaimsInIdToken = true,
                 AllowedScopes = new List<string>
                 {
                     IdentityServerConstants.StandardScopes.OpenId,
@@ -64,17 +66,27 @@ namespace Nmro.Oidc.Storage
                     IdentityServerConstants.StandardScopes.Email,
                     "member"
                 },
-                RedirectUris = new List<string> {"http://localhost:4200"},
-                PostLogoutRedirectUris = new List<string> {"http://localhost:4200"},
-                AllowedCorsOrigins = new List<string> { "http://localhost:4200" }
+                RedirectUris = new List<string> {
+                    "http://localhost:4200",
+                    "http://localhost:4200/silent-renew.html"
+                },
+                PostLogoutRedirectUris = new List<string> {
+                    "http://localhost:4200",
+                    "http://localhost:4200/web/unauthorized"
+                },
+                AllowedCorsOrigins = new List<string> {
+                    "http://localhost:4200"
+                }
             },
              new Client {
                 ClientId = "nmro-angular-client",
                 ClientName = "Nmro Angular client",
-                AllowedGrantTypes = GrantTypes.Implicit,
+                AccessTokenLifetime = 3600,
+                IdentityTokenLifetime = 30,
+                RequireClientSecret = false,
+                AllowedGrantTypes = GrantTypes.Code,
+                RequirePkce = true,
                 AllowAccessTokensViaBrowser = true,
-                RequireConsent = false,
-                AlwaysIncludeUserClaimsInIdToken = true,
                 AllowedScopes = new List<string>
                 {
                     IdentityServerConstants.StandardScopes.OpenId,
@@ -82,8 +94,16 @@ namespace Nmro.Oidc.Storage
                     IdentityServerConstants.StandardScopes.Email,
                     "member"
                 },
-                RedirectUris = new List<string> {"http://control-centre.nmro.local"},
-                PostLogoutRedirectUris = new List<string> {"http://control-centre.nmro.local"},
+                RedirectUris = new List<string>
+                {
+                    "http://control-centre.nmro.local",
+                    "http://control-centre.nmro.local/silent-renew.html"
+                },
+                PostLogoutRedirectUris = new List<string>
+                {
+                    "http://control-centre.nmro.local",
+                    "http://control-centre.nmro.local/web/unauthorized"
+                },
                 AllowedCorsOrigins = new List<string> { "http://control-centre.nmro.local" }
             }
         };
