@@ -1,10 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Nmro.IAM.Repository.Entities;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Nmro.IAM.Repository.Entities
 {
@@ -58,6 +55,28 @@ namespace Nmro.IAM.Repository.Entities
         // Summary:
         //     Specifies allowed URIs to redirect to after logout
         public ICollection<string> PostLogoutRedirectUris { get; set; }
+        //
+        // Summary:
+        //     Gets or sets the allowed CORS origins for JavaScript clients.
+        public ICollection<string> AllowedCorsOrigins { get; set; }
+        //
+        // Summary:
+        //     Lifetime of access token in seconds (defaults to 3600 seconds / 1 hour)
+        public int AccessTokenLifetime { get; set; }
+        //
+        // Summary:
+        //     Lifetime of identity token in seconds (defaults to 300 seconds / 5 minutes)
+        public int IdentityTokenLifetime { get; set; }
+        //
+        // Summary:
+        //     If set to false, no client secret is needed to request tokens at the token endpoint
+        //     (defaults to true)
+        public bool RequireClientSecret { get; set; }
+        //
+        // Summary:
+        //     Specifies whether a proof key is required for authorization code based token
+        //     requests (defaults to false).
+        public bool RequirePkce { get; set; }
     }
 
     public static class ClientIdentityExtention
@@ -76,6 +95,8 @@ namespace Nmro.IAM.Repository.Entities
             entityTable.Property(e => e.RedirectUris)
                          .HasConversion(v => string.Join(',', v), v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
             entityTable.Property(e => e.PostLogoutRedirectUris)
+                         .HasConversion(v => string.Join(',', v), v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
+            entityTable.Property(e => e.AllowedCorsOrigins)
                          .HasConversion(v => string.Join(',', v), v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
 
             entityTable.HasIndex(en => en.ClientId).IsUnique();

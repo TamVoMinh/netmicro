@@ -3,12 +3,18 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Nmro.Landing.Settings;
 
 namespace Nmro.Landing.Extentions
 {
     public static class AuthenticationExtentions{
         public static IServiceCollection AddCustomAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
+            OidcOptions oidcOptions = configuration.GetSection("Oidc").Get<OidcOptions>();
+            if(oidcOptions==null){
+                throw new ArgumentNullException(typeof(OidcOptions).Name);
+            }
+
             var identityUrl = configuration.GetValue<string>("IdentityUrl");
             var callBackUrl = configuration.GetValue<string>("CallBackUrl");
             var sessionCookieLifetime = configuration.GetValue("SessionCookieLifetimeMinutes", 60);
@@ -22,17 +28,15 @@ namespace Nmro.Landing.Extentions
             .AddOpenIdConnect(options =>
             {
                 options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.Authority = identityUrl.ToString();
-                options.SignedOutRedirectUri = callBackUrl.ToString();
-                options.ClientId = "nmro-website";
-                options.ClientSecret = "nmro-website-Secret";
+                options.Authority = oidcOptions.Authority;
+                options.SignedOutRedirectUri = oidcOptions.SignedOutRedirectUri;
+                options.ClientId = oidcOptions.ClientId;
+                options.ClientSecret = oidcOptions.ClientSecret;
                 options.ResponseType =  "code id_token";
                 options.SaveTokens = true;
                 options.GetClaimsFromUserInfoEndpoint = true;
                 options.RequireHttpsMetadata = false;
-                options.Scope.Add("openid");
-                options.Scope.Add("profile");
-                options.Scope.Add("member");
+                Array.ForEach(oidcOptions.Scopes, scope => options.Scope.Add(scope));
             });
 
             return services;

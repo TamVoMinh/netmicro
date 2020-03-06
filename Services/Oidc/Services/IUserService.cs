@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Nmro.Oidc.Services
 {
-    public partial interface IUserService
+    public interface IUserService
     {
         Task<User> FindByUsername(string username);
         Task<bool> ValidateCredentials(string username, string password);

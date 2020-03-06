@@ -11,6 +11,7 @@ using Serilog;
 using System;
 using Nmro.Oidc.Application;
 using Nmro.BuildingBlocks.WebHost.ServiceDiscovery;
+using Nmro.Oidc.Storage;
 
 namespace Nmro.Oidc
 {
@@ -36,14 +37,13 @@ namespace Nmro.Oidc
 
             services
                 .AddIdentityServer()
-                .AddInMemoryClients(Storage.Clients.Get())
-                .AddInMemoryIdentityResources(Storage.Resources.GetIdentityResources())
-                .AddInMemoryApiResources(Storage.Resources.GetApiResources())
+                .AddClientStore<ClientStore>()
+                .AddResourceStore<ResourceStore>()
                 .AddDeveloperSigningCredential();
 
             services.AddHttpClient("iam", opts =>
             {
-                opts.BaseAddress = new Uri(Configuration.GetValue<string>("IdentityApiEndpoint") ?? "http://iam-api");
+                opts.BaseAddress = new Uri(Configuration.GetValue<string>("IdentityApiEndpoint") ?? "http://iam-api/iam");
             });
 
             services.AddControllers();
@@ -55,7 +55,7 @@ namespace Nmro.Oidc
 
             services.AddHealthChecks();
 
-            services.RegisterConsulServices(Configuration);
+            //services.RegisterConsulServices(Configuration);
 
         }
 
