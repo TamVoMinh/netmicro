@@ -47,7 +47,12 @@ namespace Nmro.IAM.Migrations
                     AllowedGrantTypes = table.Column<string>(nullable: true),
                     AllowAccessTokensViaBrowser = table.Column<bool>(nullable: false),
                     RedirectUris = table.Column<string>(nullable: true),
-                    PostLogoutRedirectUris = table.Column<string>(nullable: true)
+                    PostLogoutRedirectUris = table.Column<string>(nullable: true),
+                    AllowedCorsOrigins = table.Column<string>(nullable: true),
+                    AccessTokenLifetime = table.Column<int>(nullable: false),
+                    IdentityTokenLifetime = table.Column<int>(nullable: false),
+                    RequireClientSecret = table.Column<bool>(nullable: false),
+                    RequirePkce = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -137,8 +142,8 @@ namespace Nmro.IAM.Migrations
                     Value = table.Column<string>(nullable: true),
                     Expiration = table.Column<DateTime>(nullable: true),
                     Type = table.Column<string>(nullable: true),
-                    ClientId = table.Column<int>(nullable: false),
-                    ApiResourceId = table.Column<int>(nullable: false)
+                    ClientId = table.Column<int>(nullable: true),
+                    ApiResourceId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -148,13 +153,13 @@ namespace Nmro.IAM.Migrations
                         column: x => x.ApiResourceId,
                         principalTable: "ApiResources",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Secrets_Clients_ClientId",
                         column: x => x.ClientId,
                         principalTable: "Clients",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(

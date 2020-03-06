@@ -6,20 +6,18 @@ using Nmro.IAM.Repository.Entities;
 using Nmro.IAM.Models;
 using Nmro.IAM.Repository;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using Serilog;
 
 namespace Nmro.IAM.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class IdentityController : ControllerBase
+    public class IdentityUserController : ControllerBase
     {
-        private readonly ILogger<IdentityController> _logger;
+        private readonly ILogger<IdentityUserController> _logger;
         private readonly IMapper _mapper;
         private readonly IAMDbcontext _context;
 
-        public IdentityController(ILogger<IdentityController> logger, IAMDbcontext context, IMapper mapper)
+        public IdentityUserController(ILogger<IdentityUserController> logger, IAMDbcontext context, IMapper mapper)
         {
             _logger = logger;
             _context = context;
@@ -46,7 +44,7 @@ namespace Nmro.IAM.Controllers
         }
 
         [HttpPost("credential-validation")]
-        public async Task<ActionResult<bool>> ValidateCredential([FromBody] UserCredentialModel credential)
+        public async Task<ActionResult<bool>> ValidateCredential([FromBody] CredentialModel credential)
         {
             var user = await _context.IdentityUsers.FirstOrDefaultAsync(e => e.UserName.Equals(credential.Username));
 

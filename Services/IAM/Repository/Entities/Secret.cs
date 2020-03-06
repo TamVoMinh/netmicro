@@ -1,10 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Nmro.IAM.Repository.Entities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Nmro.IAM.Repository.Entities
 {
@@ -27,13 +23,13 @@ namespace Nmro.IAM.Repository.Entities
         //     Gets or sets the type of the client secret.
         public string Type { get; set; }
 
-        public int ClientId { get; set; }
+        public int? ClientId { get; set; }
 
-        public int ApiResourceId { get; set; }
+        public int? ApiResourceId { get; set; }
 
-        public Client Client { get; set; }
+        //public Client Client { get; set; }
 
-        public ApiResource ApiResource { get; set; }
+        //public ApiResource ApiResource { get; set; }
 
     }
 
@@ -45,14 +41,6 @@ namespace Nmro.IAM.Repository.Entities
 
             entityTable.HasKey(en => en.Id);
             entityTable.Property(en => en.Id).ValueGeneratedOnAdd();
-            entityTable
-                .HasOne(s => s.Client)
-                .WithMany(c => c.ClientSecrets)
-                .HasForeignKey(s => s.ClientId);
-            entityTable
-                .HasOne(s => s.ApiResource)
-                .WithMany(c => c.ApiSecrets)
-                .HasForeignKey(s => s.ApiResourceId);
 
             return builder;
         }

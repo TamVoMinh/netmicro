@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Nmro.IAM.Models
 {
-    public class UserCredentialModel
+    public class CredentialModel
     {
         public string Username { get; set; }
 

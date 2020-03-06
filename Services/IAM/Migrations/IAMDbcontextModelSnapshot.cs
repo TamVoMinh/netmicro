@@ -65,8 +65,14 @@ namespace Nmro.IAM.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+                    b.Property<int>("AccessTokenLifetime")
+                        .HasColumnType("integer");
+
                     b.Property<bool>("AllowAccessTokensViaBrowser")
                         .HasColumnType("boolean");
+
+                    b.Property<string>("AllowedCorsOrigins")
+                        .HasColumnType("text");
 
                     b.Property<string>("AllowedGrantTypes")
                         .HasColumnType("text");
@@ -89,13 +95,22 @@ namespace Nmro.IAM.Migrations
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("timestamp without time zone");
 
+                    b.Property<int>("IdentityTokenLifetime")
+                        .HasColumnType("integer");
+
                     b.Property<string>("PostLogoutRedirectUris")
                         .HasColumnType("text");
 
                     b.Property<string>("RedirectUris")
                         .HasColumnType("text");
 
+                    b.Property<bool>("RequireClientSecret")
+                        .HasColumnType("boolean");
+
                     b.Property<bool>("RequireConsent")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("RequirePkce")
                         .HasColumnType("boolean");
 
                     b.Property<long?>("UpdatedBy")
@@ -238,10 +253,10 @@ namespace Nmro.IAM.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<int>("ApiResourceId")
+                    b.Property<int?>("ApiResourceId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("ClientId")
+                    b.Property<int?>("ClientId")
                         .HasColumnType("integer");
 
                     b.Property<long?>("CreatedBy")
@@ -288,17 +303,13 @@ namespace Nmro.IAM.Migrations
 
             modelBuilder.Entity("Nmro.IAM.Repository.Entities.Secret", b =>
                 {
-                    b.HasOne("Nmro.IAM.Repository.Entities.ApiResource", "ApiResource")
+                    b.HasOne("Nmro.IAM.Repository.Entities.ApiResource", null)
                         .WithMany("ApiSecrets")
-                        .HasForeignKey("ApiResourceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ApiResourceId");
 
-                    b.HasOne("Nmro.IAM.Repository.Entities.Client", "Client")
+                    b.HasOne("Nmro.IAM.Repository.Entities.Client", null)
                         .WithMany("ClientSecrets")
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ClientId");
                 });
 #pragma warning restore 612, 618
         }
