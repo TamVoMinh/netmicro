@@ -12,6 +12,7 @@ using System;
 using Nmro.Oidc.Application;
 using Nmro.BuildingBlocks.WebHost.ServiceDiscovery;
 using Nmro.Oidc.Storage;
+using Nmro.Oidc.Extensions;
 
 namespace Nmro.Oidc
 {
@@ -34,6 +35,14 @@ namespace Nmro.Oidc
             });
 
             services.Configure<AppSettings>(Configuration);
+
+              services.AddCors(options =>{
+                options.AddPolicy(Configuration.GetCorsPolicyName(), corsPolicy =>{
+                    corsPolicy.WithOrigins(Configuration.GetAllowOrigns());
+                    corsPolicy.AllowAnyHeader();
+                    corsPolicy.AllowAnyMethod();
+                });
+            });
 
             services
                 .AddIdentityServer()
