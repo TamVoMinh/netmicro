@@ -39,7 +39,12 @@ namespace Nmro.IAM
                 typeof(Startup).GetTypeInfo().Assembly.GetName().Name
             );
 
-            services.AddControllers();
+            services.AddControllers()
+                    .AddJsonOptions(options=>
+                    {
+                        options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+                    });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Nmro.IAM", Version = "v1" });
@@ -47,7 +52,6 @@ namespace Nmro.IAM
             services.AddHealthChecks();
 
             services.RegisterConsulServices(Configuration);
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

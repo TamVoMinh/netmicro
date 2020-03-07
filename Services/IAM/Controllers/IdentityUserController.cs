@@ -6,6 +6,7 @@ using Nmro.IAM.Repository.Entities;
 using Nmro.IAM.Models;
 using Nmro.IAM.Repository;
 using Microsoft.EntityFrameworkCore;
+using Nmro.IAM.ModelBinders;
 
 namespace Nmro.IAM.Controllers
 {
@@ -50,5 +51,12 @@ namespace Nmro.IAM.Controllers
 
             return user != null && user.Password.Equals(credential.Password);
         }
+
+        [HttpGet("test")]
+        public ActionResult TestJsonBinding(TestModel model)
+        {
+            return Ok(model);
+        }
+        
     }
 }
