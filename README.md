@@ -22,31 +22,31 @@
         > Copy-Item -Path Scripts\variables.env.template -Destination .env
     ```
 
+1. Drop & recreate IAM database. **Skip this at first time**.
+
+    ```powershell
+        > Set-Location Services/IAM | dotnet ef database drop | dotnet ef database update
+    ```
+
 1. Run up with docker-compose
 
     ```powershell
         > docker-compose -f docker-compose.yml -f docker-compose.override.yml -f DevOnly/docker-compose.yml -f Elk/docker-compose.yml -f Clients/docker-compose.yml up -d
     ```
 
-1. Clean Up local docker containers
-
-    ```powershell
-        > docker stop $(docker ps -q); docker rm $(docker ps -aq)
-        > docker system prune
-    ```
-
 1. Known issues:
 
-- "logspout" service failed to build on windown, reference [issues/11](https://github.com/TamVoMinh/netmicro/issues/11)
+    - "logspout" service failed to build on windown, reference [issues/11](https://github.com/TamVoMinh/netmicro/issues/11)
 
+1. Most used [commands](DOCKER.md)
 
 ### Playground with
 
-1. Start playing around with [Default webiste](http://nmro.local/)
+1. Start playing around with [Landing site](http://nmro.local/) Implemented Hybrid-Flow for tradtional website
 1. Discovery servcies with [Consul](http://isys.nmro.local/)
 1. Analysis logging with [Kibana](http://isys.nmro.local/elk/)
 1. Monitor health with [healthchecks-ui](http://isys.nmro.local/health/status/)
-1. Enjoy [ReactJs app at](http://engage.nmro.local/)
+1. Play with [control-centre](http://control-centre.nmro.local/) Implemented PKCE-Flow for angular app.
 1. Enjoy document with [swagger-ui](http://docs.nmro.local/)
 1. User/Pass: admin/admin123
 

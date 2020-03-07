@@ -12,12 +12,12 @@ using System;
 using Nmro.Oidc.Application;
 using Nmro.BuildingBlocks.WebHost.ServiceDiscovery;
 using Nmro.Oidc.Storage;
-using Nmro.Oidc.Extensions;
 
 namespace Nmro.Oidc
 {
     public class Startup
     {
+        private const string OIDC_CORS_1ST_LAYER_POLICY = "__oidc_cors_1st_layer_policy";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -36,9 +36,9 @@ namespace Nmro.Oidc
 
             services.Configure<AppSettings>(Configuration);
 
-              services.AddCors(options =>{
-                options.AddPolicy(Configuration.GetCorsPolicyName(), corsPolicy =>{
-                    corsPolicy.WithOrigins(Configuration.GetAllowOrigns());
+            services.AddCors(options =>{
+                options.AddPolicy(OIDC_CORS_1ST_LAYER_POLICY, corsPolicy =>{
+                    corsPolicy.AllowAnyOrigin();
                     corsPolicy.AllowAnyHeader();
                     corsPolicy.AllowAnyMethod();
                 });
@@ -64,7 +64,7 @@ namespace Nmro.Oidc
 
             services.AddHealthChecks();
 
-            //services.RegisterConsulServices(Configuration);
+            services.RegisterConsulServices(Configuration);
 
         }
 
@@ -81,6 +81,8 @@ namespace Nmro.Oidc
                 app.UseHsts();
                 app.UseHttpsRedirection();
             }
+
+            app.UseCors(OIDC_CORS_1ST_LAYER_POLICY);
 
             app.UseStaticFiles();
 
