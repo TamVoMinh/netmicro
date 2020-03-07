@@ -1,10 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { ThemeProvider } from '@material-ui/styles';
+import Theme from './theme';
+import { Provider } from 'react-redux';
+import NotifierProvider from './notifier/NotifierProvider';
+import { createMuiTheme } from '@material-ui/core/styles';
+import store from './store/configStore';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const theme = createMuiTheme(Theme);
+theme.shadows[1] = '0 0 5px 0 rgba(0, 0, 0, 0.1)';
+
+const AppWrapper = () => {
+    return (
+        <React.Fragment>
+            <CssBaseline />
+            <Provider store={store}>
+                <ThemeProvider theme={theme}>
+                    <NotifierProvider>
+                        <App />
+                    </NotifierProvider>
+                </ThemeProvider>
+            </Provider>
+        </React.Fragment>
+    );
+};
+
+ReactDOM.render(<AppWrapper />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
