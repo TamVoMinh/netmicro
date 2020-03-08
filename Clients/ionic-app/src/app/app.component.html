@@ -3,14 +3,24 @@
         <ion-menu contentId="main-content" type="overlay">
             <ion-content>
                 <ion-list id="inbox-list">
-                    <ion-row style="height: 40px"></ion-row>
+                    <ion-row style="height: 10px"></ion-row>
                     <ion-list-header>Demo inonic app</ion-list-header>
                     <ion-note>Login oidc implicit flow</ion-note>
 
-                    <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-                        <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false">
-                            <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+                    <!-- <ion-menu-toggle auto-hide="false " *ngFor="let p of appPages; let i=i ndex ">
+                        <ion-item (click)="selectedIndex=i " routerDirection="root " [routerLink]="[p.url] " lines="none " detail="false " [class.selected]="selectedIndex==i ">
+                            <ion-icon slot="start " [ios]="p.icon + '-outline' " [md]="p.icon + '-sharp' "></ion-icon>
                             <ion-label>{{ p.title }}</ion-label>
+                        </ion-item>
+                    </ion-menu-toggle> -->
+                    <ion-menu-toggle auto-hide="false">
+                        <ion-item (click)="login()" lines="none" detail="false">
+                            <ion-icon name="enter-outline"></ion-icon>
+                            <ion-label>&nbsp; Login</ion-label>
+                        </ion-item>
+                        <ion-item (click)="logout()" lines="none" detail="false">
+                            <ion-icon name="exit-outline"></ion-icon>
+                            <ion-label>&nbsp; Logout</ion-label>
                         </ion-item>
                     </ion-menu-toggle>
                 </ion-list>
@@ -19,12 +29,3 @@
         <ion-router-outlet id="main-content"></ion-router-outlet>
     </ion-split-pane>
 </ion-app>
-
-<!-- <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-  <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" 
-  [class.selected]="selectedIndex == i"
-  >
-      <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
-      <ion-label>{{ p.title }}</ion-label>
-  </ion-item>
-</ion-menu-toggle> -->

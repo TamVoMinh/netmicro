@@ -105,7 +105,25 @@ namespace Nmro.Oidc.Storage
                     "http://control-centre.nmro.local/web/unauthorized"
                 },
                 AllowedCorsOrigins = new List<string> { "http://control-centre.nmro.local" }
-            }
+            },
+            new Client {
+                ClientId = "nmro-ionic-client",
+                ClientName = "Nmro Ionic client",
+                AllowedGrantTypes = GrantTypes.DeviceFlow,
+                AllowAccessTokensViaBrowser = true,
+                RequireConsent = false,
+                AlwaysIncludeUserClaimsInIdToken = true,
+                AllowedScopes = new List<string>
+                {
+                    IdentityServerConstants.StandardScopes.OpenId,
+                    IdentityServerConstants.StandardScopes.Profile,
+                    IdentityServerConstants.StandardScopes.Email,
+                    "member"
+                },
+                RedirectUris = new List<string> {"http://192.168.1.7:8100/signin-callback.html"},
+                PostLogoutRedirectUris = new List<string> {"http://192.168.1.7:8100"},
+                AllowedCorsOrigins = new List<string> { "http://engage.nmro.local" }
+            },
         };
     }
 }

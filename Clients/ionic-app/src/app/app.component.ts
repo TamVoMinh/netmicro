@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { AuthService } from 'src/services/AuthService';
 
 @Component({
   selector: 'app-root',
@@ -24,12 +25,17 @@ export class AppComponent implements OnInit {
     },
   ];
 
+
+  authService: AuthService;
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar
   ) {
     this.initializeApp();
+
+    this.authService = new AuthService();
   }
 
   initializeApp() {
@@ -45,4 +51,12 @@ export class AppComponent implements OnInit {
       this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
     }
   }
+
+  login() {
+    this.authService.login();
+  };
+  logout() {
+    this.authService.logout();
+  };
+
 }
