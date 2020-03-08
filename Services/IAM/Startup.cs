@@ -11,7 +11,7 @@ using System.Reflection;
 using AutoMapper;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using HealthChecks.UI.Client;
-using Nmro.BuildingBlocks.WebHost.ServiceDiscovery;
+using Nmro.BuildingBlocks.Web.ServiceDiscovery;
 
 namespace Nmro.IAM
 {

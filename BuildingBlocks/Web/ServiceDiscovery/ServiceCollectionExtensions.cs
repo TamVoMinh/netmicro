@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Nmro.BuildingBlocks.WebHost.ServiceDiscovery
+namespace Nmro.BuildingBlocks.Web.ServiceDiscovery
 {
     public static class ServiceCollectionExtensions
     {

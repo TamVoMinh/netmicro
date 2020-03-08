@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 using Polly;
 using Polly.Retry;
 
-namespace Nmro.BuildingBlocks.WebHost.ServiceDiscovery
+namespace Nmro.BuildingBlocks.Web.ServiceDiscovery
 {
     public class ServiceDiscoveryHostedService : IHostedService
     {

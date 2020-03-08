@@ -6,7 +6,7 @@ using Nmro.IAM.Repository.Entities;
 using Nmro.IAM.Models;
 using Nmro.IAM.Repository;
 using Microsoft.EntityFrameworkCore;
-using Nmro.IAM.ModelBinders;
+using Nmro.BuildingBlocks.Web.ModelBinding;
 
 namespace Nmro.IAM.Controllers
 {
@@ -57,6 +57,6 @@ namespace Nmro.IAM.Controllers
         {
             return Ok(model);
         }
-        
+
     }
 }

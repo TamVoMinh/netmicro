@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Nmro.BuildingBlocks.WebHost.Binding;
+using Nmro.BuildingBlocks.Web.ModelBinding;
 using System;
 using System.Collections.Generic;
 using System.Linq;
