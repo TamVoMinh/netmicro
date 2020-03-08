@@ -1,0 +1,13 @@
+@import '~@nebular/theme/styles/globals';
+@import '~@nebular/theme/styles/global/breakpoints';
+
+@include nb-install() {
+    @include nb-theme-global();
+    @include ngx-layout();
+    // loading progress bar
+    @include ngx-pace-theme();
+  
+    @include nb-overrides();
+  };
+
+  

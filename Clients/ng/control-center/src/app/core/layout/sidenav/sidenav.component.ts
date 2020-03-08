@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Observable } from 'rxjs';
+import { NbMenuItem, NbSidebarService } from '@nebular/theme';
+import { MENU_ITEMS } from '../pages-menu';
 
 @Component({
   selector: 'app-sidenav',
@@ -8,13 +10,19 @@ import { Observable } from 'rxjs';
 })
 export class SidenavComponent implements OnInit {
   @Input() isAuthorized$: Observable<boolean>;
-  @ViewChild('sidenav', { static: true }) sidenav: any;
-  constructor() { }
+
+  items: NbMenuItem[] = [];
+
+  constructor(
+    private sidebarService: NbSidebarService,
+  ) { }
 
   ngOnInit() {
+    this.items = MENU_ITEMS;
   }
 
   toggleSideNav() {
-    this.sidenav.toggle();
+    this.sidebarService.toggle(true);
+    return false;
   }
 }
