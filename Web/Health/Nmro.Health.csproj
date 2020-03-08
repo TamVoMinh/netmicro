@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\BuildingBlocks\WebHost\WebHost.csproj" />
+    <ProjectReference Include="..\..\BuildingBlocks\Web\Web.csproj" />
   </ItemGroup>
 
 

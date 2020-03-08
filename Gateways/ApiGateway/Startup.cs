@@ -10,7 +10,7 @@ using Serilog;
 using Nmro.ApiGateway.Extentions;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using HealthChecks.UI.Client;
-using Nmro.BuildingBlocks.WebHost.ServiceDiscovery;
+using Nmro.BuildingBlocks.Web.ServiceDiscovery;
 
 namespace Nmro.ApiGateway
 {

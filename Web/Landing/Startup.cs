@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Logging;
-using Nmro.BuildingBlocks.WebHost.ServiceDiscovery;
+using Nmro.BuildingBlocks.Web.ServiceDiscovery;
 using Nmro.Landing.Extentions;
 using Serilog;
 
