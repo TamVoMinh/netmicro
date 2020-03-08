@@ -13,7 +13,12 @@ namespace Nmro.IAM.Models
         public bool AllowAccessTokensViaBrowser { get; set; }
         public ICollection<string> RedirectUris { get; set; }
         public ICollection<string> PostLogoutRedirectUris { get; set; }
-
         public ICollection<SecretModel> ClientSecrets { get; set; }
+        public bool RequirePkce { get; set; }
+        public int AccessTokenLifetime { get; set; }
+        public int IdentityTokenLifetime { get; set; }
+        public bool RequireClientSecret { get; set; }
+        public List<string> AllowedCorsOrigins { get; set; }
+
     }
 }

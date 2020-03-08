@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Extensions.Configuration;
 
-namespace Nmro.BuildingBlocks.WebHost.ServiceDiscovery
+namespace Nmro.BuildingBlocks.Web.ServiceDiscovery
 {
     public static class ConfigurationExtensions
     {

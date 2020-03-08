@@ -59,17 +59,6 @@ public class IdentityUserContextSeed
     {
         return new List<Nmro.IAM.Repository.Entities.Client> {
             new Nmro.IAM.Repository.Entities.Client {
-                Id = 1,
-                ClientId = "oauthClient",
-                ClientName = "Example Client Credentials Client Application",
-                AllowedGrantTypes =  new string[] { GrantType.ClientCredentials},
-                ClientSecrets = new List<Secret>
-                {
-                   new Secret { Value = "superSecretPassword".Sha256() }
-                },
-                AllowedScopes = new List<string> {"customAPI.read"}
-            },
-            new Nmro.IAM.Repository.Entities.Client {
                 Id = 2,
                 ClientId = "nmro-website",
                 ClientName = "Nmro MVC client - Hybrid Grant",
@@ -81,6 +70,8 @@ public class IdentityUserContextSeed
                 AllowAccessTokensViaBrowser = false,
                 RequireConsent = false,
                 AlwaysIncludeUserClaimsInIdToken = true,
+                AccessTokenLifetime = 3600,
+                IdentityTokenLifetime = 30,
                 AllowedScopes = new List<string>
                 {
                     StandardScopes.OpenId,
@@ -89,7 +80,11 @@ public class IdentityUserContextSeed
                     "member"
                 },
                 RedirectUris = new List<string> {"http://nmro.local/signin-oidc"},
-                PostLogoutRedirectUris = new List<string> {"http://nmro.local/signout-callback-oidc"}
+                PostLogoutRedirectUris = new List<string> {"http://nmro.local/signout-callback-oidc"},
+                AllowedCorsOrigins = new List<string> {
+                    "http://nmro.local",
+                    "https://nmro.local"
+                }
             },
             new Nmro.IAM.Repository.Entities.Client {
                 Id = 3,
@@ -103,6 +98,8 @@ public class IdentityUserContextSeed
                 AllowAccessTokensViaBrowser = false,
                 RequireConsent = false,
                 AlwaysIncludeUserClaimsInIdToken = true,
+                AccessTokenLifetime = 3600,
+                IdentityTokenLifetime = 30,
                 AllowedScopes = new List<string>
                 {
                     StandardScopes.OpenId,
@@ -111,7 +108,11 @@ public class IdentityUserContextSeed
                     "member"
                 },
                 RedirectUris = new List<string> {"http://localhost:8080/signin-oidc"},
-                PostLogoutRedirectUris = new List<string> {"http://localhost:8080/signout-callback-oidc"}
+                PostLogoutRedirectUris = new List<string> {"http://localhost:8080/signout-callback-oidc"},
+                 AllowedCorsOrigins = new List<string> {
+                    "http://localhost:8080",
+                    "http://localhost:8081"
+                }
             },
             new Nmro.IAM.Repository.Entities.Client {
                 Id = 4,
@@ -121,6 +122,8 @@ public class IdentityUserContextSeed
                 AllowAccessTokensViaBrowser = true,
                 RequireConsent = false,
                 AlwaysIncludeUserClaimsInIdToken = true,
+                AccessTokenLifetime = 3600,
+                IdentityTokenLifetime = 30,
                 AllowedScopes = new List<string>
                 {
                     StandardScopes.OpenId,
@@ -130,7 +133,10 @@ public class IdentityUserContextSeed
                 },
                 RedirectUris = new List<string> {"http://engage.nmro.local/signin-callback.html"},
                 PostLogoutRedirectUris = new List<string> {"http://engage.nmro.local"},
-                AllowedCorsOrigins = new List<string> { "http://engage.nmro.local" }
+                AllowedCorsOrigins = new List<string> {
+                    "http://engage.nmro.local",
+                    "https://engage.nmro.local"
+                }
             },
             new Nmro.IAM.Repository.Entities.Client {
                 Id = 5,
@@ -139,7 +145,7 @@ public class IdentityUserContextSeed
                 AccessTokenLifetime = 3600,
                 IdentityTokenLifetime = 30,
                 RequireClientSecret = false,
-                AllowedGrantTypes = new string[] { GrantType.AuthorizationCode}, // GrantTypes.Code
+                AllowedGrantTypes = new string[] { GrantType.AuthorizationCode},
                 RequirePkce = true,
                 AllowAccessTokensViaBrowser = true,
                 AllowedScopes = new List<string>
@@ -188,7 +194,10 @@ public class IdentityUserContextSeed
                     "http://control-centre.nmro.local",
                     "http://control-centre.nmro.local/web/unauthorized"
                 },
-                AllowedCorsOrigins = new List<string> { "http://control-centre.nmro.local" }
+                AllowedCorsOrigins = new List<string> {
+                    "http://control-centre.nmro.local",
+                    "https://control-centre.nmro.local"
+                }
             }
         };
     }

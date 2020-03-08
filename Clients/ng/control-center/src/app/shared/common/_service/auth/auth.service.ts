@@ -53,7 +53,7 @@ export class AuthService extends BaseService implements OnDestroy {
       auto_userinfo: true,
       log_console_warning_active: true,
       log_console_debug_active: true,
-      max_id_token_iat_offset_allowed_in_seconds: 10,
+      max_id_token_iat_offset_allowed_in_seconds: 10
     };
 
     const authWellKnownEndpoints: AuthWellKnownEndpoints = {

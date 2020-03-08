@@ -4,7 +4,7 @@ WORKDIR /netmicro
 
 COPY "Nmro.sln" "Nmro.sln"
 
-COPY "BuildingBlocks/WebHost/WebHost.csproj" "BuildingBlocks/WebHost/WebHost.csproj"
+COPY "BuildingBlocks/Web/Web.csproj" "BuildingBlocks/Web/Web.csproj"
 
 COPY "Gateways/ApiGateway/Nmro.ApiGateway.csproj" "Gateways/ApiGateway/Nmro.ApiGateway.csproj"
 
@@ -15,3 +15,5 @@ COPY "Web/Landing/Nmro.Landing.csproj" "Web/Landing/Nmro.Landing.csproj"
 COPY "Web/Health/Nmro.Health.csproj" "Web/Health/Nmro.Health.csproj"
 
 COPY . .
+
+RUN dotnet restore Nmro.sln
