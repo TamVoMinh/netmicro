@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace Nmro.IAM.ModelBinders
+namespace Nmro.BuildingBlocks.WebHost.Binding
 {
     public class JsonModelBinder : IModelBinder
     {
