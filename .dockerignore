@@ -2,8 +2,10 @@
 .env
 .git
 .gitignore
+.gitattributes
 .vs
 .vscode
+.editorconfig
 docker-compose*.yml
 *.md
 **/bin/
@@ -11,4 +13,5 @@ docker-compose*.yml
 **/node_modules/
 **/bower_components/
 **/node_modules
+**/appsettings.Development.json
 

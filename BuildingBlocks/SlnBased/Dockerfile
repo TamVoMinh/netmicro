@@ -15,3 +15,5 @@ COPY "Web/Landing/Nmro.Landing.csproj" "Web/Landing/Nmro.Landing.csproj"
 COPY "Web/Health/Nmro.Health.csproj" "Web/Health/Nmro.Health.csproj"
 
 COPY . .
+
+RUN dotnet restore Nmro.sln
