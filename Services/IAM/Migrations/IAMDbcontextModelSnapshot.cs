@@ -191,6 +191,9 @@ namespace Nmro.IAM.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("text");
 
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("boolean");
+
                     b.Property<DateTime>("LastFailedLogin")
                         .HasColumnType("timestamp without time zone");
 
