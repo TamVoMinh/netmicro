@@ -1,17 +1,22 @@
 import { Injectable, Inject, OnDestroy } from '@angular/core';
-import { OidcSecurityService, OpenIdConfiguration, AuthWellKnownEndpoints, AuthorizationResult, AuthorizationState, OidcConfigService } from 'angular-auth-oidc-client';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {
+  OidcSecurityService,
+  OpenIdConfiguration,
+  AuthWellKnownEndpoints,
+  AuthorizationResult,
+  AuthorizationState,
+} from 'angular-auth-oidc-client';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Subscription, Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
-import { BaseService } from '../base/base.service';
+import { Subscription, Observable } from 'rxjs';
+import { BaseService } from '@shared/common/_service/base/base.service';
+import { environment } from '@environments/environment';
 
 declare const window: Window;
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService extends BaseService implements OnDestroy  {
+export class AuthService extends BaseService implements OnDestroy {
 
   isAuthorized = false;
   constructor(
@@ -22,9 +27,9 @@ export class AuthService extends BaseService implements OnDestroy  {
     @Inject('AUTH_URL') private authUrl: string
   ) {
     super(http, oidcSecurityService);
-   }
+  }
 
-  private isAuthorizedSubscription: Subscription = new Subscription;
+  private isAuthorizedSubscription: Subscription = new Subscription();
 
   ngOnDestroy(): void {
     if (this.isAuthorizedSubscription) {
@@ -38,10 +43,10 @@ export class AuthService extends BaseService implements OnDestroy  {
       redirect_url: this.originUrl,
       client_id: environment.oidc.client_id,
       response_type: 'code',
-      scope: "openid profile email",
+      scope: 'openid profile email',
       post_logout_redirect_uri: this.originUrl,
-      forbidden_route: '/web/forbidden',
-      unauthorized_route: '/web/unauthorized',
+      forbidden_route: '/login',
+      unauthorized_route: '/login',
       silent_renew: true,
       silent_renew_url: this.originUrl + '/silent-renew.html',
       history_cleanup_off: true,
@@ -90,10 +95,9 @@ export class AuthService extends BaseService implements OnDestroy  {
 
     if (authorizationResult.authorizationState === AuthorizationState.unauthorized) {
       if (window.parent) {
-        // sent from the child iframe, for example the silent renew
-        this.router.navigate(['/web/unauthorized']);
+        this.router.navigate(['/login']);
       } else {
-        window.location.href = '/web/unauthorized';
+        window.location.href = '/web';
       }
     }
   }

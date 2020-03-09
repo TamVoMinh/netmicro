@@ -3,22 +3,21 @@ import { CommonModule } from '@angular/common';
 import { LayoutComponent } from './layout/layout.component';
 import { SidenavComponent } from './layout/sidenav/sidenav.component';
 import { ToolbarComponent } from './layout/toolbar/toolbar.component';
-import { LoginComponent } from './login/login.component';
 import { AppComponent } from './app/app.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
+
+import { environment } from 'src/environments/environment';
+import {
+  NbThemeModule,
+  NbSidebarModule,
+  NbMenuModule,
+  NbLayoutModule
+} from '@nebular/theme';
 import {
   AuthModule,
   OidcConfigService,
-} from "angular-auth-oidc-client";
-import { environment } from 'src/environments/environment';
-
-export function loadOidcConfiguration(oidcConfigService: OidcConfigService) {
-  return () =>
-    oidcConfigService.load_using_custom_stsServer(
-      `${environment.oidc.stsServer}/.well-known/openid-configuration`
-    );
-}
+} from 'angular-auth-oidc-client';
 
 @NgModule({
   declarations: [
@@ -26,13 +25,16 @@ export function loadOidcConfiguration(oidcConfigService: OidcConfigService) {
     LayoutComponent,
     SidenavComponent,
     ToolbarComponent,
-    LoginComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
     SharedModule,
-    AuthModule.forRoot()
+    NbLayoutModule,
+    AuthModule.forRoot(),
+    NbThemeModule,
+    NbSidebarModule,
+    NbMenuModule,
   ],
   providers: [
     OidcConfigService,
@@ -45,3 +47,10 @@ export function loadOidcConfiguration(oidcConfigService: OidcConfigService) {
   ]
 })
 export class CoreModule { }
+
+export function loadOidcConfiguration(oidcConfigService: OidcConfigService) {
+  return () =>
+    oidcConfigService.load_using_custom_stsServer(
+      `${environment.oidc.stsServer}/.well-known/openid-configuration`
+    );
+}

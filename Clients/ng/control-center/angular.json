@@ -29,11 +29,16 @@
               "src/silent-renew.html"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
-              "src/styles.scss"
+              "src/sass/main.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "node_modules/@nebular/theme/styles/prebuilt/default.css"
             ],
-            "scripts": [
-            ]
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/sass"
+              ]
+            },
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -107,7 +112,7 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
+              
               "src/styles.scss"
             ],
             "scripts": []
