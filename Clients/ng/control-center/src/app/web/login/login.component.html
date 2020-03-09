@@ -1,0 +1,25 @@
+<nb-layout windowMode>
+    <nb-layout-column  [style.padding.px]="0">
+        <div class="login-page">
+            <div class="container-fluid">
+                <div class="wrapper wrapper__top">
+                    <div class="wrapper-title">
+                        <h3 style="color: #fff;">Net-Micro</h3>
+                    </div>
+                </div>
+                <div class="wrapper wrapper__bottom"></div>
+                <div class="login">
+                    <div class="login-form login-form__header">
+                        <h4>Login</h4>
+                        <p>Hello! Log in with your email.</p> 
+                    </div>
+                    <div class="login-form login-form__content">
+                        <button nbButton status="primary" size="medium" (click)="login()">
+                            Log In
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nb-layout-column>
+</nb-layout>

@@ -1,2 +1,3 @@
-export * from './toolbar/toolbar.component';
-export * from './sidenav/sidenav.component';
+export * from './toolbar';
+export * from './sidenav';
+export * from './layout.component';

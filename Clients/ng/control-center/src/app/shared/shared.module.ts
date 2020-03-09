@@ -1,37 +1,36 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatButtonModule, MatMenuModule, MatToolbarModule, MatSidenavModule, MatListModule, MatCardModule } from '@angular/material';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-import {MatIconModule} from '@angular/material/icon'; 
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JWTInterceptor } from './common/_helper';
-
+import { environment } from '@environments/environment';
+import { NbIconModule, NbActionsModule, NbButtonModule, NbCardModule, NbSearchModule, NbSelectModule, NbUserModule } from '@nebular/theme';
+import { NbEvaIconsModule } from '@nebular/eva-icons';
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    HttpClientModule,
-    MatMenuModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatSidenavModule,
-    MatListModule,
-    MatButtonModule,
-    MatCardModule,
+    NbIconModule,
+    NbEvaIconsModule,
+    NbActionsModule,
+    NbButtonModule,
+    NbCardModule,
+    NbSearchModule,
+    NbSelectModule,
+    NbUserModule,
   ],
   exports: [
-    HttpClientModule,
-    MatMenuModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatSidenavModule,
-    MatListModule,
-    MatButtonModule,
-    MatCardModule,
+    NbIconModule,
+    NbEvaIconsModule,
+    NbActionsModule,
+    NbButtonModule,
+    NbCardModule,
+    NbSearchModule,
+    NbSelectModule,
+    NbUserModule
   ],
   providers: [
     {
-      provide: 'BASE_URL', 
+      provide: 'BASE_URL',
       useFactory: getBaseUrl
     },
     {
@@ -47,7 +46,7 @@ import { JWTInterceptor } from './common/_helper';
 })
 export class SharedModule { }
 export function getBaseUrl() {
-  return `${window.location.protocol}//${window.location.hostname}${!!window.location.port? ":" + window.location.port : ""}`;
+  return `${window.location.protocol}//${window.location.hostname}${!!window.location.port ? ':' + window.location.port : ''}`;
 }
 export function getAuthUrl() {
   return `${environment.oidc.stsServer}`;

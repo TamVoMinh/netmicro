@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Nmro.BuildingBlocks.WebHost.ServiceDiscovery
+namespace Nmro.BuildingBlocks.Web.ServiceDiscovery
 {
     public class ConfigurationOptions
     {

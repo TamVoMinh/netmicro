@@ -15,7 +15,7 @@
 ## 1. Add Add ServiveRegister in Startup.cs
 
 ```C#
-using Nmro.BuildingBlocks.WebHost.ServiceDiscovery;
+using Nmro.BuildingBlocks.Web.ServiceDiscovery;
 //...
 
 public Startup(IConfiguration configuration)

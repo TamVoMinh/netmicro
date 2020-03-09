@@ -1,9 +1,14 @@
-<ng-container>
-    <app-toolbar [isAuthorized$]="isAuthorized$" (toggle)="toggleSideBar()" (logout)="logout()" (login)="login()"></app-toolbar>
-    <app-sidenav #sidebar [isAuthorized$]="isAuthorized$">
-      <div class="container" style="height: 100vh">
-          <!-- <app-alert></app-alert> -->
-          <router-outlet></router-outlet>
-        </div>
-  </app-sidenav>
-  </ng-container>
+<nb-layout windowMode>
+  <nb-layout-header fixed>
+    <app-toolbar [isAuthorized$]="isAuthorized$" (toggle)="toggleSideNav()" (logout)="logout()" (login)="login()">
+    </app-toolbar>
+  </nb-layout-header>
+
+  <nb-sidebar left class="menu-sidebar" tag="menu-sidebar" responsive>
+    <nb-menu [items]="items"></nb-menu>
+  </nb-sidebar>
+
+  <nb-layout-column class="colored-column-basic">
+    <router-outlet></router-outlet>
+  </nb-layout-column>
+</nb-layout>
