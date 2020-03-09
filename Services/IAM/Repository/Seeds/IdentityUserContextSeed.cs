@@ -51,7 +51,7 @@ public class IdentityUserContextSeed
     private List<IdentityUser> SeedUsers()
     {
         return new List<IdentityUser>{
-            new IdentityUser { UserName = "admin", Password = "admin123", Email = "admin@nmro.local", IsDelete = false }
+            new IdentityUser { UserName = "admin", Password = "admin123", Email = "admin@nmro.local", CreatedDate = DateTime.UtcNow, UpdatedDate = DateTime.UtcNow, IsDelete = false }
         };
     }
 

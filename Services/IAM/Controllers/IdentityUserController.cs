@@ -8,6 +8,7 @@ using Nmro.IAM.Repository;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace Nmro.IAM.Controllers
 {
@@ -62,6 +63,8 @@ namespace Nmro.IAM.Controllers
         public async Task<ActionResult<long>> Create([FromBody] IdentityUserModel userIdentityModel)
         {
             IdentityUser creatingUser = _mapper.Map<IdentityUser>(userIdentityModel);
+            creatingUser.CreatedDate = DateTime.UtcNow;
+
             await _context.IdentityUsers.AddAsync(creatingUser);
             await _context.SaveChangesAsync();
 
@@ -78,6 +81,7 @@ namespace Nmro.IAM.Controllers
             }
 
             IdentityUser updatingUser = _mapper.Map<IdentityUser>(userIdentityModel);
+            updatingUser.UpdatedDate = DateTime.UtcNow;
 
             _context.IdentityUsers.Update(updatingUser);
             await _context.SaveChangesAsync();
@@ -97,14 +101,11 @@ namespace Nmro.IAM.Controllers
         public async Task<ActionResult<long>> Delete(long id)
         {
             var user = await _context.IdentityUsers.FirstOrDefaultAsync(x => x.Id == id && !x.IsDelete);
-            if (user == null)
-            {
-                return NotFound("User not exist.");
-            }
 
             user.IsDelete = true;
 
             IdentityUser deleteUser = _mapper.Map<IdentityUser>(user);
+            deleteUser.UpdatedDate = DateTime.UtcNow;
 
             _context.IdentityUsers.Update(deleteUser);
             await _context.SaveChangesAsync();
