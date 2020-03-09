@@ -9,13 +9,8 @@ namespace Nmro.Oidc.Infrastructure
     {
         public static class IdentityUser
         {
-            public static string GetAllIdentityUsers() => $"identityuser";
-            public static string GetUserById(long id) => $"identityuser/{id}";
-            public static string CreateNewIdentityUser() => $"identityuser";
-            public static string UpdateIdentityUser() => $"identityuser";
             public static string GetUserByUsername(string username) => $"identityuser?username={username}";
             public static string ValidateCredentials() => $"identityuser/credential-validation";
-            public static string DeleteIdentityUser(long id) => $"identityuser/{id}";
         }
 
         public static class Client
