@@ -44,7 +44,6 @@ namespace Nmro.IAM.Controllers
                 .Include(e => e.ClientSecrets)
                 .FirstOrDefaultAsync();
 
-
             var result = _mapper.Map<ClientModel>(client);
 
             _logger.LogInformation("[GET] Client {@result}", result);

@@ -22,6 +22,32 @@ namespace Nmro.Oidc.Services
             iamClient = clientFactory.CreateClient("iam");
         }
 
+        public async Task<List<User>> GetAll()
+        {
+            var getUserUri = API.IdentityUser.GetAllIdentityUsers();
+
+            var response = await iamClient.GetAsync(getUserUri);
+
+            var responseString = await response.Content.ReadAsStringAsync();
+
+            var users = JsonConvert.DeserializeObject<List<User>>(responseString);
+
+            return users;
+        }
+
+        public async Task<User> FindById(long id)
+        {
+            var getUserUri = API.IdentityUser.GetUserById(id);
+
+            var response = await iamClient.GetAsync(getUserUri);
+
+            var responseString = await response.Content.ReadAsStringAsync();
+
+            var user = JsonConvert.DeserializeObject<User>(responseString);
+
+            return user;
+        }
+
         public async Task<User> FindByUsername(string username)
         {
             var getUserUri = API.IdentityUser.GetUserByUsername(username);
@@ -33,6 +59,32 @@ namespace Nmro.Oidc.Services
             var user = JsonConvert.DeserializeObject<User>(responseString);
 
             return user;
+        }
+
+        public async Task<long> CreateUser(User user)
+        {
+            var Content = new StringContent(JsonConvert.SerializeObject(user), System.Text.Encoding.UTF8, "application/json");
+
+            var response = await iamClient.PostAsync(API.IdentityUser.CreateNewIdentityUser(), Content);
+
+            var responseString = await response.Content.ReadAsStringAsync();
+
+            var userId = JsonConvert.DeserializeObject<long>(responseString);
+
+            return userId;
+        }
+
+        public async Task<long> UpdateUser(User user)
+        {
+            var Content = new StringContent(JsonConvert.SerializeObject(user), System.Text.Encoding.UTF8, "application/json");
+
+            var response = await iamClient.PostAsync(API.IdentityUser.UpdateIdentityUser(), Content);
+
+            var responseString = await response.Content.ReadAsStringAsync();
+
+            var userId = JsonConvert.DeserializeObject<long>(responseString);
+
+            return userId;
         }
 
         public async Task<bool> ValidateCredentials(string username, string password)
@@ -50,6 +102,19 @@ namespace Nmro.Oidc.Services
             var result = JsonConvert.DeserializeObject<bool>(responseString);
 
             return result;
+        }
+
+        public async Task<long> DeleteIdentityUser(long id)
+        {
+            var getUserUri = API.IdentityUser.DeleteIdentityUser(id);
+
+            var response = await iamClient.GetAsync(getUserUri);
+
+            var responseString = await response.Content.ReadAsStringAsync();
+
+            var userId = JsonConvert.DeserializeObject<long>(responseString);
+
+            return userId;
         }
     }
 }
