@@ -3,8 +3,9 @@ import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JWTInterceptor } from './common/_helper';
 import { environment } from '@environments/environment';
-import { NbIconModule, NbActionsModule, NbButtonModule, NbCardModule, NbSearchModule, NbSelectModule, NbUserModule } from '@nebular/theme';
+import { NbIconModule, NbActionsModule, NbButtonModule, NbCardModule, NbSearchModule, NbSelectModule, NbUserModule, NbListModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { LoadingIndicatorModule } from '@shared/common/_component/loading-indicator/loading-indicator.module';
 @NgModule({
   declarations: [],
   imports: [
@@ -17,8 +18,11 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     NbSearchModule,
     NbSelectModule,
     NbUserModule,
+    NbListModule,
+    LoadingIndicatorModule
   ],
   exports: [
+    LoadingIndicatorModule,
     NbIconModule,
     NbEvaIconsModule,
     NbActionsModule,
@@ -26,7 +30,8 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     NbCardModule,
     NbSearchModule,
     NbSelectModule,
-    NbUserModule
+    NbUserModule,
+    NbListModule
   ],
   providers: [
     {

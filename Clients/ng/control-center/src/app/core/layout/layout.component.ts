@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SidenavComponent } from './sidenav/sidenav.component';
 import { AuthService } from 'src/app/shared/common/_service/auth/auth.service';
 import { MENU_ITEMS } from './pages-menu';
-import { NbMenuItem, NbSidebarService } from '@nebular/theme';
+import { NbMenuItem, NbSidebarService, NbMenuService, NbMenuBag } from '@nebular/theme';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-layout',
@@ -17,11 +17,20 @@ export class LayoutComponent implements OnInit {
   constructor(
     public authService: AuthService,
     private sidebarService: NbSidebarService,
+    private nbMenuService: NbMenuService
   ) {}
 
   ngOnInit() {
     this.isAuthorized$ = this.authService.getIsAuthorized();
     this.items = MENU_ITEMS;
+
+    this.nbMenuService.onItemClick().pipe(
+      filter((menuBag: NbMenuBag) => {
+          return menuBag.item.title === 'Log out';
+      })
+    ).subscribe(() => {
+      this.logout();
+    })
   }
 
   login() {

@@ -17,7 +17,6 @@ declare const window: Window;
   providedIn: 'root'
 })
 export class AuthService extends BaseService implements OnDestroy {
-
   isAuthorized = false;
   constructor(
     public oidcSecurityService: OidcSecurityService,
