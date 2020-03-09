@@ -3,7 +3,7 @@
     <a (click)="toggleSideNav()" class="sidebar-toggle">
       <nb-icon icon="menu-2-outline"></nb-icon>
     </a>
-    <a class="logo" (click)="navigateHome()">Net-<span>Micro</span></a>
+    <a class="logo">Net-<span>Micro</span></a>
   </div>
   <nb-select [selected]="currentTheme" (selectedChange)="changeTheme($event)" status="primary">
     <nb-option *ngFor="let theme of themes" [value]="theme.value"> {{ theme.name }}</nb-option>
