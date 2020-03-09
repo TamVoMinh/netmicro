@@ -1,7 +1,6 @@
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LayoutComponent } from './layout/layout.component';
-import { SidenavComponent } from './layout/sidenav/sidenav.component';
 import { ToolbarComponent } from './layout/toolbar/toolbar.component';
 import { AppComponent } from './app/app.component';
 import { RouterModule } from '@angular/router';
@@ -23,7 +22,6 @@ import {
   declarations: [
     AppComponent,
     LayoutComponent,
-    SidenavComponent,
     ToolbarComponent,
   ],
   imports: [

@@ -4,13 +4,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './core/app/app.component';
 import { CoreModule } from './core/core.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NbSidebarModule, NbMenuModule, NbThemeModule, NbButtonModule, NbLayoutModule } from '@nebular/theme';
+import { NbSidebarModule, NbMenuModule, NbThemeModule, NbLayoutModule } from '@nebular/theme';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './web/login/login.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -21,7 +22,7 @@ import { LoginComponent } from './web/login/login.component';
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
     NbLayoutModule,
-    NbButtonModule,
+    SharedModule,
     CoreModule,
   ],
   bootstrap: [AppComponent]

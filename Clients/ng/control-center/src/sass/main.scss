@@ -1,5 +1,5 @@
 // The 7-1 Patterns for the SASS/SCSS
-@import 
+@import
 'abstracts/variables',
 'abstracts/function',
 'abstracts/mixin',
@@ -7,15 +7,15 @@
 'abstracts/animation',
 'abstracts/responsive';
 
-@import 
+@import
 'base/reset',
 'base/utilities',
 'base/typography';
 
-@import 
+@import
 'themes/theme';
 
-@import 
+@import
 'layout/grid',
 'layout/header',
 'layout/footer',
@@ -23,19 +23,20 @@
 'layout/form',
 'layout/layout';
 
-@import 
+@import
 'components/button',
+'./components/loading',
 'components/carousel',
 'components/dropdown',
 'components/pace.theme',
 'components/overrides';
 
-@import 
+@import
 'pages/login',
 'pages/dashboard',
 'pages/user';
 
-@import 
+@import
 'vendors/nebular',
 'vendors/bootstrap';
 

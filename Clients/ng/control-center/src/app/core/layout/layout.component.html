@@ -1,7 +1,9 @@
 <nb-layout windowMode>
   <nb-layout-header fixed>
-    <app-toolbar [isAuthorized$]="isAuthorized$" (toggle)="toggleSideNav()" (logout)="logout()" (login)="login()">
-    </app-toolbar>
+    <ng-container *ngIf="(isAuthorized$ | async) as isAuthorized">
+      <app-toolbar  [isAuthorized]="isAuthorized" (toggle)="toggleSideNav()" (logout)="logout()" (login)="login()">
+      </app-toolbar>
+    </ng-container>
   </nb-layout-header>
 
   <nb-sidebar left class="menu-sidebar" tag="menu-sidebar" responsive>
