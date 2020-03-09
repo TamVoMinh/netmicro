@@ -2,6 +2,10 @@
 
 ## Overview
 
+### 1. Simple deployment diagram
+
+![Downstream](Docs/Images/deployment.png)
+
 ## Getting started
 
 ### How to setup development environment
