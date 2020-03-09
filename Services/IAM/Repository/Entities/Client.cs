@@ -77,6 +77,8 @@ namespace Nmro.IAM.Repository.Entities
         //     Specifies whether a proof key is required for authorization code based token
         //     requests (defaults to false).
         public bool RequirePkce { get; set; }
+
+        public bool AllowOfflineAccess { get; set; }
     }
 
     public static class ClientIdentityExtention

@@ -15,6 +15,8 @@ namespace Nmro.IAM.Models
         public ICollection<string> PostLogoutRedirectUris { get; set; }
         public ICollection<SecretModel> ClientSecrets { get; set; }
         public bool RequirePkce { get; set; }
+
+        public bool AllowOfflineAccess { get; set; }
         public int AccessTokenLifetime { get; set; }
         public int IdentityTokenLifetime { get; set; }
         public bool RequireClientSecret { get; set; }

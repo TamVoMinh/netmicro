@@ -198,6 +198,23 @@ public class IdentityUserContextSeed
                     "http://control-centre.nmro.local",
                     "https://control-centre.nmro.local"
                 }
+            },
+            new Nmro.IAM.Repository.Entities.Client {
+                ClientId = "nmro-ionic-client",
+                ClientName = "Nmro Ionic client",
+                AllowedGrantTypes =  new string[] { GrantType.DeviceFlow},
+                RequireClientSecret = false,
+                AllowOfflineAccess = true,
+                AlwaysIncludeUserClaimsInIdToken = true,
+                AccessTokenLifetime = 3600,
+                IdentityTokenLifetime = 30,
+                AllowedScopes = new List<string>
+                {
+                    StandardScopes.OpenId,
+                    StandardScopes.Profile,
+                    StandardScopes.Email,
+                    "member"
+                }
             }
         };
     }

@@ -8,7 +8,7 @@ export class Constants {
 
   public static stsAuthority = 'http://oidc.nmro.local'
   public static clientId = 'nmro-ionic-client';
-  public static clientRoot = 'http://192.168.1.7:8100';
+  public static clientRoot = 'http://localhost:8100';
   public static clientScope = 'openid profile member';
 
 

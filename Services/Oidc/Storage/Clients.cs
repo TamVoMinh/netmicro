@@ -110,8 +110,7 @@ namespace Nmro.Oidc.Storage
                 ClientId = "nmro-ionic-client",
                 ClientName = "Nmro Ionic client",
                 AllowedGrantTypes = GrantTypes.DeviceFlow,
-                AllowAccessTokensViaBrowser = true,
-                RequireConsent = false,
+                AllowOfflineAccess = true,
                 AlwaysIncludeUserClaimsInIdToken = true,
                 AllowedScopes = new List<string>
                 {
@@ -119,10 +118,7 @@ namespace Nmro.Oidc.Storage
                     IdentityServerConstants.StandardScopes.Profile,
                     IdentityServerConstants.StandardScopes.Email,
                     "member"
-                },
-                RedirectUris = new List<string> {"http://192.168.1.7:8100/signin-callback.html"},
-                PostLogoutRedirectUris = new List<string> {"http://192.168.1.7:8100"},
-                AllowedCorsOrigins = new List<string> { "http://engage.nmro.local" }
+                }
             },
         };
     }
