@@ -4,6 +4,7 @@ services:
     command: agent -server -bootstrap-expect 1 -ui -client 0.0.0.0
     ports:
       - 53:53/udp
+      - 8500:8500
   proxy:
     ports:
       - 80:80
