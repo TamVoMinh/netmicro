@@ -90,7 +90,7 @@ namespace Nmro.IAM.Controllers
         }
 
         [HttpPost("credential-validation")]
-        public async Task<ActionResult<IdentityUserModel>> ValidateCredential([FromBody] CredentialModel credential)
+        public async Task<ActionResult<UserProfileModel>> ValidateCredential([FromBody] CredentialModel credential)
         {
             var user = await _context.IdentityUsers.FirstOrDefaultAsync(e => e.UserName.Equals(credential.Username));
 
@@ -98,7 +98,7 @@ namespace Nmro.IAM.Controllers
             {
                 var result = _passwordValidator.VerifyHashedPassword(user.Password, credential.Password, user.Salt);
                 return (result == PasswordVerificationResult.Success)
-                    ? _mapper.Map<IdentityUserModel>(user)
+                    ? _mapper.Map<UserProfileModel>(user)
                     : null;
             }
 

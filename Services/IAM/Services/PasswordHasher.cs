@@ -37,8 +37,7 @@ namespace Nmro.IAM.Services
 
         public PasswordVerificationResult VerifyHashedPassword(string hashedPassword, string providedPassword, byte[] salt)
         {
-            var providedPasswordSHA256Hashed = HashWithSha256(providedPassword);
-            var providedPasswordStrongHashed = HashWithPbkdf2(providedPasswordSHA256Hashed, salt);
+            var providedPasswordStrongHashed = HashWithPbkdf2(providedPassword, salt);
 
             if (providedPasswordStrongHashed.Equals(hashedPassword))
             {
@@ -48,13 +47,13 @@ namespace Nmro.IAM.Services
             return PasswordVerificationResult.Failed;
         }
 
-        private string HashWithSha256(string input)
+        public string HashWithSha256(string rawString)
         {
             // Create a SHA256   
             using (SHA256 sha256Hash = SHA256.Create())
             {
                 // ComputeHash - returns byte array  
-                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawString));
 
                 // Convert byte array to a string   
                 StringBuilder builder = new StringBuilder();

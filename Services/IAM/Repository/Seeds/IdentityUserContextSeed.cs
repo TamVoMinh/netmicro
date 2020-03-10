@@ -6,12 +6,20 @@ using Microsoft.Extensions.Logging;
 using Nmro.IAM.Extensions;
 using Nmro.IAM.Repository;
 using Nmro.IAM.Repository.Entities;
+using Nmro.IAM.Services;
 using Npgsql;
 using Polly;
 using Polly.Retry;
 
 public class IdentityUserContextSeed
 {
+    private readonly IPasswordValidator _passwordValidator;
+
+    public IdentityUserContextSeed(IPasswordValidator passwordValidator)
+    {
+        _passwordValidator = passwordValidator;
+    }
+
     public async Task SeedAsync(IAMDbcontext context, ILogger<IdentityUserContextSeed> logger)
     {
         var policy = CreatePolicy(logger, nameof(IdentityUserContextSeed));
@@ -50,8 +58,17 @@ public class IdentityUserContextSeed
 
     private List<IdentityUser> SeedUsers()
     {
+        var salt = _passwordValidator.GenerateSalt();
         return new List<IdentityUser>{
-            new IdentityUser { UserName = "admin", Password = "admin123", Email = "admin@nmro.local", CreatedDate = DateTime.UtcNow, UpdatedDate = DateTime.UtcNow, IsDelete = false }
+            new IdentityUser {
+                UserName = "admin",
+                Salt = salt,
+                Password = _passwordValidator.HashWithPbkdf2(_passwordValidator.HashWithSha256("admin123"), salt),
+                Email = "admin@nmro.local",
+                CreatedDate = DateTime.UtcNow,
+                UpdatedDate = DateTime.UtcNow,
+                IsDelete = false
+            }
         };
     }
 
