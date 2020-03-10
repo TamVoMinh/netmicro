@@ -2,9 +2,7 @@
 
 ## Overview
 
-### 1. Simple deployment diagram
-
-![Downstream](Docs/Images/deployment.png)
+![Architect](Docs/Images/architect.png)
 
 ## Getting started
 
