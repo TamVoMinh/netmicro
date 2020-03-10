@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -39,18 +38,18 @@ namespace Nmro.IAM.Controllers
             return resources;
         }
 
-        [HttpGet("api-resource/name")]
-        public async Task<ApiResourceModel> GetApiResourceByName([FromQuery] string resourcename)
+        [HttpGet("api-resource/{name}")]
+        public async Task<ApiResourceModel> GetApiResourceByName([FromRoute] string name)
         {
-            ApiResource resource = await _context.ApiResources.FirstOrDefaultAsync(x => x.Name.Equals(resourcename));
+            ApiResource resource = await _context.ApiResources.FirstOrDefaultAsync(x => x.Name.Equals(name));
             ApiResourceModel result = _mapper.Map<ApiResourceModel>(resource);
             return result;
         }
 
         [HttpGet("api-resource")]
-        public async Task<List<ApiResourceModel>> GetApiResourceByScopeName([FromQuery] List<string> scopename)
+        public async Task<List<ApiResourceModel>> GetApiResourceByScopeName([FromQuery] List<string> scopes)
         {
-            List<ApiResource> resources = await _context.ApiResources.Where(x => x.Scopes.Any(s => scopename.Contains(s.Name)))
+            List<ApiResource> resources = await _context.ApiResources.Where(x => x.Scopes.Any(s => scopes.Contains(s.Name)))
                 .Include(x => x.Scopes)
                 .Include(x => x.ApiSecrets).ToListAsync();
             List<ApiResourceModel> result = _mapper.Map<List<ApiResourceModel>>(resources);
@@ -58,10 +57,10 @@ namespace Nmro.IAM.Controllers
         }
 
         [HttpGet("identity-resource")]
-        public async Task<List<IdentityResourceModel>> GetIdentityResourceByScopeName([FromQuery] List<string> scopename)
+        public async Task<List<IdentityResourceModel>> GetIdentityResourceByScopeName([FromQuery] List<string> scopes)
         {
             List<IdentityResource> a = await _context.IdentityResources.ToListAsync();
-            List<IdentityResource> resources = await _context.IdentityResources.Where(x => scopename.Contains(x.Name)).ToListAsync();
+            List<IdentityResource> resources = await _context.IdentityResources.Where(x => scopes.Contains(x.Name)).ToListAsync();
             List<IdentityResourceModel> result = _mapper.Map<List<IdentityResourceModel>>(resources);
             return result;
         }

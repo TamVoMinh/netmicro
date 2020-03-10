@@ -1,12 +1,10 @@
 using IdentityServer4.Models;
 using IdentityServer4.Stores;
-using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Nmro.Oidc.Infrastructure;
 using Newtonsoft.Json;
-using Serilog;
 using Microsoft.Extensions.Logging;
 
 namespace Nmro.Oidc.Storage
@@ -37,7 +35,7 @@ namespace Nmro.Oidc.Storage
 
         public async Task<IEnumerable<ApiResource>> FindApiResourcesByScopeAsync(IEnumerable<string> scopeNames)
         {
-            var queryString = $"scopename={string.Join("&scopename=", scopeNames)}";
+            var queryString = $"scopes={string.Join("&scopes=", scopeNames)}";
 
             var uri = API.Resource.GetApiResourceByScope(queryString);
 
@@ -52,15 +50,12 @@ namespace Nmro.Oidc.Storage
 
         public async Task<IEnumerable<IdentityResource>> FindIdentityResourcesByScopeAsync(IEnumerable<string> scopeNames)
         {
-            var queryString = $"scopename={string.Join("&scopename=", scopeNames)}";
-
+            var queryString = $"scopes={string.Join("&scopes=", scopeNames)}";
             var uri = API.Resource.GetIdentityResourceByScope(queryString);
 
             var response = await iamClient.GetAsync(uri);
 
             var responseString = await response.Content.ReadAsStringAsync();
-
-            _logger.LogInformation("RESPONSE: {responseString}", responseString);
 
             var identityResources = JsonConvert.DeserializeObject<IEnumerable<IdentityResource>>(responseString);
 

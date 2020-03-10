@@ -46,8 +46,6 @@ namespace Nmro.IAM.Controllers
 
             var result = _mapper.Map<ClientModel>(client);
 
-            _logger.LogInformation("[GET] Client {@result}", result);
-
             return result;
         }
     }
