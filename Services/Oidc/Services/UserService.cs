@@ -22,20 +22,7 @@ namespace Nmro.Oidc.Services
             iamClient = clientFactory.CreateClient("iam");
         }
 
-        public async Task<User> FindByUsername(string username)
-        {
-            var getUserUri = API.IdentityUser.GetUserByUsername(username);
-
-            var response = await iamClient.GetAsync(getUserUri);
-
-            var responseString = await response.Content.ReadAsStringAsync();
-
-            var user = JsonConvert.DeserializeObject<User>(responseString);
-
-            return user;
-        }
-
-        public async Task<bool> ValidateCredentials(string username, string password)
+        public async Task<User> ValidateCredentials(string username, string password)
         {
             var credentialContent = new StringContent(JsonConvert.SerializeObject(new
             {
@@ -47,7 +34,7 @@ namespace Nmro.Oidc.Services
 
             var responseString = await response.Content.ReadAsStringAsync();
 
-            var result = JsonConvert.DeserializeObject<bool>(responseString);
+            var result = JsonConvert.DeserializeObject<User>(responseString);
 
             return result;
         }

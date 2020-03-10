@@ -28,9 +28,12 @@ namespace Nmro.IAM.Controllers
         }
 
         [HttpGet]
-        public async Task<List<IdentityUserModel>> GettAll()
+        public async Task<List<IdentityUserModel>> Filter([FromQuery] string email = "", int limit = 50, int offset = 0)
         {
-            var user = await _context.IdentityUsers.Where(x => !x.IsDelete).ToListAsync();
+            var query = string.IsNullOrEmpty(email) ? _context.IdentityUsers.Where(x => !x.IsDelete) : _context.IdentityUsers.Where(x => x.Email.Contains(email) && !x.IsDelete);
+            query.Skip(offset).Take(limit);
+
+            var user = await query.ToListAsync();
             var result = _mapper.Map<List<IdentityUserModel>>(user);
 
             return result;
@@ -46,15 +49,6 @@ namespace Nmro.IAM.Controllers
             }
 
             var result = _mapper.Map<IdentityUserModel>(user);
-
-            return result;
-        }
-
-        [HttpGet]
-        public async Task<ActionResult<UserProfileModel>> GetByUsername([FromQuery] string username)
-        {
-            var user = await _context.IdentityUsers.FirstOrDefaultAsync(e => e.UserName.Equals(username) && !e.IsDelete);
-            var result = _mapper.Map<UserProfileModel>(user);
 
             return result;
         }
@@ -90,11 +84,13 @@ namespace Nmro.IAM.Controllers
         }
 
         [HttpPost("credential-validation")]
-        public async Task<ActionResult<bool>> ValidateCredential([FromBody] CredentialModel credential)
+        public async Task<ActionResult<IdentityUserModel>> ValidateCredential([FromBody] CredentialModel credential)
         {
             var user = await _context.IdentityUsers.FirstOrDefaultAsync(e => e.UserName.Equals(credential.Username));
 
-            return user != null && user.Password.Equals(credential.Password);
+            return user != null && user.Password.Equals(credential.Password)
+                ? _mapper.Map<IdentityUserModel>(user)
+                : null ;
         }
 
         [HttpDelete("id")]

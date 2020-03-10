@@ -91,7 +91,7 @@ namespace Nmro.Oidc
             {
                 if (context != null)
                 {
-                    // if the user cancels, send a result back into IdentityServer as if they 
+                    // if the user cancels, send a result back into IdentityServer as if they
                     // denied the consent (even if this client does not require consent).
                     // this will send back an access denied OIDC error response to the client.
                     await _interaction.GrantConsentAsync(context, ConsentResponse.Denied);
@@ -115,13 +115,12 @@ namespace Nmro.Oidc
 
             if (ModelState.IsValid)
             {
-                // validate username/password against in-memory store
-                if (await _userService.ValidateCredentials(model.Username, model.Password))
+                var user = await _userService.ValidateCredentials(model.Username, model.Password);
+                if (user != null)
                 {
-                    var user = await _userService.FindByUsername(model.Username);
                     await _events.RaiseAsync(new UserLoginSuccessEvent(user.Username, user.SubjectId, user.Username, clientId: context?.ClientId));
 
-                    // only set explicit expiration here if user chooses "remember me". 
+                    // only set explicit expiration here if user chooses "remember me".
                     // otherwise we rely upon expiration configured in cookie middleware.
                     AuthenticationProperties props = null;
                     if (AccountOptions.AllowRememberLogin && model.RememberLogin)
