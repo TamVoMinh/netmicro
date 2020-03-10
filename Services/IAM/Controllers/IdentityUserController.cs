@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using Nmro.IAM.Services;
 
 namespace Nmro.IAM.Controllers
 {
@@ -18,13 +19,15 @@ namespace Nmro.IAM.Controllers
     {
         private readonly ILogger<IdentityUserController> _logger;
         private readonly IMapper _mapper;
+        private readonly IPasswordValidator _passwordValidator;
         private readonly IAMDbcontext _context;
 
-        public IdentityUserController(ILogger<IdentityUserController> logger, IAMDbcontext context, IMapper mapper)
+        public IdentityUserController(ILogger<IdentityUserController> logger, IAMDbcontext context, IMapper mapper, IPasswordValidator passwordValidator)
         {
             _logger = logger;
             _context = context;
             _mapper = mapper;
+            _passwordValidator = passwordValidator;
         }
 
         [HttpGet]
@@ -43,7 +46,7 @@ namespace Nmro.IAM.Controllers
         public async Task<ActionResult<IdentityUserModel>> GetById(long id)
         {
             var user = await _context.IdentityUsers.FirstOrDefaultAsync(x => x.Id == id && !x.IsDelete);
-            if(user == null)
+            if (user == null)
             {
                 return NotFound("User not exist.");
             }
@@ -57,7 +60,10 @@ namespace Nmro.IAM.Controllers
         public async Task<ActionResult<long>> Create([FromBody] IdentityUserModel userIdentityModel)
         {
             IdentityUser creatingUser = _mapper.Map<IdentityUser>(userIdentityModel);
+
             creatingUser.CreatedDate = DateTime.UtcNow;
+            creatingUser.Salt = _passwordValidator.GenerateSalt();
+            creatingUser.Password = _passwordValidator.HashWithPbkdf2(creatingUser.Password, creatingUser.Salt);
 
             await _context.IdentityUsers.AddAsync(creatingUser);
             await _context.SaveChangesAsync();
@@ -69,7 +75,7 @@ namespace Nmro.IAM.Controllers
         public async Task<ActionResult<long>> Update([FromBody] IdentityUserModel userIdentityModel)
         {
             var user = await _context.IdentityUsers.FirstOrDefaultAsync(x => x.Id == userIdentityModel.Id && !x.IsDelete);
-            if(user == null)
+            if (user == null)
             {
                 return NotFound("User not exist.");
             }
@@ -88,9 +94,15 @@ namespace Nmro.IAM.Controllers
         {
             var user = await _context.IdentityUsers.FirstOrDefaultAsync(e => e.UserName.Equals(credential.Username));
 
-            return user != null && user.Password.Equals(credential.Password)
-                ? _mapper.Map<IdentityUserModel>(user)
-                : null ;
+            if (user != null)
+            {
+                var result = _passwordValidator.VerifyHashedPassword(user.Password, credential.Password, user.Salt);
+                return (result == PasswordVerificationResult.Success)
+                    ? _mapper.Map<IdentityUserModel>(user)
+                    : null;
+            }
+
+            return null;
         }
 
         [HttpDelete("id")]

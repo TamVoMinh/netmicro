@@ -203,6 +203,9 @@ namespace Nmro.IAM.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("text");
 
+                    b.Property<byte[]>("Salt")
+                        .HasColumnType("bytea");
+
                     b.Property<long?>("UpdatedBy")
                         .HasColumnType("bigint");
 

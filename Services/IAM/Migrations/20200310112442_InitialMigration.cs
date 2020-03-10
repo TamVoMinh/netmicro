@@ -96,6 +96,7 @@ namespace Nmro.IAM.Migrations
                     UserName = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
+                    Salt = table.Column<byte[]>(nullable: true),
                     LastSuccessfulLogin = table.Column<DateTime>(nullable: false),
                     LastFailedLogin = table.Column<DateTime>(nullable: false),
                     IsDelete = table.Column<bool>(nullable: false)
