@@ -33,12 +33,12 @@ namespace Nmro.Oidc.Storage
 
             var client = JsonConvert.DeserializeObject<Client>(responseString);
 
-            var tokenLifeTime = _distributedCache.GetString(nameof(client.AccessTokenLifetime));
+            var tokenLifeTime = await _distributedCache.GetStringAsync(nameof(client.AccessTokenLifetime));
 
             if(string.IsNullOrEmpty(tokenLifeTime))
             {
                 var option = new DistributedCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromSeconds(client.AccessTokenLifetime));
-                _distributedCache.SetString(tokenLifeTime, client.AccessTokenLifetime.ToString(), option);
+                await _distributedCache.SetStringAsync(tokenLifeTime, client.AccessTokenLifetime.ToString(), option);
             }
 
             return client;
