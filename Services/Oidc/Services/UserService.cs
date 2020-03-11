@@ -27,7 +27,7 @@ namespace Nmro.Oidc.Services
             var credentialContent = new StringContent(JsonConvert.SerializeObject(new
             {
                 Username = username,
-                Password = password
+                Password = CryptoService.ComputeSha256Hash(password)
             }), System.Text.Encoding.UTF8, "application/json");
 
             var response = await iamClient.PostAsync(API.IdentityUser.ValidateCredentials(), credentialContent);

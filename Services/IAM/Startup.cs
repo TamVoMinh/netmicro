@@ -12,6 +12,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using HealthChecks.UI.Client;
 using Nmro.BuildingBlocks.Web.ServiceDiscovery;
+using Nmro.IAM.Services;
 
 namespace Nmro.IAM
 {
@@ -45,10 +46,13 @@ namespace Nmro.IAM
                         options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
                     });
 
+            services.AddScoped<IPasswordValidator, PasswordValidator>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Nmro.IAM", Version = "v1" });
             });
+
             services.AddHealthChecks();
 
             services.RegisterConsulServices(Configuration);

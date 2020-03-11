@@ -12,6 +12,8 @@ namespace Nmro.IAM.Repository.Entities
 
         public string Email { get; set; }
 
+        public byte[] Salt { get; set; }
+
         public DateTime LastSuccessfulLogin { get; set; }
 
         public DateTime LastFailedLogin { get; set; }

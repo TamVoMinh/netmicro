@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Nmro.IAM.Migrations
 {
     [DbContext(typeof(IAMDbcontext))]
-    [Migration("20200309104359_InitialMigration")]
+    [Migration("20200310112442_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -204,6 +204,9 @@ namespace Nmro.IAM.Migrations
 
                     b.Property<string>("Password")
                         .HasColumnType("text");
+
+                    b.Property<byte[]>("Salt")
+                        .HasColumnType("bytea");
 
                     b.Property<long?>("UpdatedBy")
                         .HasColumnType("bigint");

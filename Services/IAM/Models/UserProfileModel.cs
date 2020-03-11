@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace Nmro.IAM.Models
 {
-    public class UserProfileModel
+    public class UserProfileModel : BaseEntityModel<long>
     {
-        public long Id { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
     }

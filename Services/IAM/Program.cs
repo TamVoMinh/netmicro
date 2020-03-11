@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using Nmro.IAM.Extensions;
 using Nmro.IAM.Repository;
-
+using Nmro.IAM.Services;
 
 namespace Nmro.IAM
 {
@@ -30,12 +30,15 @@ namespace Nmro.IAM
                 var host = CreateWebHostBuilder(args).Build();
 
                 Log.Information("Applying migrations");
-                host.MigrateDbContext<IAMDbcontext>((context, services) => {
+                host.MigrateDbContext<IAMDbcontext>((context, services) =>
+                {
                     var logger = services.GetService<ILogger<IdentityUserContextSeed>>();
-                    new IdentityUserContextSeed()
+                    var passwordValidator = services.GetService<IPasswordValidator>();
+
+                    new IdentityUserContextSeed(passwordValidator)
                         .SeedAsync(context, logger)
                         .Wait();
-                 });
+                });
 
                 Log.Information("Starting web host");
                 host.Run();
@@ -52,7 +55,7 @@ namespace Nmro.IAM
             }
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args)=>
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost
                 .CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
