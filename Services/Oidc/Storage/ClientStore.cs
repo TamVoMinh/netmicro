@@ -4,6 +4,7 @@ using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Nmro.Oidc.Infrastructure;
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -36,7 +37,8 @@ namespace Nmro.Oidc.Storage
 
             if(string.IsNullOrEmpty(tokenLifeTime))
             {
-                _distributedCache.SetString(tokenLifeTime, client.AccessTokenLifetime.ToString());
+                var option = new DistributedCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromSeconds(client.AccessTokenLifetime));
+                _distributedCache.SetString(tokenLifeTime, client.AccessTokenLifetime.ToString(), option);
             }
 
             return client;
