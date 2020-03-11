@@ -59,6 +59,12 @@ namespace Nmro.Oidc
             services.AddControllersWithViews();
             services.AddRazorPages();
 
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = "localhost";
+                options.InstanceName = "OidcInstance";
+            });
+
             // Register services
             services.AddScoped<IUserService, UserService>();
 

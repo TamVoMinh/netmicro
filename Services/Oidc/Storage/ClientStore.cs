@@ -1,5 +1,6 @@
 using IdentityServer4.Models;
 using IdentityServer4.Stores;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Nmro.Oidc.Infrastructure;
@@ -12,12 +13,12 @@ namespace Nmro.Oidc.Storage
     {
         private readonly IHttpClientFactory _clientFactory;
         private readonly HttpClient iamClient;
+        private readonly IDistributedCache _distributedCache;
 
-
-        public ClientStore(IHttpClientFactory clientFactory)
+        public ClientStore(IHttpClientFactory clientFactory, IDistributedCache distributedCache)
         {
             _clientFactory = clientFactory;
-
+            _distributedCache = distributedCache;
             iamClient = clientFactory.CreateClient("iam");
         }
 
@@ -30,6 +31,13 @@ namespace Nmro.Oidc.Storage
             var responseString = await response.Content.ReadAsStringAsync();
 
             var client = JsonConvert.DeserializeObject<Client>(responseString);
+
+            var tokenLifeTime = _distributedCache.GetString(nameof(client.AccessTokenLifetime));
+
+            if(string.IsNullOrEmpty(tokenLifeTime))
+            {
+                _distributedCache.SetString(tokenLifeTime, client.AccessTokenLifetime.ToString());
+            }
 
             return client;
         }
