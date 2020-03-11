@@ -1,10 +1,6 @@
 using Newtonsoft.Json;
 using Nmro.Oidc.Infrastructure;
 using Nmro.Oidc.Models;
-using Serilog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 

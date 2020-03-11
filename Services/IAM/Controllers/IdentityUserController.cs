@@ -31,15 +31,19 @@ namespace Nmro.IAM.Controllers
         }
 
         [HttpGet]
-        public async Task<List<IdentityUserModel>> Filter([FromQuery] string email = "", int limit = 50, int offset = 0)
+        public async Task<ResponseResult<List<IdentityUserModel>>> Filter([FromQuery] string email = "", int limit = 50, int offset = 0)
         {
             var query = string.IsNullOrEmpty(email) ? _context.IdentityUsers.Where(x => !x.IsDelete) : _context.IdentityUsers.Where(x => x.Email.Contains(email) && !x.IsDelete);
+
+            int count = await query.CountAsync();
+
             query.Skip(offset).Take(limit);
 
-            var user = await query.ToListAsync();
-            var result = _mapper.Map<List<IdentityUserModel>>(user);
+            var users = await query.ToListAsync();
 
-            return result;
+            var responseUsers = _mapper.Map<List<IdentityUserModel>>(users);
+
+            return new ResponseResult<List<IdentityUserModel>> { Total = count , Data = responseUsers }; ;
         }
 
         [HttpGet("id")]
@@ -57,9 +61,9 @@ namespace Nmro.IAM.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<long>> Create([FromBody] IdentityUserModel userIdentityModel)
+        public async Task<ActionResult<IdentityUserModel>> Create([FromBody] RegistrationIdentityUserModel userIdentity)
         {
-            IdentityUser creatingUser = _mapper.Map<IdentityUser>(userIdentityModel);
+            IdentityUser creatingUser = _mapper.Map<IdentityUser>(userIdentity);
 
             creatingUser.CreatedDate = DateTime.UtcNow;
             creatingUser.Salt = _passwordValidator.GenerateSalt();
@@ -68,25 +72,25 @@ namespace Nmro.IAM.Controllers
             await _context.IdentityUsers.AddAsync(creatingUser);
             await _context.SaveChangesAsync();
 
-            return creatingUser.Id;
+            return _mapper.Map<IdentityUserModel>(creatingUser);
         }
 
         [HttpPut]
-        public async Task<ActionResult<long>> Update([FromBody] IdentityUserModel userIdentityModel)
+        public async Task<ActionResult<IdentityUserModel>> Update([FromBody] RegistrationIdentityUserModel userIdentity)
         {
-            var user = await _context.IdentityUsers.FirstOrDefaultAsync(x => x.Id == userIdentityModel.Id && !x.IsDelete);
+            var user = await _context.IdentityUsers.FirstOrDefaultAsync(x => x.Id == userIdentity.Id && !x.IsDelete);
             if (user == null)
             {
                 return NotFound("User not exist.");
             }
 
-            IdentityUser updatingUser = _mapper.Map<IdentityUser>(userIdentityModel);
+            IdentityUser updatingUser = _mapper.Map<IdentityUser>(userIdentity);
             updatingUser.UpdatedDate = DateTime.UtcNow;
 
             _context.IdentityUsers.Update(updatingUser);
             await _context.SaveChangesAsync();
 
-            return updatingUser.Id;
+            return _mapper.Map<IdentityUserModel>(updatingUser);
         }
 
         [HttpPost("credential-validation")]
