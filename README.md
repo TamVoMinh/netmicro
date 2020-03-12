@@ -15,7 +15,7 @@
     ```powershell
         > set-executionpolicy unrestricted
         # Then cd to root folder and execute
-        > Scripts\dns.local.ps1
+        > DevOnly\Scripts\dns.local.ps1
     ```
 
 1. Copy & rename environment variable
@@ -24,23 +24,29 @@
         > Copy-Item -Path Scripts\variables.env.template -Destination .env
     ```
 
-1. Drop & recreate IAM database. **Skip this at first time**.
+1. Drop existing schema **Skip this at first time**.
 
     ```powershell
         > Set-Location Services/IAM | dotnet ef database drop | dotnet ef database update
     ```
 
+1. Initialize database schema
+
+    ```powershell
+        > Set-Location Services/IAM | dotnet ef database update
+    ```
+
 1. Run up with docker-compose
 
     ```powershell
-        > docker-compose -f docker-compose.yml -f docker-compose.override.yml -f DevOnly/docker-compose.yml -f Elk/docker-compose.yml -f Clients/docker-compose.yml up -d
+        > DevOps\build.ps1
     ```
 
 1. Known issues:
 
     - "logspout" service failed to build on windown, reference [issues/11](https://github.com/TamVoMinh/netmicro/issues/11)
 
-1. Most used [commands](DOCKER.md)
+1. Most used [commands](Docs/DOCKER.md)
 
 ### Playground with
 

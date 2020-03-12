@@ -3,7 +3,7 @@ RUN apk --no-cache add curl
 WORKDIR /app
 EXPOSE 80
 
-FROM nmro-based AS build
+FROM slnbased AS build
 
 WORKDIR /netmicro/Web/Health
 RUN dotnet restore -nowarn:msb3202,nu1503

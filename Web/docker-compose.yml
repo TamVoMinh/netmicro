@@ -1,0 +1,19 @@
+version: '3.5'
+services:
+  landing:
+    image: ${DOCKER_REGISTRY:-nmro}/web/landing
+    build:
+      context: .
+      dockerfile: Web/Landing/Dockerfile
+    depends_on:
+      - slnbased
+      - consul
+
+  health:
+    image: ${DOCKER_REGISTRY:-nmro}/web/health
+    build:
+      context: .
+      dockerfile: Web/Health/Dockerfile
+    depends_on:
+      - slnbased
+      - consul

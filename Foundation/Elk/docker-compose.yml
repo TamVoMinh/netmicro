@@ -1,13 +1,14 @@
 version: '3.5'
 services:
   elasticsearch:
-    image: ${DOCKER_REGISTRY:-nmro}/elk/elasticsearch
+    image: ${DOCKER_REGISTRY:-nmro}/foundation/elk-elasticsearch
     build:
-      context: Elk/Elasticsearch/
+      context: Foundation/Elk/Elasticsearch/
+      dockerfile: Dockerfile
       args:
         ELK_VERSION: $ELK_VERSION
     volumes:
-      - ./Elk/Elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+      - ./Foundation/Elk/Elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
       - esdata:/usr/share/elasticsearch/data
     ports:
       - "9200:9200"
@@ -16,15 +17,16 @@ services:
       ES_JAVA_OPTS: "-Xmx512m -Xms256m"
 
   logstash:
-    image: ${DOCKER_REGISTRY:-nmro}/elk/logstash
+    image: ${DOCKER_REGISTRY:-nmro}/foundation/elk-logstash
     build:
-      context: Elk/Logstash/
+      context: Foundation/Elk/Logstash/
+      dockerfile: Dockerfile
       args:
         ELK_VERSION: $ELK_VERSION
     volumes:
-      - ./Elk/Logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
-      - ./Elk/Logstash/pipeline:/usr/share/logstash/pipeline:ro
-      - ./Elk/Logstash/templates:/usr/share/logstash/templates:ro
+      - ./Foundation/Elk/Logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+      - ./Foundation/Elk/Logstash/pipeline:/usr/share/logstash/pipeline:ro
+      - ./Foundation/Elk/Logstash/templates:/usr/share/logstash/templates:ro
     ports:
       - "5000:5000/udp"
       - "5002:5002/udp"
@@ -40,26 +42,28 @@ services:
       - elasticsearch
 
   kibana:
-    image: ${DOCKER_REGISTRY:-nmro}/elk/kibana
+    image: ${DOCKER_REGISTRY:-nmro}/foundation/elk-kibana
     build:
-      context: Elk/Kibana/
+      context: Foundation/Elk/Kibana/
+      dockerfile: Dockerfile
       args:
         ELK_VERSION: $ELK_VERSION
     volumes:
-      - ./Elk/Kibana/config/:/usr/share/kibana/config:ro
+      - ./Foundation/Elk/Kibana/config/:/usr/share/kibana/config:ro
     environment:
       LOGSPOUT: ignore
     depends_on:
       - elasticsearch
 
   apm-server:
-    image: ${DOCKER_REGISTRY:-nmro}/elk/apm-server
+    image: ${DOCKER_REGISTRY:-nmro}/foundation/elk-apm-server
     build:
-      context: Elk/Apm/
+      context: Foundation/Elk/Apm/
+      dockerfile: Dockerfile
       args:
         ELK_VERSION: $ELK_VERSION
     volumes:
-      - ./Elk/Apm/config/apm-server.yml:/usr/share/apm-server/config/apm-server.yml:ro
+      - ./Foundation/Elk/Apm/config/apm-server.yml:/usr/share/apm-server/config/apm-server.yml:ro
     ports:
       - "8200:8200"
     environment:
@@ -68,9 +72,10 @@ services:
       - elasticsearch
 
   curator:
-    image: ${DOCKER_REGISTRY:-nmro}/elk/curator
+    image: ${DOCKER_REGISTRY:-nmro}/foundation/elk-curator
     build:
-      context: Elk/Curator/
+      context: Foundation/Elk/Curator/
+      dockerfile: Dockerfile
     environment:
       ELASTICSEARCH_HOST: elasticsearch
       CRON: 0 0 * * *
@@ -82,9 +87,10 @@ services:
       - elasticsearch
 
   logspout:
-    image: ${DOCKER_REGISTRY:-nmro}/elk/logspout
+    image: ${DOCKER_REGISTRY:-nmro}/foundation/elk-logspout
     build:
-      context: Elk/logspout
+      context: Foundation/Elk/Logspout
+      dockerfile: Dockerfile
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:

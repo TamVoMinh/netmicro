@@ -1,0 +1,32 @@
+version: '3.5'
+
+services:
+
+  slnbased:
+    image: slnbased
+    build:
+      context: .
+      dockerfile: Backbone/SlnBased/Dockerfile
+
+  consul:
+    image: ${DOCKER_REGISTRY:-nmro}/backbone/service-discovery
+    build:
+      context: .
+      dockerfile: Backbone/Discovery/Dockerfile
+
+  proxy:
+    image: ${DOCKER_REGISTRY:-nmro}/backbone/proxy
+    build:
+      context: .
+      dockerfile: Backbone/Gateways/ReverseProxy/Dockerfile
+    depends_on:
+      - consul
+
+  apigateway:
+    image: ${DOCKER_REGISTRY:-nmro}/backbone/apigateway
+    build:
+      context: .
+      dockerfile: Backbone/Gateways/ApiGateway/Dockerfile
+    depends_on:
+      - slnbased
+      - consul
