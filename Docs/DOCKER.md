@@ -9,7 +9,7 @@
 ```
 
 ```sh
-    sh DevOps/build.sh
+    sh cli/nmro.sh build
 ```
 
 ### Build a netcore image
@@ -19,7 +19,7 @@
 ```
 
 ```sh
-    sh DevOps/build.sh <service-name ...>
+    sh cli/nmro.sh build slnbased <service-name ...>
 ```
 
 ### Rebuild a running container service
@@ -29,7 +29,7 @@
 ```
 
 ```sh
-    echo "will implement soon"
+    sh cli/nmro.sh up -d --build <service-name>
 ```
 
 ### Run services
@@ -39,7 +39,7 @@
 ```
 
 ```sh
-    sh DevOps/up.sh 
+    sh cli/nmro.sh up -d 
 ```
 
 ### Stop & remove all containers
@@ -49,5 +49,5 @@
 ```
 
 ```sh
-    sh DevOps/down.sh 
+    sh cli/nmro.sh down 
 ```
