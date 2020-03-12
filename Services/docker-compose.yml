@@ -1,0 +1,19 @@
+version: '3.5'
+services:
+  oidc:
+    image: ${DOCKER_REGISTRY:-nmro}/services/oidc
+    build:
+      context: .
+      dockerfile: Services/Oidc/Dockerfile
+    depends_on:
+      - slnbased
+      - consul
+
+  iam-api:
+    image: ${DOCKER_REGISTRY:-nmro}/services/iam-api
+    build:
+      context: .
+      dockerfile: Services/IAM/Dockerfile
+    depends_on:
+      - slnbased
+      - consul

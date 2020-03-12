@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateways", "Gateways", "{6B642FEC-8322-4B87-9F8B-CD875872E088}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nmro.ApiGateway", "Gateways\ApiGateway\Nmro.ApiGateway.csproj", "{9C0AFF50-AE5F-4DD2-ACCA-4BC9E5016071}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nmro.ApiGateway", "Backbone\Gateways\ApiGateway\Nmro.ApiGateway.csproj", "{9C0AFF50-AE5F-4DD2-ACCA-4BC9E5016071}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{EBA68191-4137-4F63-A86C-8E363B9BD74E}"
 EndProject

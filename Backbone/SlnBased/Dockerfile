@@ -6,7 +6,7 @@ COPY "Nmro.sln" "Nmro.sln"
 
 COPY "BuildingBlocks/Web/Web.csproj" "BuildingBlocks/Web/Web.csproj"
 
-COPY "Gateways/ApiGateway/Nmro.ApiGateway.csproj" "Gateways/ApiGateway/Nmro.ApiGateway.csproj"
+COPY "Backbone/Gateways/ApiGateway/Nmro.ApiGateway.csproj" "Backbone/Gateways/ApiGateway/Nmro.ApiGateway.csproj"
 
 COPY "Services/IAM/Nmro.IAM.csproj" "Services/IAM/Nmro.IAM.csproj"
 COPY "Services/Oidc/Nmro.Oidc.csproj" "Services/Oidc/Nmro.Oidc.csproj"
