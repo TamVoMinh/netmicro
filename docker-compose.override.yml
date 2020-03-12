@@ -13,8 +13,8 @@ services:
       PUBLIC_ORIGIN: ${PUBLIC_ORIGIN:-nmro.local}
     command: /bin/sh -c "envsubst '$$PUBLIC_ORIGIN' < /etc/nginx/domains.template > /etc/nginx/nginx.conf && exec nginx-debug -g 'daemon off;'"
     volumes:
-      - ./Gateways/ReverseProxy/config/domains.template:/etc/nginx/domains.template:ro
-      - ./Gateways/ReverseProxy/html:/etc/nginx/html:ro
+      - ./Backbone/Gateways/ReverseProxy/config/domains.template:/etc/nginx/domains.template:ro
+      - ./Backbone/Gateways/ReverseProxy/html:/etc/nginx/html:ro
 
   oidc:
     networks:

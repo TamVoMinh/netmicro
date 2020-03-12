@@ -13,6 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\BuildingBlocks\Web\Web.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\Web\Web.csproj" />
   </ItemGroup>
 </Project>

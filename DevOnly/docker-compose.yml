@@ -1,5 +1,6 @@
 version: '3.5'
 services:
+
   db-postgres:
     image: ${DOCKER_REGISTRY:-nmro}/postgres
     build:
