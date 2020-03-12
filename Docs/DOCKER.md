@@ -9,7 +9,7 @@
 ```
 
 ```sh
-    sh cli/nmro.sh
+    sh cli/nmro.sh build
 ```
 
 ### Build a netcore image
@@ -19,7 +19,7 @@
 ```
 
 ```sh
-    sh cli/nmro.sh build <service-name ...>
+    sh cli/nmro.sh build slnbased <service-name ...>
 ```
 
 ### Rebuild a running container service
@@ -29,7 +29,7 @@
 ```
 
 ```sh
-    echo "will implement soon"
+    sh cli/nmro.sh up -d --build <service-name>
 ```
 
 ### Run services
