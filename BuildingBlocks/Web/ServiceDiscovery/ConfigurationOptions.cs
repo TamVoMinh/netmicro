@@ -4,9 +4,9 @@ namespace Nmro.BuildingBlocks.Web.ServiceDiscovery
 {
     public class ConfigurationOptions
     {
-        public Uri ServiceDiscoveryAddress { get; set; }
-        public Uri ServiceAddress { get; set; }
+        public Uri DiscoveryAddress { get; set; }
         public string ServiceName { get; set; }
-        public string ServiceId { get; set; }
+
+        public int Port { get; set; }
     }
 }
