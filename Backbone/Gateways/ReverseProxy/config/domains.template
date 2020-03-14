@@ -24,6 +24,8 @@ http {
     #gzip  on;
 
     server {
+        resolver consul;
+
         listen       80;
         server_name  $PUBLIC_ORIGIN;
 
@@ -60,6 +62,7 @@ http {
     server {
         listen 80;
         server_name     api.$PUBLIC_ORIGIN;
+        resolver consul;
         location / {
             proxy_pass         http://apigateway;
             proxy_redirect     off;
@@ -75,6 +78,7 @@ http {
     server {
         listen 80;
         server_name     oidc.$PUBLIC_ORIGIN;
+        resolver consul;
         location / {
             proxy_pass         http://oidc;
             proxy_redirect     off;
@@ -90,6 +94,7 @@ http {
     server {
         listen 80;
         server_name     isys.$PUBLIC_ORIGIN;
+        resolver consul;
 
         location / {
             proxy_pass         http://consul:8500;
@@ -127,6 +132,8 @@ http {
     server {
         listen 80;
         server_name     docs.$PUBLIC_ORIGIN;
+        resolver consul;
+
         location / {
             proxy_pass         http://api-docs;
             proxy_redirect     off;
@@ -142,6 +149,8 @@ http {
     server {
         listen 80;
         server_name     engage.$PUBLIC_ORIGIN;
+        resolver consul;
+
         location / {
             proxy_pass         http://engage/;
             proxy_redirect     off;
@@ -157,6 +166,8 @@ http {
     server {
         listen 80;
         server_name     control-centre.$PUBLIC_ORIGIN;
+        resolver consul;
+
         location / {
             proxy_pass         http://control-centre/;
             proxy_redirect     off;

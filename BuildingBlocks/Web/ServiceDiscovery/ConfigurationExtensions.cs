@@ -14,10 +14,9 @@ namespace Nmro.BuildingBlocks.Web.ServiceDiscovery
 
             var serviceConfig = new ConfigurationOptions
             {
-                ServiceDiscoveryAddress = configuration.GetValue<Uri>("ServiceDiscovery:serviceDiscoveryAddress"),
-                ServiceAddress = configuration.GetValue<Uri>("ServiceDiscovery:serviceAddress"),
+                DiscoveryAddress = configuration.GetValue<Uri>("ServiceDiscovery:serviceDiscoveryAddress"),
                 ServiceName = configuration.GetValue<string>("ServiceDiscovery:serviceName"),
-                ServiceId = configuration.GetValue<string>("ServiceDiscovery:serviceId")
+                Port = configuration.GetValue<int>("ServiceDiscovery:port"),
             };
 
             return serviceConfig;

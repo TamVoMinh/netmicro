@@ -27,7 +27,7 @@ namespace Nmro.BuildingBlocks.Web.ServiceDiscovery
         {
             return new ConsulClient(config =>
             {
-                config.Address = serviceConfig.ServiceDiscoveryAddress;
+                config.Address = serviceConfig.DiscoveryAddress;
             });
         }
     }
