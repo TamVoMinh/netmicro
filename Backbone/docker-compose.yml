@@ -28,9 +28,8 @@ services:
       - 443:443
     environment:
       PUBLIC_ORIGIN: ${PUBLIC_ORIGIN:-nmro.local}
-    command: /bin/sh -c "envsubst '$$PUBLIC_ORIGIN' < /etc/nginx/domains.template > /etc/nginx/nginx.conf && exec nginx-debug -g 'daemon off;'"
     volumes:
-      - ./Backbone/Gateways/ReverseProxy/config/domains.template:/etc/nginx/domains.template:ro
+      - ./Backbone/Gateways/ReverseProxy/templs:/etc/nginx/templs:ro
       - ./Backbone/Gateways/ReverseProxy/html:/etc/nginx/html:ro
     depends_on:
       - consul
