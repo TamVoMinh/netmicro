@@ -1,6 +1,6 @@
 #!/bin/bash
 _COMPOSES=(
-    -f docker-compose.override.yml
+    -f docker-compose.yml
     -f Backbone/docker-compose.yml
     -f DevOnly/docker-compose.yml
     -f Foundation/Elk/docker-compose.yml

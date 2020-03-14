@@ -1,21 +1,5 @@
 version: '3.5'
 services:
-  consul:
-    command: agent -server -bootstrap-expect 1 -ui -client 0.0.0.0
-    ports:
-      - 53:53/udp
-      - 8500:8500
-  proxy:
-    ports:
-      - 80:80
-      - 443:443
-    environment:
-      PUBLIC_ORIGIN: ${PUBLIC_ORIGIN:-nmro.local}
-    command: /bin/sh -c "envsubst '$$PUBLIC_ORIGIN' < /etc/nginx/domains.template > /etc/nginx/nginx.conf && exec nginx-debug -g 'daemon off;'"
-    volumes:
-      - ./Backbone/Gateways/ReverseProxy/config/domains.template:/etc/nginx/domains.template:ro
-      - ./Backbone/Gateways/ReverseProxy/html:/etc/nginx/html:ro
-
   oidc:
     networks:
       default:
