@@ -1,9 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Nmro.BuildingBlocks.Web.ModelBinding;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Nmro.Web.ModelBinding;
 
 namespace Nmro.IAM.Models
 {

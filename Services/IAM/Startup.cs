@@ -11,7 +11,7 @@ using System.Reflection;
 using AutoMapper;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using HealthChecks.UI.Client;
-using Nmro.BuildingBlocks.Web.ServiceDiscovery;
+using Nmro.Web.ServiceDiscovery;
 using Nmro.IAM.Services;
 
 namespace Nmro.IAM
@@ -55,7 +55,7 @@ namespace Nmro.IAM
 
             services.AddHealthChecks();
 
-            services.RegisterConsulServices(Configuration);
+            services.RegisterConsulServices(Program.AppName, Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

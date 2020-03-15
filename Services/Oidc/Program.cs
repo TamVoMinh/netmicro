@@ -9,6 +9,7 @@ namespace Nmro.Oidc
 {
     public class Program
     {
+        public static readonly string AppName = "oidc";
         public static int Main(string[] args)
         {
             var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
@@ -60,6 +61,7 @@ namespace Nmro.Oidc
         private static Serilog.ILogger CreateSerilogLogger(IConfiguration configuration)
         {
             return new LoggerConfiguration()
+                .Enrich.WithProperty("Application", AppName)
                 .Enrich.FromLogContext()
                 .ReadFrom.Configuration(configuration)
                 .CreateLogger();

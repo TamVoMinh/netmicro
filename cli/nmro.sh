@@ -19,5 +19,3 @@ then
     docker rmi $(docker images | grep "nmro" | awk '{print $3}')
     docker rmi slnbased
 fi
-
-docker image prune --filter "dangling=true"

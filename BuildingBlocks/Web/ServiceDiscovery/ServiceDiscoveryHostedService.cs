@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 using Polly;
 using Polly.Retry;
 
-namespace Nmro.BuildingBlocks.Web.ServiceDiscovery
+namespace Nmro.Web.ServiceDiscovery
 {
     public class ServiceDiscoveryHostedService : IHostedService
     {
@@ -40,7 +40,7 @@ namespace Nmro.BuildingBlocks.Web.ServiceDiscovery
                     ID = _registrationId,
                     Address = _ipv4,
                     Name = _config.ServiceName,
-                    Port = _config.Port
+                    Port = _config.ServicePort
                 };
 
                 await _client.Agent.ServiceDeregister(registration.ID, cancellationToken);

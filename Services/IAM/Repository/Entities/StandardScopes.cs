@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace Nmro.IAM.Repository.Entities
 {
     public static class StandardScopes
