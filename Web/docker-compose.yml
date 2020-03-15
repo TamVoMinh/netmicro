@@ -5,6 +5,9 @@ services:
     build:
       context: .
       dockerfile: Web/Landing/Dockerfile
+    environment:
+      IdentityUrl: http://oidc.${PUBLIC_ORIGIN:-nmro.local}
+      CallBackUrl: http://${PUBLIC_ORIGIN:-nmro.local}
     depends_on:
       - slnbased
       - consul
@@ -14,6 +17,9 @@ services:
     build:
       context: .
       dockerfile: Web/Health/Dockerfile
+    environment:
+      IdentityUrl: http://oidc.${PUBLIC_ORIGIN:-nmro.local}
+      HealthChecksUI__Webhooks__Uri: "https://${LS_NOTIFY_HOOK}"
     depends_on:
       - slnbased
       - consul
