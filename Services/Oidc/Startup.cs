@@ -64,7 +64,7 @@ namespace Nmro.Oidc
 
             services.AddHealthChecks();
 
-            services.RegisterConsulServices(Configuration);
+            services.RegisterConsulServices(Program.AppName, Configuration);
 
         }
 

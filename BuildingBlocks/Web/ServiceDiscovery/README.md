@@ -4,10 +4,8 @@
 ```JSON
 {
     "ServiceDiscovery": {
-        "serviceDiscoveryAddress": "http://consul:8500",
-        "serviceName": "landing",
-        "serviceId": "1",
-        "serviceAddress": "http://landing:80"
+        "ServiceDiscoveryAddress": "http://consul:8500",
+        "ServicePort": 80
     }
 }
 ```
@@ -18,6 +16,8 @@
 using Nmro.BuildingBlocks.Web.ServiceDiscovery;
 //...
 
+public static readonly string AppName = "application-name";
+
 public Startup(IConfiguration configuration)
 {
     Configuration = configuration;
@@ -26,6 +26,6 @@ public Startup(IConfiguration configuration)
 public void ConfigureServices(IServiceCollection services)
 {
     //...
-    services.RegisterConsulServices(Configuration);
+    services.RegisterConsulServices(Program.AppName, Configuration);
 }
 ```

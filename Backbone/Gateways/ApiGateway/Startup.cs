@@ -41,7 +41,7 @@ namespace Nmro.ApiGateway
             services.AddOcelot();
             services.AddHealthChecks();
 
-            services.RegisterConsulServices(Configuration);
+            services.RegisterConsulServices(Program.AppName, Configuration);
 
         }
 

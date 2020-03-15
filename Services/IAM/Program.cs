@@ -17,6 +17,7 @@ namespace Nmro.IAM
 {
     public class Program
     {
+        public static readonly string AppName = "iam-api";
         public static int Main(string[] args)
         {
             var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
@@ -76,6 +77,7 @@ namespace Nmro.IAM
         private static Serilog.ILogger CreateSerilogLogger(IConfiguration configuration)
         {
             return new LoggerConfiguration()
+                .Enrich.WithProperty("Application", AppName)
                 .Enrich.FromLogContext()
                 .ReadFrom.Configuration(configuration)
                 .CreateLogger();
