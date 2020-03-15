@@ -1,5 +1,11 @@
 version: '3.5'
 services:
+  slnbased:
+    image: slnbased
+    build:
+      context: .
+      dockerfile: Backbone/SlnBased/Dockerfile
+
   oidc:
     networks:
       default:
@@ -11,10 +17,6 @@ services:
       default:
         aliases:
           - api.${PUBLIC_ORIGIN:-nmro.local}
-
-  iam-api:
-    environment:
-      - ConnectionStrings__DefaultConnection=${DB_POSTGRES:-Server=db-postgres;port=5432;Database=iam_db;UserId=nmro_dbadmin;Password=theForest&;Pooling=true}
 
 networks:
   default:

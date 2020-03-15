@@ -7,10 +7,17 @@ rest_args=("${all_args[@]:2}")
 
 allowed_cmds=(build up down)
 match_cmd=$(echo "${allowed_cmds[@]:0}" | grep -o $cmd_arg)
-if [ ! -z $match_cmd ]; then
+if [ ! -z $match_cmd ];
+then
     echo "docker-compose" $cmd_arg $opt_arg ${rest_args[@]}
     . cli/dcb-list.sh
     docker-compose ${_COMPOSES[*]} $cmd_arg $opt_arg ${rest_args[@]}
+    docker image prune --filter "dangling=true"
+elif [ $cmd_arg = "clear" ]
+then
+    docker-compose ${_COMPOSES[*]} down
+    docker rmi $(docker images | grep "nmro" | awk '{print $3}')
+    docker rmi slnbased
 fi
 
 docker image prune --filter "dangling=true"

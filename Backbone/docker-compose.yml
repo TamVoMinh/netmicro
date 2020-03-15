@@ -2,12 +2,6 @@ version: '3.5'
 
 services:
 
-  slnbased:
-    image: slnbased
-    build:
-      context: .
-      dockerfile: Backbone/SlnBased/Dockerfile
-
   consul:
     image: ${DOCKER_REGISTRY:-nmro}/backbone/service-discovery
     build:
