@@ -12,3 +12,5 @@ if [ ! -z $match_cmd ]; then
     . cli/dcb-list.sh
     docker-compose ${_COMPOSES[*]} $cmd_arg $opt_arg ${rest_args[@]}
 fi
+
+docker image prune --filter "dangling=true"

@@ -27,7 +27,7 @@
 1. Drop existing schema **Skip this at first time**.
 
     ```powershell
-        > Set-Location Services/IAM | dotnet ef database drop | dotnet ef database update
+        > Set-Location Services/IAM | dotnet ef database drop
     ```
 
 1. Initialize database schema
