@@ -13,7 +13,7 @@
 ## 1. Add Add ServiveRegister in Startup.cs
 
 ```C#
-using Nmro.BuildingBlocks.Web.ServiceDiscovery;
+using Nmro.Web.ServiceDiscovery;
 //...
 
 public static readonly string AppName = "application-name";

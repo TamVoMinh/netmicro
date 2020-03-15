@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>Nmro.BuildingBlocks.Web</RootNamespace>
+    <RootNamespace>Nmro.Web</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

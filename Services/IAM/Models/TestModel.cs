@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Nmro.BuildingBlocks.Web.ModelBinding;
+using Nmro.Web.ModelBinding;
 
 namespace Nmro.IAM.Models
 {
