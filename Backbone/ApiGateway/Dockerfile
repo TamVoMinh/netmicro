@@ -5,7 +5,7 @@ EXPOSE 80
 
 FROM slnbased AS build
 
-WORKDIR /netmicro/Backbone/Gateways/ApiGateway
+WORKDIR /netmicro/Backbone/ApiGateway
 RUN dotnet restore -nowarn:msb3202,nu1503
 RUN dotnet build --no-restore -c Release -o /artifact
 

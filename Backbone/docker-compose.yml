@@ -16,15 +16,15 @@ services:
     image: ${DOCKER_REGISTRY:-nmro}/backbone/proxy
     build:
       context: .
-      dockerfile: Backbone/Gateways/ReverseProxy/Dockerfile
+      dockerfile: Backbone/ReverseProxy/Dockerfile
     ports:
       - 80:80
       - 443:443
     environment:
       PUBLIC_ORIGIN: ${PUBLIC_ORIGIN:-nmro.local}
     volumes:
-      - ./Backbone/Gateways/ReverseProxy/templs:/etc/nginx/templs:ro
-      - ./Backbone/Gateways/ReverseProxy/html:/etc/nginx/html:ro
+      - ./Backbone/ReverseProxy/templs:/etc/nginx/templs:ro
+      - ./Backbone/ReverseProxy/html:/etc/nginx/html:ro
     depends_on:
       - consul
 
@@ -32,7 +32,7 @@ services:
     image: ${DOCKER_REGISTRY:-nmro}/backbone/apigateway
     build:
       context: .
-      dockerfile: Backbone/Gateways/ApiGateway/Dockerfile
+      dockerfile: Backbone/ApiGateway/Dockerfile
     depends_on:
       - slnbased
       - consul
