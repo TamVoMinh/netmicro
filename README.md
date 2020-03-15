@@ -39,7 +39,7 @@
 1. Run up with docker-compose
 
     ```powershell
-        > DevOps\build.ps1
+        > cli\up.ps1
     ```
 
 1. Known issues:
