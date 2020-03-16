@@ -1,5 +1,3 @@
-using System;
-using Consul;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -7,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Logging;
-using Nmro.BuildingBlocks.Web.ServiceDiscovery;
+using Nmro.Web.ServiceDiscovery;
 using Nmro.Landing.Extentions;
 using Serilog;
 
@@ -40,7 +38,7 @@ namespace Nmro.Landing
 
             services.AddCustomAuthentication(Configuration);
 
-            services.RegisterConsulServices(Configuration);
+            services.RegisterConsulServices(Program.AppName, Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

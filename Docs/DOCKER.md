@@ -5,21 +5,21 @@
 ### Build images
 
 ```powershell
-    > DevOps/build.ps1
+    > cli/build.ps1
 ```
 
 ```sh
-    sh DevOps/build.sh
+    sh cli/nmro.sh build
 ```
 
 ### Build a netcore image
 
 ```powershell
-    > DevOps/build.ps1 <service-name ...>
+    > cli/build.ps1 <service-name ...>
 ```
 
 ```sh
-    sh DevOps/build.sh <service-name ...>
+    sh cli/nmro.sh build slnbased <service-name ...>
 ```
 
 ### Rebuild a running container service
@@ -29,7 +29,7 @@
 ```
 
 ```sh
-    echo "will implement soon"
+    sh cli/nmro.sh up -d --build <service-name>
 ```
 
 ### Run services
@@ -39,15 +39,15 @@
 ```
 
 ```sh
-    sh DevOps/up.sh 
+    sh cli/nmro.sh up -d 
 ```
 
 ### Stop & remove all containers
 
 ```powershell
-    DevOps/down.ps1
+    cli/down.ps1
 ```
 
 ```sh
-    sh DevOps/down.sh 
+    sh cli/nmro.sh down 
 ```

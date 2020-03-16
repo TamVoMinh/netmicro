@@ -1,12 +1,12 @@
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1-alpine3.10 AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1-alpine3.10
 WORKDIR /netmicro
 
 COPY "Nmro.sln" "Nmro.sln"
 
 COPY "BuildingBlocks/Web/Web.csproj" "BuildingBlocks/Web/Web.csproj"
 
-COPY "Backbone/Gateways/ApiGateway/Nmro.ApiGateway.csproj" "Backbone/Gateways/ApiGateway/Nmro.ApiGateway.csproj"
+COPY "Backbone/ApiGateway/Nmro.ApiGateway.csproj" "Backbone/ApiGateway/Nmro.ApiGateway.csproj"
 
 COPY "Services/IAM/Nmro.IAM.csproj" "Services/IAM/Nmro.IAM.csproj"
 COPY "Services/Oidc/Nmro.Oidc.csproj" "Services/Oidc/Nmro.Oidc.csproj"

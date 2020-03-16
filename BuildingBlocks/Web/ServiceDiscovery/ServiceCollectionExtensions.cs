@@ -4,13 +4,18 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace Nmro.BuildingBlocks.Web.ServiceDiscovery
+namespace Nmro.Web.ServiceDiscovery
 {
     public static class ServiceCollectionExtensions
     {
-        public static void RegisterConsulServices(this IServiceCollection services, IConfiguration configuration)
+        public static void RegisterConsulServices(this IServiceCollection services, string appName,IConfiguration configuration)
         {
-            ConfigurationOptions options = configuration.GetServiceDiscoveryOptions();
+            if(string.IsNullOrEmpty(appName))
+            {
+                throw new ArgumentNullException("appName", "Must have value");
+            }
+
+            ConfigurationOptions options = configuration.GetServiceDiscoveryOptions(appName);
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -27,7 +32,7 @@ namespace Nmro.BuildingBlocks.Web.ServiceDiscovery
         {
             return new ConsulClient(config =>
             {
-                config.Address = serviceConfig.ServiceDiscoveryAddress;
+                config.Address = serviceConfig.DiscoveryAddress;
             });
         }
     }

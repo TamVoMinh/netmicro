@@ -13,7 +13,6 @@ using Microsoft.AspNetCore.Mvc;
 using Nmro.Oidc.Extensions;
 using Nmro.Oidc.Services;
 using Nmro.Oidc.Storage;
-using Serilog;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
