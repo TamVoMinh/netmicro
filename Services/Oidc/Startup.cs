@@ -48,7 +48,16 @@ namespace Nmro.Oidc
                 .AddIdentityServer()
                 .AddClientStore<ClientStore>()
                 .AddResourceStore<ResourceStore>()
-                .AddDeveloperSigningCredential();
+                .AddDeveloperSigningCredential()
+                .AddOperationalStore(options =>
+                {
+                    options.RedisConnectionMultiplexer = RedisOptions.GetConnectionMultiplexer(Configuration);
+                    options.Db = 1;
+                })
+                .AddRedisCaching(options =>
+                {
+                    options.RedisConnectionMultiplexer = RedisOptions.GetConnectionMultiplexer(Configuration);
+                });
 
             services.AddHttpClient("iam", opts =>
             {
@@ -61,7 +70,7 @@ namespace Nmro.Oidc
 
             services.AddStackExchangeRedisCache(options =>
             {
-                options.Configuration = "localhost";
+                options.Configuration = Configuration.GetConnectionString("ConnectionString");
                 options.InstanceName = "OidcInstance";
             });
 
