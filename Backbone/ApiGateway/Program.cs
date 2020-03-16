@@ -11,6 +11,7 @@ namespace Nmro.ApiGateway
 {
     public class Program
     {
+        public static readonly string AppName = "apigateway";
         public static int Main(string[] args)
         {
             var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");

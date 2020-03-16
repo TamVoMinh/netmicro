@@ -2,23 +2,29 @@ version: '3.5'
 
 services:
 
-  slnbased:
-    image: slnbased
-    build:
-      context: .
-      dockerfile: Backbone/SlnBased/Dockerfile
-
   consul:
     image: ${DOCKER_REGISTRY:-nmro}/backbone/service-discovery
     build:
       context: .
       dockerfile: Backbone/Discovery/Dockerfile
+    command: agent -server -bootstrap-expect 1 -ui -client 0.0.0.0
+    ports:
+      - 53:53/udp
+      - 8500:8500
 
   proxy:
     image: ${DOCKER_REGISTRY:-nmro}/backbone/proxy
     build:
       context: .
-      dockerfile: Backbone/Gateways/ReverseProxy/Dockerfile
+      dockerfile: Backbone/ReverseProxy/Dockerfile
+    ports:
+      - 80:80
+      - 443:443
+    environment:
+      PUBLIC_ORIGIN: ${PUBLIC_ORIGIN:-nmro.local}
+    volumes:
+      - ./Backbone/ReverseProxy/templs:/etc/nginx/templs:ro
+      - ./Backbone/ReverseProxy/html:/etc/nginx/html:ro
     depends_on:
       - consul
 
@@ -26,7 +32,7 @@ services:
     image: ${DOCKER_REGISTRY:-nmro}/backbone/apigateway
     build:
       context: .
-      dockerfile: Backbone/Gateways/ApiGateway/Dockerfile
+      dockerfile: Backbone/ApiGateway/Dockerfile
     depends_on:
       - slnbased
       - consul

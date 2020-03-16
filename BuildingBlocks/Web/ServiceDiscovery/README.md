@@ -4,10 +4,8 @@
 ```JSON
 {
     "ServiceDiscovery": {
-        "serviceDiscoveryAddress": "http://consul:8500",
-        "serviceName": "landing",
-        "serviceId": "1",
-        "serviceAddress": "http://landing:80"
+        "ServiceDiscoveryAddress": "http://consul:8500",
+        "ServicePort": 80
     }
 }
 ```
@@ -15,8 +13,10 @@
 ## 1. Add Add ServiveRegister in Startup.cs
 
 ```C#
-using Nmro.BuildingBlocks.Web.ServiceDiscovery;
+using Nmro.Web.ServiceDiscovery;
 //...
+
+public static readonly string AppName = "application-name";
 
 public Startup(IConfiguration configuration)
 {
@@ -26,6 +26,6 @@ public Startup(IConfiguration configuration)
 public void ConfigureServices(IServiceCollection services)
 {
     //...
-    services.RegisterConsulServices(Configuration);
+    services.RegisterConsulServices(Program.AppName, Configuration);
 }
 ```

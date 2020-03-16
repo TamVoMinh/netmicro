@@ -1,11 +1,11 @@
 ﻿using System;
 using Microsoft.Extensions.Configuration;
 
-namespace Nmro.BuildingBlocks.Web.ServiceDiscovery
+namespace Nmro.Web.ServiceDiscovery
 {
     public static class ConfigurationExtensions
     {
-        public static ConfigurationOptions GetServiceDiscoveryOptions(this IConfiguration configuration)
+        public static ConfigurationOptions GetServiceDiscoveryOptions(this IConfiguration configuration, string appName)
         {
             if (configuration == null)
             {
@@ -14,10 +14,9 @@ namespace Nmro.BuildingBlocks.Web.ServiceDiscovery
 
             var serviceConfig = new ConfigurationOptions
             {
-                ServiceDiscoveryAddress = configuration.GetValue<Uri>("ServiceDiscovery:serviceDiscoveryAddress"),
-                ServiceAddress = configuration.GetValue<Uri>("ServiceDiscovery:serviceAddress"),
-                ServiceName = configuration.GetValue<string>("ServiceDiscovery:serviceName"),
-                ServiceId = configuration.GetValue<string>("ServiceDiscovery:serviceId")
+                DiscoveryAddress = configuration.GetValue<Uri>("ServiceDiscovery:ServiceDiscoveryAddress"),
+                ServiceName = appName,
+                ServicePort = configuration.GetValue<int>("ServiceDiscovery:ServicePort"),
             };
 
             return serviceConfig;

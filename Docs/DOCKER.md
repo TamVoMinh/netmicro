@@ -5,7 +5,7 @@
 ### Build images
 
 ```powershell
-    > DevOps/build.ps1
+    > cli/build.ps1
 ```
 
 ```sh
@@ -15,7 +15,7 @@
 ### Build a netcore image
 
 ```powershell
-    > DevOps/build.ps1 <service-name ...>
+    > cli/build.ps1 <service-name ...>
 ```
 
 ```sh
@@ -45,7 +45,7 @@
 ### Stop & remove all containers
 
 ```powershell
-    DevOps/down.ps1
+    cli/down.ps1
 ```
 
 ```sh
