@@ -1,6 +1,5 @@
 version: '3.5'
 services:
-
   db-postgres:
     image: ${DOCKER_REGISTRY:-nmro}/postgres
     build:
@@ -11,5 +10,19 @@ services:
     ports:
       - 5432:5432
 
+  db-redis:
+    image: ${DOCKER_REGISTRY:-nmro}/redis
+    build:
+      context: .
+      dockerfile: DevOnly/Redis/Dockerfile
+
+  redis-cmd:
+    image: rediscommander/redis-commander:latest
+    restart: always
+    environment:
+      - REDIS_HOSTS=docker:db-redis:6379
+      - URL_PREFIX=/redis
+
 volumes:
   db-postgres:
+  db-redis:

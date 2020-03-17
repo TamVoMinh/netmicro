@@ -48,16 +48,28 @@ namespace Nmro.Oidc
                 .AddIdentityServer()
                 .AddClientStore<ClientStore>()
                 .AddResourceStore<ResourceStore>()
-                .AddDeveloperSigningCredential();
+                .AddDeveloperSigningCredential()
+                .AddOperationalStore(options =>
+                {
+                    options.RedisConnectionMultiplexer = RedisOptions.GetConnectionMultiplexer(Configuration);
+                    options.Db = 1;
+                });
 
             services.AddHttpClient("iam", opts =>
             {
+                //TODO resolve iam-api by consul to get real-ip
                 opts.BaseAddress = new Uri(Configuration.GetValue<string>("IdentityApiEndpoint") ?? "http://iam-api/iam");
             });
 
             services.AddControllers();
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = Configuration.GetConnectionString("RedisConnection");
+                options.InstanceName = "OidcInstance";
+            });
 
             // Register services
             services.AddScoped<IUserService, UserService>();
