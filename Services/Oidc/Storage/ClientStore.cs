@@ -1,7 +1,6 @@
 using IdentityServer4.Models;
 using IdentityServer4.Stores;
 using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Nmro.Oidc.Infrastructure;
 using System;
@@ -25,22 +24,19 @@ namespace Nmro.Oidc.Storage
 
         public async Task<Client> FindClientByIdAsync(string clientId)
         {
-            var getClientUri = API.Client.GetClientById(clientId);
+            string cachingKey = $"iam-find-client-{clientId}";
+            string responseString = await _distributedCache.GetStringAsync(cachingKey);
+            if(string.IsNullOrEmpty(responseString)){
+                var getClientUri = API.Client.GetClientById(clientId);
+                var response = await iamClient.GetAsync(getClientUri);
 
-            var response = await iamClient.GetAsync(getClientUri);
+                responseString = await response.Content.ReadAsStringAsync();
 
-            var responseString = await response.Content.ReadAsStringAsync();
-
-            var client = JsonConvert.DeserializeObject<Client>(responseString);
-
-            var tokenLifeTime = await _distributedCache.GetStringAsync(nameof(client.AccessTokenLifetime));
-
-            if(string.IsNullOrEmpty(tokenLifeTime))
-            {
-                var option = new DistributedCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromSeconds(client.AccessTokenLifetime));
-                await _distributedCache.SetStringAsync(tokenLifeTime, client.AccessTokenLifetime.ToString(), option);
+                var option = new DistributedCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromSeconds(60));
+                _distributedCache.SetString(cachingKey, responseString , option);
             }
 
+            var client = JsonConvert.DeserializeObject<Client>(responseString);
             return client;
         }
     }

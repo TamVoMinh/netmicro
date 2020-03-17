@@ -53,14 +53,11 @@ namespace Nmro.Oidc
                 {
                     options.RedisConnectionMultiplexer = RedisOptions.GetConnectionMultiplexer(Configuration);
                     options.Db = 1;
-                })
-                .AddRedisCaching(options =>
-                {
-                    options.RedisConnectionMultiplexer = RedisOptions.GetConnectionMultiplexer(Configuration);
                 });
 
             services.AddHttpClient("iam", opts =>
             {
+                //TODO resolve iam-api by consul to get real-ip
                 opts.BaseAddress = new Uri(Configuration.GetValue<string>("IdentityApiEndpoint") ?? "http://iam-api/iam");
             });
 
@@ -70,7 +67,7 @@ namespace Nmro.Oidc
 
             services.AddStackExchangeRedisCache(options =>
             {
-                options.Configuration = Configuration.GetConnectionString("ConnectionString");
+                options.Configuration = Configuration.GetConnectionString("RedisConnection");
                 options.InstanceName = "OidcInstance";
             });
 

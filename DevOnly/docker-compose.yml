@@ -9,14 +9,22 @@ services:
       - db-postgres:/var/lib/postgresql/data
     ports:
       - 5432:5432
+
   db-redis:
     image: ${DOCKER_REGISTRY:-nmro}/redis
     build:
       context: .
       dockerfile: DevOnly/Redis/Dockerfile
-    volumes:
-      - ./DevOnly/Redis/redis.conf:/usr/local/etc/redis/redis.conf
-  
+
+  redis-cmd:
+    image: rediscommander/redis-commander:latest
+    restart: always
+    environment:
+      - REDIS_HOSTS=docker:db-redis:6379
+      - URL_PREFIX=/redis
+    ports:
+      - 8081:8081
+
 volumes:
   db-postgres:
   db-redis:
