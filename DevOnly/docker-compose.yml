@@ -22,8 +22,6 @@ services:
     environment:
       - REDIS_HOSTS=docker:db-redis:6379
       - URL_PREFIX=/redis
-    ports:
-      - 8081:8081
 
 volumes:
   db-postgres:

@@ -54,6 +54,7 @@
 1. Discovery servcies with [Consul](http://isys.nmro.local/)
 1. Analysis logging with [Kibana](http://isys.nmro.local/elk/)
 1. Monitor health with [healthchecks-ui](http://isys.nmro.local/health/status/)
+1. Explore  [Redis Db](http://isys.nmro.local/redis/)
 1. Play with [control-centre](http://control-centre.nmro.local/) Implemented PKCE-Flow for angular app.
 1. Enjoy document with [swagger-ui](http://docs.nmro.local/)
 1. User/Pass: admin/admin123
