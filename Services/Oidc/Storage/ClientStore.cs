@@ -27,7 +27,7 @@ namespace Nmro.Oidc.Storage
             string cachingKey = $"iam-find-client-{clientId}";
             string responseString = await _distributedCache.GetStringAsync(cachingKey);
             if(string.IsNullOrEmpty(responseString)){
-                var getClientUri = API.Client.GetClientById(clientId);
+                var getClientUri = API.Client.GetClientByClientId(clientId);
                 var response = await iamClient.GetAsync(getClientUri);
 
                 responseString = await response.Content.ReadAsStringAsync();

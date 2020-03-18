@@ -10,12 +10,12 @@ namespace Nmro.Oidc.Infrastructure
 
         public static class Client
         {
-            public static string GetClientById(string clientId) => $"client?clientId={clientId}";
+            public static string GetClientByClientId(string clientId) => $"client/oidc?clientId={clientId}";
         }
 
         public static class Resource
         {
-            public static string GetApiResourceByName(string resourcename) => $"resources/api-resource/{resourcename}";
+            public static string GetApiResourceByName(string resourceName) => $"resources/api-resource/{resourceName}";
 
             public static string GetApiResourceByScope(string scopes) => $"resources/api-resource?{scopes}";
 

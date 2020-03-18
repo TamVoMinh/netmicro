@@ -33,7 +33,7 @@ namespace Nmro.IAM.Controllers
         [HttpGet]
         public async Task<ResponseResult<List<IdentityUserModel>>> Filter([FromQuery] string email = "", int limit = 50, int offset = 0)
         {
-            var query = string.IsNullOrEmpty(email) ? _context.IdentityUsers.Where(x => !x.IsDelete) : _context.IdentityUsers.Where(x => x.Email.Contains(email) && !x.IsDelete);
+            var query = string.IsNullOrEmpty(email) ? _context.IdentityUsers.Where(x => !x.IsDeleted) : _context.IdentityUsers.Where(x => x.Email.Contains(email) && !x.IsDeleted);
 
             int count = await query.CountAsync();
 
@@ -49,7 +49,7 @@ namespace Nmro.IAM.Controllers
         [HttpGet("id")]
         public async Task<ActionResult<IdentityUserModel>> GetById(long id)
         {
-            var user = await _context.IdentityUsers.FirstOrDefaultAsync(x => x.Id == id && !x.IsDelete);
+            var user = await _context.IdentityUsers.FirstOrDefaultAsync(x => x.Id == id && !x.IsDeleted);
             if (user == null)
             {
                 return NotFound("User not exist.");
@@ -78,7 +78,7 @@ namespace Nmro.IAM.Controllers
         [HttpPut]
         public async Task<ActionResult<IdentityUserModel>> Update([FromBody] RegistrationIdentityUserModel userIdentity)
         {
-            var user = await _context.IdentityUsers.FirstOrDefaultAsync(x => x.Id == userIdentity.Id && !x.IsDelete);
+            var user = await _context.IdentityUsers.FirstOrDefaultAsync(x => x.Id == userIdentity.Id && !x.IsDeleted);
             if (user == null)
             {
                 return NotFound("User not exist.");
@@ -112,9 +112,9 @@ namespace Nmro.IAM.Controllers
         [HttpDelete("id")]
         public async Task<ActionResult<long>> Delete(long id)
         {
-            var user = await _context.IdentityUsers.FirstOrDefaultAsync(x => x.Id == id && !x.IsDelete);
+            var user = await _context.IdentityUsers.FirstOrDefaultAsync(x => x.Id == id && !x.IsDeleted);
 
-            user.IsDelete = true;
+            user.IsDeleted = true;
 
             IdentityUser deleteUser = _mapper.Map<IdentityUser>(user);
             deleteUser.UpdatedDate = DateTime.UtcNow;
