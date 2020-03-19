@@ -16,6 +16,7 @@ namespace Nmro.IAM.Repository.Entities
         // Summary:
         //     An API must have at least one scope. Each scope can have different settings.
         public ICollection<Scope> Scopes { get; set; }
+        public bool IsDeleted { get; set; }
     }
 
     public static class ApiResourceExtention

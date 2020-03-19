@@ -93,7 +93,7 @@ namespace Nmro.IAM.Controllers
             return _mapper.Map<IdentityUserModel>(updatingUser);
         }
 
-        [HttpPost("credential-validation")]
+        [HttpPost("oidc/credential-validation")]
         public async Task<ActionResult<UserProfileModel>> ValidateCredential([FromBody] CredentialModel credential)
         {
             var user = await _context.IdentityUsers.FirstOrDefaultAsync(e => e.UserName.Equals(credential.Username));
@@ -125,11 +125,11 @@ namespace Nmro.IAM.Controllers
             return user.Id;
         }
 
-        [HttpGet("test")]
-        public ActionResult TestJsonBinding(TestModel model)
-        {
-            return Ok(model);
-        }
+        //[HttpGet("test")]
+        //public ActionResult TestJsonBinding(TestModel model)
+        //{
+        //    return Ok(model);
+        //}
 
     }
 }

@@ -22,7 +22,8 @@ namespace Nmro.IAM.Migrations
                     Name = table.Column<string>(nullable: true),
                     DisplayName = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
-                    UserClaims = table.Column<string>(nullable: true)
+                    UserClaims = table.Column<string>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -77,7 +78,8 @@ namespace Nmro.IAM.Migrations
                     UserClaims = table.Column<string>(nullable: true),
                     Required = table.Column<bool>(nullable: false),
                     Emphasize = table.Column<bool>(nullable: false),
-                    ShowInDiscoveryDocument = table.Column<bool>(nullable: false)
+                    ShowInDiscoveryDocument = table.Column<bool>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {

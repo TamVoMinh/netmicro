@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Nmro.IAM.Migrations
 {
     [DbContext(typeof(IAMDbcontext))]
-    [Migration("20200318172126_InitialMigration")]
+    [Migration("20200319175141_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,6 +41,9 @@ namespace Nmro.IAM.Migrations
                         .HasColumnType("text");
 
                     b.Property<bool>("Enabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
                     b.Property<string>("Name")
@@ -155,6 +158,9 @@ namespace Nmro.IAM.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<bool>("Enabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
                     b.Property<string>("Name")

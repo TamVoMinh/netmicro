@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -26,7 +27,7 @@ namespace Nmro.IAM.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet("oidc")]
         public async Task<ResourcesModel> GetAll()
         {
             ResourcesModel resources = new ResourcesModel();
@@ -38,7 +39,7 @@ namespace Nmro.IAM.Controllers
             return resources;
         }
 
-        [HttpGet("api-resource/{name}")]
+        [HttpGet("oidc/api-resource/name={name}")]
         public async Task<ApiResourceModel> GetApiResourceByName([FromRoute] string name)
         {
             ApiResource resource = await _context.ApiResources.FirstOrDefaultAsync(x => x.Name.Equals(name));
@@ -46,7 +47,7 @@ namespace Nmro.IAM.Controllers
             return result;
         }
 
-        [HttpGet("api-resource")]
+        [HttpGet("oidc/api-resource")]
         public async Task<List<ApiResourceModel>> GetApiResourceByScopeName([FromQuery] List<string> scopes)
         {
             List<ApiResource> resources = await _context.ApiResources.Where(x => x.Scopes.Any(s => scopes.Contains(s.Name)))
@@ -56,7 +57,7 @@ namespace Nmro.IAM.Controllers
             return result;
         }
 
-        [HttpGet("identity-resource")]
+        [HttpGet("oidc/identity-resource")]
         public async Task<List<IdentityResourceModel>> GetIdentityResourceByScopeName([FromQuery] List<string> scopes)
         {
             List<IdentityResource> a = await _context.IdentityResources.ToListAsync();
