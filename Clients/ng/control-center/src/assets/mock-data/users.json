@@ -1,0 +1,44 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Luis Suarez",
+      "title": "Visa"
+    },
+    {
+      "id": 2,
+      "name": "Lucas Torreira",
+      "title": "Master"
+    },
+    {
+      "id": 3,
+      "name": "Edison Cavani",
+      "title": "Visa"
+    },
+    {
+      "id": 4,
+      "name": "Carla Espinosa",
+      "title": "Nurse"
+    },
+    {
+      "id": 5,
+      "name": "Bob Kelso",
+      "title": "Doctor of Medicine"
+    },
+    {
+      "id": 6,
+      "name": "Janitor",
+      "title": "Janitor"
+    },
+    {
+      "id": 7,
+      "name": "Perry Cox",
+      "title": "Doctor of Medicine"
+    },
+    {
+      "id": 8,
+      "name": "Ben Sullivan",
+      "title": "Carpenter and photographer"
+    }
+  ]
+}

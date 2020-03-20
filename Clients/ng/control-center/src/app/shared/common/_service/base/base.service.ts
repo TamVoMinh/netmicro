@@ -12,7 +12,7 @@ export class BaseService {
   constructor(protected http: HttpClient, protected oidcSecurityService: OidcSecurityService) { }
 
   get(url: string): Observable<any> {
-    return this.http.get(url, { headers: this.getHeaders() })
+    return this.http.get(url)
       .pipe(catchError((error) => {
         this.oidcSecurityService.handleError(error);
         return throwError(error);
@@ -21,7 +21,7 @@ export class BaseService {
 
   put(url: string, data: any): Observable<any> {
     const body = JSON.stringify(data);
-    return this.http.put(url, body, { headers: this.getHeaders() })
+    return this.http.put(url, body)
       .pipe(catchError((error) => {
         this.oidcSecurityService.handleError(error);
         return throwError(error);
@@ -29,7 +29,7 @@ export class BaseService {
   }
 
   delete(url: string): Observable<any> {
-    return this.http.delete(url, { headers: this.getHeaders() })
+    return this.http.delete(url)
       .pipe(catchError((error) => {
         this.oidcSecurityService.handleError(error);
         return throwError(error);
@@ -38,30 +38,30 @@ export class BaseService {
 
   post(url: string, data: any): Observable<any> {
     const body = JSON.stringify(data);
-    return this.http.post(url, body, { headers: this.getHeaders() })
+    return this.http.post(url, body)
       .pipe(catchError((error) => {
         this.oidcSecurityService.handleError(error);
         return throwError(error);
       }));
   }
 
-  private getHeaders() {
-    let headers = new HttpHeaders();
-    headers = headers.set('Content-Type', 'application/json');
-    return this.appendAuthHeader(headers);
-  }
+  // private getHeaders() {
+  //   let headers = new HttpHeaders();
+  //   headers = headers.set('Content-Type', 'application/json');
+  //   return this.appendAuthHeader(headers);
+  // }
 
   public getToken() {
     const token = this.oidcSecurityService.getToken();
     return token;
   }
 
-  private appendAuthHeader(headers: HttpHeaders) {
-    const token = this.oidcSecurityService.getToken();
+  // private appendAuthHeader(headers: HttpHeaders) {
+  //   const token = this.oidcSecurityService.getToken();
 
-    if (token === '') { return headers; }
+  //   if (token === '') { return headers; }
 
-    const tokenValue = 'Bearer ' + token;
-    return headers.set('Authorization', tokenValue);
-  }
+  //   const tokenValue = 'Bearer ' + token;
+  //   return headers.set('Authorization', tokenValue);
+  // }
 }

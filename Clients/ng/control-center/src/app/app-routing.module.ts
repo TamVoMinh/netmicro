@@ -1,4 +1,3 @@
-import { AppComponent } from './core/app/app.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './core/layout/layout.component';
@@ -8,7 +7,7 @@ const routes: Routes = [
   {
     path: 'web',
     component: LayoutComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     loadChildren: () => import('./web/web.module').then(m => m.WebModule)
   },
   {
