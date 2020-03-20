@@ -1,0 +1,9 @@
+version: '3.5'
+services:
+  dozzle:
+    image: ${DOCKER_REGISTRY:-nmro}/foundation/dozzle
+    build:
+      context: .
+      dockerfile: Foundation/Dozzle/Dockerfile
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock

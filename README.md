@@ -21,7 +21,12 @@
 1. Copy & rename environment variable
 
     ```powershell
-        > Copy-Item -Path Scripts\variables.env.template -Destination .env
+        > Copy-Item -Path DevOnly\Scripts\variables.env.template -Destination .env
+    ```
+1. Run Up IAM database
+
+    ```powershell
+        .\cli\nmro.sh up -d db-postgres
     ```
 
 1. Drop existing schema **Skip this at first time**.
@@ -39,7 +44,7 @@
 1. Run up with docker-compose
 
     ```powershell
-        > cli\up.ps1
+        cli\nmro.sh up -d
     ```
 
 1. Known issues:
