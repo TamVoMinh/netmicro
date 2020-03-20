@@ -17,13 +17,13 @@ services:
     build:
       context: .
       dockerfile: Backbone/ReverseProxy/Dockerfile
+      args:
+        PUBLIC_ORIGIN: ${PUBLIC_ORIGIN:-nmro.local}
+        FOUNDATION: $FOUNDATION
     ports:
       - 80:80
       - 443:443
-    environment:
-      PUBLIC_ORIGIN: ${PUBLIC_ORIGIN:-nmro.local}
     volumes:
-      - ./Backbone/ReverseProxy/templs:/etc/nginx/templs:ro
       - ./Backbone/ReverseProxy/html:/etc/nginx/html:ro
     depends_on:
       - consul
