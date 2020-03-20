@@ -29,15 +29,17 @@ namespace Nmro.Oidc.Storage
         {
             string cachingKey = $"iam-find-client-{clientId}";
             string responseString = await _distributedCache.GetStringAsync(cachingKey);
-            _logger.LogWarning("vo day");
+            
             if(string.IsNullOrEmpty(responseString)){
+
                 var getClientUri = API.Client.GetClientByClientId(clientId);
-                _logger.LogWarning("vo day uriiii {0}",getClientUri);
+                
                 var response = await iamClient.GetAsync(getClientUri);
-                _logger.LogWarning("vo day responsessss {0}",response);
+                
                 responseString = await response.Content.ReadAsStringAsync();
-                _logger.LogWarning("vo day responseStringgg {0}", responseString);
+                
                 var option = new DistributedCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromSeconds(60));
+
                 _distributedCache.SetString(cachingKey, responseString , option);
             }
 

@@ -9,7 +9,7 @@ namespace Nmro.Oidc.Infrastructure
 
         public static class Client
         {
-            public static string GetClientByClientId(string clientId) => $"client/oidc?clientId={clientId}";
+            public static string GetClientByClientId(string clientId) => $"client/oidc/clientid={clientId}";
         }
 
         public static class Resource

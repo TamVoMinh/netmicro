@@ -46,7 +46,7 @@ namespace Nmro.IAM.Controllers
             return new ResponseResult<List<IdentityUserModel>> { Total = count , Data = responseUsers }; ;
         }
 
-        [HttpGet("id")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<IdentityUserModel>> GetById(long id)
         {
             var user = await _context.IdentityUsers.FirstOrDefaultAsync(x => x.Id == id && !x.IsDeleted);
@@ -109,7 +109,7 @@ namespace Nmro.IAM.Controllers
             return null;
         }
 
-        [HttpDelete("id")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<long>> Delete(long id)
         {
             var user = await _context.IdentityUsers.FirstOrDefaultAsync(x => x.Id == id && !x.IsDeleted);

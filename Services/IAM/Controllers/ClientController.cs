@@ -43,7 +43,7 @@ namespace Nmro.IAM.Controllers
             return new ResponseResult<List<ClientModel>> { Total = count, Data = responseClients }; ;
         }
 
-        [HttpGet("id")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<ClientModel>> GetById(int id)
         {
             var client = await _context.Clients
@@ -87,7 +87,7 @@ namespace Nmro.IAM.Controllers
             return _mapper.Map<ClientModel>(updatingClient);
         }
 
-        [HttpDelete("id")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<int>> Delete(int id)
         {
             var client = await _context.Clients.FirstOrDefaultAsync(x => x.Id == id && !x.IsDeleted);
@@ -103,7 +103,7 @@ namespace Nmro.IAM.Controllers
             return client.Id;
         }
 
-        [HttpGet("oidc")]
+        [HttpGet("oidc/clientid={clientId}")]
         public async Task<ActionResult<ClientModel>> GetByClientId(string clientId)
         {
             var client = await _context.Clients
