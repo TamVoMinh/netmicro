@@ -67,7 +67,7 @@ public class IdentityUserContextSeed
                 Email = "admin@nmro.local",
                 CreatedDate = DateTime.UtcNow,
                 UpdatedDate = DateTime.UtcNow,
-                IsDelete = false
+                IsDeleted = false
             }
         };
     }

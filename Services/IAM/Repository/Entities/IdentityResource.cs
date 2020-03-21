@@ -22,6 +22,7 @@ namespace Nmro.IAM.Repository.Entities
         //     Specifies whether this scope is shown in the discovery document. Defaults to
         //     true.
         public bool ShowInDiscoveryDocument { get; set; }
+        public bool IsDeleted { get; set; }
     }
 
     public static class IdentityResourceExtention

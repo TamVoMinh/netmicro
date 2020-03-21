@@ -7,6 +7,8 @@ using Nmro.IAM.Models;
 using Nmro.IAM.Repository;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Collections.Generic;
+using System;
 
 namespace Nmro.IAM.Controllers
 {
@@ -25,22 +27,87 @@ namespace Nmro.IAM.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost]
-        public async Task<ActionResult<long>> Create([FromBody] ClientModel model)
+        [HttpGet]
+        public async Task<ResponseResult<List<ClientModel>>> Filter([FromQuery] string clientName = "", int limit = 50, int offset = 0)
         {
-            Client creatingClient = _mapper.Map<Client>(model);
+            var query = string.IsNullOrEmpty(clientName) ? _context.Clients : _context.Clients.Where(x => x.ClientName.Contains(clientName) && !x.IsDeleted);
+
+            int count = await query.CountAsync();
+
+            query.Skip(offset).Take(limit);
+
+            var clients = await query.ToListAsync();
+
+            var responseClients = _mapper.Map<List<ClientModel>>(clients);
+
+            return new ResponseResult<List<ClientModel>> { Total = count, Data = responseClients }; ;
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ClientModel>> GetById(int id)
+        {
+            var client = await _context.Clients
+                .Where(e => e.Id == id && !e.IsDeleted)
+                .Include(e => e.ClientSecrets)
+                .FirstOrDefaultAsync();
+
+            var result = _mapper.Map<ClientModel>(client);
+
+            return result;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<ClientModel>> Create([FromBody] ClientModel clientModel)
+        {
+            Client creatingClient = _mapper.Map<Client>(clientModel);
+
+            creatingClient.CreatedDate = DateTime.UtcNow;
 
             await _context.Clients.AddAsync(creatingClient);
             await _context.SaveChangesAsync();
 
-            return creatingClient.Id;
+            return _mapper.Map<ClientModel>(creatingClient);
         }
 
-        [HttpGet]
+        [HttpPut]
+        public async Task<ActionResult<ClientModel>> Update([FromBody] ClientModel clientModel)
+        {
+            var client = await _context.Clients.FirstOrDefaultAsync(x => x.Id == clientModel.Id && !x.IsDeleted);
+            if (client == null)
+            {
+                return NotFound("Client not exist.");
+            }
+
+            Client updatingClient = _mapper.Map<Client>(clientModel);
+            updatingClient.UpdatedDate = DateTime.UtcNow;
+
+            _context.Clients.Update(updatingClient);
+            await _context.SaveChangesAsync();
+
+            return _mapper.Map<ClientModel>(updatingClient);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<int>> Delete(int id)
+        {
+            var client = await _context.Clients.FirstOrDefaultAsync(x => x.Id == id && !x.IsDeleted);
+
+            client.IsDeleted = true;
+
+            Client deleteClient = _mapper.Map<Client>(client);
+            deleteClient.UpdatedDate = DateTime.UtcNow;
+
+            _context.Clients.Update(deleteClient);
+            await _context.SaveChangesAsync();
+
+            return client.Id;
+        }
+
+        [HttpGet("oidc/clientid={clientId}")]
         public async Task<ActionResult<ClientModel>> GetByClientId(string clientId)
         {
             var client = await _context.Clients
-                .Where(e => e.ClientId.Equals(clientId))
+                .Where(e => e.ClientId.Equals(clientId) && !e.IsDeleted)
                 .Include(e => e.ClientSecrets)
                 .FirstOrDefaultAsync();
 

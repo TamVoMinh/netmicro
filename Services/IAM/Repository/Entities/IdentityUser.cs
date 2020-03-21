@@ -18,7 +18,7 @@ namespace Nmro.IAM.Repository.Entities
 
         public DateTime LastFailedLogin { get; set; }
 
-        public bool IsDelete { get; set; }
+        public bool IsDeleted { get; set; }
     }
 
     public static class UserIdentityExtention
