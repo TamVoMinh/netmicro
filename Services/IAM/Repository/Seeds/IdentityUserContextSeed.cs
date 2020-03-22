@@ -72,7 +72,7 @@ public class IdentityUserContextSeed
         };
     }
 
-    private List<Nmro.IAM.Repository.Entities.Client> SeedClients()
+    private List<Client> SeedClients()
     {
         return new List<Nmro.IAM.Repository.Entities.Client> {
             new Nmro.IAM.Repository.Entities.Client {
@@ -219,7 +219,7 @@ public class IdentityUserContextSeed
         };
     }
 
-    private List<Nmro.IAM.Repository.Entities.IdentityResource> SeedIdentityResources()
+    private List<IdentityResource> SeedIdentityResources()
     {
         return new List<Nmro.IAM.Repository.Entities.IdentityResource>
         {
@@ -274,7 +274,7 @@ public class IdentityUserContextSeed
         };
     }
 
-    private List<Nmro.IAM.Repository.Entities.ApiResource> SeedApiResources()
+    private List<ApiResource> SeedApiResources()
     {
         return new List<Nmro.IAM.Repository.Entities.ApiResource> {
             new Nmro.IAM.Repository.Entities.ApiResource {

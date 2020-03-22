@@ -4,7 +4,6 @@ using IdentityServer4.Extensions;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
 using IdentityServer4.Stores;
-using IdentityServer4.Test;
 using IdentityServer4.Validation;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -12,7 +11,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Nmro.Oidc.Extensions;
 using Nmro.Oidc.Services;
-using Nmro.Oidc.Storage;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -28,7 +26,6 @@ namespace Nmro.Oidc
     [AllowAnonymous]
     public class AccountController : Controller
     {
-        private readonly TestUserStore __userService;
         private readonly IUserService _userService;
         private readonly IResourceOwnerPasswordValidator _validator;
         private readonly IIdentityServerInteractionService _interaction;
@@ -42,12 +39,10 @@ namespace Nmro.Oidc
             IClientStore clientStore,
             IAuthenticationSchemeProvider schemeProvider,
             IUserService userService,
-            IEventService events,
-            TestUserStore users = null)
+            IEventService events)
         {
             // if the TestUserStore is not in DI, then we'll just use the global users collection
             // this is where you would plug in your own custom identity management library (e.g. ASP.NET Identity)
-            __userService = users ?? new TestUserStore(Users.Get());
 
             _validator = validator;
             _interaction = interaction;

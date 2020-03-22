@@ -73,6 +73,7 @@ namespace Nmro.Oidc
 
             // Register services
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IExternalUserService, ExternalUserService>();
 
             services.AddHealthChecks();
 
