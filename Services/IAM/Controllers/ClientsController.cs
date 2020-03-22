@@ -9,18 +9,19 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Collections.Generic;
 using System;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Nmro.IAM.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
-    public class ClientController : ControllerBase
+    [Route("clients")]
+    public class ClientsController : ControllerBase
     {
-        private readonly ILogger<ClientController> _logger;
+        private readonly ILogger<ClientsController> _logger;
         private readonly IMapper _mapper;
         private readonly IAMDbcontext _context;
 
-        public ClientController(ILogger<ClientController> logger, IAMDbcontext context, IMapper mapper)
+        public ClientsController(ILogger<ClientsController> logger, IAMDbcontext context, IMapper mapper)
         {
             _logger = logger;
             _context = context;
@@ -28,6 +29,7 @@ namespace Nmro.IAM.Controllers
         }
 
         [HttpGet]
+        [SwaggerOperation("Query a bunch of clients by name")]
         public async Task<ResponseResult<List<ClientModel>>> Filter([FromQuery] string clientName = "", int limit = 50, int offset = 0)
         {
             var query = string.IsNullOrEmpty(clientName) ? _context.Clients : _context.Clients.Where(x => x.ClientName.Contains(clientName) && !x.IsDeleted);
@@ -44,6 +46,7 @@ namespace Nmro.IAM.Controllers
         }
 
         [HttpGet("{id}")]
+        [SwaggerOperation("Read a client")]
         public async Task<ActionResult<ClientModel>> GetById(int id)
         {
             var client = await _context.Clients
@@ -57,6 +60,7 @@ namespace Nmro.IAM.Controllers
         }
 
         [HttpPost]
+        [SwaggerOperation("Create new client")]
         public async Task<ActionResult<ClientModel>> Create([FromBody] ClientModel clientModel)
         {
             Client creatingClient = _mapper.Map<Client>(clientModel);
@@ -69,7 +73,8 @@ namespace Nmro.IAM.Controllers
             return _mapper.Map<ClientModel>(creatingClient);
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
+        [SwaggerOperation("Update existing client")]
         public async Task<ActionResult<ClientModel>> Update([FromBody] ClientModel clientModel)
         {
             var client = await _context.Clients.FirstOrDefaultAsync(x => x.Id == clientModel.Id && !x.IsDeleted);
@@ -88,6 +93,7 @@ namespace Nmro.IAM.Controllers
         }
 
         [HttpDelete("{id}")]
+        [SwaggerOperation("Delele a client")]
         public async Task<ActionResult<int>> Delete(int id)
         {
             var client = await _context.Clients.FirstOrDefaultAsync(x => x.Id == id && !x.IsDeleted);
@@ -101,19 +107,6 @@ namespace Nmro.IAM.Controllers
             await _context.SaveChangesAsync();
 
             return client.Id;
-        }
-
-        [HttpGet("oidc/clientid={clientId}")]
-        public async Task<ActionResult<ClientModel>> GetByClientId(string clientId)
-        {
-            var client = await _context.Clients
-                .Where(e => e.ClientId.Equals(clientId) && !e.IsDeleted)
-                .Include(e => e.ClientSecrets)
-                .FirstOrDefaultAsync();
-
-            var result = _mapper.Map<ClientModel>(client);
-
-            return result;
         }
     }
 }
