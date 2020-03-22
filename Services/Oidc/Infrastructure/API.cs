@@ -4,23 +4,23 @@ namespace Nmro.Oidc.Infrastructure
     {
         public static class IdentityUser
         {
-            public static string ValidateCredentials() => $"identityuser/oidc/credential-validation";
+            public static string ValidateCredentials() => $"oidc/users/validate";
         }
 
         public static class Client
         {
-            public static string GetClientByClientId(string clientId) => $"client/oidc/clientid={clientId}";
+            public static string GetClientByClientId(string clientId) => $"oidc/clients/{clientId}";
         }
 
         public static class Resource
         {
-            public static string GetApiResourceByName(string resourceName) => $"resources/oidc/api-resource/name={resourceName}";
+            public static string GetApiResourceByName(string resourceName) => $"oidc/resources/apis/{resourceName}";
 
-            public static string GetApiResourceByScope(string scopes) => $"resources/oidc/api-resource?{scopes}";
+            public static string GetApiResourceByScope(string scopes) => $"oidc/resources/apis?{scopes}";
 
-            public static string GetIdentityResourceByScope(string scopes) => $"resources/oidc/identity-resource?{scopes}";
+            public static string GetIdentityResourceByScope(string scopes) => $"oidc/resources/identities?{scopes}";
 
-            public static string GetAllResources() => $"resources/oidc";
+            public static string GetAllResources() => $"oidc/resources";
         }
     }
 }

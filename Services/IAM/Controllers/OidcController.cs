@@ -45,8 +45,8 @@ namespace Nmro.IAM.Controllers
             return resources;
         }
 
-        [HttpGet("api-resource/{name}")]
-        [SwaggerOperation("Read a resource by name")]
+        [HttpGet("resources/apis/{name}")]
+        [SwaggerOperation("Read a api-resource by name")]
         public async Task<ApiResourceModel> GetApiResourceByName([FromRoute] string name)
         {
             ApiResource resource = await _context.ApiResources.FirstOrDefaultAsync(x => x.Name.Equals(name));
@@ -54,8 +54,8 @@ namespace Nmro.IAM.Controllers
             return result;
         }
 
-        [HttpGet("api-resource")]
-        [SwaggerOperation("Query api-resources by scopes")]
+        [HttpGet("resources/apis")]
+        [SwaggerOperation("Query a set of api-resources by scopes")]
         public async Task<List<ApiResourceModel>> GetApiResourceByScopeName([FromQuery] List<string> scopes)
         {
             List<ApiResource> resources = await _context.ApiResources.Where(x => x.Scopes.Any(s => scopes.Contains(s.Name)))
@@ -65,8 +65,8 @@ namespace Nmro.IAM.Controllers
             return result;
         }
 
-        [HttpGet("identity-resource")]
-        [SwaggerOperation("Query identity-resources by scopes")]
+        [HttpGet("resources/identities")]
+        [SwaggerOperation("Query a set of identity-resources by scopes")]
         public async Task<List<IdentityResourceModel>> GetIdentityResourceByScopeName([FromQuery] List<string> scopes)
         {
             List<IdentityResource> a = await _context.IdentityResources.ToListAsync();
@@ -75,7 +75,7 @@ namespace Nmro.IAM.Controllers
             return result;
         }
 
-        [HttpPost("credential-validation")]
+        [HttpPost("users/validate")]
         [SwaggerOperation("Validate an user credential")]
         public async Task<ActionResult<UserProfileModel>> ValidateCredential([FromBody] CredentialModel credential)
         {
