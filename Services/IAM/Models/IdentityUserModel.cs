@@ -8,6 +8,6 @@ namespace Nmro.IAM.Models
 
         public string Email {get;set;}
 
-        public bool IsDelete { get; set; }
+        public bool IsDeleted { get; set; }
     }
  }

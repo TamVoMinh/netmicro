@@ -2,14 +2,14 @@ using IdentityModel;
 using IdentityServer4.Events;
 using IdentityServer4.Services;
 using IdentityServer4.Stores;
-using IdentityServer4.Test;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Nmro.Oidc.Extensions;
-using Nmro.Oidc.Storage;
+using Nmro.Oidc.Models;
+using Nmro.Oidc.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,27 +23,24 @@ namespace Nmro.Oidc
     [AllowAnonymous]
     public class ExternalController : Controller
     {
-        private readonly TestUserStore _users;
         private readonly IIdentityServerInteractionService _interaction;
         private readonly IClientStore _clientStore;
         private readonly ILogger<ExternalController> _logger;
         private readonly IEventService _events;
+        private readonly IExternalUserService _userService;
 
         public ExternalController(
             IIdentityServerInteractionService interaction,
             IClientStore clientStore,
             IEventService events,
             ILogger<ExternalController> logger,
-            TestUserStore users = null)
+            IExternalUserService userService)
         {
-            // if the TestUserStore is not in DI, then we'll just use the global users collection
-            // this is where you would plug in your own custom identity management library (e.g. ASP.NET Identity)
-            _users = users ?? new TestUserStore(Users.Get());
-
             _interaction = interaction;
             _clientStore = clientStore;
             _logger = logger;
             _events = events;
+            _userService = userService;
         }
 
         /// <summary>
@@ -68,7 +65,7 @@ namespace Nmro.Oidc
             }
             else
             {
-                // start challenge and roundtrip the return URL and scheme 
+                // start challenge and roundtrip the return URL and scheme
                 var props = new AuthenticationProperties
                 {
                     RedirectUri = Url.Action(nameof(Callback)),
@@ -103,13 +100,13 @@ namespace Nmro.Oidc
             }
 
             // lookup our user and external provider info
-            var (user, provider, providerUserId, claims) = FindUserFromExternalProvider(result);
+            var (user, provider, providerUserId, claims) = await FindUserFromExternalProvider(result);
             if (user == null)
             {
                 // this might be where you might initiate a custom workflow for user registration
                 // in this sample we don't show how that would be done, as our sample implementation
                 // simply auto-provisions new external user
-                user = AutoProvisionUser(provider, providerUserId, claims);
+                user = await AutoProvisionUser(provider, providerUserId, claims);
             }
 
             // this allows us to collect any additonal claims or properties
@@ -194,7 +191,7 @@ namespace Nmro.Oidc
             }
         }
 
-        private (TestUser user, string provider, string providerUserId, IEnumerable<Claim> claims) FindUserFromExternalProvider(AuthenticateResult result)
+        private async Task<(User user, string provider, string providerUserId, IEnumerable<Claim> claims)> FindUserFromExternalProvider(AuthenticateResult result)
         {
             var externalUser = result.Principal;
 
@@ -213,14 +210,14 @@ namespace Nmro.Oidc
             var providerUserId = userIdClaim.Value;
 
             // find external user
-            var user = _users.FindByExternalProvider(provider, providerUserId);
+            var user = await _userService.FindByExternalProvider(provider, providerUserId);
 
             return (user, provider, providerUserId, claims);
         }
 
-        private TestUser AutoProvisionUser(string provider, string providerUserId, IEnumerable<Claim> claims)
+        private async Task<User> AutoProvisionUser(string provider, string providerUserId, IEnumerable<Claim> claims)
         {
-            var user = _users.AutoProvisionUser(provider, providerUserId, claims.ToList());
+            var user = await _userService.AutoProvisionUser(provider, providerUserId, claims.ToList());
             return user;
         }
 

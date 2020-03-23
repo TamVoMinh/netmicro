@@ -10,19 +10,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using Nmro.IAM.Services;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Nmro.IAM.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class IdentityUserController : ControllerBase
+    public class UsersController : ControllerBase
     {
-        private readonly ILogger<IdentityUserController> _logger;
+        private readonly ILogger<UsersController> _logger;
         private readonly IMapper _mapper;
         private readonly IPasswordValidator _passwordValidator;
         private readonly IAMDbcontext _context;
 
-        public IdentityUserController(ILogger<IdentityUserController> logger, IAMDbcontext context, IMapper mapper, IPasswordValidator passwordValidator)
+        public UsersController(ILogger<UsersController> logger, IAMDbcontext context, IMapper mapper, IPasswordValidator passwordValidator)
         {
             _logger = logger;
             _context = context;
@@ -31,9 +32,10 @@ namespace Nmro.IAM.Controllers
         }
 
         [HttpGet]
+        [SwaggerOperation("Query a bunch of users by name")]
         public async Task<ResponseResult<List<IdentityUserModel>>> Filter([FromQuery] string email = "", int limit = 50, int offset = 0)
         {
-            var query = string.IsNullOrEmpty(email) ? _context.IdentityUsers.Where(x => !x.IsDelete) : _context.IdentityUsers.Where(x => x.Email.Contains(email) && !x.IsDelete);
+            var query = string.IsNullOrEmpty(email) ? _context.IdentityUsers.Where(x => !x.IsDeleted) : _context.IdentityUsers.Where(x => x.Email.Contains(email) && !x.IsDeleted);
 
             int count = await query.CountAsync();
 
@@ -46,10 +48,11 @@ namespace Nmro.IAM.Controllers
             return new ResponseResult<List<IdentityUserModel>> { Total = count , Data = responseUsers }; ;
         }
 
-        [HttpGet("id")]
+        [HttpGet("{id}")]
+        [SwaggerOperation("Read an user")]
         public async Task<ActionResult<IdentityUserModel>> GetById(long id)
         {
-            var user = await _context.IdentityUsers.FirstOrDefaultAsync(x => x.Id == id && !x.IsDelete);
+            var user = await _context.IdentityUsers.FirstOrDefaultAsync(x => x.Id == id && !x.IsDeleted);
             if (user == null)
             {
                 return NotFound("User not exist.");
@@ -61,6 +64,7 @@ namespace Nmro.IAM.Controllers
         }
 
         [HttpPost]
+        [SwaggerOperation("Create new user")]
         public async Task<ActionResult<IdentityUserModel>> Create([FromBody] RegistrationIdentityUserModel userIdentity)
         {
             IdentityUser creatingUser = _mapper.Map<IdentityUser>(userIdentity);
@@ -76,9 +80,10 @@ namespace Nmro.IAM.Controllers
         }
 
         [HttpPut]
+        [SwaggerOperation("Update a user")]
         public async Task<ActionResult<IdentityUserModel>> Update([FromBody] RegistrationIdentityUserModel userIdentity)
         {
-            var user = await _context.IdentityUsers.FirstOrDefaultAsync(x => x.Id == userIdentity.Id && !x.IsDelete);
+            var user = await _context.IdentityUsers.FirstOrDefaultAsync(x => x.Id == userIdentity.Id && !x.IsDeleted);
             if (user == null)
             {
                 return NotFound("User not exist.");
@@ -93,28 +98,13 @@ namespace Nmro.IAM.Controllers
             return _mapper.Map<IdentityUserModel>(updatingUser);
         }
 
-        [HttpPost("credential-validation")]
-        public async Task<ActionResult<UserProfileModel>> ValidateCredential([FromBody] CredentialModel credential)
-        {
-            var user = await _context.IdentityUsers.FirstOrDefaultAsync(e => e.UserName.Equals(credential.Username));
-
-            if (user != null)
-            {
-                var result = _passwordValidator.VerifyHashedPassword(user.Password, credential.Password, user.Salt);
-                return (result == PasswordVerificationResult.Success)
-                    ? _mapper.Map<UserProfileModel>(user)
-                    : null;
-            }
-
-            return null;
-        }
-
-        [HttpDelete("id")]
+        [HttpDelete("{id}")]
+        [SwaggerOperation("Delete a user")]
         public async Task<ActionResult<long>> Delete(long id)
         {
-            var user = await _context.IdentityUsers.FirstOrDefaultAsync(x => x.Id == id && !x.IsDelete);
+            var user = await _context.IdentityUsers.FirstOrDefaultAsync(x => x.Id == id && !x.IsDeleted);
 
-            user.IsDelete = true;
+            user.IsDeleted = true;
 
             IdentityUser deleteUser = _mapper.Map<IdentityUser>(user);
             deleteUser.UpdatedDate = DateTime.UtcNow;
@@ -125,11 +115,11 @@ namespace Nmro.IAM.Controllers
             return user.Id;
         }
 
-        [HttpGet("test")]
-        public ActionResult TestJsonBinding(TestModel model)
-        {
-            return Ok(model);
-        }
+        //[HttpGet("test")]
+        //public ActionResult TestJsonBinding(TestModel model)
+        //{
+        //    return Ok(model);
+        //}
 
     }
 }

@@ -18,12 +18,14 @@ namespace Nmro.IAM
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
         {
             Configuration = configuration;
+            environment = webHostEnvironment;
         }
 
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment environment {get;}
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -50,12 +52,28 @@ namespace Nmro.IAM
 
             services.AddSwaggerGen(c =>
             {
+                c.EnableAnnotations(true);
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Nmro.IAM", Version = "v1" });
             });
 
             services.AddHealthChecks();
 
             services.RegisterConsulServices(Program.AppName, Configuration);
+
+            if(environment.IsDevelopment()){
+                services.AddCors(options =>
+                {
+                    options.AddPolicy("development_cors",
+                    builder =>
+                    {
+                        builder
+                            .AllowAnyOrigin()
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+
+                    });
+                });
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,6 +82,7 @@ namespace Nmro.IAM
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseCors("development_cors");
             }
 
             app.UsePathBase("/iam");

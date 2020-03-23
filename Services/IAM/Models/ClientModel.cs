@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Nmro.IAM.Models
 {
-    public class ClientModel
+    public class ClientModel : BaseEntityModel<int>
     {
         public bool AlwaysIncludeUserClaimsInIdToken { get; set; }
         public ICollection<string> AllowedScopes { get; set; }
@@ -19,6 +19,6 @@ namespace Nmro.IAM.Models
         public int IdentityTokenLifetime { get; set; }
         public bool RequireClientSecret { get; set; }
         public List<string> AllowedCorsOrigins { get; set; }
-
+        public bool IsDeleted { get; set; }
     }
 }
