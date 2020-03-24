@@ -1,4 +1,4 @@
-namespace Nmro.IAM.Repository.Entities
+namespace Nmro.IAM.Domain.Entities
 {
     public static class GrantType
     {

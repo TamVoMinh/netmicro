@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Nmro.IAM.Repository.Entities
+namespace Nmro.IAM.Domain.Entities
 {
     public class Resource : EntityBase<int>
     {

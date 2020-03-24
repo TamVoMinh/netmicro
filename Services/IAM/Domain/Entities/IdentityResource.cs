@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 
-namespace Nmro.IAM.Repository.Entities
+namespace Nmro.IAM.Domain.Entities
 {
     public class IdentityResource : Resource
     {

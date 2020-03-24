@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
 
-namespace Nmro.IAM.Repository.Entities
+namespace Nmro.IAM.Domain.Entities
 {
     public class Client : EntityBase<int>
     {
