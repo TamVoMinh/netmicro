@@ -35,10 +35,10 @@ export class AppComponent implements OnInit, OnDestroy {
     )
     .subscribe(event => {
       if(event instanceof NavigationStart) {
-          this.store.dispatch(new ShowLoading());
+        this.loadingService.show();
         return;
       }
-      // this.store.dispatch(new HideLoading());
+      this.loadingService.hide();
     })
   }
 

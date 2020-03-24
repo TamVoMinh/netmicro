@@ -17,8 +17,4 @@ export class UsersComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  showLoading() {
-    this.store.dispatch(new ShowLoading());
-  }
 }

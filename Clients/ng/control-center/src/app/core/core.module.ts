@@ -27,7 +27,7 @@ import { LoadingEffect } from './store/effects/loading.effects';
 
 export const effects = [
   UserEffect,
-  LoadingEffect
+  // LoadingEffect
 ]
 
 @NgModule({

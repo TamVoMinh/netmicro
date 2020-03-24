@@ -12,9 +12,9 @@ import { selectLoading } from '@app/core/store/selectors/loading.selector';
 export class LoadingIndicatorComponent implements OnInit {
   isLoading$: Observable<any>;
 
-  constructor(private store: Store) { }
+  constructor(private loadingService: LoadingService) { }
 
   ngOnInit() {
-    this.isLoading$ = this.store.pipe(select(selectLoading));
+    this.isLoading$ = this.loadingService.isLoading$;
   }
 }
