@@ -1,17 +1,47 @@
 ﻿{
     "ReRoutes": [
         {
-          "DownstreamPathTemplate": "/iam/{everything}",
-          "DownstreamScheme": "http",
-          "DownstreamHostAndPorts": [
-            {
-              "Host": "iam-api",
-              "Port": 80
+            "DownstreamPathTemplate": "/health ",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                "Host": "iam-api",
+                "Port": 80
+                }
+            ],
+            "UpstreamPathTemplate": "/health ",
+            "UpstreamHttpMethod": [ "GET"],
+            "ReRouteIsCaseSensitive": false
+        },
+        {
+            "UpstreamPathTemplate": "/oas/v1/swagger.json",
+            "DownstreamPathTemplate": "/iam/oas/v1/swagger.json",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                "Host": "iam-api",
+                "Port": 80
+                }
+            ],
+            "UpstreamHttpMethod": [ "GET" ],
+            "ReRouteIsCaseSensitive": false
+        },
+        {
+            "DownstreamPathTemplate": "/iam/{everything}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                "Host": "iam-api",
+                "Port": 80
+                }
+            ],
+            "UpstreamPathTemplate": "/iam/{everything}",
+            "UpstreamHttpMethod": [ "GET", "POST","DELETE","PUT","OPTION" ],
+            "ReRouteIsCaseSensitive": false,
+            "AuthenticationOptions": {
+                "AuthenticationProviderKey": "AuthN",
+                "AllowedScopes": []
             }
-          ],
-          "UpstreamPathTemplate": "/iam/{everything}",
-          "UpstreamHttpMethod": [ "GET", "POST","DELETE","PUT","OPTION" ],
-          "ReRouteIsCaseSensitive": false
         }
       ],
       "GlobalConfiguration": {
