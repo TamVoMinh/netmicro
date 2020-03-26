@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { IClient } from '@app/shared/common/_model/client.interface';
-import { IHttpResponse } from '@app/shared/common';
 import { NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from '@nebular/theme';
+import { IHttpResponse } from '@shared/common/_model/http-response.interface';
 
 @Component({
   selector: 'app-clients',

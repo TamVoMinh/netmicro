@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
-import { IUser, IHttpResponse } from '@app/shared/common/_model';
 import { NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from '@nebular/theme';
+import { IHttpResponse } from '@app/shared/common/_model/http-response.interface';
+import { IUser } from '@app/shared/common/_model/user.interface';
 
 @Component({
   selector: 'app-users',

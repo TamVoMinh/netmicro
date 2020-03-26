@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { BaseService } from '@shared/common/_service/base/base.service';
 import { Observable } from 'rxjs';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
-import { IUser, IHttpResponse } from '../../_model';
+import { IHttpResponse } from '../../_model/http-response.interface';
+import { IUser } from '../../_model/user.interface';
 
 @Injectable({
   providedIn: 'root'

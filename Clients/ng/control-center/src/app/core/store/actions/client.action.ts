@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
-import { IHttpResponse } from '@shared/common/_model';
 import { IClient } from '@app/shared/common/_model/client.interface';
+import { IHttpResponse } from '@app/shared/common/_model/http-response.interface';
 
 export enum EClientActions {
   GetClients = '[Client] Get Clients',

@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { ClientService, IHttpResponse } from '@app/shared/common';
+import { ClientService } from '@app/shared/common';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { GetClients, EClientActions, GetClientSuccess } from '../actions/client.action';
 import { map, switchMap } from 'rxjs/operators';
 import { IClient } from '@app/shared/common/_model/client.interface';
 import { of } from 'rxjs';
+import { IHttpResponse } from '@app/shared/common/_model/http-response.interface';
 
 @Injectable()
 export class ClientEffect {

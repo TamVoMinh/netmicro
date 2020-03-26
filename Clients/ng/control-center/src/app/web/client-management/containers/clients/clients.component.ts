@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IHttpResponse } from '@app/shared/common';
 import { IClient } from '@app/shared/common/_model/client.interface';
 import { Store, select } from '@ngrx/store';
 import { selectClientList } from '@app/core/store/selectors/client.selector';
 import { GetClients } from '@app/core/store/actions/client.action';
+import { IHttpResponse } from '@app/shared/common/_model/http-response.interface';
 
 @Component({
   templateUrl: './clients.component.html',
@@ -22,6 +22,6 @@ export class ClientsComponent implements OnInit {
   }
 
   getClients(event: any) {
-    this.store.dispatch(new GetClients({ limit: event.pageSize, offset: event.pageIndex, clientName: event.email }));
+    this.store.dispatch(new GetClients({ limit: event.pageSize, offset: event.pageIndex, clientName: event.clientName }));
   }
 }
