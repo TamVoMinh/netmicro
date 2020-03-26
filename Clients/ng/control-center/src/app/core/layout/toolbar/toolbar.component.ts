@@ -1,8 +1,7 @@
 import { Component, OnInit, EventEmitter, Output, Input, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { NbThemeService } from '@nebular/theme';
 import { map, takeUntil } from 'rxjs/operators';
-import { UserService } from '@app/shared/common/_service/user/user.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -12,7 +11,6 @@ import { UserService } from '@app/shared/common/_service/user/user.service';
 export class ToolbarComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
   @Input() isAuthorized: boolean;
-  @Input() user$: Observable<any>;
   @Output() toggle = new EventEmitter<any>();
   @Output() logout = new EventEmitter<any>();
   @Output() login = new EventEmitter<any>();
@@ -38,7 +36,6 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
   constructor(
     private themeService: NbThemeService,
-    private userService: UserService
     ) { }
 
   ngOnInit() {
@@ -48,12 +45,6 @@ export class ToolbarComponent implements OnInit, OnDestroy {
       takeUntil(this.destroy$)
     )
     .subscribe(themeName => this.currentTheme = themeName);
-
-    this.user$ = this.userService.userData$;
-    this.userService.getUserData().pipe(
-      takeUntil(this.destroy$)
-    )
-    .subscribe();
   }
 
   toggleSideNav() {

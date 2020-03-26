@@ -17,6 +17,18 @@ import {
   AuthModule,
   OidcConfigService,
 } from 'angular-auth-oidc-client';
+import { StoreModule } from '@ngrx/store';
+import { appReducers } from './store/reducers/app.reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { UserEffect } from './store/effects/user.effect';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { ClientEffect } from './store/effects/client.effect';
+
+export const effects = [
+  UserEffect,
+  ClientEffect
+]
 
 @NgModule({
   declarations: [
@@ -33,6 +45,10 @@ import {
     NbThemeModule,
     NbSidebarModule,
     NbMenuModule,
+    StoreModule.forRoot(appReducers),
+    EffectsModule.forRoot(effects),
+    StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
+    environment.production ? [] : StoreDevtoolsModule.instrument()
   ],
   providers: [
     OidcConfigService,

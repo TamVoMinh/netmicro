@@ -29,6 +29,7 @@
               "src/silent-renew.html"
             ],
             "styles": [
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/sass/main.scss",
               "node_modules/bootstrap/dist/css/bootstrap.css",
               "node_modules/@nebular/theme/styles/prebuilt/default.css"
@@ -112,7 +113,7 @@
               "src/assets"
             ],
             "styles": [
-
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss"
             ],
             "scripts": []
