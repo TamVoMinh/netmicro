@@ -1,9 +1,12 @@
-import { IUser } from '@shared/common/_model';
+import { IUser, IHttpResponse } from '@shared/common/_model';
 
 export interface IUserState {
-  users: IUser[];
+  users: IHttpResponse<IUser[]>;
 }
 
 export const initialUserState: IUserState = {
-  users: []
+  users: {
+    total: 0,
+    data: []
+  }
 }

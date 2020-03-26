@@ -23,11 +23,11 @@ import { EffectsModule } from '@ngrx/effects';
 import { UserEffect } from './store/effects/user.effect';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { LoadingEffect } from './store/effects/loading.effects';
+import { ClientEffect } from './store/effects/client.effect';
 
 export const effects = [
   UserEffect,
-  // LoadingEffect
+  ClientEffect
 ]
 
 @NgModule({

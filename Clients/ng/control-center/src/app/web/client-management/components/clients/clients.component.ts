@@ -1,18 +1,19 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
-import { IUser, IHttpResponse } from '@app/shared/common/_model';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { IClient } from '@app/shared/common/_model/client.interface';
+import { IHttpResponse } from '@app/shared/common';
 import { NbSortDirection, NbSortRequest, NbTreeGridDataSource, NbTreeGridDataSourceBuilder } from '@nebular/theme';
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss']
+  selector: 'app-clients',
+  templateUrl: './clients.component.html',
+  styleUrls: ['./clients.component.scss']
 })
-export class UsersComponent implements OnChanges {
-  @Input() users: IHttpResponse<IUser[]>;
-  @Output() getUsers = new EventEmitter();
-  defaultColumns = ['Username', 'Email', 'CreatedDate'];
+export class ClientsComponent implements OnChanges {
+  @Input() clients: IHttpResponse<IClient[]>;
+  @Output() getClients = new EventEmitter();
+  defaultColumns = ['ClientId', 'ClientName', 'AllowedGrantTypes', 'RequiredPKCE', 'CreatedDate'];
   allColumns = [...this.defaultColumns];
-  dataSource: NbTreeGridDataSource<IUser>;
+  dataSource: NbTreeGridDataSource<IClient>;
   sortColumn: string;
   sortDirection: NbSortDirection = NbSortDirection.NONE;
   searchString = '';
@@ -23,16 +24,15 @@ export class UsersComponent implements OnChanges {
 
   maxSize = 5;
   totalItems = 0;
-
   constructor(
-    private dataSourceBuilder: NbTreeGridDataSourceBuilder<IUser>
+    private dataSourceBuilder: NbTreeGridDataSourceBuilder<IClient>
   ) { }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (typeof changes['users'] !== undefined) {
-      var change = changes['users'];
+  ngOnChanges(changes: SimpleChanges) {
+    if (typeof changes['clients'] !== undefined) {
+      var change = changes['clients'];
       if (!change.firstChange) {
-        this.loadData(changes['users'].currentValue);
+        this.loadData(changes['clients'].currentValue);
       }
     }
   }
@@ -42,8 +42,10 @@ export class UsersComponent implements OnChanges {
     const data: TreeNode<any>[] = dataSource.data.map((item) => {
       return {
         data: {
-          Username: item.userName,
-          Email: item.email,
+          ClientId: item.clientId,
+          ClientName: item.clientName,
+          AllowedGrantTypes: item.allowedGrantTypes.toString(),
+          RequiredPKCE: item.requirePkce,
           CreatedDate: item.createdDate
         },
         children: null,
@@ -52,6 +54,7 @@ export class UsersComponent implements OnChanges {
     })
     this.dataSource = this.dataSourceBuilder.create(data);
   }
+
 
   updateSort(sortRequest: NbSortRequest): void {
     this.sortColumn = sortRequest.column;
@@ -67,18 +70,19 @@ export class UsersComponent implements OnChanges {
 
   onSearch(searchString) {
     this.searchString = searchString;
-    this.getUserList();
+    this.getClientList();
   }
 
   pageChanged(event: any) {
     this.pagingOptions.pageIndex = event.page;
     this.pagingOptions.pageSize = event.itemsPerPage;
-    this.getUserList();
+    this.getClientList();
   }
 
-  getUserList() {
-    this.getUsers.emit({ ...this.pagingOptions, email: this.searchString })
+  getClientList() {
+    this.getClients.emit({ ...this.pagingOptions, clientName: this.searchString })
   }
+
 }
 
 interface TreeNode<T> {

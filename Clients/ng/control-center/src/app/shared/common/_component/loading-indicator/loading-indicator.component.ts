@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LoadingService } from '../../_service/loading/loading.service';
 import { Store, select } from '@ngrx/store';
-import { selectLoading } from '@app/core/store/selectors/loading.selector';
 
 @Component({
   selector: 'app-loading-indicator',

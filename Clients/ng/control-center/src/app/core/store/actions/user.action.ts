@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { IUser } from '@shared/common/_model';
+import { IUser, IHttpResponse } from '@shared/common/_model';
 
 export enum EUserActions {
   GetUsers = '[User] Get Users',
@@ -8,11 +8,12 @@ export enum EUserActions {
 
 export class GetUsers implements Action {
   public readonly type = EUserActions.GetUsers;
+  constructor(public payload: any) {}
 }
 
 export class GetUsersSuccess implements Action {
   public readonly type = EUserActions.GetUsersSuccess;
-  constructor(public payload: IUser[]) { }
+  constructor(public payload: IHttpResponse<IUser[]>) { }
 }
 
 export type UserActions = GetUsers | GetUsersSuccess;

@@ -8,6 +8,7 @@ import { NbSidebarModule, NbMenuModule, NbThemeModule, NbLayoutModule } from '@n
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './web/login/login.component';
 import { SharedModule } from './shared/shared.module';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { SharedModule } from './shared/shared.module';
     NbLayoutModule,
     SharedModule,
     CoreModule,
+    PaginationModule.forRoot(),
   ],
   bootstrap: [AppComponent]
 })

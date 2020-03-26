@@ -1,13 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/shared/common/_service/auth/auth.service';
-import { Observable } from 'rxjs';
 import { Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { LoadingService } from '@shared/common/_service/loading/loading.service';
 import { Store, select } from '@ngrx/store';
 import { IAppState } from '../store/states/app.state';
-import { selectLoading } from '../store/selectors/loading.selector';
-import { ShowLoading, HideLoading } from '../store/actions/loading.action';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +16,6 @@ export class AppComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private loadingService: LoadingService,
     private router: Router,
-    private store: Store<IAppState>
     ) {
   }
 

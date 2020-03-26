@@ -1,1 +1,1 @@
-<app-users [users]="users$ | async"></app-users>
+<app-users [users]="users$ | async" (getUsers)="getUsers($event)"></app-users>

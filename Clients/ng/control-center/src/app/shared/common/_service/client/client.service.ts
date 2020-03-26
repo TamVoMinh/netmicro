@@ -1,14 +1,14 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BaseService } from '@shared/common/_service/base/base.service';
-import { Observable } from 'rxjs';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
-import { IUser, IHttpResponse } from '../../_model';
+import { BaseService } from '..';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService extends BaseService {
+export class ClientService extends BaseService {
+
   constructor(
     public oidcSecurityService: OidcSecurityService,
     public http: HttpClient,
@@ -17,7 +17,7 @@ export class UserService extends BaseService {
     super(http, oidcSecurityService);
   }
 
-  getUsersList(params): Observable<IHttpResponse<IUser[]>> {
-    return this.http.get<IHttpResponse<IUser[]>>(this.apiUrl + `/Users`, { params: params });
+  getClientList(params): Observable<any> {
+    return this.http.get<any>(this.apiUrl + '/clients', { params: params });
   }
 }
