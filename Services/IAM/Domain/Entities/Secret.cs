@@ -1,5 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 
 namespace Nmro.IAM.Domain.Entities
@@ -27,22 +25,5 @@ namespace Nmro.IAM.Domain.Entities
 
         public int? ApiResourceId { get; set; }
 
-        //public Client Client { get; set; }
-
-        //public ApiResource ApiResource { get; set; }
-
-    }
-
-    public static class SecretExtention
-    {
-        public static ModelBuilder AddSecret(this ModelBuilder builder)
-        {
-            EntityTypeBuilder<Secret> entityTable = builder.Entity<Secret>();
-
-            entityTable.HasKey(en => en.Id);
-            entityTable.Property(en => en.Id).ValueGeneratedOnAdd();
-
-            return builder;
-        }
     }
 }

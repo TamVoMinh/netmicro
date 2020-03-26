@@ -15,7 +15,7 @@ namespace Nmro.IAM.Controllers
 {
     [ApiController]
     [Route("clients")]
-    public class ClientsController : ControllerBase
+    public class ClientsController : NmroControllerBase
     {
         private readonly ILogger<ClientsController> _logger;
         private readonly IMapper _mapper;

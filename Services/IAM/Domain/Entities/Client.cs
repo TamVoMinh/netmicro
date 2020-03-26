@@ -1,6 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
 using System.Collections.Generic;
 
 namespace Nmro.IAM.Domain.Entities
@@ -79,31 +76,5 @@ namespace Nmro.IAM.Domain.Entities
         public bool RequirePkce { get; set; }
 
         public bool IsDeleted { get; set; }
-    }
-
-    public static class ClientIdentityExtention
-    {
-        public static ModelBuilder AddClient(this ModelBuilder builder)
-        {
-            EntityTypeBuilder<Client> entityTable = builder.Entity<Client>();
-
-            entityTable.HasKey(en => en.Id);
-
-            entityTable.Property(en => en.Id).ValueGeneratedOnAdd();
-            entityTable.Property(e => e.AllowedScopes)
-                         .HasConversion(v => string.Join(',', v), v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
-            entityTable.Property(e => e.AllowedGrantTypes)
-                         .HasConversion(v => string.Join(',', v), v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
-            entityTable.Property(e => e.RedirectUris)
-                         .HasConversion(v => string.Join(',', v), v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
-            entityTable.Property(e => e.PostLogoutRedirectUris)
-                         .HasConversion(v => string.Join(',', v), v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
-            entityTable.Property(e => e.AllowedCorsOrigins)
-                         .HasConversion(v => string.Join(',', v), v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
-
-            entityTable.HasIndex(en => en.ClientId).IsUnique();
-
-            return builder;
-        }
     }
 }

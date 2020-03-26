@@ -2,112 +2,61 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Nmro.IAM.Models;
-using Nmro.IAM.Repository;
-using Nmro.IAM.Repository.Entities;
+using Nmro.IAM.Application;
+using Nmro.IAM.Application.Resources;
+using Nmro.IAM.Application.Resources.Commands;
+using Nmro.IAM.Application.Resources.Queries;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace Nmro.IAM.Controllers
 {
     [Route("resources")]
     [ApiController]
-    public class ResourcesController : ControllerBase
+    public class ResourcesController : NmroControllerBase
     {
         private readonly ILogger<ResourcesController> _logger;
-        private readonly IMapper _mapper;
-        private readonly IAMDbcontext _context;
 
-        public ResourcesController(ILogger<ResourcesController> logger, IAMDbcontext context, IMapper mapper)
+        public ResourcesController(ILogger<ResourcesController> logger)
         {
             _logger = logger;
-            _context = context;
-            _mapper = mapper;
         }
 
         [HttpGet("apis")]
         [SwaggerOperation("Query a bunch of api-resources by name")]
-        public async Task<ResponseResult<List<ApiResourceModel>>> FilterApiResources([FromQuery] string resourceName = "", int limit = 50, int offset = 0)
+        public async Task<ResponseListResult<ApiResourceModel>> FilterApiResources([FromQuery] string name = "", int limit = 50, int offset = 0)
         {
-            var query = string.IsNullOrEmpty(resourceName) ? _context.ApiResources : _context.ApiResources.Where(x => x.Name.Contains(resourceName) && !x.IsDeleted);
+            return await Mediator.Send(new ListApiResourcesQuery{ Name = name, Limit = limit, Offset = offset });
 
-            int count = await query.CountAsync();
-
-            query.Skip(offset).Take(limit);
-
-            var apiResources = await query.ToListAsync();
-
-            var responseApiResources = _mapper.Map<List<ApiResourceModel>>(apiResources);
-
-            return new ResponseResult<List<ApiResourceModel>> { Total = count, Data = responseApiResources }; ;
         }
 
         [HttpGet("apis/{id}")]
         [SwaggerOperation("Read a api-resources by name")]
-        public async Task<ActionResult<ApiResourceModel>> GetApiResourceById(int id)
+        public async Task<ApiResourceModel> GetApiResourceById(int id)
         {
-            var resource = await _context.ApiResources
-                .Where(e => e.Id == id && !e.IsDeleted)
-                .Include(e => e.ApiSecrets)
-                .Include(e => e.Scopes)
-                .FirstOrDefaultAsync();
-
-            var result = _mapper.Map<ApiResourceModel>(resource);
-
-            return result;
+            return await Mediator.Send(new GetApiResourcesQuery{ ResourceId = id});
         }
 
         [HttpPost("apis")]
         [SwaggerOperation("Create new api-resource")]
-        public async Task<ActionResult<ApiResourceModel>> CreateApiResource([FromBody] ApiResourceModel apiResourceModel)
+        public async Task<long> CreateApiResource([FromBody] CreateResourceModel createResourceModel)
         {
-            ApiResource creatingApiResource = _mapper.Map<ApiResource>(apiResourceModel);
-
-            creatingApiResource.CreatedDate = DateTime.UtcNow;
-
-            await _context.ApiResources.AddAsync(creatingApiResource);
-            await _context.SaveChangesAsync();
-
-            return _mapper.Map<ApiResourceModel>(creatingApiResource);
+           return await Mediator.Send(new CreateResourceCommand { Model = createResourceModel });
         }
 
         [HttpPut("apis/{id}")]
         [SwaggerOperation("Update a api-resource")]
-        public async Task<ActionResult<ApiResourceModel>> UpdateApiResource([FromBody] ApiResourceModel apiResourceModel)
+        public async Task<long> UpdateApiResource([FromBody] UpdateResourceModel updateResourceModel)
         {
-            var resource = await _context.ApiResources.FirstOrDefaultAsync(x => x.Id == apiResourceModel.Id && !x.IsDeleted);
-            if (resource == null)
-            {
-                return NotFound("Api Resource not exist.");
-            }
-
-            ApiResource updatingApiResource = _mapper.Map<ApiResource>(apiResourceModel);
-            updatingApiResource.UpdatedDate = DateTime.UtcNow;
-
-            _context.ApiResources.Update(updatingApiResource);
-            await _context.SaveChangesAsync();
-
-            return _mapper.Map<ApiResourceModel>(updatingApiResource);
+            return await Mediator.Send(new UpdateResourceCommand{ Model = updateResourceModel });
         }
 
         [HttpDelete("apis/{id}")]
         [SwaggerOperation("Delete a api-resource")]
-        public async Task<ActionResult<int>> DeleteApiResource(int id)
+        public async Task<int> DeleteApiResource(int id)
         {
-            var apiResource = await _context.ApiResources.FirstOrDefaultAsync(x => x.Id == id && !x.IsDeleted);
-
-            apiResource.IsDeleted = true;
-
-            ApiResource deleteApiResource = _mapper.Map<ApiResource>(apiResource);
-            deleteApiResource.UpdatedDate = DateTime.UtcNow;
-
-            _context.ApiResources.Update(deleteApiResource);
-            await _context.SaveChangesAsync();
-
-            return apiResource.Id;
+           return await Mediator.Send(new DeleteResourceCommand{Id = id});
         }
 
         #region Resource Identity

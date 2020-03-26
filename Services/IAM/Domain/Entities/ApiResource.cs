@@ -1,6 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
 using System.Collections.Generic;
 
 namespace Nmro.IAM.Domain.Entities
@@ -17,20 +14,5 @@ namespace Nmro.IAM.Domain.Entities
         //     An API must have at least one scope. Each scope can have different settings.
         public ICollection<Scope> Scopes { get; set; }
         public bool IsDeleted { get; set; }
-    }
-
-    public static class ApiResourceExtention
-    {
-        public static ModelBuilder AddApiResource(this ModelBuilder builder)
-        {
-            EntityTypeBuilder<ApiResource> entityTable = builder.Entity<ApiResource>();
-
-            entityTable.HasKey(en => en.Id);
-            entityTable.Property(en => en.Id).ValueGeneratedOnAdd();
-            entityTable.Property(e => e.UserClaims)
-                         .HasConversion(v => string.Join(',', v), v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
-
-            return builder;
-        }
     }
 }

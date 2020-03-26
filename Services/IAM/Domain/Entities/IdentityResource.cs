@@ -1,7 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-
 namespace Nmro.IAM.Domain.Entities
 {
     public class IdentityResource : Resource
@@ -23,20 +19,5 @@ namespace Nmro.IAM.Domain.Entities
         //     true.
         public bool ShowInDiscoveryDocument { get; set; }
         public bool IsDeleted { get; set; }
-    }
-
-    public static class IdentityResourceExtention
-    {
-        public static ModelBuilder AddIdentityResource(this ModelBuilder builder)
-        {
-            EntityTypeBuilder<IdentityResource> entityTable = builder.Entity<IdentityResource>();
-
-            entityTable.HasKey(en => en.Id);
-            entityTable.Property(en => en.Id).ValueGeneratedOnAdd();
-            entityTable.Property(e => e.UserClaims)
-                         .HasConversion(v => string.Join(',', v), v => v.Split(',', StringSplitOptions.RemoveEmptyEntries));
-
-            return builder;
-        }
     }
 }
