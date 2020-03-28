@@ -7,15 +7,14 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Serilog;
-using AutoMapper;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using HealthChecks.UI.Client;
-using System.Reflection;
 using Nmro.Web.ServiceDiscovery;
 using Nmro.IAM.Persistence;
 using Nmro.Blocks.Interfaces;
 using Nmro.IAM.API.Services;
 using Nmro.IAM.Application;
+using Nmro.Blocks.Services;
 
 namespace Nmro.IAM.API
 {
@@ -34,28 +33,27 @@ namespace Nmro.IAM.API
         public void ConfigureServices(IServiceCollection services)
         {
             Log.Information("==================== CONFIGURE APPLICATION SERVICES ====================");
-            services.AddLogging(logging => {
-                logging.ClearProviders();
-                logging.AddSerilog(dispose: true);
-            });
-
-            services.AddScoped<ICurrentUserService, CurrentUserService>();
-
-            services
-                .AddHttpContextAccessor()
-                .AddApplication()
+             services
+                .AddLogging(logging => {
+                    logging.ClearProviders();
+                    logging.AddSerilog(dispose: true);
+                })
                 .AddPersistance(Configuration)
-                .AddControllers()
-                .AddJsonOptions(options=>
-                {
-                    options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+                .AddApplication()
+                .AddSwaggerGen(c => {
+                    c.EnableAnnotations(true);
+                    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Nmro.IAM", Version = "v1" });
                 });
 
-            services.AddSwaggerGen(c =>
-            {
-                c.EnableAnnotations(true);
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Nmro.IAM", Version = "v1" });
-            });
+            services.AddTransient<IDateTime, MachineDateTime>();
+            services.AddScoped<ICurrentUserService, CurrentUserService>()
+                    .AddHttpContextAccessor();
+
+            services
+                .AddControllers()
+                .AddJsonOptions(options=> {
+                    options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+                });
 
             services.AddHealthChecks();
 
@@ -75,6 +73,7 @@ namespace Nmro.IAM.API
                     });
                 });
             }
+            Log.Information("====================END CONFIGURE APPLICATION SERVICES ====================");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -9,11 +9,9 @@ namespace Nmro.IAM.Application.UseCases.Resources.Commands
     public class DeleteApiResourceCommandHandler : IRequestHandler<DeleteApiResourceCommand, int>
     {
         private readonly IIAMDbcontext _context;
-        private readonly IMapper _mapper;
-        public DeleteApiResourceCommandHandler(IIAMDbcontext context, IMapper mapper)
+        public DeleteApiResourceCommandHandler(IIAMDbcontext context)
         {
             _context = context;
-            _mapper = mapper;
         }
         public async Task<int> Handle(DeleteApiResourceCommand request, CancellationToken cancellationToken)
         {

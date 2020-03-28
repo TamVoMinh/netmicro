@@ -13,9 +13,9 @@ namespace Nmro.IAM.Application.UseCases.Systems
 
         private readonly IIAMDbcontext _context;
 
-        private readonly ILogger _logger;
+        private readonly ILogger<DataSeeder> _logger;
 
-        public DataSeeder(IIAMDbcontext context, IPasswordProcessor passwordProcessor, ILogger logger)
+        public DataSeeder(IIAMDbcontext context, IPasswordProcessor passwordProcessor, ILogger<DataSeeder> logger)
         {
             _context = context;
             _passwordProcessor = passwordProcessor;

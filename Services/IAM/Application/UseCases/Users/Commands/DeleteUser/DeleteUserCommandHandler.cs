@@ -1,7 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using AutoMapper;
 using Nmro.IAM.Application.Interfaces;
 using Nmro.IAM.Domain.Entities;
 namespace Nmro.IAM.Application.Users.Commands
@@ -9,13 +8,9 @@ namespace Nmro.IAM.Application.Users.Commands
     public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, int>
     {
         private readonly IIAMDbcontext _context;
-        private readonly IMapper _mapper;
-        private readonly IPasswordProcessor _passwordProcessor;
-        public DeleteUserCommandHandler(IIAMDbcontext context, IMapper mapper, IPasswordProcessor passwordValidator)
+        public DeleteUserCommandHandler(IIAMDbcontext context)
         {
             _context = context;
-            _mapper = mapper;
-            _passwordProcessor = passwordValidator;
         }
         public async Task<int> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
         {

@@ -9,12 +9,10 @@ namespace Nmro.IAM.Application.Users.Commands
     public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, int>
     {
         private readonly IIAMDbcontext _context;
-        private readonly IMapper _mapper;
         private readonly IPasswordProcessor _passwordProcessor;
-        public UpdateUserCommandHandler(IIAMDbcontext context, IMapper mapper, IPasswordProcessor passwordValidator)
+        public UpdateUserCommandHandler(IIAMDbcontext context, IPasswordProcessor passwordValidator)
         {
             _context = context;
-            _mapper = mapper;
             _passwordProcessor = passwordValidator;
         }
         public async Task<int> Handle(UpdateUserCommand request, CancellationToken cancellationToken)

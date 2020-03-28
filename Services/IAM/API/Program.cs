@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore;
@@ -12,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Nmro.IAM.Application.UseCases.Systems;
 using Nmro.IAM.Persistence;
 using Serilog;
+using System.Threading;
 
 namespace Nmro.IAM.API
 {

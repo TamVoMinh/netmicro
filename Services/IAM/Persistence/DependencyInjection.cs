@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Nmro.IAM.Application;
 using Nmro.IAM.Application.Interfaces;
 
 namespace Nmro.IAM.Persistence
@@ -15,7 +14,6 @@ namespace Nmro.IAM.Persistence
             });
 
             services.AddScoped<IIAMDbcontext>(provider => provider.GetService<IAMDbcontext>());
-            services.AddScoped<IPasswordProcessor, PasswordProcessor>();
 
             return services;
         }

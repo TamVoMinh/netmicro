@@ -9,11 +9,9 @@ namespace Nmro.IAM.Application.UseCases.Resources.Commands
     public class UpdateIdentityResourceCommandHandler : IRequestHandler<UpdateIdentityResourceCommand, int>
     {
         private readonly IIAMDbcontext _context;
-        private readonly IMapper _mapper;
-        public UpdateIdentityResourceCommandHandler(IIAMDbcontext context, IMapper mapper)
+        public UpdateIdentityResourceCommandHandler(IIAMDbcontext context)
         {
             _context = context;
-            _mapper = mapper;
         }
         public async Task<int> Handle(UpdateIdentityResourceCommand request, CancellationToken cancellationToken)
         {
