@@ -1,80 +1,61 @@
+﻿using System;
 using System.Collections.Generic;
-
 namespace Nmro.IAM.Domain.Entities
 {
-    public class Client : EntityBase<int>
+    public class Client
     {
-        //
-        // Summary:
-        //     When requesting both an id token and access token, should the user claims always
-        //     be added to the id token instead of requring the client to use the userinfo endpoint.
-        //     Defaults to false.
-        public bool AlwaysIncludeUserClaimsInIdToken { get; set; }
-        //
-        // Summary:
-        //     Specifies the api scopes that the client is allowed to request. If empty, the
-        //     client can't access any scope
-        public ICollection<string> AllowedScopes { get; set; }
-        //
-        // Summary:
-        //     Unique ID of the client
+        public int Id { get; set; }
+        public bool Enabled { get; set; } = true;
         public string ClientId { get; set; }
-        //
-        // Summary:
-        //     Client secrets - only relevant for flows that require a secret
-        public ICollection<Secret> ClientSecrets { get; set; }
-        //
-        // Summary:
-        //     Client display name (used for logging and consent screen)
+        public string ProtocolType { get; set; } = "oidc";
+        public List<ClientSecret> ClientSecrets { get; set; }
+        public bool RequireClientSecret { get; set; } = true;
         public string ClientName { get; set; }
-        //
-
-        //
-        // Summary:
-        //     Specifies whether a consent screen is required (defaults to true)
-        public bool RequireConsent { get; set; }
-        //
-        // Summary:
-        //     Specifies the allowed grant types (legal combinations of AuthorizationCode, Implicit,
-        //     Hybrid, ResourceOwner, ClientCredentials).
-        public ICollection<string> AllowedGrantTypes { get; set; }
-        //
-        // Summary:
-        //     Controls whether access tokens are transmitted via the browser for this client
-        //     (defaults to false). This can prevent accidental leakage of access tokens when
-        //     multiple response types are allowed.
+        public string Description { get; set; }
+        public string ClientUri { get; set; }
+        public string LogoUri { get; set; }
+        public bool RequireConsent { get; set; } = false;
+        public bool AllowRememberConsent { get; set; } = true;
+        public bool AlwaysIncludeUserClaimsInIdToken { get; set; }
+        public List<ClientGrantType> AllowedGrantTypes { get; set; }
+        public bool RequirePkce { get; set; } = true;
+        public bool AllowPlainTextPkce { get; set; }
+        public bool RequireRequestObject { get; set; }
         public bool AllowAccessTokensViaBrowser { get; set; }
-        //
-        // Summary:
-        //     Specifies allowed URIs to return tokens or authorization codes to
-        public ICollection<string> RedirectUris { get; set; }
-        //
-        // Summary:
-        //     Specifies allowed URIs to redirect to after logout
-        public ICollection<string> PostLogoutRedirectUris { get; set; }
-        //
-        // Summary:
-        //     Gets or sets the allowed CORS origins for JavaScript clients.
-        public ICollection<string> AllowedCorsOrigins { get; set; }
-        //
-        // Summary:
-        //     Lifetime of access token in seconds (defaults to 3600 seconds / 1 hour)
-        public int AccessTokenLifetime { get; set; }
-        //
-        // Summary:
-        //     Lifetime of identity token in seconds (defaults to 300 seconds / 5 minutes)
-        public int IdentityTokenLifetime { get; set; }
-        //
-        // Summary:
-        //     If set to false, no client secret is needed to request tokens at the token endpoint
-        //     (defaults to true)
-        public bool RequireClientSecret { get; set; }
-        //
-        // Summary:
-        //     Specifies whether a proof key is required for authorization code based token
-        //     requests (defaults to false).
-        public bool RequirePkce { get; set; }
-
-        public bool IsDeleted { get; set; }
+        public List<ClientRedirectUri> RedirectUris { get; set; }
+        public List<ClientPostLogoutRedirectUri> PostLogoutRedirectUris { get; set; }
+        public string FrontChannelLogoutUri { get; set; }
+        public bool FrontChannelLogoutSessionRequired { get; set; } = true;
+        public string BackChannelLogoutUri { get; set; }
+        public bool BackChannelLogoutSessionRequired { get; set; } = true;
+        public bool AllowOfflineAccess { get; set; }
+        public List<ClientScope> AllowedScopes { get; set; }
+        public int IdentityTokenLifetime { get; set; } = 300;
+        public string AllowedIdentityTokenSigningAlgorithms { get; set; }
+        public int AccessTokenLifetime { get; set; } = 3600;
+        public int AuthorizationCodeLifetime { get; set; } = 300;
+        public int? ConsentLifetime { get; set; } = null;
+        public int AbsoluteRefreshTokenLifetime { get; set; } = 2592000;
+        public int SlidingRefreshTokenLifetime { get; set; } = 1296000;
+        public int RefreshTokenUsage { get; set; } = (int)TokenUsage.OneTimeOnly;
+        public bool UpdateAccessTokenClaimsOnRefresh { get; set; }
+        public int RefreshTokenExpiration { get; set; } = (int)TokenExpiration.Absolute;
+        public int AccessTokenType { get; set; } = (int)0; // AccessTokenType.Jwt;
+        public bool EnableLocalLogin { get; set; } = true;
+        public List<ClientIdPRestriction> IdentityProviderRestrictions { get; set; }
+        public bool IncludeJwtId { get; set; }
+        public List<ClientClaim> Claims { get; set; }
+        public bool AlwaysSendClientClaims { get; set; }
+        public string ClientClaimsPrefix { get; set; } = "client_";
+        public string PairWiseSubjectSalt { get; set; }
+        public List<ClientCorsOrigin> AllowedCorsOrigins { get; set; }
+        public List<ClientProperty> Properties { get; set; }
+        public DateTime Created { get; set; } = DateTime.UtcNow;
+        public DateTime? Updated { get; set; }
+        public DateTime? LastAccessed { get; set; }
+        public int? UserSsoLifetime { get; set; }
+        public string UserCodeType { get; set; }
+        public int DeviceCodeLifetime { get; set; } = 300;
+        public bool NonEditable { get; set; }
     }
 }

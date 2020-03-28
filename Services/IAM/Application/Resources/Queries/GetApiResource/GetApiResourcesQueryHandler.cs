@@ -1,33 +1,29 @@
 using System.Threading;
 using System.Threading.Tasks;
+using System.Linq;
 using MediatR;
-using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Nmro.IAM.Application.Interfaces;
-using System.Linq;
-
 namespace Nmro.IAM.Application.Resources.Queries
 {
-    public class GetApiResourcesQueryHandler : IRequestHandler<GetApiResourcesQuery, ApiResourceModel>
+    public class GetApiResourcesQueryHandler : IRequestHandler<GetApiResourcesQuery, Models.ApiResource>
     {
         private readonly IIAMDbcontext _context;
-        private readonly IMapper _mapper;
-        public GetApiResourcesQueryHandler(IIAMDbcontext context, IMapper mapper)
+        public GetApiResourcesQueryHandler(IIAMDbcontext context)
         {
             _context = context;
-            _mapper = mapper;
         }
-
-        public async Task<ApiResourceModel> Handle(GetApiResourcesQuery request, CancellationToken cancellationToken)
+        public async Task<Models.ApiResource> Handle(GetApiResourcesQuery request, CancellationToken cancellationToken)
         {
-
               var apiResource = await _context.ApiResources
-                .Where(e => e.Id == request.ResourceId && !e.IsDeleted)
-                .Include(e => e.ApiSecrets)
+                .Where(e => e.Id == request.ResourceId)
+                .Include(e => e.Secrets)
                 .Include(e => e.Scopes)
+                .Include(x => x.UserClaims)
+                .Include(x => x.Properties)
+                .AsNoTracking()
                 .FirstOrDefaultAsync();
-
-            return apiResource == null ? null : _mapper.Map<ApiResourceModel>(apiResource);
+            return apiResource == null ? null : apiResource.ToModel();
         }
     }
 }

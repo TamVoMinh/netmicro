@@ -1,18 +1,23 @@
+﻿using System;
 using System.Collections.Generic;
-
 namespace Nmro.IAM.Domain.Entities
 {
-    public class ApiResource : Resource
+    public class ApiResource
     {
-        //
-        // Summary:
-        //     The API secret is used for the introspection endpoint. The API can authenticate
-        //     with introspection using the API name and secret.
-        public ICollection<Secret> ApiSecrets { get; set; }
-        //
-        // Summary:
-        //     An API must have at least one scope. Each scope can have different settings.
-        public ICollection<Scope> Scopes { get; set; }
-        public bool IsDeleted { get; set; }
+        public int Id { get; set; }
+        public bool Enabled { get; set; } = true;
+        public string Name { get; set; }
+        public string DisplayName { get; set; }
+        public string Description { get; set; }
+        public string AllowedAccessTokenSigningAlgorithms { get; set; }
+        public bool ShowInDiscoveryDocument { get; set; } = true;
+        public List<ApiResourceSecret> Secrets { get; set; }
+        public List<ApiResourceScope> Scopes { get; set; }
+        public List<ApiResourceClaim> UserClaims { get; set; }
+        public List<ApiResourceProperty> Properties { get; set; }
+        public DateTime Created { get; set; } = DateTime.UtcNow;
+        public DateTime? Updated { get; set; }
+        public DateTime? LastAccessed { get; set; }
+        public bool NonEditable { get; set; }
     }
 }

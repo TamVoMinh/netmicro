@@ -1,4 +1,6 @@
 using MediatR;
+using Nmro.IAM.Application.Users.Models;
+
 namespace Nmro.IAM.Application.Users.Queries
 {
     public class ListUsersQuery:IRequest<ResponseListResult<IdentityUserModel>> {

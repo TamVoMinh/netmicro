@@ -3,12 +3,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Annotations;
-
-using Nmro.IAM.Models;
 using Nmro.IAM.Application;
 using Nmro.IAM.Application.Users.Queries;
 using Nmro.IAM.Application.Users.Commands;
-
+using Nmro.IAM.Application.Users.Models;
 
 namespace Nmro.IAM.Controllers
 {
@@ -39,30 +37,21 @@ namespace Nmro.IAM.Controllers
 
         [HttpPost]
         [SwaggerOperation("Create new user")]
-        public async Task<(long, DateTime)> Create([FromBody] UserCreatingModel user)
+        public async Task<int> Create([FromBody] CreatingUserModel user)
         {
-            return await Mediator.Send(new UpsertUserCommand{
-                UserName = user.UserName,
-                Password = user.Password,
-                Email = user.Email
-            });
+            return await Mediator.Send(new CreateUserCommand{Model = user});
         }
 
         [HttpPut]
         [SwaggerOperation("Update a user")]
-        public async Task<(long, DateTime)> Update([FromBody] UserUpdatingModel user)
+        public async Task<int> Update([FromBody] UpdatingUserModel user)
         {
-            return await Mediator.Send(new UpsertUserCommand{
-                Id = user.Id,
-                UpdatedDate = user.UpdatedDate,
-                Password = user.Password,
-                Email = user.Email
-            });
+            return await Mediator.Send(new UpdateUserCommand{Model = user});
         }
 
         [HttpDelete("{id}")]
         [SwaggerOperation("Delete a user")]
-        public async Task<(long, DateTime)> Delete(long id)
+        public async Task<int> Delete(int id)
         {
             return await Mediator.Send(new DeleteUserCommand{ Id = id });
         }

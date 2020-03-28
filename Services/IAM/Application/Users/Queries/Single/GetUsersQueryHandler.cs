@@ -4,6 +4,7 @@ using MediatR;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Nmro.IAM.Application.Interfaces;
+using Nmro.IAM.Application.Users.Models;
 
 namespace Nmro.IAM.Application.Users.Queries
 {

@@ -2,9 +2,8 @@ namespace Nmro.Blocks.Interfaces
 {
     public interface ICurrentUserService
     {
-        long UserId { get; }
+        int UserId { get; }
         string UuId { get; }
-
         bool IsAuthenticated { get; }
     }
 }

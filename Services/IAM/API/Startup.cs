@@ -7,12 +7,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Serilog;
-using System.Reflection;
 using AutoMapper;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using HealthChecks.UI.Client;
 using Nmro.Web.ServiceDiscovery;
-using Nmro.IAM.Services;
 
 namespace Nmro.IAM
 {
@@ -37,18 +35,16 @@ namespace Nmro.IAM
                 logging.AddSerilog(dispose: true);
             });
 
-            services.AddIAMDbcontext(
-                Configuration.GetConnectionString("DefaultConnection"),
-                typeof(Startup).GetTypeInfo().Assembly.GetName().Name
-            );
+            // services.AddIAMDbcontext(
+            //     Configuration.GetConnectionString("DefaultConnection"),
+            //     typeof(Startup).GetTypeInfo().Assembly.GetName().Name
+            // );
 
             services.AddControllers()
                     .AddJsonOptions(options=>
                     {
                         options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
                     });
-
-            services.AddScoped<IPasswordValidator, PasswordValidator>();
 
             services.AddSwaggerGen(c =>
             {
