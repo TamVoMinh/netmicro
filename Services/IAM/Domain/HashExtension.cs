@@ -2,18 +2,13 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Nmro.IAM.Extensions
+namespace Nmro.IAM.Domain
 {
     /// <summary>
     /// Extension methods for hashing strings
     /// </summary>
     public static class HashExtensions
     {
-        /// <summary>
-        /// Creates a SHA256 hash of the specified input.
-        /// </summary>
-        /// <param name="input">The input.</param>
-        /// <returns>A hash</returns>
         public static string Sha256(this string input)
         {
             if (string.IsNullOrWhiteSpace(input)) return string.Empty;
@@ -27,11 +22,6 @@ namespace Nmro.IAM.Extensions
             }
         }
 
-        /// <summary>
-        /// Creates a SHA256 hash of the specified input.
-        /// </summary>
-        /// <param name="input">The input.</param>
-        /// <returns>A hash.</returns>
         public static byte[] Sha256(this byte[] input)
         {
             if (input == null)
@@ -45,11 +35,6 @@ namespace Nmro.IAM.Extensions
             }
         }
 
-        /// <summary>
-        /// Creates a SHA512 hash of the specified input.
-        /// </summary>
-        /// <param name="input">The input.</param>
-        /// <returns>A hash</returns>
         public static string Sha512(this string input)
         {
             if (string.IsNullOrWhiteSpace(input)) return string.Empty;

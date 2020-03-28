@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using Nmro.Blocks.Interfaces;
 using Nmro.IAM.Application.Interfaces;
 using Nmro.IAM.Domain.Entities;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 namespace Nmro.IAM.Persistence
@@ -16,7 +15,16 @@ namespace Nmro.IAM.Persistence
         public DbSet<ApiResource> ApiResources { get; set; }
         public DbSet<ApiScope> ApiScopes { get; set; }
         public DbSet<IdentityUser> IdentityUsers { get; set; }
-        public IAMDbcontext(DbContextOptions options) : base(options) { }
+        public IAMDbcontext(DbContextOptions<IAMDbcontext> options) : base(options) { }
+         public IAMDbcontext(
+            DbContextOptions<IAMDbcontext> options,
+            ICurrentUserService currentUserService,
+            IDateTime dateTime)
+            : base(options)
+        {
+            _currentUserService = currentUserService;
+            _dateTime = dateTime;
+        }
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             //@TODO public auditing event from here

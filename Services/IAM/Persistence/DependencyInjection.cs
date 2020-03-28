@@ -1,15 +1,24 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Nmro.IAM.Persistence;
+using Nmro.IAM.Application;
+using Nmro.IAM.Application.Interfaces;
 
-public static class IAMDbContextExtension
+namespace Nmro.IAM.Persistence
+{
+    public static class DependencyInjection
     {
-        public static IServiceCollection AddIAMDbcontext(this IServiceCollection services, string connectionString, string migrationsAssembly)
+        public static IServiceCollection AddPersistance(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<IAMDbcontext>(options => {
-                options.UseNpgsql(connectionString, optionsBuilder => optionsBuilder.MigrationsAssembly(migrationsAssembly));
+                options.UseNpgsql(configuration.GetConnectionString(Constants.ConnectionStringName));
             });
+
+            services.AddScoped<IIAMDbcontext>(provider => provider.GetService<IAMDbcontext>());
+            services.AddScoped<IPasswordProcessor, PasswordProcessor>();
 
             return services;
         }
     }
+}
+

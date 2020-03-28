@@ -1,18 +1,24 @@
 using System;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
+using MediatR;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
+using Nmro.IAM.Application.UseCases.Systems;
+using Nmro.IAM.Persistence;
 using Serilog;
 
-namespace Nmro.IAM
+namespace Nmro.IAM.API
 {
     public class Program
     {
         public static readonly string AppName = "iam-api";
-        public static int Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
             var configuration = GetConfiguration(env);
@@ -24,14 +30,24 @@ namespace Nmro.IAM
                 Log.Information("Configuring web host");
                 var host = CreateWebHostBuilder(args).Build();
 
+                 using (var scope = host.Services.CreateScope())
+                 {
+                    var services = scope.ServiceProvider;
+
+                    var dbcontext = services.GetRequiredService<IAMDbcontext>();
+
+                    dbcontext.Database.Migrate();
+
+                    var mediator = services.GetRequiredService<IMediator>();
+                    await mediator.Send(new SeedDataCommand(), CancellationToken.None);
+                 }
+
                 Log.Information("Starting web host");
                 host.Run();
-                return 0;
             }
             catch (Exception ex)
             {
                 Log.Fatal(ex, "Host terminated unexpectedly");
-                return 1;
             }
             finally
             {

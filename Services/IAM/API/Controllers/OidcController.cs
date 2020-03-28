@@ -3,12 +3,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Annotations;
-using Nmro.IAM.Application.Resources.Models;
-using Nmro.IAM.Application.Resources.Queries;
+using Nmro.IAM.Application.UseCases.Resources.Models;
+using Nmro.IAM.Application.UseCases.Resources.Queries;
 using Nmro.IAM.Application.Users.Queries;
 using Nmro.IAM.Application.Users.Models;
-using Nmro.IAM.Application.Clients.Queries;
-using Nmro.IAM.Application.Clients.Models;
+using Nmro.IAM.Application.UseCases.Clients.Queries;
+using Nmro.IAM.Application.UseCases.Clients.Models;
 
 namespace Nmro.IAM.Controllers
 {

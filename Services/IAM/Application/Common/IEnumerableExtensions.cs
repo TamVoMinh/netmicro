@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 namespace Nmro.IAM.Application
 {
     public static class IEnumerableExtensions
     {
-        [DebuggerStepThrough]
         public static bool IsNullOrEmpty<T>(this IEnumerable<T> list)
         {
             if (list == null)

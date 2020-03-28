@@ -1,13 +1,11 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Microsoft.EntityFrameworkCore;
-using System;
 using Swashbuckle.AspNetCore.Annotations;
-using Nmro.IAM.Application.Clients.Queries;
-using Nmro.IAM.Application.Clients.Models;
+using Nmro.IAM.Application.UseCases.Clients.Queries;
+using Nmro.IAM.Application.UseCases.Clients.Models;
 using Nmro.IAM.Application;
-using Nmro.IAM.Application.Clients.Commands;
+using Nmro.IAM.Application.UseCases.Clients.Commands;
 
 namespace Nmro.IAM.Controllers
 {
@@ -24,7 +22,7 @@ namespace Nmro.IAM.Controllers
 
         [HttpGet]
         [SwaggerOperation("Query a bunch of clients by name")]
-        public async Task<ResponseListResult<Client>> Filter([FromQuery] string clientName = "", int limit = 50, int offset = 0)
+        public async Task<ListResult<Client>> Filter([FromQuery] string clientName = "", int limit = 50, int offset = 0)
         {
             return await Mediator.Send(new FilterClientsByNameQuery{ Name = clientName, Limit = limit, Offset = offset});
         }

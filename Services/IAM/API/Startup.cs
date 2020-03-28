@@ -10,9 +10,14 @@ using Serilog;
 using AutoMapper;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using HealthChecks.UI.Client;
+using System.Reflection;
 using Nmro.Web.ServiceDiscovery;
+using Nmro.IAM.Persistence;
+using Nmro.Blocks.Interfaces;
+using Nmro.IAM.API.Services;
+using Nmro.IAM.Application;
 
-namespace Nmro.IAM
+namespace Nmro.IAM.API
 {
     public class Startup
     {
@@ -28,23 +33,23 @@ namespace Nmro.IAM
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAutoMapper(typeof(Startup));
-
+            Log.Information("==================== CONFIGURE APPLICATION SERVICES ====================");
             services.AddLogging(logging => {
                 logging.ClearProviders();
                 logging.AddSerilog(dispose: true);
             });
 
-            // services.AddIAMDbcontext(
-            //     Configuration.GetConnectionString("DefaultConnection"),
-            //     typeof(Startup).GetTypeInfo().Assembly.GetName().Name
-            // );
+            services.AddScoped<ICurrentUserService, CurrentUserService>();
 
-            services.AddControllers()
-                    .AddJsonOptions(options=>
-                    {
-                        options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
-                    });
+            services
+                .AddHttpContextAccessor()
+                .AddApplication()
+                .AddPersistance(Configuration)
+                .AddControllers()
+                .AddJsonOptions(options=>
+                {
+                    options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+                });
 
             services.AddSwaggerGen(c =>
             {
@@ -75,6 +80,8 @@ namespace Nmro.IAM
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            Log.Information("==================== CONFIGURE HTTP PIPELINE ====================");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

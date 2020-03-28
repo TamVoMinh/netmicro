@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -23,7 +22,7 @@ namespace Nmro.IAM.Controllers
 
         [HttpGet]
         [SwaggerOperation("Query a bunch of users by name")]
-        public async Task<ResponseListResult<IdentityUserModel>> Filter([FromQuery] string email = "", int limit = 50, int offset = 0)
+        public async Task<ListResult<IdentityUserModel>> Filter([FromQuery] string email = "", int limit = 50, int offset = 0)
         {
             return await Mediator.Send(new ListUsersQuery{Email = email, Limit = limit, Offset = offset});
         }
