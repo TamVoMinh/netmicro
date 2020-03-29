@@ -59,9 +59,7 @@ namespace Nmro.IAM.API.Controllers
         [SwaggerOperation("Validate an user credential")]
         public async Task<IdentityUserModel> ValidateCredential([FromBody] CredentialModel credential)
         {
-            var user  = await Mediator.Send(new ValidateCredentialQuery{ Credential = credential });
-            _logger.LogInformation("VALIDATE RESULT @{user}", user);
-            return user;
+            return await Mediator.Send(new ValidateCredentialQuery{ Credential = credential });
         }
 
 

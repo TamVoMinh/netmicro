@@ -16,8 +16,7 @@ namespace Nmro.IAM.Application.UseCases.Systems
                     DisplayName = "Your user identifier",
                     Required = true,
                     UserClaims = new List<IdentityResourceClaim> {
-                        new IdentityResourceClaim { Type = JwtClaimTypes.Subject},
-                        new IdentityResourceClaim { Type = JwtClaimTypes.PreferredUserName}
+                        new IdentityResourceClaim { Type = JwtClaimTypes.Subject}
                     },
                     Enabled = true
                 },

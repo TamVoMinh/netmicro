@@ -32,7 +32,6 @@ namespace Nmro.IAM.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            Log.Information("==================== CONFIGURE APPLICATION SERVICES ====================");
              services
                 .AddLogging(logging => {
                     logging.ClearProviders();
@@ -73,13 +72,11 @@ namespace Nmro.IAM.API
                     });
                 });
             }
-            Log.Information("====================END CONFIGURE APPLICATION SERVICES ====================");
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            Log.Information("==================== CONFIGURE HTTP PIPELINE ====================");
 
             if (env.IsDevelopment())
             {
