@@ -13,7 +13,7 @@ services:
     image: ${DOCKER_REGISTRY:-nmro}/services/iam-api
     build:
       context: .
-      dockerfile: Services/IAM/Dockerfile
+      dockerfile: Services/IAM/API/Dockerfile
     environment:
       - ConnectionStrings__IamDbConnection=${DB_POSTGRES:-Server=db-postgres;port=5432;Database=iam_db;UserId=nmro_dbadmin;Password=theForest&;Pooling=true}
     depends_on:

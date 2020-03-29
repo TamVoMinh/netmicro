@@ -5,7 +5,7 @@ EXPOSE 80
 
 FROM slnbased AS build
 
-WORKDIR /netmicro/Services/IAM
+WORKDIR /netmicro/Services/IAM/API
 RUN dotnet restore -nowarn:msb3202,nu1503
 RUN dotnet build --no-restore -c Release -o /artifact
 
@@ -15,4 +15,4 @@ RUN dotnet publish --no-restore -c Release -o /artifact
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /artifact .
-ENTRYPOINT ["dotnet", "Nmro.IAM.dll"]
+ENTRYPOINT ["dotnet", "Nmro.IAM.API.dll"]
