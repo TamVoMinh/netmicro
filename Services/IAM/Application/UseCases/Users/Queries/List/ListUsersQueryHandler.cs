@@ -1,8 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using MediatR;
-using AutoMapper;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Nmro.IAM.Application.Interfaces;
@@ -13,11 +11,9 @@ namespace Nmro.IAM.Application.Users.Queries
     public class ListUsersQueryHandler : IRequestHandler<ListUsersQuery, ListResult<IdentityUserModel>>
     {
         private readonly IIAMDbcontext _context;
-        private readonly IMapper _mapper;
-        public ListUsersQueryHandler(IIAMDbcontext context, IMapper mapper)
+        public ListUsersQueryHandler(IIAMDbcontext context)
         {
             _context = context;
-            _mapper = mapper;
         }
 
         public async Task<ListResult<IdentityUserModel>> Handle(ListUsersQuery request, CancellationToken cancellationToken)
@@ -32,9 +28,7 @@ namespace Nmro.IAM.Application.Users.Queries
 
             var users = await query.ToListAsync();
 
-            var responseUsers = _mapper.Map<List<IdentityUserModel>>(users);
-
-            return  new ListResult<IdentityUserModel> { Total = count , Data = responseUsers };
+            return  new ListResult<IdentityUserModel> { Total = count , Data =  users.Select(x=> x.ToModel())};
 
         }
     }

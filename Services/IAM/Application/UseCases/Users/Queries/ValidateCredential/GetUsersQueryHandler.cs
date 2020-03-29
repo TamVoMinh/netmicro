@@ -11,13 +11,11 @@ namespace Nmro.IAM.Application.Users.Queries
     public class ValidateCredentialQueryHandler : IRequestHandler<ValidateCredentialQuery, IdentityUserModel>
     {
         private readonly IIAMDbcontext _context;
-        private readonly IMapper _mapper;
         private readonly IPasswordProcessor _passwordProcessor;
 
-        public ValidateCredentialQueryHandler(IIAMDbcontext context, IMapper mapper, IPasswordProcessor passwordValidator)
+        public ValidateCredentialQueryHandler(IIAMDbcontext context, IPasswordProcessor passwordValidator)
         {
             _context = context;
-            _mapper = mapper;
             _passwordProcessor = passwordValidator;
         }
 
@@ -31,7 +29,7 @@ namespace Nmro.IAM.Application.Users.Queries
             var result = _passwordProcessor.VerifyHashedPassword(user.Password, request.Credential.Password, user.Salt);
 
             return (result == PasswordVerificationResult.Success)
-                ? _mapper.Map<IdentityUserModel>(user)
+                ? user.ToModel()
                 : null;
         }
     }

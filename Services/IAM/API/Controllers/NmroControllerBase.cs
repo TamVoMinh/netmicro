@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Nmro.IAM.Controllers
+namespace Nmro.IAM.API.Controllers
 {
     [ApiController]
     public abstract class NmroControllerBase : ControllerBase

@@ -7,7 +7,7 @@ using Nmro.IAM.Application.Users.Queries;
 using Nmro.IAM.Application.Users.Commands;
 using Nmro.IAM.Application.Users.Models;
 
-namespace Nmro.IAM.Controllers
+namespace Nmro.IAM.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]

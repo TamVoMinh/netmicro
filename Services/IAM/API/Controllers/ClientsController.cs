@@ -7,7 +7,7 @@ using Nmro.IAM.Application.UseCases.Clients.Models;
 using Nmro.IAM.Application;
 using Nmro.IAM.Application.UseCases.Clients.Commands;
 
-namespace Nmro.IAM.Controllers
+namespace Nmro.IAM.API.Controllers
 {
     [ApiController]
     [Route("clients")]

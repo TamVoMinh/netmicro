@@ -18,6 +18,7 @@ namespace Nmro.IAM.Application.UseCases.Systems
                         new ClientSecret { Value = "nmro-website-Secret".Sha256(), Type = OidcConstants.SecretTypes.SharedSecret }
                     },
                     AllowedGrantTypes = new List<ClientGrantType> { new ClientGrantType{ GrantType = GrantType.Hybrid} },
+                    RequirePkce = false,
                     AllowAccessTokensViaBrowser = false,
                     RequireConsent = false,
                     AlwaysIncludeUserClaimsInIdToken = true,
@@ -52,6 +53,7 @@ namespace Nmro.IAM.Application.UseCases.Systems
                         new ClientSecret { Value = "nmro-website-Secret-localhost".Sha256(), Type = OidcConstants.SecretTypes.SharedSecret }
                     },
                     AllowedGrantTypes = new List<ClientGrantType> { new ClientGrantType{ GrantType = GrantType.Hybrid} },
+                    RequirePkce = false,
                     AllowAccessTokensViaBrowser = false,
                     RequireConsent = false,
                     AlwaysIncludeUserClaimsInIdToken = true,
@@ -81,6 +83,7 @@ namespace Nmro.IAM.Application.UseCases.Systems
                     ClientId = "nmro-reactjs-client",
                     ClientName = "Nmro ReactJS client",
                     AllowedGrantTypes = new List<ClientGrantType> { new ClientGrantType{ GrantType = GrantType.Implicit} },
+                    RequirePkce = false,
                     AllowAccessTokensViaBrowser = true,
                     RequireConsent = false,
                     AlwaysIncludeUserClaimsInIdToken = true,

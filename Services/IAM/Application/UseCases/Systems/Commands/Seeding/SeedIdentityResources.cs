@@ -58,7 +58,7 @@ namespace Nmro.IAM.Application.UseCases.Systems
                 new Nmro.IAM.Domain.Entities.IdentityResource {
                     Name = "role",
                     UserClaims = new List<IdentityResourceClaim> {
-                        new IdentityResourceClaim { Type = "nmro-role"},
+                        new IdentityResourceClaim { Type = "role"},
                     },
                     Enabled = true
                 }

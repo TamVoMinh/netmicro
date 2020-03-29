@@ -14,13 +14,12 @@ namespace Nmro.IAM.Application.UseCases.Systems
                     Name = "member",
                     DisplayName = "member API",
                     Description = "member API Access",
-                    UserClaims = new List<ApiResourceClaim> { new ApiResourceClaim{ Type = "nmro-role"} },
+                    UserClaims = new List<ApiResourceClaim> { new ApiResourceClaim{ Type = "role"} },
                     Enabled = true,
                     Secrets = new List<ApiResourceSecret> { new ApiResourceSecret { Value = "scopeSecret".Sha256() } },
                     Scopes = new List<ApiResourceScope> {
                         new ApiResourceScope { Scope ="member" },
                         new ApiResourceScope { Scope ="member.read" },
-                        new ApiResourceScope { Scope ="member.write" },
                         new ApiResourceScope { Scope ="member.write" }
                     }
                 }

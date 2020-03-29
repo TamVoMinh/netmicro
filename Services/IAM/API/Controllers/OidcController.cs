@@ -1,16 +1,16 @@
+using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Annotations;
-using Nmro.IAM.Application.UseCases.Resources.Models;
 using Nmro.IAM.Application.UseCases.Resources.Queries;
 using Nmro.IAM.Application.Users.Queries;
 using Nmro.IAM.Application.Users.Models;
 using Nmro.IAM.Application.UseCases.Clients.Queries;
-using Nmro.IAM.Application.UseCases.Clients.Models;
+using Nmro.IAM.API.Vms;
 
-namespace Nmro.IAM.Controllers
+namespace Nmro.IAM.API.Controllers
 {
     [Route("oidc")]
     [ApiController]
@@ -25,43 +25,49 @@ namespace Nmro.IAM.Controllers
 
         [HttpGet("resources")]
         [SwaggerOperation("Read all resources")]
-        public async Task<AllResources> GetAll()
+        public async Task<Resources> GetAll()
         {
-            return await Mediator.Send(new ListAllResourcesQuery());
+            var all = await Mediator.Send(new ListAllResourcesQuery());
+            return new Resources(all);
         }
 
         [HttpGet("resources/apis/{name}")]
         [SwaggerOperation("Read a api-resource by name")]
         public async Task<ApiResource> GetApiResourceByName([FromRoute] string name)
         {
-           return await Mediator.Send(new GetApiResourceByNameQuery{ Name = name});
+           var apiResource =  await Mediator.Send(new GetApiResourceByNameQuery{ Name = name});
+           return apiResource.ToViewModel();
         }
 
         [HttpGet("resources/apis")]
         [SwaggerOperation("Query a set of api-resources by scopes")]
         public async Task<IEnumerable<ApiResource>> GetApiResourceByScopeName([FromQuery] List<string> scopes)
         {
-            return await Mediator.Send(new ListApiResourcesByScopesQuery{Scopes = scopes});
+            var apiResources = await Mediator.Send(new ListApiResourcesByScopesQuery{Scopes = scopes});
+            return apiResources.Select(x => x.ToViewModel());
         }
 
         [HttpGet("resources/identities")]
         [SwaggerOperation("Query a set of identity-resources by scopes")]
         public async Task<IEnumerable<IdentityResource>> GetIdentityResourceByScopeName([FromQuery] List<string> scopes)
         {
-            return await Mediator.Send(new ListIdentityResourcesByScopesQuery{Scopes = scopes});
+            var identityReources = await Mediator.Send(new ListIdentityResourcesByScopesQuery{Scopes = scopes});
+            return identityReources.Select(x =>x.ToViewModel());
         }
 
         [HttpPost("users/validate")]
         [SwaggerOperation("Validate an user credential")]
         public async Task<IdentityUserModel> ValidateCredential([FromBody] CredentialModel credential)
         {
-            return await Mediator.Send(new ValidateCredentialQuery{ Credential = credential });
+            var user  = await Mediator.Send(new ValidateCredentialQuery{ Credential = credential });
+            _logger.LogInformation("VALIDATE RESULT @{user}", user);
+            return user;
         }
 
 
         [HttpGet("clients/{clientId}")]
         [SwaggerOperation("Read a client")]
-        public async Task<Client> GetByClientId(string clientId)
+        public async Task<Application.UseCases.Clients.Models.Client> GetByClientId(string clientId)
         {
             return await Mediator.Send(new GetClientByClientIdQuery{ ClientId = clientId});
         }

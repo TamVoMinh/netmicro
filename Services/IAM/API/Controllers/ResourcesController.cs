@@ -7,7 +7,7 @@ using Nmro.IAM.Application;
 using Nmro.IAM.Application.UseCases.Resources.Commands;
 using Nmro.IAM.Application.UseCases.Resources.Queries;
 using Nmro.IAM.Application.UseCases.Resources.Models;
-namespace Nmro.IAM.Controllers
+namespace Nmro.IAM.API.Controllers
 {
     [Route("resources")]
     [ApiController]

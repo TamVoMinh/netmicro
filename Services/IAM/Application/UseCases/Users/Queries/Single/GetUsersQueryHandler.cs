@@ -11,18 +11,16 @@ namespace Nmro.IAM.Application.Users.Queries
     public class GetUserQueryHandler : IRequestHandler<GetUsersQuery, IdentityUserModel>
     {
         private readonly IIAMDbcontext _context;
-        private readonly IMapper _mapper;
-        public GetUserQueryHandler(IIAMDbcontext context, IMapper mapper)
+        public GetUserQueryHandler(IIAMDbcontext context)
         {
             _context = context;
-            _mapper = mapper;
         }
 
         public async Task<IdentityUserModel> Handle(GetUsersQuery request, CancellationToken cancellationToken)
         {
             var user = await _context.IdentityUsers.FirstOrDefaultAsync(x => x.Id == request.UserId && !x.IsDeleted);
 
-            return user == null? null:   _mapper.Map<IdentityUserModel>(user);
+            return user == null ? null: user.ToModel();
         }
     }
 }
