@@ -38,6 +38,13 @@ namespace Nmro.ApiGateway
                 });
             });
 
+            services.AddAuthentication()
+                .AddJwtBearer("AuthN", options=>{
+                    options.Authority="oidc.nmro.local";
+                    options.Audience="member";
+                    options.RequireHttpsMetadata = false;
+                });
+
             services.AddOcelot();
             services.AddHealthChecks();
 

@@ -27,22 +27,51 @@ namespace Nmro.IAM.API
         }
 
         public IConfiguration Configuration { get; }
-        public IWebHostEnvironment environment {get;}
+        public IWebHostEnvironment environment { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-             services
-                .AddLogging(logging => {
-                    logging.ClearProviders();
-                    logging.AddSerilog(dispose: true);
-                })
-                .AddPersistance(Configuration)
-                .AddApplication()
-                .AddSwaggerGen(c => {
-                    c.EnableAnnotations(true);
-                    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Nmro.IAM", Version = "v1" });
-                });
+            services
+               .AddLogging(logging =>
+               {
+                   logging.ClearProviders();
+                   logging.AddSerilog(dispose: true);
+               })
+               .AddPersistance(Configuration)
+               .AddApplication()
+               .AddSwaggerGen(c =>
+               {
+                   c.EnableAnnotations(true);
+                   c.SwaggerDoc("v1", new OpenApiInfo { Title = "Nmro.IAM", Version = "v1" });
+                   c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                   {
+                       Name = "Authorization",
+                       In = ParameterLocation.Header,
+                       Type = SecuritySchemeType.ApiKey,
+                       Scheme = "Bearer"
+                   });
+                   c.AddSecurityRequirement(
+                         new OpenApiSecurityRequirement()
+                   {
+                        {
+                            new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference
+                                {
+                                    Type = ReferenceType.SecurityScheme,
+                                    Id = "Bearer"
+                                },
+                                Scheme = "oauth2",
+                                Name = "Bearer",
+                                In = ParameterLocation.Header,
+
+                            },
+                            new List<string>()
+                        }
+                   }
+                     );
+               });
 
             services.AddTransient<IDateTime, MachineDateTime>();
             services.AddScoped<ICurrentUserService, CurrentUserService>()
@@ -50,7 +79,8 @@ namespace Nmro.IAM.API
 
             services
                 .AddControllers()
-                .AddJsonOptions(options=> {
+                .AddJsonOptions(options =>
+                {
                     options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
                 });
 
@@ -58,7 +88,8 @@ namespace Nmro.IAM.API
 
             services.RegisterConsulServices(Program.AppName, Configuration);
 
-            if(environment.IsDevelopment()){
+            if (environment.IsDevelopment())
+            {
                 services.AddCors(options =>
                 {
                     options.AddPolicy("development_cors",
@@ -86,11 +117,12 @@ namespace Nmro.IAM.API
 
             app.UsePathBase("/iam");
 
-            app.UseSwagger(c => {
+            app.UseSwagger(c =>
+            {
                 c.RouteTemplate = "oas/{documentName}/swagger.json";
                 c.PreSerializeFilters.Add((swaggerDoc, httpReq) =>
                 {
-                    swaggerDoc.Servers = new List<OpenApiServer> { new OpenApiServer { Url = "/iam", Description="Identity Accesss Managerment" } };
+                    swaggerDoc.Servers = new List<OpenApiServer> { new OpenApiServer { Url = "/iam", Description = "Identity Accesss Managerment" } };
                 });
             });
 
