@@ -8,9 +8,7 @@ namespace Nmro.Oidc
 {
     public class ErrorViewModel
     {
-        public ErrorViewModel()
-        {
-        }
+        public ErrorViewModel(){}
 
         public ErrorViewModel(string error)
         {
