@@ -1,7 +1,6 @@
 ﻿using System;
-using Nmro.Blocks.Interfaces;
 
-namespace Nmro.Blocks.Services
+namespace Nmro.Common.Services
 {
     public class MachineDateTime : IDateTime
     {

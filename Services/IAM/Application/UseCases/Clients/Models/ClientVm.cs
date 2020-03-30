@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using Nmro.Common.Models;
 
 namespace Nmro.IAM.Application.UseCases.Clients.Models
 {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Nmro.IAM.Application
+namespace Nmro.Common.Models
 {
     public class PageResult<T> where T: class
     {

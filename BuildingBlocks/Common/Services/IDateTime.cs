@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Nmro.Blocks.Interfaces
+namespace Nmro.Common.Services
 {
     public interface IDateTime
     {
