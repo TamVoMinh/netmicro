@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using Nmro.Blocks.Interfaces;
-using Nmro.Blocks.Services;
-using Nmro.IAM.API.Services;
+using Nmro.Common.Services;
 
 namespace Nmro.IAM.API
 {

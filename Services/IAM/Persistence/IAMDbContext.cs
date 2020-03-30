@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Nmro.Blocks.Interfaces;
+using Nmro.Common.Services;
 using Nmro.IAM.Application.Interfaces;
 using Nmro.IAM.Domain.Entities;
 using System.Threading;

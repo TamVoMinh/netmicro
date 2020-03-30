@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\BuildingBlocks\Web\Web.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\Common\Nmro.Common.csproj" />
     <ProjectReference Include="..\Application\Nmro.IAM.Application.csproj" />
     <ProjectReference Include="..\Domain\Nmro.IAM.Domain.csproj" />
   </ItemGroup>

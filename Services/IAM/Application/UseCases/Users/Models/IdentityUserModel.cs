@@ -1,8 +1,8 @@
-using System;
+using Nmro.Common.Models;
 
 namespace Nmro.IAM.Application.UseCases.Users.Models
- {
- public class IdentityUser : Application.Models.AuditableModel
+{
+    public class IdentityUser : AuditableModel
     {
         public int Id { get; set; }
         public string UserName {get;set;}

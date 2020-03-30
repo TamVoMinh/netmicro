@@ -1,6 +1,6 @@
 using System;
 
-namespace Nmro.IAM.Application.Models
+namespace Nmro.Common.Models
 {
     public class AuditableModel
     {

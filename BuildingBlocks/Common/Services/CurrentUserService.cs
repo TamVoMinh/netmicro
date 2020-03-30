@@ -1,8 +1,7 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
-using Nmro.Blocks.Interfaces;
 
-namespace Nmro.IAM.API.Services
+namespace Nmro.Common.Services
 {
     public class CurrentUserService : ICurrentUserService
     {
@@ -20,7 +19,6 @@ namespace Nmro.IAM.API.Services
         public string UuId {get;}
 
         public bool IsAuthenticated { get; }
-
 
     }
 }
