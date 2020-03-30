@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-12">
+    <nb-card>
+      <nb-card-body>
+        <label class="search-label" for="search">Search:</label>
+        <input nbInput #searchInput (keyup.enter)="onSearch(searchInput.value)" id="search" class="search-input">
+        <table [nbTreeGrid]="dataSource" [nbSort]="dataSource" (sort)="updateSort($event)" equalColumnsWidth>
+          <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
+          <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"></tr>
+          <ng-container *ngFor="let column of defaultColumns; let index = index" [nbTreeGridColumnDef]="column">
+            <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef [nbSortHeader]="getSortDirection(column)">
+              {{column}}
+            </th>
+            <td nbTreeGridCell *nbTreeGridCellDef="let row">
+              {{ column != 'CreatedDate' ? row.data[column] || '-' : row.data[column] | date: 'dd/MM/yyyy'}}</td>
+          </ng-container>
+        </table>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+<div class="row">
+  <div class="col-3 offset-3"></div>
+  <div class="col-3 offset-3">
+    <pagination [boundaryLinks]="true" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
+      lastText="&raquo;" [totalItems]="totalItems" [(ngModel)]="pagingOptions.pageIndex"
+      (pageChanged)="pageChanged($event)" [maxSize]="maxSize"></pagination>
+  </div>
+</div>

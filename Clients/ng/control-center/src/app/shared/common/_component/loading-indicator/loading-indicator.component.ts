@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { LoadingService } from '../../_service';
+import { LoadingService } from '../../_service/loading/loading.service';
+import { Store, select } from '@ngrx/store';
 
 @Component({
   selector: 'app-loading-indicator',
@@ -8,14 +9,11 @@ import { LoadingService } from '../../_service';
   styleUrls: ['./loading-indicator.component.scss']
 })
 export class LoadingIndicatorComponent implements OnInit {
+  isLoading$: Observable<any>;
 
   constructor(private loadingService: LoadingService) { }
 
   ngOnInit() {
+    this.isLoading$ = this.loadingService.isLoading$;
   }
-
-  get isLoading$(): Observable<boolean> {
-    return this.loadingService.isLoading$;
-  }
-
 }

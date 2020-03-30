@@ -1,4 +1,3 @@
-import { AppComponent } from './core/app/app.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutComponent } from './core/layout/layout.component';

@@ -8,7 +8,8 @@ export const environment = {
     stsServer: "http://oidc.nmro.local",
     client_id: 'nmro-angular-client-localhost',
     log_console_debug_active: true,
-  }
+  },
+  apiUrl: "http://api.nmro.local/iam"
 };
 
 /*
