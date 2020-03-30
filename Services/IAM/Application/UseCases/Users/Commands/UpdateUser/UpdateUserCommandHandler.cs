@@ -1,10 +1,10 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using AutoMapper;
 using Nmro.IAM.Application.Interfaces;
+using Nmro.IAM.Application.UseCases.Users.Models;
 using Nmro.IAM.Domain.Entities;
-namespace Nmro.IAM.Application.Users.Commands
+namespace Nmro.IAM.Application.UseCases.Users.Commands
 {
     public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, int>
     {
@@ -17,13 +17,13 @@ namespace Nmro.IAM.Application.Users.Commands
         }
         public async Task<int> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
         {
-            IdentityUser identityUser = await _context.IdentityUsers.FindAsync(request.Model.Id);
+            var identityUser = await _context.IdentityUsers.FindAsync(request.Model.Id);
 
             if(identityUser == null){
                 return int.MinValue;
             }
 
-            Models.UpdatingUserModel updating = request.Model;
+            UpdatingUserModel updating = request.Model;
 
             if(updating.Email.IsPresent()){
                 identityUser.Email = updating.Email;

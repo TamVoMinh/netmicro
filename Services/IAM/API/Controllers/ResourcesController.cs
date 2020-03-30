@@ -2,14 +2,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Annotations;
-
-using Nmro.IAM.Application;
 using Nmro.IAM.Application.UseCases.Resources.Commands;
 using Nmro.IAM.Application.UseCases.Resources.Queries;
 using Nmro.IAM.Application.UseCases.Resources.Models;
 namespace Nmro.IAM.API.Controllers
 {
     [Route("resources")]
+    [ApiExplorerSettings(GroupName="iams")]
     [ApiController]
     public class ResourcesController : NmroControllerBase
     {
@@ -20,7 +19,7 @@ namespace Nmro.IAM.API.Controllers
         }
         [HttpGet("apis")]
         [SwaggerOperation("Query a bunch of api-resources by name")]
-        public async Task<ListResult<ApiResource>> FilterApiResources([FromQuery] string name = "", int limit = 50, int offset = 0)
+        public async Task<PageApiResource> FilterApiResources([FromQuery] string name = "", int limit = 50, int offset = 0)
         {
             return await Mediator.Send(new FilterApiResourcesByNameQuery{ Name = name, Limit = limit, Offset = offset });
         }
@@ -51,7 +50,7 @@ namespace Nmro.IAM.API.Controllers
         #region Resource Identity
         [HttpGet("identities")]
         [SwaggerOperation("Query a bunch of identity-resources by name")]
-        public async Task<ListResult<IdentityResource>> FilterIdentityResources([FromQuery] string resourceName = "", int limit = 50, int offset = 0)
+        public async Task<PageIdentityResource> FilterIdentityResources([FromQuery] string resourceName = "", int limit = 50, int offset = 0)
         {
             return await Mediator.Send(new FilterIdentityResourcesByNameQuery{Name = resourceName, Limit = limit, Offset = offset});
         }

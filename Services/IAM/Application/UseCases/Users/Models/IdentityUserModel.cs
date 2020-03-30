@@ -1,6 +1,8 @@
-namespace Nmro.IAM.Application.Users.Models
+using System;
+
+namespace Nmro.IAM.Application.UseCases.Users.Models
  {
- public class IdentityUserModel : Application.Models.AuditableModel
+ public class IdentityUser : Application.Models.AuditableModel
     {
         public int Id { get; set; }
         public string UserName {get;set;}

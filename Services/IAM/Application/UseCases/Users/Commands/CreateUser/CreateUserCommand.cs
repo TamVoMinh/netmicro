@@ -1,7 +1,7 @@
 using MediatR;
-using Nmro.IAM.Application.Users.Models;
+using Nmro.IAM.Application.UseCases.Users.Models;
 
-namespace Nmro.IAM.Application.Users.Commands
+namespace Nmro.IAM.Application.UseCases.Users.Commands
 {
     public class CreateUserCommand: IRequest<int> {
        public CreatingUserModel Model {get; set;}

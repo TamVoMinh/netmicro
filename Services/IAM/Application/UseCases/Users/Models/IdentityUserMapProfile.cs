@@ -1,11 +1,11 @@
 using AutoMapper;
-namespace Nmro.IAM.Application.Users.Models
+namespace Nmro.IAM.Application.UseCases.Users.Models
 {
     public class IdentityUserMapProfile : Profile
     {
         public IdentityUserMapProfile()
         {
-            CreateMap<Domain.Entities.IdentityUser, IdentityUserModel>();
+            CreateMap<Domain.Entities.IdentityUser, IdentityUser>();
         }
     }
 }

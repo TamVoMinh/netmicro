@@ -8,8 +8,8 @@ namespace Nmro.IAM.Application.Models
 
         public DateTime Updated { get; set; }
 
-        public long CreatedBy { get; set; }
+        public int CreatedBy { get; set; }
 
-        public long UpdatedBy { get; set; }
+        public int UpdatedBy { get; set; }
     }
 }

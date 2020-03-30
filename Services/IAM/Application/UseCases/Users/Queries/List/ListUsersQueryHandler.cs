@@ -4,11 +4,11 @@ using MediatR;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Nmro.IAM.Application.Interfaces;
-using Nmro.IAM.Application.Users.Models;
+using Nmro.IAM.Application.UseCases.Users.Models;
 
-namespace Nmro.IAM.Application.Users.Queries
+namespace Nmro.IAM.Application.UseCases.Users.Queries
 {
-    public class ListUsersQueryHandler : IRequestHandler<ListUsersQuery, ListResult<IdentityUserModel>>
+    public class ListUsersQueryHandler : IRequestHandler<ListUsersQuery, PageIdentityUserModel>
     {
         private readonly IIAMDbcontext _context;
         public ListUsersQueryHandler(IIAMDbcontext context)
@@ -16,7 +16,7 @@ namespace Nmro.IAM.Application.Users.Queries
             _context = context;
         }
 
-        public async Task<ListResult<IdentityUserModel>> Handle(ListUsersQuery request, CancellationToken cancellationToken)
+        public async Task<PageIdentityUserModel> Handle(ListUsersQuery request, CancellationToken cancellationToken)
         {
             var query = string.IsNullOrEmpty(request.Email)
                 ? _context.IdentityUsers.Where(x => !x.IsDeleted)
@@ -28,7 +28,7 @@ namespace Nmro.IAM.Application.Users.Queries
 
             var users = await query.ToListAsync();
 
-            return  new ListResult<IdentityUserModel> { Total = count , Data =  users.Select(x=> x.ToModel())};
+            return  new PageIdentityUserModel (count, request.Limit, request.Offset, users.Select(x=> x.ToModel()));
 
         }
     }

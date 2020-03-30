@@ -14,8 +14,21 @@
             "ReRouteIsCaseSensitive": false
         },
         {
-            "UpstreamPathTemplate": "/oas/v1/swagger.json",
-            "DownstreamPathTemplate": "/iam/oas/v1/swagger.json",
+            "UpstreamPathTemplate": "/oas/iams/swagger.json",
+            "DownstreamPathTemplate": "/iam/oas/iams/swagger.json",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                "Host": "iam-api",
+                "Port": 80
+                }
+            ],
+            "UpstreamHttpMethod": [ "GET" ],
+            "ReRouteIsCaseSensitive": false
+        },
+        {
+            "UpstreamPathTemplate": "/oas/oidc/swagger.json",
+            "DownstreamPathTemplate": "/iam/oas/oidc/swagger.json",
             "DownstreamScheme": "http",
             "DownstreamHostAndPorts": [
                 {

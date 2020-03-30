@@ -2,14 +2,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Annotations;
-using Nmro.IAM.Application;
-using Nmro.IAM.Application.Users.Queries;
-using Nmro.IAM.Application.Users.Commands;
-using Nmro.IAM.Application.Users.Models;
+using Nmro.IAM.Application.UseCases.Users.Queries;
+using Nmro.IAM.Application.UseCases.Users.Commands;
+using Nmro.IAM.Application.UseCases.Users.Models;
 
 namespace Nmro.IAM.API.Controllers
 {
     [ApiController]
+    [ApiExplorerSettings(GroupName="iams")]
     [Route("[controller]")]
     public class UsersController : NmroControllerBase
     {
@@ -22,14 +22,14 @@ namespace Nmro.IAM.API.Controllers
 
         [HttpGet]
         [SwaggerOperation("Query a bunch of users by name")]
-        public async Task<ListResult<IdentityUserModel>> Filter([FromQuery] string email = "", int limit = 50, int offset = 0)
+        public async Task<PageIdentityUserModel> Filter([FromQuery] string email = "", int limit = 50, int offset = 0)
         {
             return await Mediator.Send(new ListUsersQuery{Email = email, Limit = limit, Offset = offset});
         }
 
         [HttpGet("{id}")]
         [SwaggerOperation("Read an user")]
-        public async Task<IdentityUserModel> GetById(long id)
+        public async Task<IdentityUser> GetById(long id)
         {
             return await Mediator.Send(new GetUsersQuery{UserId = id});
         }

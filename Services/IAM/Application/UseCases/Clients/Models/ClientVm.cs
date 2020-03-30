@@ -26,4 +26,9 @@ namespace Nmro.IAM.Application.UseCases.Clients.Models
     {
         public int Id {get;set;}
     }
+
+    public class PageClient: PageResult<Client>{
+        public PageClient(int total, int offset, int limit, IEnumerable<Client> items): base(total, offset, limit, items){}
+    }
+
 }

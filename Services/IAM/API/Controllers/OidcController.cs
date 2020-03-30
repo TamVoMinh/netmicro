@@ -5,14 +5,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Annotations;
 using Nmro.IAM.Application.UseCases.Resources.Queries;
-using Nmro.IAM.Application.Users.Queries;
-using Nmro.IAM.Application.Users.Models;
+using Nmro.IAM.Application.UseCases.Users.Queries;
 using Nmro.IAM.Application.UseCases.Clients.Queries;
 using Nmro.IAM.API.Vms;
 
 namespace Nmro.IAM.API.Controllers
 {
     [Route("oidc")]
+    [ApiExplorerSettings(GroupName="oidc")]
     [ApiController]
     public class OidcController : NmroControllerBase
     {
@@ -59,15 +59,17 @@ namespace Nmro.IAM.API.Controllers
         [SwaggerOperation("Validate an user credential")]
         public async Task<IdentityUserModel> ValidateCredential([FromBody] CredentialModel credential)
         {
-            return await Mediator.Send(new ValidateCredentialQuery{ Credential = credential });
+            var identityUser = await Mediator.Send(new ValidateCredentialQuery{ UserName = credential.UserName, Password = credential.Password });
+            return identityUser.ToViewModel();
         }
 
 
         [HttpGet("clients/{clientId}")]
         [SwaggerOperation("Read a client")]
-        public async Task<Application.UseCases.Clients.Models.Client> GetByClientId(string clientId)
+        public async Task<Client> GetByClientId(string clientId)
         {
-            return await Mediator.Send(new GetClientByClientIdQuery{ ClientId = clientId});
+            var client = await Mediator.Send(new GetClientByClientIdQuery{ ClientId = clientId});
+            return client.ToViewModel();
         }
     }
 }

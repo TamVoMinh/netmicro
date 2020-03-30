@@ -1,9 +1,9 @@
 using MediatR;
-using Nmro.IAM.Application.Users.Models;
+using Nmro.IAM.Application.UseCases.Users.Models;
 
-namespace Nmro.IAM.Application.Users.Queries
+namespace Nmro.IAM.Application.UseCases.Users.Queries
 {
-    public class GetUsersQuery: IRequest<IdentityUserModel> {
+    public class GetUsersQuery: IRequest<IdentityUser> {
         public long UserId { get; set;}
     }
 }
