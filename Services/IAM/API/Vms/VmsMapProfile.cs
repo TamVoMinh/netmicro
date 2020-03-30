@@ -12,6 +12,8 @@ namespace Nmro.IAM.API.Vms
             CreateMap<Application.UseCases.Resources.Models.IdentityResource, IdentityResource>();
             CreateMap<Application.UseCases.Resources.Models.ApiResource, ApiResource>()
                 .ForMember(x=>x.Scopes, opts => opts.MapFrom(x => x.Scopes.Select(s => new Scope{Name = s})));
+            CreateMap<Application.UseCases.Clients.Models.Client, Client>();
+            CreateMap<Application.UseCases.Users.Models.IdentityUser, IdentityUserModel>();
         }
     }
 }

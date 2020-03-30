@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Nmro.IAM.Application.Interfaces;
 using Nmro.IAM.Domain.Entities;
-namespace Nmro.IAM.Application.Users.Commands
+namespace Nmro.IAM.Application.UseCases.Users.Commands
 {
     public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, int>
     {

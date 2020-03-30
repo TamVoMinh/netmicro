@@ -1,6 +1,7 @@
 using System;
+using System.Collections.Generic;
 
-namespace Nmro.IAM.Application.Users.Models
+namespace Nmro.IAM.Application.UseCases.Users.Models
 {
     public class CredentialModel
     {
@@ -25,5 +26,9 @@ namespace Nmro.IAM.Application.Users.Models
     {
         public long Id { get; set;}
         public string Password {get; set;}
+    }
+
+    public class PageIdentityUserModel: PageResult<IdentityUser>{
+        public PageIdentityUserModel(int total, int offset, int limit, IEnumerable<IdentityUser> items): base(total, offset, limit, items){}
     }
 }

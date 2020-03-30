@@ -1,5 +1,5 @@
 using AutoMapper;
-namespace Nmro.IAM.Application.Users.Models
+namespace Nmro.IAM.Application.UseCases.Users.Models
 {
     public static class IdentityUserMapper
     {
@@ -10,9 +10,9 @@ namespace Nmro.IAM.Application.Users.Models
         }
         internal static IMapper Mapper { get; }
 
-        public static IdentityUserModel ToModel(this Domain.Entities.IdentityUser entity)
+        public static IdentityUser ToModel(this Domain.Entities.IdentityUser entity)
         {
-            return Mapper.Map<IdentityUserModel>(entity);
+            return Mapper.Map<IdentityUser>(entity);
         }
 
     }

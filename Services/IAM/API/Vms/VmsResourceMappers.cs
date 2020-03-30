@@ -19,5 +19,15 @@ namespace Nmro.IAM.API.Vms
         {
             return model == null ? null : Mapper.Map<ApiResource>(model);
         }
+
+        public static Client ToViewModel(this Application.UseCases.Clients.Models.Client model)
+        {
+            return model == null ? null : Mapper.Map<Client>(model);
+        }
+
+        public static IdentityUserModel ToViewModel(this Application.UseCases.Users.Models.IdentityUser model)
+        {
+            return model == null ? null : Mapper.Map<IdentityUserModel>(model);
+        }
     }
 }

@@ -5,10 +5,11 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Nmro.IAM.Application.UseCases.Clients.Mappers;
 using Nmro.IAM.Application.Interfaces;
+using Nmro.IAM.Application.UseCases.Clients.Models;
 
 namespace Nmro.IAM.Application.UseCases.Clients.Queries
 {
-    public class FilterClientsByNameQueryHandler: IRequestHandler<FilterClientsByNameQuery, ListResult<Models.Client>>
+    public class FilterClientsByNameQueryHandler: IRequestHandler<FilterClientsByNameQuery, PageClient>
     {
         IIAMDbcontext _context;
         public FilterClientsByNameQueryHandler(IIAMDbcontext context)
@@ -16,7 +17,7 @@ namespace Nmro.IAM.Application.UseCases.Clients.Queries
             _context = context;
         }
 
-        public async Task<ListResult<Models.Client>> Handle(FilterClientsByNameQuery request, CancellationToken cancellationToken)
+        public async Task<PageClient> Handle(FilterClientsByNameQuery request, CancellationToken cancellationToken)
         {
             IQueryable<Domain.Entities.Client> baseQuery = _context.Clients
                 .Where(x => x.ClientName.Contains(request.Name));
@@ -28,7 +29,9 @@ namespace Nmro.IAM.Application.UseCases.Clients.Queries
                 .Take(request.Limit)
                 .ToArrayAsync();
 
-            return new ListResult<Models.Client>{ Total = count, Data = clients.Select(x=>x.ToModel())};
+            int pageSize = clients.Count();
+
+            return new PageClient(count, request.Offset, request.Limit, clients.Select(x=>x.ToModel()));
         }
     }
 }

@@ -4,11 +4,11 @@ using MediatR;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Nmro.IAM.Application.Interfaces;
-using Nmro.IAM.Application.Users.Models;
+using Nmro.IAM.Application.UseCases.Users.Models;
 
-namespace Nmro.IAM.Application.Users.Queries
+namespace Nmro.IAM.Application.UseCases.Users.Queries
 {
-    public class ValidateCredentialQueryHandler : IRequestHandler<ValidateCredentialQuery, IdentityUserModel>
+    public class ValidateCredentialQueryHandler : IRequestHandler<ValidateCredentialQuery, IdentityUser>
     {
         private readonly IIAMDbcontext _context;
         private readonly IPasswordProcessor _passwordProcessor;
@@ -19,14 +19,14 @@ namespace Nmro.IAM.Application.Users.Queries
             _passwordProcessor = passwordValidator;
         }
 
-        public async Task<IdentityUserModel> Handle(ValidateCredentialQuery request, CancellationToken cancellationToken)
+        public async Task<IdentityUser> Handle(ValidateCredentialQuery request, CancellationToken cancellationToken)
         {
-            var user = await _context.IdentityUsers.FirstOrDefaultAsync(x => x.UserName == request.Credential.UserName);
+            var user = await _context.IdentityUsers.FirstOrDefaultAsync(x => x.UserName == request.UserName);
             if(user == null){
                 return null;
             }
 
-            var result = _passwordProcessor.VerifyHashedPassword(user.Password, request.Credential.Password, user.Salt);
+            var result = _passwordProcessor.VerifyHashedPassword(user.Password, request.Password, user.Salt);
 
             return (result == PasswordVerificationResult.Success)
                 ? user.ToModel()

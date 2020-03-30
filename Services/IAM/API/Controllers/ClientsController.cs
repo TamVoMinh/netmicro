@@ -10,6 +10,7 @@ using Nmro.IAM.Application.UseCases.Clients.Commands;
 namespace Nmro.IAM.API.Controllers
 {
     [ApiController]
+    [ApiExplorerSettings(GroupName="iams")]
     [Route("clients")]
     public class ClientsController : NmroControllerBase
     {
@@ -22,7 +23,7 @@ namespace Nmro.IAM.API.Controllers
 
         [HttpGet]
         [SwaggerOperation("Query a bunch of clients by name")]
-        public async Task<ListResult<Client>> Filter([FromQuery] string clientName = "", int limit = 50, int offset = 0)
+        public async Task<PageClient> Filter([FromQuery] string clientName = "", int limit = 50, int offset = 0)
         {
             return await Mediator.Send(new FilterClientsByNameQuery{ Name = clientName, Limit = limit, Offset = offset});
         }
@@ -50,7 +51,7 @@ namespace Nmro.IAM.API.Controllers
 
         [HttpDelete("{id}")]
         [SwaggerOperation("Delele a client")]
-        public async Task<ActionResult<int>> Delete(int id)
+        public async Task<int> Delete(int id)
         {
            return await Mediator.Send(new DeleteClientCommand{Id = id});
         }
