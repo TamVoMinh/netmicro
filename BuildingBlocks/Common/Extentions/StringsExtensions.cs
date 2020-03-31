@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-namespace Nmro.IAM.Application
+namespace Nmro.Common.Extentions
 {
-    internal static class StringExtensions
+    public static class StringExtensions
     {
         public static string ToSpaceSeparatedString(this IEnumerable<string> list)
         {
