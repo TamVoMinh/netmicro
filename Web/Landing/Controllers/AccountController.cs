@@ -20,9 +20,9 @@ namespace Nmro.Landing.Controllers
         }
 
         [Authorize(AuthenticationSchemes = "OpenIdConnect")]
-        public async Task<IActionResult> SignIn(string returnUrl)
+        public Task<RedirectToActionResult> SignIn(string returnUrl)
         {
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            return Task.FromResult(RedirectToAction(nameof(HomeController.Index), "Home"));
         }
 
         public async Task<IActionResult> Signout()

@@ -2,7 +2,7 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Nmro.IAM.Domain
+namespace Nmro.Common.Extentions
 {
     /// <summary>
     /// Extension methods for hashing strings
@@ -13,25 +13,16 @@ namespace Nmro.IAM.Domain
         {
             if (string.IsNullOrWhiteSpace(input)) return string.Empty;
 
-            using (var sha = SHA256.Create())
+            using (SHA256 sha256Hash = SHA256.Create())
             {
-                var bytes = Encoding.UTF8.GetBytes(input);
-                var hash = sha.ComputeHash(bytes);
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
 
-                return Convert.ToBase64String(hash);
-            }
-        }
-
-        public static byte[] Sha256(this byte[] input)
-        {
-            if (input == null)
-            {
-                return null;
-            }
-
-            using (var sha = SHA256.Create())
-            {
-                return sha.ComputeHash(input);
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
             }
         }
 

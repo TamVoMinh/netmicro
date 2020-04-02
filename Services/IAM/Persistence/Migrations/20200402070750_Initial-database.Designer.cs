@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Nmro.IAM.Persistence.Migrations
 {
     [DbContext(typeof(IAMDbcontext))]
-    [Migration("20200328131303_Initial-database")]
+    [Migration("20200402070750_Initial-database")]
     partial class Initialdatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -826,7 +826,7 @@ namespace Nmro.IAM.Persistence.Migrations
                     b.Property<int>("UpdatedBy")
                         .HasColumnType("integer");
 
-                    b.Property<string>("UserName")
+                    b.Property<string>("Username")
                         .HasColumnType("text");
 
                     b.HasKey("Id");

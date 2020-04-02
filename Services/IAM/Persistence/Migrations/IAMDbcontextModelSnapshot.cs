@@ -824,7 +824,7 @@ namespace Nmro.IAM.Persistence.Migrations
                     b.Property<int>("UpdatedBy")
                         .HasColumnType("integer");
 
-                    b.Property<string>("UserName")
+                    b.Property<string>("Username")
                         .HasColumnType("text");
 
                     b.HasKey("Id");

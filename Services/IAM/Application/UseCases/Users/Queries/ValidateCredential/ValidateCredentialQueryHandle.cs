@@ -21,7 +21,7 @@ namespace Nmro.IAM.Application.UseCases.Users.Queries
 
         public async Task<IdentityUser> Handle(ValidateCredentialQuery request, CancellationToken cancellationToken)
         {
-            var user = await _context.IdentityUsers.FirstOrDefaultAsync(x => x.UserName == request.UserName);
+            var user = await _context.IdentityUsers.FirstOrDefaultAsync(x => x.Username == request.Username);
             if(user == null){
                 return null;
             }

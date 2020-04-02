@@ -1,4 +1,4 @@
-namespace Nmro.Oidc.Application
+namespace Nmro.Oidc
 {
     public class AppSettings
     {

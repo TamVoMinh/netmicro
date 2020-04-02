@@ -1,33 +1,33 @@
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Nmro.Oidc.Models;
+using Nmro.Oidc.Infrastructure.IamClient.Models;
 
-namespace Nmro.Oidc.Services
+namespace Nmro.Oidc.Application
 {
     public class ExternalUserService : IExternalUserService
     {
-        public Task<User> AutoProvisionUser(string provider, string userId, List<Claim> claims)
+        public Task<IdentityUser> AutoProvisionUser(string provider, string userId, List<Claim> claims)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<User> FindByExternalProvider(string provider, string userId)
+        public Task<IdentityUser> FindByExternalProvider(string provider, string userId)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<User> FindBySubjectId(string subjectId)
+        public Task<IdentityUser> FindBySubjectId(string subjectId)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<User> FindByUsername(string username)
+        public Task<IdentityUser> FindByUsername(string username)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<User> ValidateCredentials(string username, string password)
+        public Task<IdentityUser> ValidateCredential(string username, string password)
         {
             throw new System.NotImplementedException();
         }

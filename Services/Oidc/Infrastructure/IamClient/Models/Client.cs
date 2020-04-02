@@ -1,9 +1,24 @@
 using System.Collections.Generic;
 using System.Security.Claims;
-using Nmro.IAM.Domain;
 
-namespace Nmro.IAM.API.Vms
+namespace Nmro.Oidc.Infrastructure.IamClient.Models
 {
+    public enum AccessTokenType
+    {
+        Jwt = 0,
+        Reference = 1
+    }
+    public enum TokenUsage
+    {
+        ReUse = 0,
+        OneTimeOnly = 1
+    }
+    public enum TokenExpiration
+    {
+        Sliding = 0,
+        Absolute = 1
+    }
+
     public class Client
     {
         public bool AllowOfflineAccess { get; set; }

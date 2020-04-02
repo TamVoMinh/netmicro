@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Configuration;
 using StackExchange.Redis;
 
-namespace Nmro.Oidc.Services
+namespace Nmro.Oidc.Infrastructure.Redis
 {
     public class RedisOptions
     {

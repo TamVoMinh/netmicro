@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Nmro.Oidc.Application;
 using Nmro.Oidc.Extensions;
-using Nmro.Oidc.Models;
-using Nmro.Oidc.Services;
+using Nmro.Oidc.Infrastructure.IamClient.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -119,7 +119,7 @@ namespace Nmro.Oidc
             ProcessLoginCallbackForSaml2p(result, additionalLocalClaims, localSignInProps);
 
             // issue authentication cookie for user
-            await HttpContext.SignInAsync(user.SubjectId, user.Username, provider, localSignInProps, additionalLocalClaims.ToArray());
+            await HttpContext.SignInAsync(user.Id.ToString(), user.Username, provider, localSignInProps, additionalLocalClaims.ToArray());
 
             // delete temporary cookie used during external authentication
             await HttpContext.SignOutAsync(IdentityServer4.IdentityServerConstants.ExternalCookieAuthenticationScheme);
@@ -129,7 +129,7 @@ namespace Nmro.Oidc
 
             // check if external login is in the context of an OIDC request
             var context = await _interaction.GetAuthorizationContextAsync(returnUrl);
-            await _events.RaiseAsync(new UserLoginSuccessEvent(provider, providerUserId, user.SubjectId, user.Username, true, context?.ClientId));
+            await _events.RaiseAsync(new UserLoginSuccessEvent(provider, providerUserId, user.Id.ToString(), user.Username, true, context?.ClientId));
 
             if (context != null)
             {
@@ -191,7 +191,7 @@ namespace Nmro.Oidc
             }
         }
 
-        private async Task<(User user, string provider, string providerUserId, IEnumerable<Claim> claims)> FindUserFromExternalProvider(AuthenticateResult result)
+        private async Task<(IdentityUser user, string provider, string providerUserId, IEnumerable<Claim> claims)> FindUserFromExternalProvider(AuthenticateResult result)
         {
             var externalUser = result.Principal;
 
@@ -215,7 +215,7 @@ namespace Nmro.Oidc
             return (user, provider, providerUserId, claims);
         }
 
-        private async Task<User> AutoProvisionUser(string provider, string providerUserId, IEnumerable<Claim> claims)
+        private async Task<IdentityUser> AutoProvisionUser(string provider, string providerUserId, IEnumerable<Claim> claims)
         {
             var user = await _userService.AutoProvisionUser(provider, providerUserId, claims.ToList());
             return user;

@@ -153,7 +153,7 @@ namespace Nmro.IAM.Persistence.Migrations
                     Updated = table.Column<DateTime>(nullable: false),
                     CreatedBy = table.Column<int>(nullable: false),
                     UpdatedBy = table.Column<int>(nullable: false),
-                    UserName = table.Column<string>(nullable: true),
+                    Username = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
                     Salt = table.Column<byte[]>(nullable: true),

@@ -20,6 +20,7 @@ namespace Nmro.IAM.API
         public static readonly string AppName = "iam-api";
         public static async Task Main(string[] args)
         {
+            Console.Title = AppName;
             var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
             var configuration = GetConfiguration(env);
 

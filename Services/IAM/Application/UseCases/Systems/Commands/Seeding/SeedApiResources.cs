@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using Nmro.IAM.Domain;
 using Nmro.IAM.Domain.Entities;
+using Nmro.Common.Extentions;
 
 namespace Nmro.IAM.Application.UseCases.Systems
 {
