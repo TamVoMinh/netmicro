@@ -9,8 +9,8 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Nmro.Oidc.Application;
 using Nmro.Oidc.Extensions;
-using Nmro.Oidc.Services;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -109,10 +109,10 @@ namespace Nmro.Oidc
 
             if (ModelState.IsValid)
             {
-                var user = await _userService.ValidateCredentials(model.Username, model.Password);
+                var user = await _userService.ValidateCredential(model.Username, model.Password);
                 if (user != null)
                 {
-                    await _events.RaiseAsync(new UserLoginSuccessEvent(user.Username, user.SubjectId, user.Username, clientId: context?.ClientId));
+                    await _events.RaiseAsync(new UserLoginSuccessEvent(user.Username, user.Id.ToString(), user.Username, clientId: context?.ClientId));
 
                     // only set explicit expiration here if user chooses "remember me".
                     // otherwise we rely upon expiration configured in cookie middleware.
@@ -127,7 +127,7 @@ namespace Nmro.Oidc
                     };
 
                     // issue authentication cookie with subject ID and username
-                    await HttpContext.SignInAsync(user.SubjectId, user.Username, props);
+                    await HttpContext.SignInAsync(user.Id.ToString(), user.Username, props);
 
                     if (context != null)
                     {

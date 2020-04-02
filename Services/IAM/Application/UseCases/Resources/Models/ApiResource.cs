@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Nmro.IAM.Application.Models;
+using Nmro.Common.Extentions;
+
 namespace Nmro.IAM.Application.UseCases.Resources.Models
 {
     public class ApiResource : Resource

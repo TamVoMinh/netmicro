@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Nmro.IAM.Application.Interfaces;
 using Nmro.IAM.Application.UseCases.Users.Models;
-using Nmro.IAM.Domain.Entities;
+using Nmro.Common.Extentions;
 namespace Nmro.IAM.Application.UseCases.Users.Commands
 {
     public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, int>

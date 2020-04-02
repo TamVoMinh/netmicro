@@ -6,12 +6,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Nmro.Oidc.Services;
 using Serilog;
-using System;
-using Nmro.Oidc.Application;
 using Nmro.Web.ServiceDiscovery;
-using Nmro.Oidc.Storage;
+using Nmro.Oidc.Application;
 
 namespace Nmro.Oidc
 {
@@ -25,7 +22,6 @@ namespace Nmro.Oidc
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddLogging(logging =>
@@ -44,36 +40,22 @@ namespace Nmro.Oidc
                 });
             });
 
+            services.AddUserStore();
+
             services
                 .AddIdentityServer()
-                .AddClientStore<ClientStore>()
-                .AddResourceStore<ResourceStore>()
                 .AddDeveloperSigningCredential()
-                .AddOperationalStore(options =>
-                {
-                    options.RedisConnectionMultiplexer = RedisOptions.GetConnectionMultiplexer(Configuration);
-                    options.Db = 1;
-                });
+                .AddIdentityServer4Stores(Configuration);
 
-            services.AddHttpClient("iam", opts =>
+            services.AddStackExchangeRedisCache(options =>
             {
-                //TODO resolve iam-api by consul to get real-ip
-                opts.BaseAddress = new Uri(Configuration.GetValue<string>("IdentityApiEndpoint") ?? "http://iam-api/iam");
+                options.Configuration = Configuration.GetConnectionString("RedisConnection");
+                options.InstanceName = Program.AppName;
             });
 
             services.AddControllers();
             services.AddControllersWithViews();
             services.AddRazorPages();
-
-            services.AddStackExchangeRedisCache(options =>
-            {
-                options.Configuration = Configuration.GetConnectionString("RedisConnection");
-                options.InstanceName = "OidcInstance";
-            });
-
-            // Register services
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IExternalUserService, ExternalUserService>();
 
             services.AddHealthChecks();
 
@@ -81,7 +63,6 @@ namespace Nmro.Oidc
 
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Nmro.Common.Extentions;
 using Nmro.IAM.Application.Interfaces;
 using Nmro.IAM.Domain.Entities;
 
@@ -12,9 +13,9 @@ namespace Nmro.IAM.Application.UseCases.Systems
             var salt = passwordProcessor.GenerateSalt();
             return new List<IdentityUser>{
                 new IdentityUser {
-                    UserName = "admin",
+                    Username = "admin",
                     Salt = salt,
-                    Password = passwordProcessor.HashWithPbkdf2(passwordProcessor.HashWithSha256("admin123"), salt),
+                    Password = passwordProcessor.HashWithPbkdf2("admin123".Sha256(), salt),
                     Email = "admin@nmro.local",
                     Created = DateTime.UtcNow,
                     Updated = DateTime.UtcNow,

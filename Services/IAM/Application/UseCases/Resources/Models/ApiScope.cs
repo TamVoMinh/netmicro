@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using Nmro.Common.Extentions;
+
 namespace Nmro.IAM.Application.UseCases.Resources.Models
 {
     public class ApiScope : Resource

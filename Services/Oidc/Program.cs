@@ -12,6 +12,7 @@ namespace Nmro.Oidc
         public static readonly string AppName = "oidc";
         public static int Main(string[] args)
         {
+            Console.Title = AppName;
             var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
             var configuration = GetConfiguration(env);
 

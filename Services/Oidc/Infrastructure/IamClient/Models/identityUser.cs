@@ -1,6 +1,5 @@
 using Nmro.Common.Models;
-
-namespace Nmro.IAM.Application.UseCases.Users.Models
+namespace Nmro.Oidc.Infrastructure.IamClient.Models
 {
     public class IdentityUser : AuditableModel
     {
@@ -8,4 +7,4 @@ namespace Nmro.IAM.Application.UseCases.Users.Models
         public string Username {get;set;}
         public string Email {get;set;}
     }
- }
+}
