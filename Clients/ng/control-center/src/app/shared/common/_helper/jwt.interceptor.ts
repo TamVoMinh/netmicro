@@ -5,8 +5,7 @@ import { OidcSecurityService } from 'angular-auth-oidc-client';
 
 @Injectable()
 export class JWTInterceptor implements HttpInterceptor {
-    
-    constructor(private oidcSecurityService: OidcSecurityService) { }
+    constructor(private oidcSecurityService: OidcSecurityService) {}
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         let requestToForward = request;

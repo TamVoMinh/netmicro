@@ -22,6 +22,18 @@ namespace Nmro.IAM.Application.UseCases.Systems
                         new ApiResourceScope { Scope ="member.read" },
                         new ApiResourceScope { Scope ="member.write" }
                     }
+                },
+                new ApiResource {
+                    Id = 99,
+                    Name = "apigateway",
+                    DisplayName = "apigateway",
+                    Description = "Netmicro API ApiGateway",
+                    UserClaims = new List<ApiResourceClaim> { new ApiResourceClaim{ Type = "role"} },
+                    Enabled = true,
+                    Secrets = new List<ApiResourceSecret> { new ApiResourceSecret { Value = "ApigatewaySecret".Sha256() } },
+                    Scopes = new List<ApiResourceScope> {
+                        new ApiResourceScope { Scope ="apigateway" }
+                    }
                 }
             };
         }
