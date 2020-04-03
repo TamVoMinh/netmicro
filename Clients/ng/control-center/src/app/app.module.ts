@@ -10,6 +10,8 @@ import { LoginComponent } from './web/login/login.component';
 import { SharedModule } from './shared/shared.module';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 
+
+
 @NgModule({
   declarations: [
     LoginComponent,

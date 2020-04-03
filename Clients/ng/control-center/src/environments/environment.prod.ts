@@ -5,5 +5,5 @@ export const environment = {
     client_id: 'nmro-angular-client',
     log_console_debug_active: true,
   },
-  apiUrl: "http://api.nmro.prod/iam"
+  apiUrl: "http://api.nmro.local/iam"
 };

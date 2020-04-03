@@ -4,13 +4,16 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Logging;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using HealthChecks.UI.Client;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 using Serilog;
 using Nmro.ApiGateway.Extentions;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using HealthChecks.UI.Client;
 using Nmro.Web.ServiceDiscovery;
+using Nmro.Common.Extentions;
+using IdentityServer4.AccessTokenValidation;
 
 namespace Nmro.ApiGateway
 {
@@ -25,6 +28,8 @@ namespace Nmro.ApiGateway
 
         public void ConfigureServices(IServiceCollection services)
         {
+            IdentityModelEventSource.ShowPII = true;
+
             services.AddLogging(logging => {
                 logging.ClearProviders();
                 logging.AddSerilog(dispose: true);
@@ -38,9 +43,11 @@ namespace Nmro.ApiGateway
                 });
             });
 
-            services.AddAuthentication()
+            services
+                .AddAuthentication()
                 .AddJwtBearer("AuthN", options=>{
-                    options.Authority="oidc.nmro.local";
+                    //TODO Apply Extention & Configuration options
+                    options.Authority=  Configuration.GetValue<string>("IdentityUrl") ?? "http://oidc.nmro.local";
                     options.Audience="member";
                     options.RequireHttpsMetadata = false;
                 });
@@ -68,6 +75,10 @@ namespace Nmro.ApiGateway
                 Predicate = _ => true,
                 ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
             });
+
+            app.UseAuthentication();
+
+            app.UseAuthorization();
 
             app.UseOcelot().Wait();
 

@@ -48,3 +48,6 @@ node_modules/
 
 #health-check
 Web/Health/healthchecksdb
+
+#nuget packages
+packages/

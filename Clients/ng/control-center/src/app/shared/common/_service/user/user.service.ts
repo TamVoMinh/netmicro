@@ -19,6 +19,7 @@ export class UserService extends BaseService {
   }
 
   getUsersList(params): Observable<IHttpResponse<IUser[]>> {
-    return this.http.get<IHttpResponse<IUser[]>>(this.apiUrl + `/Users`, { params: params });
+
+    return this.http.get<IHttpResponse<IUser[]>>(this.apiUrl + `/users`, { params: params});
   }
 }

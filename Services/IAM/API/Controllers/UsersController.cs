@@ -10,7 +10,7 @@ namespace Nmro.IAM.API.Controllers
 {
     [ApiController]
     [ApiExplorerSettings(GroupName="iams")]
-    [Route("[controller]")]
+    [Route("users")]
     public class UsersController : NmroControllerBase
     {
         private readonly ILogger<UsersController> _logger;
