@@ -42,7 +42,7 @@ export class AuthService extends BaseService implements OnDestroy {
       redirect_url: this.originUrl,
       client_id: environment.oidc.client_id,
       response_type: 'code',
-      scope: 'openid profile email member',
+      scope: 'openid profile email member apigateway',
       post_logout_redirect_uri: this.originUrl,
       forbidden_route: '/login',
       unauthorized_route: '/login',

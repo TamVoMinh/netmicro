@@ -12,14 +12,12 @@ using Ocelot.Middleware;
 using Serilog;
 using Nmro.ApiGateway.Extentions;
 using Nmro.Web.ServiceDiscovery;
-using Nmro.Common.Extentions;
-using IdentityServer4.AccessTokenValidation;
 
 namespace Nmro.ApiGateway
 {
     public class Startup
     {
-         public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
@@ -43,14 +41,7 @@ namespace Nmro.ApiGateway
                 });
             });
 
-            services
-                .AddAuthentication()
-                .AddJwtBearer("AuthN", options=>{
-                    //TODO Apply Extention & Configuration options
-                    options.Authority=  Configuration.GetValue<string>("IdentityUrl") ?? "http://oidc.nmro.local";
-                    options.Audience="member";
-                    options.RequireHttpsMetadata = false;
-                });
+            services.AddOidcAuthentication(Configuration);
 
             services.AddOcelot();
             services.AddHealthChecks();
