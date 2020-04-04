@@ -8,9 +8,10 @@ apk add --update go git mercurial build-base
 mkdir -p /go/src/github.com/gliderlabs
 cp -r /src /go/src/github.com/gliderlabs/logspout
 cd /go/src/github.com/gliderlabs/logspout
+export GO111MODULE="on"
 export GOPATH=/go
 go get
-go build -ldflags "-X main.Version=$1" -o /bin/logspout
+go build -ldflags "-X main.Version=$1" -o /bin/logspout -v
 apk del go git mercurial build-base
 rm -rf /go /var/cache/apk/* /root/.glide
 

@@ -11,6 +11,8 @@ then
     . cli/dcb-list.sh
     . cli/load_dotenv.sh
 
+    START_TIME=$(date +%s)
+
     echo "docker-compose [$FOUNDATION]" $cmd_arg $opt_arg ${rest_args[@]}
     if [ $FOUNDATION == "ELK" ];
     then
@@ -18,11 +20,15 @@ then
     else
         docker-compose ${_COMPOSES[*]} -f Foundation/Dozzle/docker-compose.yml $cmd_arg $opt_arg ${rest_args[@]}
     fi
+
+    END_TIME=$(date +%s)
+    echo -e "\033[44m\033[37m IT TOOK $(($END_TIME - $START_TIME)) SECONDS TO EXECUTE COMMAND \033[0m"
+
     docker image prune --filter "dangling=true"
 elif [ $cmd_arg = "clear" ]
 then
     docker stop $(docker ps -q) | docker rm $(docker ps -aq)
-    docker rmi $(docker images | grep "nmro" | awk '{print $3}')
+    docker rmi $(docker images | grep "nmro" | awk '{print $3}') $opt_arg ${rest_args[@]}
     docker rmi slnbased
     docker image prune --filter "dangling=true"
 fi

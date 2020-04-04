@@ -1,7 +1,7 @@
 ﻿{
     "ReRoutes": [
         {
-            "DownstreamPathTemplate": "/health ",
+            "DownstreamPathTemplate": "/iam/health ",
             "DownstreamScheme": "http",
             "DownstreamHostAndPorts": [
                 {
@@ -9,7 +9,7 @@
                 "Port": 80
                 }
             ],
-            "UpstreamPathTemplate": "/health ",
+            "UpstreamPathTemplate": "/iam/health ",
             "UpstreamHttpMethod": [ "GET"],
             "ReRouteIsCaseSensitive": false
         },
@@ -49,15 +49,15 @@
                 }
             ],
             "UpstreamPathTemplate": "/iam/{everything}",
-            "UpstreamHttpMethod": [ "GET", "POST","DELETE","PUT","OPTION" ],
+            "UpstreamHttpMethod": [ "GET", "POST", "DELETE", "PUT", "OPTION"],
             "ReRouteIsCaseSensitive": false,
             "AuthenticationOptions": {
-                "AuthenticationProviderKey": "AuthN",
+                "AuthenticationProviderKey": "Authorization",
                 "AllowedScopes": []
             }
         }
-      ],
-      "GlobalConfiguration": {
+    ],
+    "GlobalConfiguration": {
         "BaseUrl": "http://api.nmro.local"
       }
 }

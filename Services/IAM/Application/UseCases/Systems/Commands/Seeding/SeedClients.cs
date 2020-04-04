@@ -124,7 +124,9 @@ namespace Nmro.IAM.Application.UseCases.Systems
                         new ClientScope{ Scope =  OidcConstants.StandardScopes.OpenId},
                         new ClientScope{ Scope =  OidcConstants.StandardScopes.Profile},
                         new ClientScope{ Scope =  OidcConstants.StandardScopes.Email},
+                        new ClientScope{ Scope =  "apigateway"},
                         new ClientScope{ Scope =  "member"}
+
                     },
                     RedirectUris = new List<ClientRedirectUri>
                     {
@@ -158,6 +160,7 @@ namespace Nmro.IAM.Application.UseCases.Systems
                         new ClientScope{ Scope =  OidcConstants.StandardScopes.OpenId},
                         new ClientScope{ Scope =  OidcConstants.StandardScopes.Profile},
                         new ClientScope{ Scope =  OidcConstants.StandardScopes.Email},
+                        new ClientScope{ Scope =  "apigateway"},
                         new ClientScope{ Scope =  "member"}
                     },
                     RedirectUris = new List<ClientRedirectUri>
