@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -28,44 +27,32 @@ namespace Nmro.IAM.API.Controllers
         [HttpGet("resources")]
         [SwaggerOperation("Read all resources")]
         public async Task<AllResources> ListAllResources()
-        {
-            return await Mediator.Send(new ListAllResourcesQuery());
-        }
+            => await Mediator.Send(new ListAllResourcesQuery());
 
         [HttpGet("resources/apis/{name}")]
         [SwaggerOperation("Read a api-resource by name")]
         public async Task<ApiResource> GetApiResourceByName([FromRoute] string name)
-        {
-           return  await Mediator.Send(new GetApiResourceByNameQuery{ Name = name});
-        }
+            => await Mediator.Send(new GetApiResourceByNameQuery{ Name = name});
 
         [HttpGet("resources/apis")]
         [SwaggerOperation("Query a set of api-resources by scopes")]
         public async Task<IEnumerable<ApiResource>> ListApiResourceByScopeName([FromQuery] List<string> scopes)
-        {
-            return await Mediator.Send(new ListApiResourcesByScopesQuery{Scopes = scopes});
-        }
+            => await Mediator.Send(new ListApiResourcesByScopesQuery{Scopes = scopes});
 
         [HttpGet("resources/identities")]
         [SwaggerOperation("Query a set of identity-resources by scopes")]
         public async Task<IEnumerable<IdentityResource>> ListIdentityResourceByScopeName([FromQuery] List<string> scopes)
-        {
-            return await Mediator.Send(new ListIdentityResourcesByScopesQuery{Scopes = scopes});
-        }
+            => await Mediator.Send(new ListIdentityResourcesByScopesQuery{Scopes = scopes});
 
         [HttpPost("users/validate")]
         [SwaggerOperation("Validate an user credential")]
         public async Task<IdentityUser> ValidateCredential([FromBody] CredentialModel credential)
-        {
-            return await Mediator.Send(new ValidateCredentialQuery{ Username = credential.UserName, Password = credential.Password });
-        }
-
+            => await Mediator.Send(new ValidateCredentialQuery{ Username = credential.UserName, Password = credential.Password });
 
         [HttpGet("clients/{clientId}")]
         [SwaggerOperation("Read a client")]
         public async Task<Client> GetOidcClientById(string clientId)
-        {
-            return await Mediator.Send(new GetClientByClientIdQuery{ ClientId = clientId});
-        }
+            => await Mediator.Send(new GetClientByClientIdQuery{ ClientId = clientId});
+
     }
 }
