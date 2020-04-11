@@ -21,7 +21,6 @@ namespace Nmro.Web.Services
                 if(_userId > 0) return _userId;
 
                 string accessToken = _httpContextAccessor?.HttpContext?.Request?.Headers?["Authorization"];
-
                 if(accessToken.IsPresent())
                 {
                     _logger.LogTrace("Found->Access_Token from Headers[Authorization]");
