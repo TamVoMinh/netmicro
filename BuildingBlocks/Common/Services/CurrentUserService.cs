@@ -19,7 +19,7 @@ namespace Nmro.Common.Services
             get {
                 if(_userId > 0) return _userId;
 
-                string accessToken = _httpContextAccessor.HttpContext.Request.Headers["Authorization"];
+                string accessToken = _httpContextAccessor?.HttpContext?.Request?.Headers?["Authorization"];
 
                 _logger.LogTrace("Authorization->Access_Token: {0}", accessToken);
 
