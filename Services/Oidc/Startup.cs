@@ -5,16 +5,15 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Serilog;
 using Nmro.Web.ServiceDiscovery;
 using Nmro.Oidc.Application;
+using Nmro.Common;
+using Nmro.Web;
 
 namespace Nmro.Oidc
 {
     public class Startup
     {
-        private const string OIDC_CORS_1ST_LAYER_POLICY = "__oidc_cors_1st_layer_policy";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -24,21 +23,12 @@ namespace Nmro.Oidc
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddLogging(logging =>
-            {
-                logging.ClearProviders();
-                logging.AddSerilog(dispose: true);
-            });
+            services.AddNmroLogging();
 
             services.Configure<AppSettings>(Configuration);
 
-            services.AddCors(options =>{
-                options.AddPolicy(OIDC_CORS_1ST_LAYER_POLICY, corsPolicy =>{
-                    corsPolicy.AllowAnyOrigin();
-                    corsPolicy.AllowAnyHeader();
-                    corsPolicy.AllowAnyMethod();
-                });
-            });
+            services.AddCors(options => AllOrigins.SetUpPolicy(options));
+
 
             services.AddUserStore();
 
@@ -59,7 +49,10 @@ namespace Nmro.Oidc
 
             services.AddHealthChecks();
 
-            services.RegisterConsulServices(Program.AppName, Configuration);
+            services.RegisterConsulServices(
+                Program.AppName,
+                option => Configuration.GetSection("ServiceDiscovery").Bind(option)
+            );
 
         }
 
@@ -71,12 +64,12 @@ namespace Nmro.Oidc
             }
             else
             {
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                //see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
                 app.UseHttpsRedirection();
             }
 
-            app.UseCors(OIDC_CORS_1ST_LAYER_POLICY);
+            app.UseCors(AllOrigins.PolicyName);
 
             app.UseStaticFiles();
 

@@ -3,45 +3,44 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Logging;
 using Nmro.Web.ServiceDiscovery;
 using Nmro.Landing.Extentions;
-using Serilog;
+using Nmro.Web;
 
 namespace Nmro.Landing
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
         {
             Configuration = configuration;
+            Environment = webHostEnvironment;
         }
 
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment Environment { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddLogging(logging =>
-            {
-                logging.ClearProviders();
-                logging.AddSerilog(dispose: true);
-            });
+            if(Environment.IsDevelopment()){
+                IdentityModelEventSource.ShowPII = true;
+            }
+
+            services.AddNmroLogging();
 
             services.AddControllersWithViews();
 
             services.AddControllers();
 
-            // Caution! Do NOT use in production: https://aka.ms/IdentityModel/PII
-            IdentityModelEventSource.ShowPII = true;
-
             services.AddCustomAuthentication(Configuration);
 
-            services.RegisterConsulServices(Program.AppName, Configuration);
+            services.RegisterConsulServices(
+                Program.AppName,
+                option => Configuration.GetSection("ServiceDiscovery").Bind(option)
+            );
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -51,7 +50,7 @@ namespace Nmro.Landing
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                // https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
 
                 app.UseHttpsRedirection();

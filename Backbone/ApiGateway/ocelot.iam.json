@@ -50,14 +50,10 @@
             ],
             "UpstreamPathTemplate": "/iam/{everything}",
             "UpstreamHttpMethod": [ "GET", "POST", "DELETE", "PUT", "OPTION"],
-            "ReRouteIsCaseSensitive": false,
-            "AuthenticationOptions": {
-                "AuthenticationProviderKey": "Authorization",
-                "AllowedScopes": []
-            }
+            "ReRouteIsCaseSensitive": false
         }
     ],
     "GlobalConfiguration": {
         "BaseUrl": "http://api.nmro.local"
-      }
+    }
 }

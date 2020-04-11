@@ -15,12 +15,12 @@ namespace Nmro.Web.ServiceDiscovery
     public class ServiceDiscoveryHostedService : IHostedService
     {
         private readonly IConsulClient _client;
-        private readonly ConfigurationOptions _config;
+        private readonly DiscoveryOptions _config;
         private readonly string _registrationId;
         private readonly string _ipv4;
         ILogger<ServiceDiscoveryHostedService> _logger;
 
-        public ServiceDiscoveryHostedService(ILogger<ServiceDiscoveryHostedService> logger,IConsulClient client, ConfigurationOptions config)
+        public ServiceDiscoveryHostedService(ILogger<ServiceDiscoveryHostedService> logger,IConsulClient client, DiscoveryOptions config)
         {
             _client = client;
             _config = config;
