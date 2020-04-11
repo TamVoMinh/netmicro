@@ -2,7 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Nmro.Common.Extentions;
-namespace Nmro.Common.Services
+
+namespace Nmro.Web.Services
 {
     public class CurrentUserService : ICurrentUserService
     {
@@ -19,12 +20,12 @@ namespace Nmro.Common.Services
             get {
                 if(_userId > 0) return _userId;
 
-                string accessToken = _httpContextAccessor.HttpContext.Request.Headers["Authorization"];
-
-                _logger.LogTrace("Authorization->Access_Token: {0}", accessToken);
+                string accessToken = _httpContextAccessor?.HttpContext?.Request?.Headers?["Authorization"];
 
                 if(accessToken.IsPresent())
                 {
+                    _logger.LogTrace("Found->Access_Token from Headers[Authorization]");
+
                     accessToken = accessToken.Replace("Bearer ", "");
                     var handler = new JwtSecurityTokenHandler();
                     var jsonToken = handler.ReadToken(accessToken) as JwtSecurityToken;

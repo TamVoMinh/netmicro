@@ -10,11 +10,14 @@ using HealthChecks.UI.Client;
 using Nmro.Web.ServiceDiscovery;
 using Nmro.IAM.Persistence;
 using Nmro.IAM.Application;
+using Nmro.Common;
+using Nmro.Web;
 
 namespace Nmro.IAM.API
 {
     public class Startup
     {
+        public const string PathBase = "/iam";
         public Startup(IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
         {
             Configuration = configuration;
@@ -26,12 +29,18 @@ namespace Nmro.IAM.API
 
         public void ConfigureServices(IServiceCollection services)
         {
+            if (Environment.IsDevelopment())
+            {
+                services.AddCors(options => AllOrigins.SetUpPolicy(options));
+            }
+
             services
-                .AddConfiguredLogging()
+                .AddNmroLogging()
+                .AddCommonServices()
+                .AddWebServices()
                 .AddPersistance(Configuration)
                 .AddApplication()
-                .AddSwagger()
-                .AddCommonServices();
+                .AddSwagger();
 
             services
                 .AddControllers()
@@ -42,23 +51,10 @@ namespace Nmro.IAM.API
 
             services.AddHealthChecks();
 
-            services.RegisterConsulServices(Program.AppName, Configuration);
-
-            if (Environment.IsDevelopment())
-            {
-                services.AddCors(options =>
-                {
-                    options.AddPolicy("development_cors",
-                    builder =>
-                    {
-                        builder
-                            .AllowAnyOrigin()
-                            .AllowAnyHeader()
-                            .AllowAnyMethod();
-
-                    });
-                });
-            }
+            services.RegisterConsulServices(
+                Program.AppName,
+                option => Configuration.GetSection("ServiceDiscovery").Bind(option)
+            );
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -67,17 +63,17 @@ namespace Nmro.IAM.API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseCors("development_cors");
+                app.UseCors(AllOrigins.PolicyName);
             }
 
-            app.UsePathBase("/iam");
+            app.UsePathBase(PathBase);
 
             app.UseSwagger(c =>
             {
                 c.RouteTemplate = "oas/{documentName}/swagger.json";
                 c.PreSerializeFilters.Add((swaggerDoc, httpReq) =>
                 {
-                    swaggerDoc.Servers = new List<OpenApiServer> { new OpenApiServer { Url = "/iam", Description = "Identity Accesss Managerment" } };
+                    swaggerDoc.Servers = new List<OpenApiServer> { new OpenApiServer { Url = PathBase, Description = "Identity Accesss Managerment" } };
                 });
             });
 

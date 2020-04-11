@@ -1,4 +1,4 @@
-namespace Nmro.Common.Services
+namespace Nmro.Web.Services
 {
     public interface ICurrentUserService
     {

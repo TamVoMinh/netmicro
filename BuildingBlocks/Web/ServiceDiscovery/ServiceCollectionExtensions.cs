@@ -1,6 +1,5 @@
 ﻿using System;
 using Consul;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -8,32 +7,42 @@ namespace Nmro.Web.ServiceDiscovery
 {
     public static class ServiceCollectionExtensions
     {
-        public static void RegisterConsulServices(this IServiceCollection services, string appName,IConfiguration configuration)
+        public static IServiceCollection RegisterConsulServices(this IServiceCollection services, string serviceName, Action<DiscoveryOptions> configOptions)
+            => services.RegisterConsulServices(BuilOption(configOptions, serviceName));
+
+
+        private static IServiceCollection RegisterConsulServices(this IServiceCollection services, DiscoveryOptions configOptions)
         {
-            if(string.IsNullOrEmpty(appName))
+            if (configOptions == null)
             {
-                throw new ArgumentNullException("appName", "Must have value");
+                throw new ArgumentNullException(nameof(configOptions));
             }
 
-            ConfigurationOptions options = configuration.GetServiceDiscoveryOptions(appName);
-            if (options == null)
-            {
-                throw new ArgumentNullException(nameof(options));
-            }
+            var consulClient = CreateConsulClient(configOptions.DiscoveryAddress);
 
-            var consulClient = CreateConsulClient(options);
-
-            services.AddSingleton(options);
+            services.AddSingleton(configOptions);
             services.AddSingleton<IConsulClient, ConsulClient>(p => consulClient);
             services.AddSingleton<IHostedService, ServiceDiscoveryHostedService>();
+
+            return services;
         }
 
-        private static ConsulClient CreateConsulClient(ConfigurationOptions serviceConfig)
-        {
-            return new ConsulClient(config =>
+        private static DiscoveryOptions BuilOption(Action<DiscoveryOptions> build, string serviceName){
+            if(string.IsNullOrEmpty(serviceName))
             {
-                config.Address = serviceConfig.DiscoveryAddress;
-            });
+                throw new ArgumentNullException("serviceName");
+            }
+
+            var options = new DiscoveryOptions();
+            build(options);
+            options.ServiceName = serviceName;
+            Console.WriteLine("options:{0}\n{1}", serviceName, System.Text.Json.JsonSerializer.Serialize(options));
+            return options;
         }
+
+
+        private static ConsulClient CreateConsulClient(string discoveryAddress)
+            => new ConsulClient(config => config.Address = new Uri(discoveryAddress));
+
     }
 }

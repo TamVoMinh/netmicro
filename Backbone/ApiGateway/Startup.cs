@@ -41,12 +41,15 @@ namespace Nmro.ApiGateway
                 });
             });
 
-            services.AddOidcAuthentication(Configuration);
+            services.AddOidcAuthentication(option => Configuration.GetSection("oauth2").Bind(option));
 
             services.AddOcelot();
             services.AddHealthChecks();
 
-            services.RegisterConsulServices(Program.AppName, Configuration);
+            services.RegisterConsulServices(
+                Program.AppName,
+                option => Configuration.GetSection("ServiceDiscovery").Bind(option)
+            );
 
         }
 
