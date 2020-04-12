@@ -12,6 +12,7 @@ using Nmro.IAM.Persistence;
 using Nmro.IAM.Application;
 using Nmro.Common;
 using Nmro.Web;
+using Elastic.Apm.NetCoreAll;
 
 namespace Nmro.IAM.API
 {
@@ -59,6 +60,7 @@ namespace Nmro.IAM.API
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseAllElasticApm(Configuration);
 
             if (env.IsDevelopment())
             {

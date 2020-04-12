@@ -9,6 +9,8 @@ using Nmro.Web.ServiceDiscovery;
 using Nmro.Oidc.Application;
 using Nmro.Common;
 using Nmro.Web;
+using Elastic.Apm.AspNetCore;
+using Elastic.Apm.DiagnosticSource;
 
 namespace Nmro.Oidc
 {
@@ -58,6 +60,8 @@ namespace Nmro.Oidc
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseElasticApm(Configuration, new HttpDiagnosticsSubscriber());
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
