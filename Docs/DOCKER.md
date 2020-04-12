@@ -32,6 +32,18 @@
     sh cli/nmro.sh up -d --build <service-name>
 ```
 
+### Rebuild with force recreate a container service
+
+```
+    sh cli/nmro.sh up -d --force-recreate --build <service-name>
+```
+
+### Recreate a container service
+
+```
+    sh cli/nmro.sh up -d --force-recreate <service-name>
+```
+
 ### Run services
 
 ```powershell
@@ -39,7 +51,7 @@
 ```
 
 ```sh
-    sh cli/nmro.sh up -d 
+    sh cli/nmro.sh up -d
 ```
 
 ### Stop & remove all containers
@@ -49,5 +61,5 @@
 ```
 
 ```sh
-    sh cli/nmro.sh down 
+    sh cli/nmro.sh down
 ```

@@ -33,13 +33,13 @@
 1. Drop existing schema **Skip this at first time**.
 
     ```powershell
-        > Set-Location Services/IAM | dotnet ef database drop
+        > Set-Location Services/IAM/Persistence | dotnet ef database drop
     ```
 
 1. Initialize database schema
 
     ```powershell
-        > Set-Location Services/IAM | dotnet ef database update
+        > Set-Location Services/IAM/Persistence | dotnet ef database update
     ```
 
 1. Run up with docker-compose
@@ -60,7 +60,7 @@
 1. Discovery servcies with [Consul](http://isys.nmro.local/)
 1. Analysis logging with [Kibana](http://isys.nmro.local/elk/)
 1. Monitor health with [healthchecks-ui](http://isys.nmro.local/health/status/)
-1. Explore  [Redis Db](http://isys.nmro.local/redis/)
+1. Explore [Redis Db](http://isys.nmro.local/redis/)
 1. Play with [control-centre](http://control-centre.nmro.local/) Implemented PKCE-Flow for angular app.
 1. Enjoy document with [swagger-ui](http://docs.nmro.local/)
 1. User/Pass: admin/admin123
@@ -69,15 +69,15 @@
 
 ### Editors and IDEs
 
-* For `define and maintain consistent` between different editors and IDEs [use EditorConfig](http://editorconfig.org)
+-   For `define and maintain consistent` between different editors and IDEs [use EditorConfig](http://editorconfig.org)
 
 ### Server side projects in `C#`
 
-* Reply on [StyleCop](https://github.com/StyleCop/StyleCop.ReSharper)
-* Support tool reshaper
+-   Reply on [StyleCop](https://github.com/StyleCop/StyleCop.ReSharper)
+-   Support tool reshaper
 
 ### Client side projects
 
-* For `Typescript & Angular` [Use angular style guide](https://angular.io/guide/styleguide)
-* For `Javascript` module reply on jslint/eslint and be supported by prettier
-* For `Markdown` document use [style-guide](https://arcticicestudio.github.io/styleguide-markdown/rules/)
+-   For `Typescript & Angular` [Use angular style guide](https://angular.io/guide/styleguide)
+-   For `Javascript` module reply on jslint/eslint and be supported by prettier
+-   For `Markdown` document use [style-guide](https://arcticicestudio.github.io/styleguide-markdown/rules/)
