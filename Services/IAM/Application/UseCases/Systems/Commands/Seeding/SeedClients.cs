@@ -112,7 +112,7 @@ namespace Nmro.IAM.Application.UseCases.Systems
                 new Client {
                     Id = 7,
                     ClientId = "nmro-reactjs-client-localhost",
-                    ClientName = "Nmro ReactJS client",
+                    ClientName = "Nmro ReactJS client - localhost",
                     AllowedGrantTypes = new List<ClientGrantType> { new ClientGrantType{ GrantType = GrantType.Implicit} },
                     RequirePkce = false,
                     AllowAccessTokensViaBrowser = true,
@@ -130,8 +130,8 @@ namespace Nmro.IAM.Application.UseCases.Systems
                     RedirectUris = new List<ClientRedirectUri>
                     {
                         new ClientRedirectUri{ RedirectUri="http://localhost:3000" },
-                        new ClientRedirectUri{ RedirectUri="http://localhost:3000/signin-callback.html" },
-                        new ClientRedirectUri{ RedirectUri="http://localhost:3000/apps/dashboard/signin-callback.html" }
+                        new ClientRedirectUri{ RedirectUri="http://localhost:3000/apps/dashboard/signin-callback.html" },
+                        new ClientRedirectUri{ RedirectUri="http://localhost:3000/apps/dashboard/silent-renew.html" }
                     },
                     PostLogoutRedirectUris = new List<ClientPostLogoutRedirectUri>
                     {

@@ -5,7 +5,7 @@ interface IButtonsProps {
     login: () => void;
     // getUser: () => void;
     // callApi: () => void;
-    // renewToken: () => void;
+    renewToken: () => void;
     logout: () => void;
 }
 
@@ -21,10 +21,10 @@ const Buttons: React.SFC<IButtonsProps> = (props) => {
         </button>
         <button className="btn btn-warning btn-getapi" style={{ margin: '10px' }} onClick={props.callApi}>
           Call API
-        </button>
-        <button className="btn btn-success btn-renewtoken" style={{ margin: '10px' }} onClick={props.renewToken}>
-          Renew Token
-        </button> */}
+        </button>*/}
+                <Button color="default" style={{ margin: '10px' }} onClick={props.renewToken}>
+                    Renew Token
+                </Button>
                 <Button color="secondary" style={{ margin: '10px' }} onClick={props.logout}>
                     Logout
                 </Button>

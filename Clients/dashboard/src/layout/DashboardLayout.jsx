@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -18,10 +18,11 @@ import Avatar from '@material-ui/core/Avatar';
 import { useSelector } from 'react-redux';
 import { get } from 'lodash';
 import MenuBar from './MenuBar';
+import { AuthService } from '../services/AuthService';
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex'
     },
@@ -81,10 +82,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function DashboardLayout({ children }) {
+    const authService = new AuthService();
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(true);
-    const user = useSelector(state => state.auth.user);
+    const user = useSelector((state) => state.auth.user);
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -92,6 +94,26 @@ export default function DashboardLayout({ children }) {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
+    const login = () => {
+        authService.login();
+    };
+
+    const requiredLoggedIn = () => {
+        authService
+            .querySessionStatus()
+            .then((sessionStatus) => {
+                // Nothing
+            })
+            .catch((error) => {
+                login();
+            });
+    };
+
+    useEffect(() => {
+        // Always check logged in
+        requiredLoggedIn();
+    });
 
     return (
         <div className={classes.root}>

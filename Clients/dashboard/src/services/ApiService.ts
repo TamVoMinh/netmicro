@@ -1,41 +1,33 @@
 import axios from 'axios';
 import { Constants } from '../helpers/Constants';
 import { AuthService } from './AuthService';
+import { User } from 'oidc-client';
 
 export class ApiService {
-  private authService: AuthService;
+    private authService: AuthService;
+    private authorization: string | undefined;
+    constructor() {
+        this.authService = new AuthService();
+        this.authService.getUser().then((user: User | null) => {
+            if (user) {
+                this.authorization = user?.access_token;
+            }
+        });
+    }
 
-  constructor() {
-    this.authService = new AuthService();
-  }
+    public get(url: string) {
+        const headers = {
+            Accept: 'application/json',
+            Authorization: this.authorization
+        };
+        return axios.get(Constants.apiRoot + url, { headers });
+    }
 
-  // public callApi(): Promise<any> {
-  //   return this.authService.getUser().then(user => {
-  //     if (user && user.access_token) {
-  //       return this._callApi(user.access_token).catch(error => {
-  //         if (error.response.status === 401) {
-  //           return this.authService.renewToken().then(renewedUser => {
-  //             return this._callApi(renewedUser.access_token);
-  //           });
-  //         }
-  //         throw error;
-  //       });
-  //     } else if (user) {
-  //       return this.authService.renewToken().then(renewedUser => {
-  //         return this._callApi(renewedUser.access_token);
-  //       });
-  //     } else {
-  //       throw new Error('user is not logged in');
-  //     }
-  //   });
-  // }
-
-  // private _callApi(token: string) {
-  //   const headers = {
-  //     Accept: 'application/json',
-  //     Authorization: 'Bearer ' + token
-  //   };
-
-  //   return axios.get(Constants.apiRoot + 'test', { headers });
-  // }
+    public post(url: string) {
+        const headers = {
+            Accept: 'application/json',
+            Authorization: this.authorization
+        };
+        return axios.post(Constants.apiRoot + url, { headers });
+    }
 }

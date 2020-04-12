@@ -9,12 +9,14 @@ import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import DashboardIcon from '@material-ui/icons/DashboardOutlined';
-import MoneyIcon from '@material-ui/icons/MoneyOutlined';
-import ReportIcon from '@material-ui/icons/ReportOutlined';
+// import MoneyIcon from '@material-ui/icons/MoneyOutlined';
+// import ReportIcon from '@material-ui/icons/ReportOutlined';
 import PeopleAltOutlinedIcon from '@material-ui/icons/PeopleAltOutlined';
 import SupervisedUserCircleOutlinedIcon from '@material-ui/icons/SupervisedUserCircleOutlined';
 import DesktopWindowsOutlinedIcon from '@material-ui/icons/DesktopWindowsOutlined';
 import { withRouter } from 'react-router-dom';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { AuthService } from '../services/AuthService';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -71,6 +73,8 @@ menu.forEach((item) => {
 });
 
 function MenuBar({ history, location }) {
+    const authService = new AuthService();
+
     const classes = useStyles();
     let partials = location.pathname.split('/');
     const last = partials[partials.length - 1];
@@ -136,6 +140,17 @@ function MenuBar({ history, location }) {
                         </>
                     );
                 })}
+                <ListItem
+                    key={999}
+                    // className={`${classes.navigationItem} ${activeLink ? classes.activeLink : ''}`}
+                    button
+                    onClick={() => authService.logout()}
+                >
+                    <ListItemIcon>
+                        <ExitToAppIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Logout" />
+                </ListItem>
             </List>
         </Grid>
     );

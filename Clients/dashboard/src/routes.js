@@ -6,7 +6,8 @@ import Revenue from 'dashboard/revenue';
 import Report from 'dashboard/report';
 import UserInfo from 'auth/info';
 import UserResetInfo from 'auth/resetPassword';
-import Users from 'auth';
+import Users from './user-management/index';
+import User from 'auth';
 
 const pages = [
     {
@@ -28,6 +29,10 @@ const pages = [
     {
         path: '/users',
         component: Users
+    },
+    {
+        path: '/user',
+        component: User
     },
     {
         path: '/user/info',

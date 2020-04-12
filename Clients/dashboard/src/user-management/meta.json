@@ -1,0 +1,29 @@
+{
+    "size": 50,
+    "entry": "/users",
+    "keys": ["username", "email", "created"],
+    "fields": {
+        "username": {
+            "label": "Username",
+            "width": 200,
+            "sortable": true,
+            "editable": true
+        },
+        "email": {
+            "label": "Email",
+            "width": 280,
+            "sortable": true,
+            "editable": true,
+            "filterable": true
+        },
+        "created": {
+            "label": "Created",
+            "width": 200,
+            "sortable": true,
+            "editable": true,
+            "type": "date",
+            "filterable": true
+        }
+    },
+    "default": {}
+}

@@ -13,6 +13,7 @@
         "@types/react-json-tree": "^0.6.11",
         "axios": "^0.19.2",
         "hex-to-rgba": "^2.0.1",
+        "joy-ui": "^0.0.3",
         "lodash": "^4.17.15",
         "notistack": "^0.9.9",
         "oidc-client": "^1.10.1",
@@ -26,6 +27,7 @@
         "react-toastify": "^5.5.0",
         "redux": "^4.0.5",
         "redux-devtools-extension": "^2.13.8",
+        "redux-immutable": "^4.0.0",
         "redux-thunk": "^2.3.0",
         "typescript": "^3.8.3"
     },

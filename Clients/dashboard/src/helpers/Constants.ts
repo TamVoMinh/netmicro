@@ -10,5 +10,5 @@ export class Constants {
     public static clientRoot = 'http://localhost:3000';
     public static clientScope = 'openid profile member';
 
-    //public static apiRoot = 'https://demo.identityserver.io/api/';
+    public static apiRoot = 'http://api.nmro.local/iam/';
 }
