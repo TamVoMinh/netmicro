@@ -2,7 +2,8 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Nmro.Common.Extentions;
-namespace Nmro.Common.Services
+
+namespace Nmro.Web.Services
 {
     public class CurrentUserService : ICurrentUserService
     {
@@ -15,21 +16,23 @@ namespace Nmro.Common.Services
         }
 
         private int _userId = int.MinValue;
-        public int UserId {
-            get {
-                if(_userId > 0) return _userId;
+        public int UserId
+        {
+            get
+            {
+                if (_userId > 0) return _userId;
 
                 string accessToken = _httpContextAccessor?.HttpContext?.Request?.Headers?["Authorization"];
-
-                _logger.LogTrace("Authorization->Access_Token: {0}", accessToken);
-
-                if(accessToken.IsPresent())
+                if (accessToken.IsPresent())
                 {
+                    _logger.LogTrace("Found->Access_Token from Headers[Authorization]");
+
                     accessToken = accessToken.Replace("Bearer ", "");
                     var handler = new JwtSecurityTokenHandler();
                     var jsonToken = handler.ReadToken(accessToken) as JwtSecurityToken;
 
-                    if(jsonToken.Subject!=null){
+                    if (jsonToken.Subject != null)
+                    {
                         int.TryParse(jsonToken.Subject, out _userId);
                     }
                 }
@@ -38,9 +41,9 @@ namespace Nmro.Common.Services
             }
         }
 
-        public string UuId {get;}
+        public string UuId { get; }
 
-        public bool IsAuthenticated { get => _userId > 0 ; }
+        public bool IsAuthenticated { get => _userId > 0; }
 
     }
 }

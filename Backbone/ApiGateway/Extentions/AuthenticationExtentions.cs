@@ -1,24 +1,35 @@
+using System;
 using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Nmro.Common.Extentions;
 
 namespace Nmro.ApiGateway.Extentions
 {
-    public static class AuthenticationExtentions{
-        public static IServiceCollection AddOidcAuthentication(this IServiceCollection services, IConfiguration configuration)
+    public static class AuthenticationExtentions
+    {
+        public static IServiceCollection AddOidcAuthentication(this IServiceCollection services, Action<Oauth2Options> configOption)
+            => services.AddOidcAuthentication(configOption.build());
+
+
+        public static IServiceCollection AddOidcAuthentication(this IServiceCollection services, Oauth2Options config)
         {
             services
                 .AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
-                .AddIdentityServerAuthentication("Authorization", o =>{
-                    o.Authority = configuration.GetValue<string>("IdentityUrl");
-                    o.ApiName = "apigateway";
-                    o.ApiSecret = "ApigatewaySecret".Sha256();
-                    o.RequireHttpsMetadata = false;
+                .AddIdentityServerAuthentication(config.SchemeName, o =>{
+                    o.Authority = config.Authority;
+                    o.ApiName = config.ApiName;
+                    o.ApiSecret = config.ApiSecret;
+                    o.RequireHttpsMetadata = config.RequireHttps;
                 });
 
             return services;
+        }
+
+        private static Oauth2Options build(this Action<Oauth2Options> configOption)
+        {
+            var options = new Oauth2Options();
+            configOption(options);
+            return options;
         }
     }
 }

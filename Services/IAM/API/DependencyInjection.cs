@@ -1,9 +1,6 @@
-using Serilog;
 using System.Collections.Generic;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using Nmro.Common.Services;
 
 namespace Nmro.IAM.API
 {
@@ -44,19 +41,6 @@ namespace Nmro.IAM.API
                     }
                 });
             });
-
-        public static IServiceCollection AddConfiguredLogging(this IServiceCollection services) =>
-            services.AddLogging(logging =>
-            {
-                logging.ClearProviders();
-                logging.AddSerilog(dispose: true);
-            });
-
-        public static IServiceCollection AddCommonServices(this IServiceCollection services) =>
-            services
-                .AddTransient<IDateTime, MachineDateTime>()
-                .AddScoped<ICurrentUserService, CurrentUserService>()
-                .AddHttpContextAccessor();
 
     }
 }
