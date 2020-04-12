@@ -86,7 +86,7 @@ export default function DashboardLayout({ children }) {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(true);
-    const user = useSelector((state) => state.auth.user);
+    // const user = useSelector((state) => state.auth.user);
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -167,11 +167,11 @@ export default function DashboardLayout({ children }) {
                                         aria-haspopup="true"
                                         color="inherit"
                                     >
-                                        <Avatar
+                                        {/* <Avatar
                                             className={classes.avatar}
                                             alt="Duong Nguyen"
                                             src={get(user, `imageUrl`)}
-                                        />
+                                        /> */}
                                     </IconButton>
                                 </Grid>
                             </Grid>

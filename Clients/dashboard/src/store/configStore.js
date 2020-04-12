@@ -13,7 +13,7 @@ if (isProduction) {
     composeFn = devTools.composeWithDevTools;
 }
 
-const store = (preloadedState) => {
+const configureStore = (preloadedState) => {
     const store = createStore(
         rootReducer,
         preloadedState,
@@ -22,4 +22,4 @@ const store = (preloadedState) => {
     return store;
 };
 
-export default store;
+export default configureStore;

@@ -15,6 +15,7 @@
         "hex-to-rgba": "^2.0.1",
         "joy-ui": "^0.0.3",
         "lodash": "^4.17.15",
+        "node-sass": "^4.13.1",
         "notistack": "^0.9.9",
         "oidc-client": "^1.10.1",
         "ramda": "^0.27.0",

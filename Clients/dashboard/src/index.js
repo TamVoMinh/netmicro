@@ -8,10 +8,12 @@ import Theme from './theme';
 import { Provider } from 'react-redux';
 import NotifierProvider from './notifier/NotifierProvider';
 import { createMuiTheme } from '@material-ui/core/styles';
-import store from './store/configStore';
+import configureStore from './store/configStore';
 
 const theme = createMuiTheme(Theme);
 theme.shadows[1] = '0 0 5px 0 rgba(0, 0, 0, 0.1)';
+
+const store = configureStore();
 
 const AppWrapper = () => {
     return (
@@ -19,9 +21,9 @@ const AppWrapper = () => {
             <CssBaseline />
             <Provider store={store}>
                 <ThemeProvider theme={theme}>
-                    <NotifierProvider>
-                        <App />
-                    </NotifierProvider>
+                    {/* <NotifierProvider> */}
+                    <App />
+                    {/* </NotifierProvider> */}
                 </ThemeProvider>
             </Provider>
         </React.Fragment>

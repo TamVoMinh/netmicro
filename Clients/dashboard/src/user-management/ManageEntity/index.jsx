@@ -12,7 +12,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return bindActionCreators(actions, dispatch);
 };
 
-const ModalProviderWithRouter = connect(mapStateToProps, null)(withRouter(ModalProvider));
+// const ModalProviderWithRouter = connect(mapStateToProps, null)(withRouter(ModalProvider));
 
 export default connect(mapStateToPropsDefault, mapDispatchToProps)(ManageEntity(Switch, Route, withRouter, Link));
-export { ModalProviderWithRouter };
+// export { ModalProviderWithRouter };

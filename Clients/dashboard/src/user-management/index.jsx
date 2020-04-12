@@ -10,8 +10,9 @@ const Users = () => {
     //     apiService.get('clients?clientName=&limit=50&offset=0');
     // }, []);
 
+    const title = 'Hello Joy-UI';
     const props = {
-        // title,
+        title,
         meta,
         form: <div />,
         useModal: true
