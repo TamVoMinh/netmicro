@@ -110,6 +110,38 @@ namespace Nmro.IAM.Application.UseCases.Systems
                     }
                 },
                 new Client {
+                    Id = 7,
+                    ClientId = "nmro-reactjs-client-localhost",
+                    ClientName = "Nmro ReactJS client",
+                    AllowedGrantTypes = new List<ClientGrantType> { new ClientGrantType{ GrantType = GrantType.Implicit} },
+                    RequirePkce = false,
+                    AllowAccessTokensViaBrowser = true,
+                    RequireConsent = false,
+                    AlwaysIncludeUserClaimsInIdToken = true,
+                    AccessTokenLifetime = 3600,
+                    IdentityTokenLifetime = 30,
+                    AllowedScopes = new List<ClientScope>
+                    {
+                        new ClientScope{ Scope =  OidcConstants.StandardScopes.OpenId},
+                        new ClientScope{ Scope =  OidcConstants.StandardScopes.Profile},
+                        new ClientScope{ Scope =  OidcConstants.StandardScopes.Email},
+                        new ClientScope{ Scope =  "member"}
+                    },
+                    RedirectUris = new List<ClientRedirectUri>
+                    {
+                        new ClientRedirectUri{ RedirectUri="http://localhost:3000" },
+                        new ClientRedirectUri{ RedirectUri="http://localhost:3000/apps/dashboard/signin-callback.html" }
+                    },
+                    PostLogoutRedirectUris = new List<ClientPostLogoutRedirectUri>
+                    {
+                         new ClientPostLogoutRedirectUri{ PostLogoutRedirectUri="http://localhost:3000" },
+                         new ClientPostLogoutRedirectUri{ PostLogoutRedirectUri="http://localhost:3000/apps/dashboard"}
+                    },
+                    AllowedCorsOrigins = new List<ClientCorsOrigin> {
+                        new ClientCorsOrigin{Origin="http://localhost:3000"}
+                    }
+                },
+                new Client {
                     Id = 5,
                     ClientId = "nmro-angular-client-localhost",
                     ClientName = "Nmro Angular client - localhost",

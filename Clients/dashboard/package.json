@@ -1,48 +1,56 @@
 {
-  "name": "dashboard",
-  "version": "0.1.0",
-  "private": true,
-  "homepage": "/apps/dashboard",
-  "dependencies": {
-    "@material-ui/core": "^4.9.5",
-    "@material-ui/icons": "^4.9.1",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "hex-to-rgba": "^2.0.1",
-    "lodash": "^4.17.15",
-    "notistack": "^0.9.9",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-redux": "^7.2.0",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.0",
-    "redux": "^4.0.5",
-    "redux-devtools-extension": "^2.13.8",
-    "redux-thunk": "^2.3.0"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "cross-env NODE_PATH=src react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "cross-env": "^7.0.2"
-  }
+    "name": "dashboard",
+    "version": "0.1.0",
+    "private": true,
+    "homepage": "/apps/dashboard",
+    "dependencies": {
+        "@material-ui/core": "^4.9.5",
+        "@material-ui/icons": "^4.9.1",
+        "@testing-library/jest-dom": "^4.2.4",
+        "@testing-library/react": "^9.3.2",
+        "@testing-library/user-event": "^7.1.2",
+        "@types/ramda": "^0.27.3",
+        "@types/react-json-tree": "^0.6.11",
+        "axios": "^0.19.2",
+        "hex-to-rgba": "^2.0.1",
+        "lodash": "^4.17.15",
+        "notistack": "^0.9.9",
+        "oidc-client": "^1.10.1",
+        "ramda": "^0.27.0",
+        "react": "^16.12.0",
+        "react-dom": "^16.12.0",
+        "react-json-tree": "^0.11.2",
+        "react-redux": "^7.2.0",
+        "react-router-dom": "^5.1.2",
+        "react-scripts": "3.4.0",
+        "react-toastify": "^5.5.0",
+        "redux": "^4.0.5",
+        "redux-devtools-extension": "^2.13.8",
+        "redux-thunk": "^2.3.0",
+        "typescript": "^3.8.3"
+    },
+    "scripts": {
+        "start": "cross-env NODE_PATH=src react-scripts start",
+        "build": "cross-env NODE_PATH=src react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject"
+    },
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "cross-env": "^7.0.2"
+    }
 }

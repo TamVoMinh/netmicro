@@ -9,14 +9,14 @@ import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import DashboardIcon from '@material-ui/icons/DashboardOutlined';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import MoneyIcon from '@material-ui/icons/MoneyOutlined';
 import ReportIcon from '@material-ui/icons/ReportOutlined';
-import InfoIcon from '@material-ui/icons/InfoOutlined';
-import ClearIcon from '@material-ui/icons/ClearOutlined';
+import PeopleAltOutlinedIcon from '@material-ui/icons/PeopleAltOutlined';
+import SupervisedUserCircleOutlinedIcon from '@material-ui/icons/SupervisedUserCircleOutlined';
+import DesktopWindowsOutlinedIcon from '@material-ui/icons/DesktopWindowsOutlined';
 import { withRouter } from 'react-router-dom';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
         maxWidth: 360,
@@ -45,28 +45,28 @@ const menu = [
         id: 1,
         title: 'Dashboard',
         icon: () => <DashboardIcon />,
-        value: 'dashboard',
+        value: 'Dashboard',
         path: '/dashboard',
         children: [
-            { title: 'Revenue', icon: () => <MoneyIcon />, path: '/revenue', value: 'revenue' },
-            { title: 'Report', icon: () => <ReportIcon />, path: '/report', value: 'report' }
+            /* { title: 'Revenue', icon: () => <MoneyIcon />, path: '/revenue', value: 'revenue' },
+            { title: 'Report', icon: () => <ReportIcon />, path: '/report', value: 'report' } */
         ]
     },
     {
         id: 2,
-        title: 'User',
-        path: '/user',
-        value: 'user',
-        icon: () => <AccountCircle />,
+        title: 'Managements',
+        path: '/users',
+        value: 'Managements',
+        icon: () => <DesktopWindowsOutlinedIcon />,
         children: [
-            { title: 'Info', icon: () => <InfoIcon />, path: '/user/info', value: 'info' },
-            { title: 'Change Password', icon: () => <ClearIcon />, path: '/user/reset', value: 'reset' }
+            { title: 'Users', icon: () => <PeopleAltOutlinedIcon />, path: '/users', value: 'Users' },
+            { title: 'Clients', icon: () => <SupervisedUserCircleOutlinedIcon />, path: '/user/reset', value: 'reset' }
         ]
     }
 ];
 
 let defaultOPen = {};
-menu.forEach(item => {
+menu.forEach((item) => {
     defaultOPen[item.id] = true;
 });
 
@@ -85,7 +85,7 @@ function MenuBar({ history, location }) {
         });
     };
 
-    const navigate = path => {
+    const navigate = (path) => {
         history.push(path);
     };
 
@@ -104,16 +104,17 @@ function MenuBar({ history, location }) {
                             >
                                 <ListItemIcon>{icon && icon()}</ListItemIcon>
                                 <ListItemText primary={title} />
-                                {children.length > 0 && open[id] ? (
-                                    <ExpandLess onClick={e => handleClick({ e, id })} />
-                                ) : (
-                                    <ExpandMore onClick={e => handleClick({ e, id })} />
-                                )}
+                                {children.length > 0 &&
+                                    (open[id] ? (
+                                        <ExpandLess onClick={(e) => handleClick({ e, id })} />
+                                    ) : (
+                                        <ExpandMore onClick={(e) => handleClick({ e, id })} />
+                                    ))}
                             </ListItem>
                             {children.length > 0 && (
                                 <Collapse in={open[id]} timeout="auto" unmountOnExit>
                                     <List component="div" disablePadding>
-                                        {children.map(nestedItem => {
+                                        {children.map((nestedItem) => {
                                             const activeNestedLink = last.includes(nestedItem.value);
                                             return (
                                                 <ListItem
