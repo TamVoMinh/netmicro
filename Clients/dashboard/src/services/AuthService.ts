@@ -3,41 +3,41 @@ import { Log, User, UserManager } from 'oidc-client';
 import { Constants } from '../helpers/Constants';
 
 export class AuthService {
-  public userManager: UserManager;
+    public userManager: UserManager;
 
-  constructor() {
-    const settings = {
-      authority: Constants.stsAuthority,
-      client_id: Constants.clientId,
-      
-      // tslint:disable-next-line:object-literal-sort-keys
-      
-      silent_redirect_uri: `${Constants.clientRoot}/silent-renew.html`,
-      redirect_uri: `${Constants.clientRoot}/signin-callback.html`,
-      signout_callback_oidc: `${Constants.clientRoot}`,
-      post_logout_redirect_uri: `${Constants.clientRoot}`,
-      response_type: 'id_token token',
-      scope: Constants.clientScope
-    };
-    this.userManager = new UserManager(settings);
+    constructor() {
+        const settings = {
+            authority: Constants.stsAuthority,
+            client_id: Constants.clientId,
 
-    Log.logger = console;
-    Log.level = Log.INFO;
-  }
+            // tslint:disable-next-line:object-literal-sort-keys
 
-  public getUser(): Promise<User | null> {
-    return this.userManager.getUser();
-  }
+            silent_redirect_uri: `${Constants.clientRoot}/silent-renew.html`,
+            redirect_uri: `${Constants.clientRoot}/apps/dashboard/signin-callback.html`,
+            signout_callback_oidc: `${Constants.clientRoot}`,
+            post_logout_redirect_uri: `${Constants.clientRoot}`,
+            response_type: 'id_token token',
+            scope: Constants.clientScope
+        };
+        this.userManager = new UserManager(settings);
 
-  public login(): Promise<void> {
-    return this.userManager.signinRedirect();
-  }
+        Log.logger = console;
+        Log.level = Log.INFO;
+    }
 
-  public renewToken(): Promise<User> {
-    return this.userManager.signinSilent();
-  }
+    public getUser(): Promise<User | null> {
+        return this.userManager.getUser();
+    }
 
-  public logout(): Promise<void> {
-    return this.userManager.signoutRedirect();
-  }
+    public login(): Promise<void> {
+        return this.userManager.signinRedirect();
+    }
+
+    public renewToken(): Promise<User> {
+        return this.userManager.signinSilent();
+    }
+
+    public logout(): Promise<void> {
+        return this.userManager.signoutRedirect();
+    }
 }

@@ -130,6 +130,7 @@ namespace Nmro.IAM.Application.UseCases.Systems
                     RedirectUris = new List<ClientRedirectUri>
                     {
                         new ClientRedirectUri{ RedirectUri="http://localhost:3000" },
+                        new ClientRedirectUri{ RedirectUri="http://localhost:3000/signin-callback.html" },
                         new ClientRedirectUri{ RedirectUri="http://localhost:3000/apps/dashboard/signin-callback.html" }
                     },
                     PostLogoutRedirectUris = new List<ClientPostLogoutRedirectUri>
