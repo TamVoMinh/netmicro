@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Consul;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -7,20 +8,24 @@ namespace Nmro.Web.ServiceDiscovery
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection RegisterConsulServices(this IServiceCollection services, string serviceName, Action<DiscoveryOptions> configOptions)
-            => services.RegisterConsulServices(BuilOption(configOptions, serviceName));
+        public static IServiceCollection RegisterConsulServices(this IServiceCollection services, string serviceName, Action<DiscoveryOptions> configOptions, Action<ServiceMetaData> configMeta = null)
+            => services.RegisterConsulServices(BuilOption(configOptions, serviceName), buildMeta(configMeta));
 
 
-        private static IServiceCollection RegisterConsulServices(this IServiceCollection services, DiscoveryOptions configOptions)
+        private static IServiceCollection RegisterConsulServices(this IServiceCollection services, DiscoveryOptions discoveryOptions, ServiceMetaData serviceMetaData)
         {
-            if (configOptions == null)
+            if (discoveryOptions == null)
             {
-                throw new ArgumentNullException(nameof(configOptions));
+                throw new ArgumentNullException(nameof(discoveryOptions));
             }
 
-            var consulClient = CreateConsulClient(configOptions.DiscoveryAddress);
+            var consulClient = CreateConsulClient(discoveryOptions.DiscoveryAddress);
 
-            services.AddSingleton(configOptions);
+            if(serviceMetaData != null){
+                services.AddSingleton(serviceMetaData);
+            }
+
+            services.AddSingleton(discoveryOptions);
             services.AddSingleton<IConsulClient, ConsulClient>(p => consulClient);
             services.AddSingleton<IHostedService, ServiceDiscoveryHostedService>();
 
@@ -36,10 +41,15 @@ namespace Nmro.Web.ServiceDiscovery
             var options = new DiscoveryOptions();
             build(options);
             options.ServiceName = serviceName;
-            Console.WriteLine("options:{0}\n{1}", serviceName, System.Text.Json.JsonSerializer.Serialize(options));
             return options;
         }
 
+        private static ServiceMetaData buildMeta(Action<ServiceMetaData> build){
+            if(build == null) return null;
+            ServiceMetaData meta = new ServiceMetaData();
+            build(meta);
+            return meta;
+        }
 
         private static ConsulClient CreateConsulClient(string discoveryAddress)
             => new ConsulClient(config => config.Address = new Uri(discoveryAddress));
