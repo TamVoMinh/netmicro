@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using Elastic.Apm.SerilogEnricher;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -70,6 +71,7 @@ namespace Nmro.Web
 
         private static IHostBuilder CreateHostBuilder<TStartUp>(string[] args) where TStartUp : class
             => Host.CreateDefaultBuilder(args)
+                .UseSerilog()
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<TStartUp>();
@@ -78,6 +80,7 @@ namespace Nmro.Web
         [Obsolete("Enable for backward compatible only, will be removed soon")]
         private static IWebHostBuilder CreateWebHostBuilder<TStartUp>(string[] args, Action<WebHostBuilderContext, IConfigurationBuilder> configDelegate) where TStartUp : class
              => WebHost.CreateDefaultBuilder(args)
+                .UseSerilog()
                 .ConfigureAppConfiguration(configDelegate)
                 .UseStartup<TStartUp>();
 
@@ -98,7 +101,6 @@ namespace Nmro.Web
         private static Serilog.ILogger CreateSerilogLogger(IConfiguration configuration)
         {
             return new LoggerConfiguration()
-                .Enrich.FromLogContext()
                 .ReadFrom.Configuration(configuration)
                 .CreateLogger();
         }

@@ -8,6 +8,7 @@
   <ItemGroup>
     <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="3.0.2" />
     <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="Elastic.Apm.AspNetCore" Version="1.4.0" />
     <PackageReference Include="Flurl.Http" Version="2.4.2" />
     <PackageReference Include="IdentityServer4.Contrib.RedisStore" Version="3.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.HealthChecks" Version="2.2.0" />
