@@ -63,7 +63,7 @@ services:
       args:
         ELK_VERSION: $ELK_VERSION
     volumes:
-      - ./Foundation/Elk/Apm/config/apm-server.yml:/usr/share/apm-server/config/apm-server.yml:ro
+      - ./Foundation/Elk/Apm/config/apm-server.yml:/usr/share/apm-server/apm-server.yml:ro
     ports:
       - "8200:8200"
     environment:
