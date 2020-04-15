@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Consul;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -21,11 +20,8 @@ namespace Nmro.Web.ServiceDiscovery
 
             var consulClient = CreateConsulClient(discoveryOptions.DiscoveryAddress);
 
-            if(serviceMetaData != null){
-                services.AddSingleton(serviceMetaData);
-            }
-
             services.AddSingleton(discoveryOptions);
+            services.AddSingleton(serviceMetaData ?? new ServiceMetaData());
             services.AddSingleton<IConsulClient, ConsulClient>(p => consulClient);
             services.AddSingleton<IHostedService, ServiceDiscoveryHostedService>();
 

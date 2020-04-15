@@ -60,24 +60,12 @@ namespace Nmro.Web.ServiceDiscovery
                             _config.ServicePort != DefaultHttpPort ? $":{_config.ServicePort}" : string.Empty,
                             _config.HealthPath
                         )
-                    }
+                    },
+                    Meta = _meta
                 };
 
                 await _client.Agent.ServiceDeregister(registration.ID, cancellationToken);
                 await _client.Agent.ServiceRegister(registration, cancellationToken);
-
-                if(_meta!=null){
-                    var keysResult = await _client.KV.Keys(_config.ServiceName, cancellationToken);
-                    if(keysResult.Response.Any(k => k == _config.ServiceName))
-                    {
-                        return;
-                    }
-
-                    await _client.KV.Put(new KVPair(_config.ServiceName){
-                        Value = Encoding.UTF8.GetBytes(System.Text.Json.JsonSerializer.Serialize(_meta))
-                    }, WriteOptions.Default, cancellationToken);
-                }
-
             });
         }
 
