@@ -54,7 +54,11 @@ namespace Nmro.IAM.API
 
             services.RegisterConsulServices(
                 Program.AppName,
-                option => Configuration.GetSection("ServiceDiscovery").Bind(option)
+                option => Configuration.GetSection("ServiceDiscovery").Bind(option),
+                meta => {
+                    meta.Add("swagger-oidc", "oas/oidc/swagger.json");
+                    meta.Add("swagger-iams", "oas/iams/swagger.json");
+                }
             );
         }
 

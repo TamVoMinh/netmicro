@@ -9,25 +9,34 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Polly;
 using Polly.Retry;
+using System.Text;
 
 namespace Nmro.Web.ServiceDiscovery
 {
     public class ServiceDiscoveryHostedService : IHostedService
     {
+        private const int DefaultHttpPort = 80;
         private readonly IConsulClient _client;
         private readonly DiscoveryOptions _config;
+
+        private readonly ServiceMetaData _meta;
         private readonly string _registrationId;
-        private readonly string _ipv4;
+        private readonly System.Net.IPAddress _ipv4;
         ILogger<ServiceDiscoveryHostedService> _logger;
 
-        public ServiceDiscoveryHostedService(ILogger<ServiceDiscoveryHostedService> logger,IConsulClient client, DiscoveryOptions config)
+        public ServiceDiscoveryHostedService(
+            ILogger<ServiceDiscoveryHostedService> logger,
+            IConsulClient client,
+            DiscoveryOptions config,
+            ServiceMetaData meta
+        )
         {
             _client = client;
             _config = config;
+            _meta = meta;
             _logger = logger;
-
-            _registrationId = ResolveHostName();
-            _ipv4 = ResolveLanIPV4()?.ToString() ?? "";
+            _ipv4 = ResolveLanIPV4() ?? throw new Exception("Not Found V4 IP");
+            _registrationId = string.Format("{0}-[{1}:{2}]", _config.ServiceName, _ipv4, _config.ServicePort);
         }
 
         public async Task StartAsync(CancellationToken cancellationToken)
@@ -38,9 +47,21 @@ namespace Nmro.Web.ServiceDiscovery
                 var registration = new AgentServiceRegistration
                 {
                     ID = _registrationId,
-                    Address = _ipv4,
+                    Address = _ipv4.ToString(),
                     Name = _config.ServiceName,
-                    Port = _config.ServicePort
+                    Port = _config.ServicePort,
+                    Check = new AgentServiceCheck{
+                        Interval = new TimeSpan(0,0,5),
+                        DeregisterCriticalServiceAfter = new TimeSpan(0, 0, 25),
+                        Timeout = new TimeSpan(0,0,1),
+                        HTTP= string.Format(
+                            "http://{0}{1}/{2}",
+                            _config.ServiceName,
+                            _config.ServicePort != DefaultHttpPort ? $":{_config.ServicePort}" : string.Empty,
+                            _config.HealthPath
+                        )
+                    },
+                    Meta = _meta
                 };
 
                 await _client.Agent.ServiceDeregister(registration.ID, cancellationToken);
