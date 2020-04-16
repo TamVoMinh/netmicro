@@ -29,7 +29,7 @@ namespace Nmro.Oidc
 
             services.Configure<AppSettings>(Configuration);
 
-            services.AddCors(options => AllOrigins.SetUpPolicy(options));
+            services.AddCors(options => AllOrigins.Bind(options));
 
 
             services.AddUserStore();

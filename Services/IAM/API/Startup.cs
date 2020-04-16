@@ -32,7 +32,7 @@ namespace Nmro.IAM.API
         {
             if (Environment.IsDevelopment())
             {
-                services.AddCors(options => AllOrigins.SetUpPolicy(options));
+                services.AddCors(options => AllOrigins.Bind(options));
             }
 
             services

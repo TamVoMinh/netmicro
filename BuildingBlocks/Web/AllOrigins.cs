@@ -7,7 +7,7 @@ namespace Nmro.Web
     {
         public const string PolicyName = "all_cors_policy";
 
-        public static Action<CorsOptions> SetUpPolicy = options
+        public static Action<CorsOptions> Bind = options
             => options.AddPolicy(AllOrigins.PolicyName, builder => AllOrigins.BuildPolicy(builder));
 
         private static void BuildPolicy(CorsPolicyBuilder builder)
