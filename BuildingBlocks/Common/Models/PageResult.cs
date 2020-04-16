@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace Nmro.Common.Models
 {
@@ -7,8 +8,8 @@ namespace Nmro.Common.Models
     {
         public PageResult(int total, int offset, int limit, IEnumerable<T> items){
             Total = total;
-            Offset = offset.ClaimOffset(total, limit);
-            Litmit = limit.ClaimLimit(items.Count());
+            Litmit = Math.Min(limit, items.Count());
+            Offset = offset.ClampOffset(Total, Litmit);
             Data = items;
         }
 
@@ -20,9 +21,6 @@ namespace Nmro.Common.Models
 
     public static class IntExtensions
     {
-        public static int ClaimOffset(this int offset, int total, int limit) => offset < total - limit ? offset : total;
-
-        public static int ClaimLimit(this int limit, int size) => size < limit ? size : limit;
-
+        public static int ClampOffset(this int offset, int total, int limit) =>  total > limit ? Math.Min(offset, total - limit) : 0 ;
     }
 }

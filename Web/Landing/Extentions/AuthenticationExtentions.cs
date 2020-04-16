@@ -15,8 +15,6 @@ namespace Nmro.Landing.Extentions
                 throw new ArgumentNullException(typeof(OidcOptions).Name);
             }
 
-            var identityUrl = configuration.GetValue<string>("IdentityUrl");
-            var callBackUrl = configuration.GetValue<string>("CallBackUrl");
             var sessionCookieLifetime = configuration.GetValue("SessionCookieLifetimeMinutes", 60);
 
             services.AddAuthentication(options =>

@@ -3,43 +3,40 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using HealthChecks.UI.Client;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
-using Serilog;
 using Nmro.ApiGateway.Extentions;
 using Nmro.Web.ServiceDiscovery;
+using Nmro.Web;
 
 namespace Nmro.ApiGateway
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
+            Environment = environment;
         }
 
         public IConfiguration Configuration { get; }
 
+        public IWebHostEnvironment Environment  {get;}
+
         public void ConfigureServices(IServiceCollection services)
         {
-            IdentityModelEventSource.ShowPII = true;
+            if(Environment.IsDevelopment()){
+                IdentityModelEventSource.ShowPII = true;
+            }
 
-            services.AddLogging(logging => {
-                logging.ClearProviders();
-                logging.AddSerilog(dispose: true);
-            });
-
-            services.AddCors(options =>{
-                options.AddPolicy(Configuration.GetCorsPolicyName(), corsPolicy =>{
-                    corsPolicy.WithOrigins(Configuration.GetAllowOrigns());
-                    corsPolicy.AllowAnyHeader();
-                    corsPolicy.AllowAnyMethod();
-                });
-            });
+            services.AddNmroLogging();
+            services.AddCors(options => LimitedOrigins.Bind(
+                options,
+                Configuration.GetSection("CorsPolicy").Get<CorsPolicyConfigOptions>()
+            ));
 
             services.AddOidcAuthentication(option => Configuration.GetSection("oauth2").Bind(option));
 
@@ -60,7 +57,8 @@ namespace Nmro.ApiGateway
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(Configuration.GetCorsPolicyName());
+
+            app.UseCors(Configuration.GetValue<string>("CorsPolicy:PolicyName"));
 
             app.UseRouting();
 
