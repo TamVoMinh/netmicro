@@ -57,7 +57,8 @@
 
 1. Known issues:
 
-    - "logspout" service failed to build on windown, reference [issues/11](https://github.com/TamVoMinh/netmicro/issues/11)
+    * "logspout" service failed to build on windown, reference [issues/11](https://github.com/TamVoMinh/netmicro/issues/11)
+    * `warning CS8034: Unable to load Analyzer assembly` → run `dotnet nuget locals all -c`
 
 1. Most used [commands](Docs/DOCKER.md)
 
@@ -68,27 +69,27 @@
 
 ### Playground with
 
-1. [Landing site](http://nmro.local/) Implemented Hybrid-Flow for tradtional website
+1. [Landing site](http://nmro.local/) (Hybrid-Flow for tradtional website)
 1. [Consul](http://isys.nmro.local/)
 1. [Kibana](http://isys.nmro.local/elk/)
-1. [healthchecks-ui](http://isys.nmro.local/health/status/)
+1. [Healthchecks-ui](http://isys.nmro.local/health/status/)
 1. [Redis Db](http://isys.nmro.local/redis/)
-1. [control-centre](http://control-centre.nmro.local/) Implemented PKCE-Flow for angular app.
-1. [swagger-ui](http://docs.nmro.local/)
+1. [Control-centre](http://control-centre.nmro.local/) (auth code flow with PKCE for angular app)
+1. [Swagger-ui](http://docs.nmro.local/)
 
 ## Coding conventions & Style
 
 ### Editors and IDEs
 
-* For `define and maintain consistent` between different editors and IDEs [use EditorConfig](http://editorconfig.org)
+1. For `define and maintain consistent` between different editors and IDEs [use EditorConfig](http://editorconfig.org)
 
 ### Server side projects in `C#`
 
-* Reply on [StyleCop](https://github.com/StyleCop/StyleCop.ReSharper)
-* Support tool reshaper
+1. Reply on [StyleCop](https://github.com/StyleCop/StyleCop.ReSharper)
+1. Support tool reshaper
 
 ### Client side projects
 
-* For `Typescript & Angular` [Use angular style guide](https://angular.io/guide/styleguide)
-* For `Javascript` module reply on jslint/eslint and be supported by prettier
-* For `Markdown` document use [style-guide](https://arcticicestudio.github.io/styleguide-markdown/rules/)
+1. For `Typescript & Angular` [Use angular style guide](https://angular.io/guide/styleguide)
+1. For `Javascript` module reply on jslint/eslint and be supported by prettier
+1. For `Markdown` document use [style-guide](https://arcticicestudio.github.io/styleguide-markdown/rules/)
