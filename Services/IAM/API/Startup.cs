@@ -89,7 +89,7 @@ namespace Nmro.IAM.API
                 endpoints.MapControllers();
             });
 
-            app.UseHealthChecks("/health");
+            app.UseHealthChecks("/hc");
         }
     }
 }

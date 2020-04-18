@@ -1,4 +1,4 @@
-## Serilog Levels Visible Map
+# Serilog Levels Visible Map
 
 ✓ → Mean visible
 

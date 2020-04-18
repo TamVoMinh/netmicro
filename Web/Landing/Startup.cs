@@ -35,6 +35,8 @@ namespace Nmro.Landing
 
             services.AddCustomAuthentication(Configuration);
 
+            services.AddHealthChecks();
+
             services.RegisterConsulServices(
                 Program.AppName,
                 option => Configuration.GetSection("ServiceDiscovery").Bind(option)
@@ -69,6 +71,8 @@ namespace Nmro.Landing
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            app.UseHealthChecks("/hc");
         }
     }
 }

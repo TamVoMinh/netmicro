@@ -60,7 +60,7 @@ namespace Nmro.ApiGateway
 
             app.UseRouting();
 
-            app.UseHealthChecks("/health");
+            app.UseHealthChecks("/hc");
 
             app.UseAuthentication();
 

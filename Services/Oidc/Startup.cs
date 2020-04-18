@@ -88,7 +88,7 @@ namespace Nmro.Oidc
                 endpoints.MapControllers();
             });
 
-            app.UseHealthChecks("/health");
+            app.UseHealthChecks("/hc");
         }
     }
 }

@@ -25,6 +25,7 @@ namespace Nmro.Health
                 logging.AddSerilog(dispose: true);
             });
 
+            services.AddHealthChecks();
             services.AddHealthChecksUI();
 
             services.RegisterConsulServices(
@@ -58,6 +59,8 @@ namespace Nmro.Health
                     options.ResourcesPath = "/health/resources";
                 });
             });
+
+            app.UseHealthChecks("/hc");
         }
     }
 }
