@@ -50,7 +50,11 @@
             ],
             "UpstreamPathTemplate": "/iam/{everything}",
             "UpstreamHttpMethod": [ "GET", "POST", "DELETE", "PUT", "OPTION"],
-            "ReRouteIsCaseSensitive": false
+            "ReRouteIsCaseSensitive": false,
+            "AuthenticationOptions":{
+                "AuthenticationProviderKey": "Authorization",
+                "AllowedScopes": ["member", "apigateway"]
+            }
         }
     ],
     "GlobalConfiguration": {

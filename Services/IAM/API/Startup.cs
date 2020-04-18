@@ -6,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using HealthChecks.UI.Client;
 using Nmro.Web.ServiceDiscovery;
 using Nmro.IAM.Persistence;
 using Nmro.IAM.Application;
@@ -90,11 +89,7 @@ namespace Nmro.IAM.API
                 endpoints.MapControllers();
             });
 
-            app.UseHealthChecks("/health", new HealthCheckOptions()
-            {
-                Predicate = _ => true,
-                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-            });
+            app.UseHealthChecks("/hc");
         }
     }
 }

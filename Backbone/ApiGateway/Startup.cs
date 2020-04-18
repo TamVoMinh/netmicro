@@ -4,8 +4,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Logging;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
-using HealthChecks.UI.Client;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 using Nmro.ApiGateway.Extentions;
@@ -62,11 +60,7 @@ namespace Nmro.ApiGateway
 
             app.UseRouting();
 
-            app.UseHealthChecks("/health", new HealthCheckOptions()
-            {
-                Predicate = _ => true,
-                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-            });
+            app.UseHealthChecks("/hc");
 
             app.UseAuthentication();
 

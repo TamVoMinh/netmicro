@@ -1,13 +1,10 @@
-using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Nmro.Web.ServiceDiscovery;
 using Nmro.Oidc.Application;
-using Nmro.Common;
 using Nmro.Web;
 using Elastic.Apm.AspNetCore;
 using Elastic.Apm.DiagnosticSource;
@@ -91,11 +88,7 @@ namespace Nmro.Oidc
                 endpoints.MapControllers();
             });
 
-            app.UseHealthChecks("/health", new HealthCheckOptions()
-            {
-                Predicate = _ => true,
-                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-            });
+            app.UseHealthChecks("/hc");
         }
     }
 }
