@@ -264,6 +264,9 @@ namespace Nmro.IAM.Application.UseCases.Clients.Models
         /// or
         /// Grant types list contains duplicate values
         /// </exception>
+
+        public DateTime Created { get; set; }
+        public DateTime? Updated { get; set; }
         public static void ValidateGrantTypes(IEnumerable<string> grantTypes)
         {
             if (grantTypes == null)
