@@ -254,6 +254,14 @@ namespace Nmro.IAM.Application.UseCases.Clients.Models
         /// </value>
         public IDictionary<string, string> Properties { get; set; } = new Dictionary<string, string>();
         /// <summary>
+        /// Gets or sets the created date time
+        /// </summary>
+        public DateTime? Created { get; set; }
+        /// <summary>
+        /// Gets or sets the updated date time
+        /// </summary>
+        public DateTime? Updated { get; set; }
+        /// <summary>
         /// Validates the grant types.
         /// </summary>
         /// <param name="grantTypes">The grant types.</param>
@@ -264,9 +272,6 @@ namespace Nmro.IAM.Application.UseCases.Clients.Models
         /// or
         /// Grant types list contains duplicate values
         /// </exception>
-
-        public DateTime Created { get; set; }
-        public DateTime? Updated { get; set; }
         public static void ValidateGrantTypes(IEnumerable<string> grantTypes)
         {
             if (grantTypes == null)
