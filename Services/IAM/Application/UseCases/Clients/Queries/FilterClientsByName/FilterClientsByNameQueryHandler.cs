@@ -19,8 +19,10 @@ namespace Nmro.IAM.Application.UseCases.Clients.Queries
 
         public async Task<PageClient> Handle(FilterClientsByNameQuery request, CancellationToken cancellationToken)
         {
-            IQueryable<Domain.Entities.Client> baseQuery = _context.Clients
-                .Where(x => x.ClientName.Contains(request.Name));
+            IQueryable<Domain.Entities.Client> baseQuery = _context.Clients.Include(x => x.AllowedGrantTypes);
+
+            if(!string.IsNullOrEmpty(request.Name))
+                baseQuery.Where(x => x.ClientName.Contains(request.Name));
 
             int count = await baseQuery.CountAsync();
 

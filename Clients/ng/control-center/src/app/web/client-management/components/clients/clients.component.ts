@@ -46,7 +46,7 @@ export class ClientsComponent implements OnChanges {
           ClientName: item.clientName,
           AllowedGrantTypes: item.allowedGrantTypes.toString(),
           RequiredPKCE: item.requirePkce,
-          CreatedDate: item.createdDate
+          CreatedDate: item.created
         },
         children: null,
         expanded: false

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using AutoMapper;
 namespace Nmro.IAM.Application.UseCases.Clients.Mappers
@@ -12,6 +13,7 @@ namespace Nmro.IAM.Application.UseCases.Clients.Mappers
 
             CreateMap<Domain.Entities.Client, Models.Client>()
                 .ForMember(dest => dest.ProtocolType, opt => opt.Condition(srs => srs != null))
+                .ForMember(x => x.AllowedGrantTypes, opts => opts.MapFrom(x => x.AllowedGrantTypes.Select(y => y.GrantType).ToList()))
                 .ForMember(x => x.AllowedIdentityTokenSigningAlgorithms, opts => opts.ConvertUsing(AllowedSigningAlgorithmsConverter.Converter, x => x.AllowedIdentityTokenSigningAlgorithms))
                 .ReverseMap()
                 .ForMember(x => x.AllowedIdentityTokenSigningAlgorithms, opts => opts.ConvertUsing(AllowedSigningAlgorithmsConverter.Converter, x => x.AllowedIdentityTokenSigningAlgorithms));
