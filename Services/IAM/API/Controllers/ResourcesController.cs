@@ -1,10 +1,14 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Nmro.IAM.Application.UseCases.ApiResources.Commands;
+using Nmro.IAM.Application.UseCases.ApiResources.Models;
+using Nmro.IAM.Application.UseCases.ApiResources.Queries;
+using Nmro.IAM.Application.UseCases.IdentityResources.Commands;
+using Nmro.IAM.Application.UseCases.IdentityResources.Models;
+using Nmro.IAM.Application.UseCases.IdentityResources.Queries;
 using Swashbuckle.AspNetCore.Annotations;
-using Nmro.IAM.Application.UseCases.Resources.Commands;
-using Nmro.IAM.Application.UseCases.Resources.Queries;
-using Nmro.IAM.Application.UseCases.Resources.Models;
+
 namespace Nmro.IAM.API.Controllers
 {
     [Route("resources")]

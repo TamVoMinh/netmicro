@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Logging;
 using Nmro.Web.ServiceDiscovery;
 using Nmro.Landing.Extentions;
 using Nmro.Web;
+using Elastic.Apm.NetCoreAll;
 
 namespace Nmro.Landing
 {
@@ -45,6 +46,8 @@ namespace Nmro.Landing
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseAllElasticApm(Configuration);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
