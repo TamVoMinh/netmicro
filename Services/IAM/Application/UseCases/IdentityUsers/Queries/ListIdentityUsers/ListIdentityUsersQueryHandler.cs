@@ -8,15 +8,15 @@ using Nmro.IAM.Application.UseCases.Users.Models;
 
 namespace Nmro.IAM.Application.UseCases.Users.Queries
 {
-    public class ListUsersQueryHandler : IRequestHandler<ListUsersQuery, PageIdentityUserModel>
+    public class ListIdentityUsersQueryHandler : IRequestHandler<ListIdentityUsersQuery, PageIdentityUserModel>
     {
         private readonly IIAMDbcontext _context;
-        public ListUsersQueryHandler(IIAMDbcontext context)
+        public ListIdentityUsersQueryHandler(IIAMDbcontext context)
         {
             _context = context;
         }
 
-        public async Task<PageIdentityUserModel> Handle(ListUsersQuery request, CancellationToken cancellationToken)
+        public async Task<PageIdentityUserModel> Handle(ListIdentityUsersQuery request, CancellationToken cancellationToken)
         {
             var query = string.IsNullOrEmpty(request.Email)
                 ? _context.IdentityUsers.Where(x => !x.IsDeleted)

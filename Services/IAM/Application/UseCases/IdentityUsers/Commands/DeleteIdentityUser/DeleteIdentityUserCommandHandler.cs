@@ -5,14 +5,14 @@ using Nmro.IAM.Application.Interfaces;
 using Nmro.IAM.Domain.Entities;
 namespace Nmro.IAM.Application.UseCases.Users.Commands
 {
-    public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, int>
+    public class DeleteIdentityUserCommandHandler : IRequestHandler<DeleteIdentityUserCommand, int>
     {
         private readonly IIAMDbcontext _context;
-        public DeleteUserCommandHandler(IIAMDbcontext context)
+        public DeleteIdentityUserCommandHandler(IIAMDbcontext context)
         {
             _context = context;
         }
-        public async Task<int> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(DeleteIdentityUserCommand request, CancellationToken cancellationToken)
         {
             IdentityUser identityUser = await _context.IdentityUsers.FindAsync(request.Id);
             if(identityUser == null){

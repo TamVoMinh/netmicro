@@ -5,16 +5,16 @@ using Nmro.IAM.Application.Interfaces;
 using Nmro.IAM.Domain.Entities;
 namespace Nmro.IAM.Application.UseCases.Users.Commands
 {
-    public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, int>
+    public class CreateIdentityUserCommandHandler : IRequestHandler<CreateIdentityUserCommand, int>
     {
         private readonly IIAMDbcontext _context;
         private readonly IPasswordProcessor _passwordProcessor;
-        public CreateUserCommandHandler(IIAMDbcontext context, IPasswordProcessor passwordValidator)
+        public CreateIdentityUserCommandHandler(IIAMDbcontext context, IPasswordProcessor passwordValidator)
         {
             _context = context;
             _passwordProcessor = passwordValidator;
         }
-        public async Task<int> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(CreateIdentityUserCommand request, CancellationToken cancellationToken)
         {
             IdentityUser identityUser;
 

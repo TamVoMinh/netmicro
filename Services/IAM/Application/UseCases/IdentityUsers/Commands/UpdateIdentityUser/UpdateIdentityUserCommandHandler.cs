@@ -6,16 +6,16 @@ using Nmro.IAM.Application.UseCases.Users.Models;
 using Nmro.Common.Extentions;
 namespace Nmro.IAM.Application.UseCases.Users.Commands
 {
-    public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, int>
+    public class UpdateIdentityUserCommandHandler : IRequestHandler<UpdateIdentityUserCommand, int>
     {
         private readonly IIAMDbcontext _context;
         private readonly IPasswordProcessor _passwordProcessor;
-        public UpdateUserCommandHandler(IIAMDbcontext context, IPasswordProcessor passwordValidator)
+        public UpdateIdentityUserCommandHandler(IIAMDbcontext context, IPasswordProcessor passwordValidator)
         {
             _context = context;
             _passwordProcessor = passwordValidator;
         }
-        public async Task<int> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(UpdateIdentityUserCommand request, CancellationToken cancellationToken)
         {
             var identityUser = await _context.IdentityUsers.FindAsync(request.Model.Id);
 
