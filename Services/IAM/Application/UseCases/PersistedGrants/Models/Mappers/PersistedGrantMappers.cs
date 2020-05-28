@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-namespace Nmro.IAM.Application.Mappers
+namespace Nmro.IAM.Application.UseCases.PersistedGrants.Models.Mappers
 {
     public static class PersistedGrantMappers
     {

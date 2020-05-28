@@ -35,5 +35,15 @@ namespace Nmro.Oidc.Application.Storages
         {
             return model == null ? null : Mapper.Map<IdentityServer4.Models.Resources>(model);
         }
+
+        public static IdentityServer4.Models.PersistedGrant ToIds4Model(this PersistedGrant model)
+        {
+            return model == null ? null : Mapper.Map<IdentityServer4.Models.PersistedGrant>(model);
+        }
+
+        public static PersistedGrant ToModel(this IdentityServer4.Models.PersistedGrant model)
+        {
+            return model == null ? null : Mapper.Map<PersistedGrant>(model);
+        }
     }
 }

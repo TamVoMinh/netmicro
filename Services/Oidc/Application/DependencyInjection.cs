@@ -12,11 +12,7 @@ namespace Nmro.Oidc.Application
              builder
                 .AddClientStore<ClientStore>()
                 .AddResourceStore<ResourceStore>()
-                .AddOperationalStore(options =>
-                {
-                    options.RedisConnectionMultiplexer = RedisOptions.GetConnectionMultiplexer(configuration);
-                    options.Db = 1;
-                });
+                .AddPersistedGrantStore<PersistedGrantStore>();
 
         public static IServiceCollection AddUserStore(this IServiceCollection services) =>
              services

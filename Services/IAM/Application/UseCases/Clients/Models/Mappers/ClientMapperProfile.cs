@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using AutoMapper;
-namespace Nmro.IAM.Application.UseCases.Clients.Mappers
+namespace Nmro.IAM.Application.UseCases.Clients.Models.Mappers
 {
     public class ClientMapperProfile : Profile
     {

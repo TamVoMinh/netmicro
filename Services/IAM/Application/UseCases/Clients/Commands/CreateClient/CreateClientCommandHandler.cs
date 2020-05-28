@@ -2,13 +2,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Nmro.IAM.Application.Interfaces;
-using Nmro.IAM.Application.UseCases.Clients.Mappers;
+using Nmro.IAM.Application.UseCases.Clients.Models.Mappers;
 
 namespace Nmro.IAM.Application.UseCases.Clients.Commands
 {
     public class CreateClientCommandHandler: IRequestHandler<CreateClientCommand, int>
     {
-        IIAMDbcontext _context;
+        private readonly IIAMDbcontext _context;
         public CreateClientCommandHandler(IIAMDbcontext context)
         {
             _context = context;

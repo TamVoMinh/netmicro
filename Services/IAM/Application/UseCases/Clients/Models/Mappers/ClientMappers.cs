@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-namespace Nmro.IAM.Application.UseCases.Clients.Mappers
+namespace Nmro.IAM.Application.UseCases.Clients.Models.Mappers
 {
     public static class ClientMappers
     {

@@ -12,28 +12,28 @@ namespace Nmro.IAM.Application.Interfaces
         /// <value>
         /// The clients.
         /// </value>
-        public DbSet<Client> Clients { get; set; }
+        DbSet<Client> Clients { get; set; }
         /// <summary>
         /// Gets or sets the identity resources.
         /// </summary>
         /// <value>
         /// The identity resources.
         /// </value>
-        public DbSet<IdentityResource> IdentityResources { get; set; }
+        DbSet<IdentityResource> IdentityResources { get; set; }
         /// <summary>
         /// Gets or sets the API resources.
         /// </summary>
         /// <value>
         /// The API resources.
         /// </value>
-        public DbSet<ApiResource> ApiResources { get; set; }
+        DbSet<ApiResource> ApiResources { get; set; }
         /// <summary>
         /// Gets or sets the API scopes.
         /// </summary>
         /// <value>
         /// The API resources.
         /// </value>
-        public DbSet<ApiScope> ApiScopes { get; set; }
+        DbSet<ApiScope> ApiScopes { get; set; }
         /// <summary>
         /// Gets or sets the User credentals.
         /// </summary>
@@ -41,6 +41,8 @@ namespace Nmro.IAM.Application.Interfaces
         /// The Identity Users.
         /// </value>
         DbSet<IdentityUser> IdentityUsers { get; set; }
+
+        DbSet<PersistedGrant> PersistedGrants { get; set; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }

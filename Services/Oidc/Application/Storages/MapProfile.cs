@@ -19,6 +19,7 @@ namespace Nmro.Oidc.Application.Storages
                 .ForMember(des => des.IdentityResources, opt => opt.MapFrom(p=>p.IdentityResources));
 
             CreateMap<IdentityUser, Oidc.Models.User>();
+            CreateMap<PersistedGrant, IdentityServer4.Models.PersistedGrant>().ReverseMap();
         }
     }
 }

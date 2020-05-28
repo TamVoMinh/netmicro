@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Nmro.IAM.Application.Models
+namespace Nmro.IAM.Application.UseCases.PersistedGrants.Models
 {
     /// <summary>
     /// A model for a persisted grant
