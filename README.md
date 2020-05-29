@@ -39,13 +39,13 @@
 1. Drop existing schema **Skip this at first time**.
 
     ```powershell
-        > Set-Location Services/IAM/Persistence | dotnet ef database drop
+        > dotnet ef database drop --project Services/IAM/Persistence
     ```
 
 1. Initialize database schema
 
     ```powershell
-        > Set-Location Services/IAM/Persistence | dotnet ef database update
+        > dotnet ef database update --project Services/IAM/Persistence
     ```
 
 1. Run up with docker-compose

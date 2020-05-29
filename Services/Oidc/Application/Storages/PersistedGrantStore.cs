@@ -13,8 +13,15 @@ namespace Nmro.Oidc.Application.Storages
     public class PersistedGrantStore : IPersistedGrantStore
     {
         private readonly IDistributedCache _distributedCache;
-        private readonly ILogger<ClientStore> _logger;
+        private readonly ILogger<PersistedGrantStore> _logger;
         private readonly IRestOidc _restOidc;
+
+        public PersistedGrantStore(IRestOidc restOidc, ILogger<PersistedGrantStore> logger, IDistributedCache distributedCache)
+        {
+            _restOidc = restOidc;
+            _logger = logger;
+            _distributedCache = distributedCache;
+        }
 
         public async Task<IEnumerable<PersistedGrant>> GetAllAsync(string subjectId)
         {

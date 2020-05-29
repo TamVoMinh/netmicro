@@ -10,7 +10,7 @@ namespace Nmro.IAM.API.Controllers
 {
     [ApiController]
     [ApiExplorerSettings(GroupName="oidc")]
-    [Route("grants")]
+    [Route("oidc/grants")]
     public class GrantsController : NmroControllerBase
     {
         private readonly ILogger<GrantsController> _logger;

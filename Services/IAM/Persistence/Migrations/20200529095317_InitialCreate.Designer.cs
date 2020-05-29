@@ -10,15 +10,15 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Nmro.IAM.Persistence.Migrations
 {
     [DbContext(typeof(IAMDbcontext))]
-    [Migration("20200402070750_Initial-database")]
-    partial class Initialdatabase
+    [Migration("20200529095317_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
-                .HasAnnotation("ProductVersion", "3.1.3")
+                .HasAnnotation("ProductVersion", "3.1.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             modelBuilder.Entity("Nmro.IAM.Domain.Entities.ApiResource", b =>
@@ -871,7 +871,7 @@ namespace Nmro.IAM.Persistence.Migrations
 
                     b.HasIndex("SubjectId", "ClientId", "Type");
 
-                    b.ToTable("PersistedGrant");
+                    b.ToTable("PersistedGrants");
                 });
 
             modelBuilder.Entity("Nmro.IAM.Domain.Entities.ApiResourceClaim", b =>

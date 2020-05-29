@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Nmro.IAM.Persistence.Migrations
 {
-    public partial class Initialdatabase : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -167,7 +167,7 @@ namespace Nmro.IAM.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PersistedGrant",
+                name: "PersistedGrants",
                 columns: table => new
                 {
                     Key = table.Column<string>(maxLength: 200, nullable: false),
@@ -180,7 +180,7 @@ namespace Nmro.IAM.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PersistedGrant", x => x.Key);
+                    table.PrimaryKey("PK_PersistedGrants", x => x.Key);
                 });
 
             migrationBuilder.CreateTable(
@@ -657,13 +657,13 @@ namespace Nmro.IAM.Persistence.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_PersistedGrant_Expiration",
-                table: "PersistedGrant",
+                name: "IX_PersistedGrants_Expiration",
+                table: "PersistedGrants",
                 column: "Expiration");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PersistedGrant_SubjectId_ClientId_Type",
-                table: "PersistedGrant",
+                name: "IX_PersistedGrants_SubjectId_ClientId_Type",
+                table: "PersistedGrants",
                 columns: new[] { "SubjectId", "ClientId", "Type" });
         }
 
@@ -727,7 +727,7 @@ namespace Nmro.IAM.Persistence.Migrations
                 name: "IdentityUsers");
 
             migrationBuilder.DropTable(
-                name: "PersistedGrant");
+                name: "PersistedGrants");
 
             migrationBuilder.DropTable(
                 name: "ApiResources");

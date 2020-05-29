@@ -11,7 +11,7 @@ namespace Nmro.IAM.API.Controllers
 {
     [ApiController]
     [ApiExplorerSettings(GroupName="oidc")]
-    [Route("subjects")]
+    [Route("oidc/subjects")]
     public class SubjectsController : NmroControllerBase
     {
         private readonly ILogger<SubjectsController> _logger;
