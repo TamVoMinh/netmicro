@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Nmro.IAM.Application.Interfaces;
-using Nmro.IAM.Application.UseCases.Clients.Mappers;
+using Nmro.IAM.Application.UseCases.Clients.Models.Mappers;
 
 namespace Nmro.IAM.Application.UseCases.Clients.Queries
 {

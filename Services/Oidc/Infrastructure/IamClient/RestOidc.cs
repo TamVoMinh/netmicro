@@ -6,7 +6,6 @@ using Nmro.Oidc.Infrastructure.IamClient.Models;
 using Flurl.Http;
 using Flurl;
 using Microsoft.Extensions.Options;
-
 namespace Nmro.Oidc.Infrastructure.IamClient
 {
     public class RestOidc : IRestOidc
@@ -19,6 +18,14 @@ namespace Nmro.Oidc.Infrastructure.IamClient
             _appSetting = appsetting;
             _origin = appsetting.Value?.IdentityApiEndpoint ?? "http://iam-api/iam";
         }
+
+        public async Task<IEnumerable<Models.PersistedGrant>> AllGrants(string subjectId)
+        {
+            string apiEndpoint =  _origin.AppendPathSegments("oidc", "subjects", subjectId, "grants");
+
+            return await apiEndpoint.GetAsync().ReceiveJson<IEnumerable<Models.PersistedGrant>>();
+        }
+
         public async Task<Models.AllResources> AllResources()
         {
             string apiEndpoint =  _origin.AppendPathSegments("oidc","resources");
@@ -53,9 +60,39 @@ namespace Nmro.Oidc.Infrastructure.IamClient
 
         public async Task<Client> GetClient(string clientId)
         {
-              string apiEndpoint =  _origin.AppendPathSegments("oidc","clients", clientId);
+            string apiEndpoint =  _origin.AppendPathSegments("oidc","clients", clientId);
 
             return await apiEndpoint.GetAsync().ReceiveJson<Client>();
+        }
+
+        public async Task<PersistedGrant> GetGrant(string key)
+        {
+            string apiEndpoint =  _origin.AppendPathSegments("oidc","grants", key);
+
+            return await apiEndpoint.GetAsync().ReceiveJson<PersistedGrant>();
+        }
+
+        public async Task<int> RemoveAllGrants(string subjectId, string clientId, string type)
+        {
+            string apiEndpoint =  _origin.AppendPathSegments("oidc","grants").SetQueryParams(new {
+                subjectId = subjectId,
+                clientId = clientId,
+                type = type
+            });
+
+            return await apiEndpoint.DeleteAsync().ReceiveJson<int>();
+        }
+
+        public async Task<int> RemoveGrant(string key)
+        {
+            string apiEndpoint =  _origin.AppendPathSegments("oidc","grants", key);
+            return await apiEndpoint.DeleteAsync().ReceiveJson<int>();
+        }
+
+        public async Task<int> StoreGrant(PersistedGrant grant)
+        {
+            string apiEndpoint =  _origin.AppendPathSegments("oidc","grants");
+            return await apiEndpoint.PostJsonAsync(grant).ReceiveJson<int>();
         }
 
         public async Task<IdentityUser> ValidateCredential(string username, string password)

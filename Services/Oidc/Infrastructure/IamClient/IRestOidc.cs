@@ -17,5 +17,14 @@ namespace Nmro.Oidc.Infrastructure.IamClient
 
         Task<Models.AllResources> AllResources();
 
+        Task<IEnumerable<Models.PersistedGrant>> AllGrants(string subjectId);
+
+        Task<Models.PersistedGrant> GetGrant(string key);
+
+        Task<int> RemoveAllGrants(string subjectId, string clientId, string type);
+
+        Task<int> StoreGrant(Models.PersistedGrant grant);
+
+        Task<int> RemoveGrant(string key);
     }
 }

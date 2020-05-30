@@ -16,6 +16,8 @@ namespace Nmro.IAM.Persistence
         public DbSet<ApiResource> ApiResources { get; set; }
         public DbSet<ApiScope> ApiScopes { get; set; }
         public DbSet<IdentityUser> IdentityUsers { get; set; }
+        public DbSet<PersistedGrant> PersistedGrants {get;set;}
+
         public IAMDbcontext(DbContextOptions<IAMDbcontext> options) : base(options) { }
          public IAMDbcontext(
             DbContextOptions<IAMDbcontext> options,
