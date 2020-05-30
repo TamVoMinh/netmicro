@@ -6,5 +6,67 @@
     <h1 class="display-4">Welcome</h1>
     <p>Nmro website public area</a>.</p>
     <div>IP @ViewData["ip"]</div>
+    <h4>Discovering elements:</h4>
+    <div class="list-group text-left">
+        <a href="http://isys.nmro.local/" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+                <h6 class="mb-1">Consul</h6>
+                <small>Service discovery</small>
+            </div>
+            <p class="mb-1">
+                One of service mesh solution providing a full featured control plane with service discovery, configuration, and segmentation functionality.
+            </p>
+        </a>
+        <a href="http://isys.nmro.local/elk/" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+                <h6 class="mb-1">Kibana</h6>
+                <small>Observability</small>
+            </div>
+            <p class="mb-1">
+                A visualizion tool that come along with elasticsearch. We iam to use it for logging, application perfomance monitor.
+            </p>
+            <p class="text-primary" >Login by User/Pass → elastic/changeme</p>
+        </a>
+        <a href="http://isys.nmro.local/health/status" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+                <h6 class="mb-1">Healthchecks</h6>
+                <small>Observability</small>
+            </div>
+            <p class="mb-1">
+                A common way to monitor health for microservice services in net-core by net-core.
+                This featued could be duplicated since most of service mesh mostly have this feature.
+            </p>
+        </a>
+        <a href="http://isys.nmro.local/redis/" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+                <h6 class="mb-1">Redis Db</h6>
+                <small>Caching</small>
+            </div>
+            <p class="mb-1">
+                For distributed caching, Redis Db is awesome. We use Redis commander to help developer more easy to work with Redis.
+            </p>
+        </a>
 
+        <a href="http://control-centre.nmro.local/" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+                <h6 class="mb-1">Control Centre</h6>
+                <small>Application</small>
+            </div>
+            <p class="mb-1">
+                Every software system is alway having backoffice system to operate bussiness processing and this app is just a small part which mostly focus on common cases for managing user asscess managment.
+                It being developed based on angular, applied most secure oidc flow for single-page-application: PKCE Flow.
+            </p>
+            <p class="text-primary" >Login by User/Pass → admin/admin123</p>
+        </a>
+
+            <a href="http://docs.nmro.local/" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+                <h6 class="mb-1">OpenAPI Specification</h6>
+                <small>Documentation</small>
+            </div>
+            <p class="mb-1">
+                Veriy initial thing of developer portal. Which provide api documentation, development sanbox and managing api keys.
+            </p>
+        </a>
+    </div>
 </div>
