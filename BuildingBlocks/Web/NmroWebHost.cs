@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using Elastic.Apm.SerilogEnricher;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
