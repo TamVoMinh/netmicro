@@ -1,9 +1,9 @@
 using Nmro.Web;
-namespace Nmro.Health
+namespace Nmro.Netmon
 {
     public class Program
     {
-        public static readonly string AppName = "health";
+        public static readonly string AppName = "netmon";
 
         public static int Main(string[] args) => NmroWebHost.Build<Startup>(args);
 

@@ -1,9 +1,4 @@
 using Nmro.Web;
-using Hangfire;
-using MediatR;
-using Microsoft.Extensions.DependencyInjection;
-using System.Threading;
-using Nmro.IAM.Application.UseCases.PersistedGrants.Commands;
 
 namespace Nmro.IAM.Worker
 {

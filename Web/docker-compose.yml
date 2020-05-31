@@ -11,15 +11,3 @@ services:
     depends_on:
       - slnbased
       - consul
-
-  health:
-    image: ${DOCKER_REGISTRY:-nmro}/web/health
-    build:
-      context: .
-      dockerfile: Web/Health/Dockerfile
-    environment:
-      IdentityUrl: http://oidc.${PUBLIC_ORIGIN:-nmro.local}
-      HealthChecksUI__Webhooks__Uri: "https://${LS_NOTIFY_HOOK}"
-    depends_on:
-      - slnbased
-      - consul

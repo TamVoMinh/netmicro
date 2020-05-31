@@ -46,10 +46,10 @@ namespace Nmro.IAM.Worker
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseHangfireDashboard("/hangfire");
             }
 
             app.UseHangfireServer();
-            app.UseHangfireDashboard("/hangfire/iam-async-worker");
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿{
   "profiles": {
-    "Nmro.Health": {
+    "Nmro.Netmon": {
       "commandName": "Project",
       "launchBrowser": true,
       "applicationUrl": "http://localhost:8082",
