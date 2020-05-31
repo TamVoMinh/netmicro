@@ -9,6 +9,7 @@ COPY "packages" "packages"
 COPY "BuildingBlocks/Web/Web.csproj" "BuildingBlocks/Web/Web.csproj"
 
 COPY "Backbone/ApiGateway/Nmro.ApiGateway.csproj" "Backbone/ApiGateway/Nmro.ApiGateway.csproj"
+COPY "Backing/Netmon/Nmro.Netmon.csproj" "Backing/Netmon/Nmro.Netmon.csproj"
 
 COPY "Services/IAM/API/Nmro.IAM.API.csproj" "Services/IAM/API/Nmro.IAM.API.csproj"
 COPY "Services/IAM/Application/Nmro.IAM.Application.csproj" "Services/IAM/Application/Nmro.IAM.Application.csproj"
@@ -18,7 +19,6 @@ COPY "Services/IAM/Persistence/Nmro.IAM.Persistence.csproj" "Services/IAM/Persis
 COPY "Services/Oidc/Nmro.Oidc.csproj" "Services/Oidc/Nmro.Oidc.csproj"
 
 COPY "Web/Landing/Nmro.Landing.csproj" "Web/Landing/Nmro.Landing.csproj"
-COPY "Web/Health/Nmro.Health.csproj" "Web/Health/Nmro.Health.csproj"
 
 
 COPY . .

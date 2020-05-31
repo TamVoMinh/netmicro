@@ -1,6 +1,6 @@
-namespace Nmro.Landing.Settings
+namespace Nmro.Web.OidcClients
 {
-    internal class OidcOptions
+    public class OidcOptions
     {
         public string Authority {get;set;}
         public string SignedOutRedirectUri {get;set;}

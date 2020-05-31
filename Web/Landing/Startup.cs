@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Logging;
 using Nmro.Web.ServiceDiscovery;
-using Nmro.Landing.Extentions;
+using Nmro.Web.OidcClients;
 using Nmro.Web;
 using Elastic.Apm.NetCoreAll;
 
@@ -34,7 +34,7 @@ namespace Nmro.Landing
 
             services.AddControllers();
 
-            services.AddCustomAuthentication(Configuration);
+            services.AddOidcHybridAuthentication(Configuration);
 
             services.AddHealthChecks();
 

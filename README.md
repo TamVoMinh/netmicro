@@ -30,7 +30,7 @@
         >  dotnet restore .\Nmro.sln
     ```
 
-1. Run Up IAM database
+1. Run Up Postgres database
 
     ```powershell
         .\cli\nmro.sh up -d db-postgres
@@ -48,6 +48,10 @@
         > dotnet ef database update --project Services/IAM/Persistence
     ```
 
+1. Manually create database schema for hangfire.
+
+    database name `hangfire_db`
+
 1. Run up with docker-compose
 
     ```powershell
@@ -57,8 +61,8 @@
 
 1. Known issues:
 
-    * "logspout" service failed to build on windown, reference [issues/11](https://github.com/TamVoMinh/netmicro/issues/11)
-    * `warning CS8034: Unable to load Analyzer assembly` → run `dotnet nuget locals all -c`
+    * "logspout" service failed to build on Window, reference [issues/11](https://github.com/TamVoMinh/netmicro/issues/11)
+    * `warning CS8034: Unable to load Analyzer assembly` → run cmd `dotnet nuget locals all -c`
 
 1. Most used [commands](Docs/DOCKER.md)
 
@@ -70,10 +74,11 @@
 ### Playground with
 
 1. [Landing site](http://nmro.local/) (Hybrid-Flow for tradtional website)
-1. [Consul](http://isys.nmro.local/)
-1. [Kibana](http://isys.nmro.local/elk/)
-1. [Healthchecks-ui](http://isys.nmro.local/health/status/)
-1. [Redis Db](http://isys.nmro.local/redis/)
+1. [Consul](http://infosys.nmro.local/)
+1. [Kibana](http://infosys.nmro.local/elk/)
+1. [Dotnet Healthchecks tool](http://infosys.nmro.local/netmon/health)
+1. [Hangfire Dashboard](http://infosys.nmro.local/netmon/hangfire)
+1. [Redis Db](http://infosys.nmro.local/redis/)
 1. [Control-centre](http://control-centre.nmro.local/) (auth code flow with PKCE for angular app)
 1. [Swagger-ui](http://docs.nmro.local/)
 

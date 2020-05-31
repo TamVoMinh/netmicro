@@ -3,12 +3,12 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Nmro.Landing.Settings;
 
-namespace Nmro.Landing.Extentions
+namespace Nmro.Web.OidcClients
 {
-    public static class AuthenticationExtentions{
-        public static IServiceCollection AddCustomAuthentication(this IServiceCollection services, IConfiguration configuration)
+    public static class AuthenticationExtentions
+    {
+        public static IServiceCollection AddOidcHybridAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
             OidcOptions oidcOptions = configuration.GetSection("Oidc").Get<OidcOptions>();
             if(oidcOptions==null){

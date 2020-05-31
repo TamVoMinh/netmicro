@@ -12,6 +12,41 @@ namespace Nmro.IAM.Application.UseCases.Systems
             return new List<Client> {
                 new Client {
                     Id = 2,
+                    ClientId = "nmro-netmon",
+                    ClientName = "Nmro net monitor client - Hybrid Grant",
+                    ClientSecrets = new List<ClientSecret>
+                    {
+                        new ClientSecret { Value = "nmro-netmon-secret".Sha256(), Type = OidcConstants.SecretTypes.SharedSecret }
+                    },
+                    AllowedGrantTypes = new List<ClientGrantType> { new ClientGrantType{ GrantType = GrantType.Hybrid} },
+                    RequirePkce = false,
+                    AllowAccessTokensViaBrowser = false,
+                    RequireConsent = false,
+                    AlwaysIncludeUserClaimsInIdToken = true,
+                    AccessTokenLifetime = 3600,
+                    IdentityTokenLifetime = 30,
+                    AllowedScopes = new List<ClientScope>
+                    {
+                        new ClientScope{ Scope =  OidcConstants.StandardScopes.OpenId},
+                        new ClientScope{ Scope =  OidcConstants.StandardScopes.Profile},
+                        new ClientScope{ Scope =  OidcConstants.StandardScopes.Email},
+                        new ClientScope{ Scope =  "member"}
+                    },
+                    RedirectUris = new List<ClientRedirectUri>
+                    {
+                        new ClientRedirectUri{ RedirectUri="http://infosys.nmro.local/netmon/signin-oidc" }
+                    },
+                    PostLogoutRedirectUris = new List<ClientPostLogoutRedirectUri>
+                    {
+                         new ClientPostLogoutRedirectUri{ PostLogoutRedirectUri="http://infosys.nmro.local/netmon/signout-callback-oidc"}
+                    },
+                    AllowedCorsOrigins = new List<ClientCorsOrigin> {
+                        new ClientCorsOrigin{Origin="http://infosys.nmro.local/netmon"},
+                        new ClientCorsOrigin{Origin="https://infosys.nmro.local/netmon"}
+                    }
+                },
+                new Client {
+                    Id = 2,
                     ClientId = "nmro-website",
                     ClientName = "Nmro MVC client - Hybrid Grant",
                     ClientSecrets = new List<ClientSecret>

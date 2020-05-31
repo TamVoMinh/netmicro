@@ -1,0 +1,14 @@
+version: '3.5'
+services:
+  netmon:
+    image: ${DOCKER_REGISTRY:-nmro}/backing/netmon
+    build:
+      context: .
+      dockerfile: Backing/Netmon/Dockerfile
+    environment:
+      ConnectionStrings__HangfireConnection: ${PGDB_HANGFIRE:-Server=db-postgres;port=5432;Database=hangfire_db;UserId=nmro_dbadmin;Password=theForest&;Pooling=true}
+      IdentityUrl: http://oidc.${PUBLIC_ORIGIN:-nmro.local}
+      HealthChecksUI__Webhooks__Uri: https://${LS_NOTIFY_HOOK}
+    depends_on:
+      - slnbased
+      - consul
