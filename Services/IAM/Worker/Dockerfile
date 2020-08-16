@@ -15,4 +15,4 @@ RUN dotnet publish --no-restore -c Release -o /artifact
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /artifact .
-ENTRYPOINT ["dotnet", "Nmro.IAM.Worker"]
+ENTRYPOINT ["dotnet", "Nmro.IAM.Worker.dll"]

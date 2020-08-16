@@ -2,7 +2,7 @@ using System.Threading;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Nmro.IAM.Application.UseCases.Systems;
+using Nmro.IAM.Core.UseCases.Systems;
 using Nmro.IAM.Persistence;
 using Nmro.Web;
 

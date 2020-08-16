@@ -23,7 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IAM", "IAM", "{672DB2AE-131
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nmro.IAM.API", "Services\IAM\API\Nmro.IAM.API.csproj", "{482B102D-ECDD-4A7E-9A11-61197B779810}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nmro.IAM.Application", "Services\IAM\Application\Nmro.IAM.Application.csproj", "{B1631B2A-40E0-49D2-B6FA-E4CCB0407F4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nmro.IAM.Core", "Services\IAM\Core\Nmro.IAM.Core.csproj", "{B1631B2A-40E0-49D2-B6FA-E4CCB0407F4A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nmro.IAM.Domain", "Services\IAM\Domain\Nmro.IAM.Domain.csproj", "{DE912420-20C6-4327-B1C8-C42A588D31EF}"
 EndProject

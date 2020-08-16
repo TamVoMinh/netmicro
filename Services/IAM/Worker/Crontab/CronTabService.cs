@@ -4,7 +4,7 @@ using Hangfire;
 using MediatR;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Nmro.IAM.Application.UseCases.PersistedGrants.Commands;
+using Nmro.IAM.Core.UseCases.PersistedGrants.Commands;
 
 namespace Nmro.IAM.Worker.Crontab
 {

@@ -7,7 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Nmro.Web.ServiceDiscovery;
 using Nmro.IAM.Persistence;
-using Nmro.IAM.Application;
+using Nmro.IAM.Core;
 using Nmro.Common;
 using Nmro.Web;
 using Elastic.Apm.NetCoreAll;
@@ -38,7 +38,7 @@ namespace Nmro.IAM.API
                 .AddCommonServices()
                 .AddWebServices()
                 .AddPersistance(Configuration)
-                .AddApplication()
+                .AddCore()
                 .AddSwagger();
 
             services

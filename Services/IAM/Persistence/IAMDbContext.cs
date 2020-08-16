@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Nmro.Common.Services;
-using Nmro.IAM.Application.Interfaces;
+using Nmro.IAM.Core.Interfaces;
 using Nmro.IAM.Domain.Entities;
 using Nmro.Web.Services;
 using System.Threading;

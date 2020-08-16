@@ -7,7 +7,7 @@ using Hangfire;
 using Hangfire.PostgreSql;
 using Elastic.Apm.NetCoreAll;
 using Nmro.IAM.Persistence;
-using Nmro.IAM.Application;
+using Nmro.IAM.Core;
 using Nmro.IAM.Worker.Crontab;
 
 namespace Nmro.IAM.Worker
@@ -24,7 +24,7 @@ namespace Nmro.IAM.Worker
         {
             services
                 .AddPersistance(Configuration)
-                .AddApplication();
+                .AddCore();
 
             services.AddHangfire(configuration => configuration
                 .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)

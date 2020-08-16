@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Nmro.IAM.Application.Interfaces;
+using Nmro.IAM.Core.Interfaces;
 
 namespace Nmro.IAM.Persistence
 {

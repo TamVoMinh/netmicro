@@ -2,9 +2,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Annotations;
-using Nmro.IAM.Application.UseCases.Clients.Queries;
-using Nmro.IAM.Application.UseCases.Clients.Models;
-using Nmro.IAM.Application.UseCases.Clients.Commands;
+using Nmro.IAM.Core.UseCases.Clients.Queries;
+using Nmro.IAM.Core.UseCases.Clients.Models;
+using Nmro.IAM.Core.UseCases.Clients.Commands;
 
 namespace Nmro.IAM.API.Controllers
 {

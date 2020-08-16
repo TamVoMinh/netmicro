@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-namespace Nmro.IAM.Application
+namespace Nmro.Common.Extentions
 {
     public static class IEnumerableExtensions
     {

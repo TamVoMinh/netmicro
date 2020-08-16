@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nmro.IAM.Domain", "Domain\Nmro.IAM.Domain.csproj", "{C138B7D7-613F-4A5F-B21F-AF27253B2D92}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nmro.IAM.Application", "Application\Nmro.IAM.Application.csproj", "{46BBF8B2-E457-4877-94F8-8EBAADE41CFE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nmro.IAM.Core", "Core\Nmro.IAM.Application.csproj", "{46BBF8B2-E457-4877-94F8-8EBAADE41CFE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nmro.IAM.Persistence", "Persistence\Nmro.IAM.Persistence.csproj", "{3DF53E23-DA50-4C5E-8B2F-6EA73A9DD41F}"
 EndProject
