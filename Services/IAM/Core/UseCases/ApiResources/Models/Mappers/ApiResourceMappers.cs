@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-namespace Nmro.IAM.Core.UseCases.ApiResources.Models.Mappers
+namespace Nmro.IAM.Core.UseCases.ApiResources.Dtos.Mappers
 {
     public static class ApiResourceMappers
     {
@@ -9,13 +9,13 @@ namespace Nmro.IAM.Core.UseCases.ApiResources.Models.Mappers
                 .CreateMapper();
         }
         internal static IMapper Mapper { get; }
-        public static Models.ApiResource ToModel(this Domain.Entities.ApiResource entity)
+        public static Dtos.ApiResource ToModel(this Core.Entities.ApiResource entity)
         {
-            return entity == null ? null : Mapper.Map<Models.ApiResource>(entity);
+            return entity == null ? null : Mapper.Map<Dtos.ApiResource>(entity);
         }
-        public static Domain.Entities.ApiResource ToEntity(this Models.ApiResource model)
+        public static Core.Entities.ApiResource ToEntity(this Dtos.ApiResource model)
         {
-            return model == null ? null : Mapper.Map<Domain.Entities.ApiResource>(model);
+            return model == null ? null : Mapper.Map<Core.Entities.ApiResource>(model);
         }
     }
 }

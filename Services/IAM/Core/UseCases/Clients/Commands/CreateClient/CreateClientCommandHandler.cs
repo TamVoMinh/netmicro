@@ -2,7 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Nmro.IAM.Core.Interfaces;
-using Nmro.IAM.Core.UseCases.Clients.Models.Mappers;
+using Nmro.IAM.Core.UseCases.Clients.Dtos.Mappers;
 
 namespace Nmro.IAM.Core.UseCases.Clients.Commands
 {
@@ -16,7 +16,7 @@ namespace Nmro.IAM.Core.UseCases.Clients.Commands
 
         public async Task<int> Handle(CreateClientCommand request, CancellationToken cancellationToken)
         {
-            Domain.Entities.Client client = request.Model.ToEntity();
+            Core.Entities.Client client = request.Model.ToEntity();
 
             await _context.Clients.AddAsync(client);
             int effected = await _context.SaveChangesAsync(cancellationToken);

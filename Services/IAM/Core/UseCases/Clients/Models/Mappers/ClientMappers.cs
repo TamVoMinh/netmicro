@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-namespace Nmro.IAM.Core.UseCases.Clients.Models.Mappers
+namespace Nmro.IAM.Core.UseCases.Clients.Dtos.Mappers
 {
     public static class ClientMappers
     {
@@ -9,23 +9,23 @@ namespace Nmro.IAM.Core.UseCases.Clients.Models.Mappers
                 .CreateMapper();
         }
         internal static IMapper Mapper { get; }
-        public static Models.Client ToModel(this Domain.Entities.Client entity)
+        public static Dtos.Client ToModel(this Core.Entities.Client entity)
         {
-            return Mapper.Map<Models.Client>(entity);
+            return Mapper.Map<Dtos.Client>(entity);
         }
-        public static Domain.Entities.Client ToEntity(this Models.Client model)
+        public static Core.Entities.Client ToEntity(this Dtos.Client model)
         {
-            return Mapper.Map<Domain.Entities.Client>(model);
-        }
-
-        public static Domain.Entities.Client ToEntity(this Models.CreateClientModel model)
-        {
-            return Mapper.Map<Domain.Entities.Client>(model);
+            return Mapper.Map<Core.Entities.Client>(model);
         }
 
-        public static Domain.Entities.Client ToUpdateEntity(this Models.UpdateClientModel model, Domain.Entities.Client client)
+        public static Core.Entities.Client ToEntity(this Dtos.CreateClientModel model)
         {
-            return Mapper.Map<Models.UpdateClientModel, Domain.Entities.Client>(model, client);
+            return Mapper.Map<Core.Entities.Client>(model);
+        }
+
+        public static Core.Entities.Client ToUpdateEntity(this Dtos.UpdateClientModel model, Core.Entities.Client client)
+        {
+            return Mapper.Map<Dtos.UpdateClientModel, Core.Entities.Client>(model, client);
         }
     }
 }

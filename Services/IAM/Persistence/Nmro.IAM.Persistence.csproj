@@ -21,7 +21,6 @@
     <ProjectReference Include="..\..\..\BuildingBlocks\Web\Web.csproj" />
     <ProjectReference Include="..\..\..\BuildingBlocks\Common\Nmro.Common.csproj" />
     <ProjectReference Include="..\Core\Nmro.IAM.Core.csproj" />
-    <ProjectReference Include="..\Domain\Nmro.IAM.Domain.csproj" />
   </ItemGroup>
 
 </Project>

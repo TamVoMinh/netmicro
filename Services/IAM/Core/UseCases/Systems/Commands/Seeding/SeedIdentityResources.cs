@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using Nmro.IAM.Domain;
-using Nmro.IAM.Domain.Entities;
+using Nmro.IAM.Core;
+using Nmro.IAM.Core.Entities;
 
 namespace Nmro.IAM.Core.UseCases.Systems
 {
@@ -8,9 +8,9 @@ namespace Nmro.IAM.Core.UseCases.Systems
     {
         public static List<IdentityResource> List()
         {
-            return new List<Nmro.IAM.Domain.Entities.IdentityResource>
+            return new List<Nmro.IAM.Core.Entities.IdentityResource>
             {
-                new Nmro.IAM.Domain.Entities.IdentityResource
+                new Nmro.IAM.Core.Entities.IdentityResource
                 {
                     Name = OidcConstants.StandardScopes.OpenId,
                     DisplayName = "Your user identifier",
@@ -20,7 +20,7 @@ namespace Nmro.IAM.Core.UseCases.Systems
                     },
                     Enabled = true
                 },
-                new Nmro.IAM.Domain.Entities.IdentityResource
+                new Nmro.IAM.Core.Entities.IdentityResource
                 {
                     Name = OidcConstants.StandardScopes.Profile,
                     DisplayName = "User profile",
@@ -43,7 +43,7 @@ namespace Nmro.IAM.Core.UseCases.Systems
                     },
                     Enabled = true
                 },
-                new Nmro.IAM.Domain.Entities.IdentityResource
+                new Nmro.IAM.Core.Entities.IdentityResource
                 {
                     Name = OidcConstants.StandardScopes.Email,
                     DisplayName = "Your email address",
@@ -54,7 +54,7 @@ namespace Nmro.IAM.Core.UseCases.Systems
                     },
                     Enabled = true
                 },
-                new Nmro.IAM.Domain.Entities.IdentityResource {
+                new Nmro.IAM.Core.Entities.IdentityResource {
                     Name = "role",
                     UserClaims = new List<IdentityResourceClaim> {
                         new IdentityResourceClaim { Type = "role"},

@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Nmro.IAM.Domain.Entities;
+using Nmro.IAM.Core.Entities;
 namespace Nmro.IAM.Persistence.Configurations
 {
     public class ApiResourceScopeConfiguration : IEntityTypeConfiguration<ApiResourceScope>

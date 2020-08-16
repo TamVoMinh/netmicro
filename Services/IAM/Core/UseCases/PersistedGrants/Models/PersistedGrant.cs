@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Nmro.IAM.Core.UseCases.PersistedGrants.Models
+namespace Nmro.IAM.Core.UseCases.PersistedGrants.Dtos
 {
     /// <summary>
     /// A model for a persisted grant

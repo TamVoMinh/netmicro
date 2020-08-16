@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Annotations;
 using Nmro.IAM.Core.UseCases.Users.Queries;
 using Nmro.IAM.Core.UseCases.Users.Commands;
-using Nmro.IAM.Core.UseCases.Users.Models;
+using Nmro.IAM.Core.UseCases.Users.Dtos;
 
 namespace Nmro.IAM.API.Controllers
 {

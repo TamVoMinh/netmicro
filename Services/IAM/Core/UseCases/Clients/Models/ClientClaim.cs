@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Security.Claims;
-namespace Nmro.IAM.Core.UseCases.Clients.Models
+namespace Nmro.IAM.Core.UseCases.Clients.Dtos
 {
     public class ClientClaim
     {

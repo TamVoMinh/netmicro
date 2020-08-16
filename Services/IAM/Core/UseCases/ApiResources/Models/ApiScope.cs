@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Nmro.Common.Extentions;
-using Nmro.IAM.Core.Models;
-namespace Nmro.IAM.Core.UseCases.ApiResources.Models
+using Nmro.IAM.Core.Dtos;
+namespace Nmro.IAM.Core.UseCases.ApiResources.Dtos
 {
     public class ApiScope : Resource
     {

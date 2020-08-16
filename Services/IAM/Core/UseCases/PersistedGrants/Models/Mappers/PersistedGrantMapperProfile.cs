@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-namespace Nmro.IAM.Core.UseCases.PersistedGrants.Models.Mappers
+namespace Nmro.IAM.Core.UseCases.PersistedGrants.Dtos.Mappers
 {
     public class PersistedGrantMapperProfile:Profile
     {
         public PersistedGrantMapperProfile()
         {
-            CreateMap<Domain.Entities.PersistedGrant, Models.PersistedGrant>(MemberList.Destination)
+            CreateMap<Core.Entities.PersistedGrant, Dtos.PersistedGrant>(MemberList.Destination)
                 .ReverseMap();
         }
     }

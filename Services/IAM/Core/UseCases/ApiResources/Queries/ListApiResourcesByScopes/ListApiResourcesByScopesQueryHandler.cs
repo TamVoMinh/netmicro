@@ -5,18 +5,18 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Nmro.IAM.Core.Interfaces;
 using System.Collections.Generic;
-using Nmro.IAM.Core.UseCases.ApiResources.Models.Mappers;
+using Nmro.IAM.Core.UseCases.ApiResources.Dtos.Mappers;
 
 namespace Nmro.IAM.Core.UseCases.ApiResources.Queries
 {
-    public class ListApiResourcesByScopesQueryHandler : IRequestHandler<ListApiResourcesByScopesQuery, IEnumerable<Models.ApiResource>>
+    public class ListApiResourcesByScopesQueryHandler : IRequestHandler<ListApiResourcesByScopesQuery, IEnumerable<Dtos.ApiResource>>
     {
         private readonly IIAMDbcontext _context;
         public ListApiResourcesByScopesQueryHandler(IIAMDbcontext context)
         {
             _context = context;
         }
-        public async Task<IEnumerable<Models.ApiResource>> Handle(ListApiResourcesByScopesQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<Dtos.ApiResource>> Handle(ListApiResourcesByScopesQuery request, CancellationToken cancellationToken)
         {
             var names = request.Scopes.ToArray();
 

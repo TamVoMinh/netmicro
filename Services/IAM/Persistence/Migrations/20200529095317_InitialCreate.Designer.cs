@@ -21,7 +21,7 @@ namespace Nmro.IAM.Persistence.Migrations
                 .HasAnnotation("ProductVersion", "3.1.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.ApiResource", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.ApiResource", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -71,7 +71,7 @@ namespace Nmro.IAM.Persistence.Migrations
                     b.ToTable("ApiResources");
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.ApiResourceClaim", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.ApiResourceClaim", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -93,7 +93,7 @@ namespace Nmro.IAM.Persistence.Migrations
                     b.ToTable("ApiResourceClaim");
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.ApiResourceProperty", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.ApiResourceProperty", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -120,7 +120,7 @@ namespace Nmro.IAM.Persistence.Migrations
                     b.ToTable("ApiResourceProperty");
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.ApiResourceScope", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.ApiResourceScope", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -142,7 +142,7 @@ namespace Nmro.IAM.Persistence.Migrations
                     b.ToTable("ApiResourceScope");
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.ApiResourceSecret", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.ApiResourceSecret", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -179,7 +179,7 @@ namespace Nmro.IAM.Persistence.Migrations
                     b.ToTable("ApiResourceSecret");
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.ApiScope", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.ApiScope", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -219,7 +219,7 @@ namespace Nmro.IAM.Persistence.Migrations
                     b.ToTable("ApiScopes");
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.ApiScopeClaim", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.ApiScopeClaim", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -241,7 +241,7 @@ namespace Nmro.IAM.Persistence.Migrations
                     b.ToTable("ApiScopeClaim");
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.ApiScopeProperty", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.ApiScopeProperty", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -268,7 +268,7 @@ namespace Nmro.IAM.Persistence.Migrations
                     b.ToTable("ApiScopeProperty");
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.Client", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.Client", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -426,7 +426,7 @@ namespace Nmro.IAM.Persistence.Migrations
                     b.ToTable("Clients");
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.ClientClaim", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.ClientClaim", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -453,7 +453,7 @@ namespace Nmro.IAM.Persistence.Migrations
                     b.ToTable("ClientClaim");
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.ClientCorsOrigin", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.ClientCorsOrigin", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -475,7 +475,7 @@ namespace Nmro.IAM.Persistence.Migrations
                     b.ToTable("ClientCorsOrigin");
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.ClientGrantType", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.ClientGrantType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -497,7 +497,7 @@ namespace Nmro.IAM.Persistence.Migrations
                     b.ToTable("ClientGrantType");
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.ClientIdPRestriction", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.ClientIdPRestriction", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -519,7 +519,7 @@ namespace Nmro.IAM.Persistence.Migrations
                     b.ToTable("ClientIdPRestriction");
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.ClientPostLogoutRedirectUri", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.ClientPostLogoutRedirectUri", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -541,7 +541,7 @@ namespace Nmro.IAM.Persistence.Migrations
                     b.ToTable("ClientPostLogoutRedirectUri");
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.ClientProperty", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.ClientProperty", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -568,7 +568,7 @@ namespace Nmro.IAM.Persistence.Migrations
                     b.ToTable("ClientProperty");
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.ClientRedirectUri", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.ClientRedirectUri", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -590,7 +590,7 @@ namespace Nmro.IAM.Persistence.Migrations
                     b.ToTable("ClientRedirectUri");
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.ClientScope", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.ClientScope", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -612,7 +612,7 @@ namespace Nmro.IAM.Persistence.Migrations
                     b.ToTable("ClientScope");
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.ClientSecret", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.ClientSecret", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -649,7 +649,7 @@ namespace Nmro.IAM.Persistence.Migrations
                     b.ToTable("ClientSecret");
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.DeviceFlowCodes", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.DeviceFlowCodes", b =>
                 {
                     b.Property<string>("UserCode")
                         .HasColumnType("character varying(200)")
@@ -691,7 +691,7 @@ namespace Nmro.IAM.Persistence.Migrations
                     b.ToTable("DeviceFlowCodes");
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.IdentityResource", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.IdentityResource", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -740,7 +740,7 @@ namespace Nmro.IAM.Persistence.Migrations
                     b.ToTable("IdentityResources");
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.IdentityResourceClaim", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.IdentityResourceClaim", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -762,7 +762,7 @@ namespace Nmro.IAM.Persistence.Migrations
                     b.ToTable("IdentityResourceClaim");
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.IdentityResourceProperty", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.IdentityResourceProperty", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -789,7 +789,7 @@ namespace Nmro.IAM.Persistence.Migrations
                     b.ToTable("IdentityResourceProperty");
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.IdentityUser", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.IdentityUser", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -834,7 +834,7 @@ namespace Nmro.IAM.Persistence.Migrations
                     b.ToTable("IdentityUsers");
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.PersistedGrant", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.PersistedGrant", b =>
                 {
                     b.Property<string>("Key")
                         .HasColumnType("character varying(200)")
@@ -874,153 +874,153 @@ namespace Nmro.IAM.Persistence.Migrations
                     b.ToTable("PersistedGrants");
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.ApiResourceClaim", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.ApiResourceClaim", b =>
                 {
-                    b.HasOne("Nmro.IAM.Domain.Entities.ApiResource", "ApiResource")
+                    b.HasOne("Nmro.IAM.Core.Entities.ApiResource", "ApiResource")
                         .WithMany("UserClaims")
                         .HasForeignKey("ApiResourceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.ApiResourceProperty", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.ApiResourceProperty", b =>
                 {
-                    b.HasOne("Nmro.IAM.Domain.Entities.ApiResource", "ApiResource")
+                    b.HasOne("Nmro.IAM.Core.Entities.ApiResource", "ApiResource")
                         .WithMany("Properties")
                         .HasForeignKey("ApiResourceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.ApiResourceScope", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.ApiResourceScope", b =>
                 {
-                    b.HasOne("Nmro.IAM.Domain.Entities.ApiResource", "ApiResource")
+                    b.HasOne("Nmro.IAM.Core.Entities.ApiResource", "ApiResource")
                         .WithMany("Scopes")
                         .HasForeignKey("ApiResourceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.ApiResourceSecret", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.ApiResourceSecret", b =>
                 {
-                    b.HasOne("Nmro.IAM.Domain.Entities.ApiResource", "ApiResource")
+                    b.HasOne("Nmro.IAM.Core.Entities.ApiResource", "ApiResource")
                         .WithMany("Secrets")
                         .HasForeignKey("ApiResourceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.ApiScopeClaim", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.ApiScopeClaim", b =>
                 {
-                    b.HasOne("Nmro.IAM.Domain.Entities.ApiScope", "Scope")
+                    b.HasOne("Nmro.IAM.Core.Entities.ApiScope", "Scope")
                         .WithMany("UserClaims")
                         .HasForeignKey("ScopeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.ApiScopeProperty", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.ApiScopeProperty", b =>
                 {
-                    b.HasOne("Nmro.IAM.Domain.Entities.ApiScope", "Scope")
+                    b.HasOne("Nmro.IAM.Core.Entities.ApiScope", "Scope")
                         .WithMany("Properties")
                         .HasForeignKey("ScopeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.ClientClaim", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.ClientClaim", b =>
                 {
-                    b.HasOne("Nmro.IAM.Domain.Entities.Client", "Client")
+                    b.HasOne("Nmro.IAM.Core.Entities.Client", "Client")
                         .WithMany("Claims")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.ClientCorsOrigin", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.ClientCorsOrigin", b =>
                 {
-                    b.HasOne("Nmro.IAM.Domain.Entities.Client", "Client")
+                    b.HasOne("Nmro.IAM.Core.Entities.Client", "Client")
                         .WithMany("AllowedCorsOrigins")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.ClientGrantType", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.ClientGrantType", b =>
                 {
-                    b.HasOne("Nmro.IAM.Domain.Entities.Client", "Client")
+                    b.HasOne("Nmro.IAM.Core.Entities.Client", "Client")
                         .WithMany("AllowedGrantTypes")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.ClientIdPRestriction", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.ClientIdPRestriction", b =>
                 {
-                    b.HasOne("Nmro.IAM.Domain.Entities.Client", "Client")
+                    b.HasOne("Nmro.IAM.Core.Entities.Client", "Client")
                         .WithMany("IdentityProviderRestrictions")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.ClientPostLogoutRedirectUri", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.ClientPostLogoutRedirectUri", b =>
                 {
-                    b.HasOne("Nmro.IAM.Domain.Entities.Client", "Client")
+                    b.HasOne("Nmro.IAM.Core.Entities.Client", "Client")
                         .WithMany("PostLogoutRedirectUris")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.ClientProperty", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.ClientProperty", b =>
                 {
-                    b.HasOne("Nmro.IAM.Domain.Entities.Client", "Client")
+                    b.HasOne("Nmro.IAM.Core.Entities.Client", "Client")
                         .WithMany("Properties")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.ClientRedirectUri", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.ClientRedirectUri", b =>
                 {
-                    b.HasOne("Nmro.IAM.Domain.Entities.Client", "Client")
+                    b.HasOne("Nmro.IAM.Core.Entities.Client", "Client")
                         .WithMany("RedirectUris")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.ClientScope", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.ClientScope", b =>
                 {
-                    b.HasOne("Nmro.IAM.Domain.Entities.Client", "Client")
+                    b.HasOne("Nmro.IAM.Core.Entities.Client", "Client")
                         .WithMany("AllowedScopes")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.ClientSecret", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.ClientSecret", b =>
                 {
-                    b.HasOne("Nmro.IAM.Domain.Entities.Client", "Client")
+                    b.HasOne("Nmro.IAM.Core.Entities.Client", "Client")
                         .WithMany("ClientSecrets")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.IdentityResourceClaim", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.IdentityResourceClaim", b =>
                 {
-                    b.HasOne("Nmro.IAM.Domain.Entities.IdentityResource", "IdentityResource")
+                    b.HasOne("Nmro.IAM.Core.Entities.IdentityResource", "IdentityResource")
                         .WithMany("UserClaims")
                         .HasForeignKey("IdentityResourceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Nmro.IAM.Domain.Entities.IdentityResourceProperty", b =>
+            modelBuilder.Entity("Nmro.IAM.Core.Entities.IdentityResourceProperty", b =>
                 {
-                    b.HasOne("Nmro.IAM.Domain.Entities.IdentityResource", "IdentityResource")
+                    b.HasOne("Nmro.IAM.Core.Entities.IdentityResource", "IdentityResource")
                         .WithMany("Properties")
                         .HasForeignKey("IdentityResourceId")
                         .OnDelete(DeleteBehavior.Cascade)

@@ -2,8 +2,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Nmro.IAM.Core.Interfaces;
-using Nmro.IAM.Domain.Entities;
-using Nmro.IAM.Core.UseCases.IdentityResources.Models.Mappers;
+using Nmro.IAM.Core.Entities;
+using Nmro.IAM.Core.UseCases.IdentityResources.Dtos.Mappers;
 
 namespace Nmro.IAM.Core.UseCases.IdentityResources.Commands
 {

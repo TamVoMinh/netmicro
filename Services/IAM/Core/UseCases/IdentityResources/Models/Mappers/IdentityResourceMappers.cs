@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-namespace Nmro.IAM.Core.UseCases.IdentityResources.Models.Mappers
+namespace Nmro.IAM.Core.UseCases.IdentityResources.Dtos.Mappers
 {
     /// <summary>
     /// Extension methods to map to/from entity/model for identity resources.
@@ -17,18 +17,18 @@ namespace Nmro.IAM.Core.UseCases.IdentityResources.Models.Mappers
         /// </summary>
         /// <param name="entity">The entity.</param>
         /// <returns></returns>
-        public static Models.IdentityResource ToModel(this Domain.Entities.IdentityResource entity)
+        public static Dtos.IdentityResource ToModel(this Core.Entities.IdentityResource entity)
         {
-            return entity == null ? null : Mapper.Map<Models.IdentityResource>(entity);
+            return entity == null ? null : Mapper.Map<Dtos.IdentityResource>(entity);
         }
         /// <summary>
         /// Maps a model to an entity.
         /// </summary>
         /// <param name="model">The model.</param>
         /// <returns></returns>
-        public static Domain.Entities.IdentityResource ToEntity(this Models.IdentityResource model)
+        public static Core.Entities.IdentityResource ToEntity(this Dtos.IdentityResource model)
         {
-            return model == null ? null : Mapper.Map<Domain.Entities.IdentityResource>(model);
+            return model == null ? null : Mapper.Map<Core.Entities.IdentityResource>(model);
         }
     }
 }

@@ -4,8 +4,8 @@ using MediatR;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Nmro.IAM.Core.Interfaces;
-using Nmro.IAM.Core.UseCases.ApiResources.Models.Mappers;
-using Nmro.IAM.Core.UseCases.ApiResources.Models;
+using Nmro.IAM.Core.UseCases.ApiResources.Dtos.Mappers;
+using Nmro.IAM.Core.UseCases.ApiResources.Dtos;
 
 namespace Nmro.IAM.Core.UseCases.ApiResources.Queries
 {

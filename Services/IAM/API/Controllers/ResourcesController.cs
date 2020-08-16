@@ -2,10 +2,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Nmro.IAM.Core.UseCases.ApiResources.Commands;
-using Nmro.IAM.Core.UseCases.ApiResources.Models;
+using Nmro.IAM.Core.UseCases.ApiResources.Dtos;
 using Nmro.IAM.Core.UseCases.ApiResources.Queries;
 using Nmro.IAM.Core.UseCases.IdentityResources.Commands;
-using Nmro.IAM.Core.UseCases.IdentityResources.Models;
+using Nmro.IAM.Core.UseCases.IdentityResources.Dtos;
 using Nmro.IAM.Core.UseCases.IdentityResources.Queries;
 using Swashbuckle.AspNetCore.Annotations;
 

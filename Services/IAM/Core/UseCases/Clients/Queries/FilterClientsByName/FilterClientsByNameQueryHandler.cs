@@ -3,9 +3,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Nmro.IAM.Core.UseCases.Clients.Models.Mappers;
+using Nmro.IAM.Core.UseCases.Clients.Dtos.Mappers;
 using Nmro.IAM.Core.Interfaces;
-using Nmro.IAM.Core.UseCases.Clients.Models;
+using Nmro.IAM.Core.UseCases.Clients.Dtos;
 
 namespace Nmro.IAM.Core.UseCases.Clients.Queries
 {
@@ -19,7 +19,7 @@ namespace Nmro.IAM.Core.UseCases.Clients.Queries
 
         public async Task<PageClient> Handle(FilterClientsByNameQuery request, CancellationToken cancellationToken)
         {
-            IQueryable<Domain.Entities.Client> baseQuery = _context.Clients.Include(x => x.AllowedGrantTypes);
+            IQueryable<Core.Entities.Client> baseQuery = _context.Clients.Include(x => x.AllowedGrantTypes);
 
             if(!string.IsNullOrEmpty(request.Name))
                 baseQuery.Where(x => x.ClientName.Contains(request.Name));

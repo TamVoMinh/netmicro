@@ -2,7 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Nmro.IAM.Core.Interfaces;
-using Nmro.IAM.Core.UseCases.Clients.Models.Mappers;
+using Nmro.IAM.Core.UseCases.Clients.Dtos.Mappers;
 
 namespace Nmro.IAM.Core.UseCases.Clients.Commands
 {
@@ -16,7 +16,7 @@ namespace Nmro.IAM.Core.UseCases.Clients.Commands
 
         public async Task<int> Handle(UpdateClientCommand request, CancellationToken cancellationToken)
         {
-            Domain.Entities.Client client = await _context.Clients.FindAsync(request.Model.Id);
+            Core.Entities.Client client = await _context.Clients.FindAsync(request.Model.Id);
 
             if(client == null){
                 return int.MinValue;

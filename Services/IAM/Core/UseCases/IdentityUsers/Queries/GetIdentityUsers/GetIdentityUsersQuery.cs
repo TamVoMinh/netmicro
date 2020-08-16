@@ -1,5 +1,5 @@
 using MediatR;
-using Nmro.IAM.Core.UseCases.Users.Models;
+using Nmro.IAM.Core.UseCases.Users.Dtos;
 
 namespace Nmro.IAM.Core.UseCases.Users.Queries
 {

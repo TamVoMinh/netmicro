@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Nmro.Common.Extentions;
 using Nmro.IAM.Core.Interfaces;
-using Nmro.IAM.Domain.Entities;
+using Nmro.IAM.Core.Entities;
 
 namespace Nmro.IAM.Core.UseCases.Systems
 {

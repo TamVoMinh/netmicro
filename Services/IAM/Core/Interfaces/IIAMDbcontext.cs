@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Nmro.IAM.Domain.Entities;
+using Nmro.IAM.Core.Entities;
 using System.Threading;
 using System.Threading.Tasks;
 namespace Nmro.IAM.Core.Interfaces

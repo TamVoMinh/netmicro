@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-namespace Nmro.IAM.Core.UseCases.ApiResources.Models.Mappers
+namespace Nmro.IAM.Core.UseCases.ApiResources.Dtos.Mappers
 {
     /// <summary>
     /// Extension methods to map to/from entity/model for scopes.
@@ -17,18 +17,18 @@ namespace Nmro.IAM.Core.UseCases.ApiResources.Models.Mappers
         /// </summary>
         /// <param name="entity">The entity.</param>
         /// <returns></returns>
-        public static Models.ApiScope ToModel(this Domain.Entities.ApiScope entity)
+        public static Dtos.ApiScope ToModel(this Core.Entities.ApiScope entity)
         {
-            return entity == null ? null : Mapper.Map<Models.ApiScope>(entity);
+            return entity == null ? null : Mapper.Map<Dtos.ApiScope>(entity);
         }
         /// <summary>
         /// Maps a model to an entity.
         /// </summary>
         /// <param name="model">The model.</param>
         /// <returns></returns>
-        public static Domain.Entities.ApiScope ToEntity(this Models.ApiScope model)
+        public static Core.Entities.ApiScope ToEntity(this Dtos.ApiScope model)
         {
-            return model == null ? null : Mapper.Map<Domain.Entities.ApiScope>(model);
+            return model == null ? null : Mapper.Map<Core.Entities.ApiScope>(model);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
-namespace Nmro.IAM.Core.UseCases.IdentityResources.Models.Mappers
+namespace Nmro.IAM.Core.UseCases.IdentityResources.Dtos.Mappers
 {
     /// <summary>
     /// Defines entity/model mapping for identity resources.
@@ -13,12 +13,12 @@ namespace Nmro.IAM.Core.UseCases.IdentityResources.Models.Mappers
         /// </summary>
         public IdentityResourceMapperProfile()
         {
-            CreateMap<Domain.Entities.IdentityResourceProperty, KeyValuePair<string, string>>()
+            CreateMap<Core.Entities.IdentityResourceProperty, KeyValuePair<string, string>>()
                 .ReverseMap();
-            CreateMap<Domain.Entities.IdentityResource, Models.IdentityResource>(MemberList.Destination)
-                .ConstructUsing(src => new Models.IdentityResource())
+            CreateMap<Core.Entities.IdentityResource, Dtos.IdentityResource>(MemberList.Destination)
+                .ConstructUsing(src => new Dtos.IdentityResource())
                 .ReverseMap();
-            CreateMap<Domain.Entities.IdentityResourceClaim, string>()
+            CreateMap<Core.Entities.IdentityResourceClaim, string>()
                .ConstructUsing(x => x.Type)
                .ReverseMap()
                .ForMember(dest => dest.Type, opt => opt.MapFrom(src => src));

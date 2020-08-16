@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Nmro.IAM.Domain.Entities;
+using Nmro.IAM.Core.Entities;
 using Nmro.Common.Extentions;
 
 namespace Nmro.IAM.Core.UseCases.Systems

@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using System.Collections;
-using Nmro.IAM.Domain;
-using Nmro.IAM.Core.Models;
+using Nmro.IAM.Core;
+using Nmro.IAM.Core.Dtos;
 
-namespace Nmro.IAM.Core.UseCases.Clients.Models
+namespace Nmro.IAM.Core.UseCases.Clients.Dtos
 {
     public class Client
     {

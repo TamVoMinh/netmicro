@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Nmro.Common.Models;
 
-namespace Nmro.IAM.Core.UseCases.Clients.Models
+namespace Nmro.IAM.Core.UseCases.Clients.Dtos
 {
     public abstract class ClientModelBase {
          public IEnumerable<string> ClientSecrets { get; set; }

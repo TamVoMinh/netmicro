@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Nmro.Common.Models;
 
-namespace Nmro.IAM.Core.UseCases.Users.Models
+namespace Nmro.IAM.Core.UseCases.Users.Dtos
 {
     public class CredentialModel
     {

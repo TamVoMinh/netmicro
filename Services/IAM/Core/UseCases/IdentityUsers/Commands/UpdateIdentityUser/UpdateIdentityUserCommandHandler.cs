@@ -2,7 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Nmro.IAM.Core.Interfaces;
-using Nmro.IAM.Core.UseCases.Users.Models;
+using Nmro.IAM.Core.UseCases.Users.Dtos;
 using Nmro.Common.Extentions;
 namespace Nmro.IAM.Core.UseCases.Users.Commands
 {

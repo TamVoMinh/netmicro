@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Nmro.IAM.Domain.Entities;
+using Nmro.IAM.Core.Entities;
 using System;
 namespace Nmro.IAM.Persistence.Configurations
 {

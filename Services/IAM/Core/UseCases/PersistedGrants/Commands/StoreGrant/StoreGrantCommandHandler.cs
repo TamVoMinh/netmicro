@@ -4,7 +4,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Nmro.IAM.Core.Interfaces;
-using Nmro.IAM.Core.UseCases.PersistedGrants.Models.Mappers;
+using Nmro.IAM.Core.UseCases.PersistedGrants.Dtos.Mappers;
 
 namespace Nmro.IAM.Core.UseCases.PersistedGrants.Commands
 {

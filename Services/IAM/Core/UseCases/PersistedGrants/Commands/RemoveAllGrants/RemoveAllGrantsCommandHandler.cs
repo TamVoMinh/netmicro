@@ -22,7 +22,7 @@ namespace Nmro.IAM.Core.UseCases.PersistedGrants.Commands
         }
         public async Task<int> Handle(RemoveAllGrantsCommand request, CancellationToken cancellationToken)
         {
-            Expression<Func<Domain.Entities.PersistedGrant, bool>> predicate = x =>
+            Expression<Func<Core.Entities.PersistedGrant, bool>> predicate = x =>
                 request.Type == string.Empty
                     ? x.SubjectId == request.SubjectId && x.ClientId == request.ClientId
                     : x.SubjectId == request.SubjectId && x.ClientId == request.ClientId && x.Type == request.Type;

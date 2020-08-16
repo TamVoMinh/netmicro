@@ -13,7 +13,6 @@ COPY "Backing/Netmon/Nmro.Netmon.csproj" "Backing/Netmon/Nmro.Netmon.csproj"
 
 COPY "Services/IAM/API/Nmro.IAM.API.csproj" "Services/IAM/API/Nmro.IAM.API.csproj"
 COPY "Services/IAM/Application/Nmro.IAM.Application.csproj" "Services/IAM/Application/Nmro.IAM.Application.csproj"
-COPY "Services/IAM/Domain/Nmro.IAM.Domain.csproj" "Services/IAM/Domain/Nmro.IAM.Domain.csproj"
 COPY "Services/IAM/Persistence/Nmro.IAM.Persistence.csproj" "Services/IAM/Persistence/Nmro.IAM.Persistence.csproj"
 
 COPY "Services/Oidc/Nmro.Oidc.csproj" "Services/Oidc/Nmro.Oidc.csproj"

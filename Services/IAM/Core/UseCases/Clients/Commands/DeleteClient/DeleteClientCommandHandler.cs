@@ -15,7 +15,7 @@ namespace Nmro.IAM.Core.UseCases.Clients.Commands
 
         public async Task<int> Handle(DeleteClientCommand request, CancellationToken cancellationToken)
         {
-            Domain.Entities.Client client = await _context.Clients.FindAsync(request.Id);
+            Core.Entities.Client client = await _context.Clients.FindAsync(request.Id);
 
             if(client == null){
                 return int.MinValue;

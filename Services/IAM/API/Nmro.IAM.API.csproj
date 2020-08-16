@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\BuildingBlocks\Web\Web.csproj" />
-    <ProjectReference Include="..\Domain\Nmro.IAM.Domain.csproj" />
     <ProjectReference Include="..\Persistence\Nmro.IAM.Persistence.csproj" />
   </ItemGroup>
 

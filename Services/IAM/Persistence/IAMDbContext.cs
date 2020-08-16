@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Nmro.Common.Services;
 using Nmro.IAM.Core.Interfaces;
-using Nmro.IAM.Domain.Entities;
+using Nmro.IAM.Core.Entities;
 using Nmro.Web.Services;
 using System.Threading;
 using System.Threading.Tasks;
@@ -31,7 +31,7 @@ namespace Nmro.IAM.Persistence
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             //@TODO public auditing event from here
-            foreach (var entry in ChangeTracker.Entries<Domain.Entities.AuditableEntity>())
+            foreach (var entry in ChangeTracker.Entries<Core.AuditableEntity>())
             {
                 switch (entry.State)
                 {

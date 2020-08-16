@@ -4,18 +4,18 @@ using System.Linq;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Nmro.IAM.Core.Interfaces;
-using Nmro.IAM.Core.UseCases.ApiResources.Models.Mappers;
+using Nmro.IAM.Core.UseCases.ApiResources.Dtos.Mappers;
 
 namespace Nmro.IAM.Core.UseCases.ApiResources.Queries
 {
-    public class GetApiResourcesQueryHandler : IRequestHandler<GetApiResourcesQuery, Models.ApiResource>
+    public class GetApiResourcesQueryHandler : IRequestHandler<GetApiResourcesQuery, Dtos.ApiResource>
     {
         private readonly IIAMDbcontext _context;
         public GetApiResourcesQueryHandler(IIAMDbcontext context)
         {
             _context = context;
         }
-        public async Task<Models.ApiResource> Handle(GetApiResourcesQuery request, CancellationToken cancellationToken)
+        public async Task<Dtos.ApiResource> Handle(GetApiResourcesQuery request, CancellationToken cancellationToken)
         {
               var apiResource = await _context.ApiResources
                 .Where(e => e.Id == request.ResourceId)

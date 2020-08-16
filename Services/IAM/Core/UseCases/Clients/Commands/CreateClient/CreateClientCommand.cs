@@ -3,6 +3,6 @@ namespace Nmro.IAM.Core.UseCases.Clients.Commands
 {
     public class CreateClientCommand: IRequest<int>
     {
-       public Models.CreateClientModel Model {get;set;}
+       public Dtos.CreateClientModel Model {get;set;}
     }
 }

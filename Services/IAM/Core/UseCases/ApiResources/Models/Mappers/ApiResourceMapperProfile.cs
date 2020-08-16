@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
-namespace Nmro.IAM.Core.UseCases.ApiResources.Models.Mappers
+namespace Nmro.IAM.Core.UseCases.ApiResources.Dtos.Mappers
 {
     /// <summary>
     /// Defines entity/model mapping for API resources.
@@ -13,22 +13,22 @@ namespace Nmro.IAM.Core.UseCases.ApiResources.Models.Mappers
         /// </summary>
         public ApiResourceMapperProfile()
         {
-            CreateMap<Domain.Entities.ApiResourceProperty, KeyValuePair<string, string>>()
+            CreateMap<Core.Entities.ApiResourceProperty, KeyValuePair<string, string>>()
                 .ReverseMap();
-            CreateMap<Domain.Entities.ApiResource, Models.ApiResource>(MemberList.Destination)
-                .ConstructUsing(src => new Models.ApiResource())
+            CreateMap<Core.Entities.ApiResource, Dtos.ApiResource>(MemberList.Destination)
+                .ConstructUsing(src => new Dtos.ApiResource())
                 .ForMember(x => x.ApiSecrets, opts => opts.MapFrom(x => x.Secrets))
                 .ForMember(x=>x.AllowedAccessTokenSigningAlgorithms, opts => opts.ConvertUsing(AllowedSigningAlgorithmsConverter.Converter, x=>x.AllowedAccessTokenSigningAlgorithms))
                 .ReverseMap()
                 .ForMember(x=>x.AllowedAccessTokenSigningAlgorithms, opts => opts.ConvertUsing(AllowedSigningAlgorithmsConverter.Converter, x=>x.AllowedAccessTokenSigningAlgorithms));
-            CreateMap<Domain.Entities.ApiResourceClaim, string>()
+            CreateMap<Core.Entities.ApiResourceClaim, string>()
                 .ConstructUsing(x => x.Type)
                 .ReverseMap()
                 .ForMember(dest => dest.Type, opt => opt.MapFrom(src => src));
-            CreateMap<Domain.Entities.ApiResourceSecret, Core.Models.Secret>(MemberList.Destination)
+            CreateMap<Core.Entities.ApiResourceSecret, Core.Dtos.Secret>(MemberList.Destination)
                 .ForMember(dest => dest.Type, opt => opt.Condition(srs => srs != null))
                 .ReverseMap();
-            CreateMap<Domain.Entities.ApiResourceScope, string>()
+            CreateMap<Core.Entities.ApiResourceScope, string>()
                 .ConstructUsing(x => x.Scope)
                 .ReverseMap()
                 .ForMember(dest => dest.Scope, opt => opt.MapFrom(src => src));

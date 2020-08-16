@@ -4,13 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Annotations;
 using Nmro.IAM.Core.UseCases.Clients.Queries;
-using Nmro.IAM.Core.UseCases.Users.Models;
-using Nmro.IAM.Core.UseCases.Clients.Models;
-using Nmro.IAM.Core.UseCases.Aggregations.Models;
-using Nmro.IAM.Core.UseCases.ApiResources.Models;
+using Nmro.IAM.Core.UseCases.Users.Dtos;
+using Nmro.IAM.Core.UseCases.Clients.Dtos;
+using Nmro.IAM.Core.UseCases.Aggregations.Dtos;
+using Nmro.IAM.Core.UseCases.ApiResources.Dtos;
 using Nmro.IAM.Core.UseCases.ApiResources.Queries;
 using Nmro.IAM.Core.UseCases.Aggregations.Queries;
-using Nmro.IAM.Core.UseCases.IdentityResources.Models;
+using Nmro.IAM.Core.UseCases.IdentityResources.Dtos;
 using Nmro.IAM.Core.UseCases.IdentityResources.Queries;
 using Nmro.IAM.Core.UseCases.Users.Queries;
 

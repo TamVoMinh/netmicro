@@ -2,7 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Nmro.IAM.Core.Interfaces;
-using Nmro.IAM.Domain.Entities;
+using Nmro.IAM.Core.Entities;
 namespace Nmro.IAM.Core.UseCases.IdentityResources.Commands
 {
     public class DeleteIdentityResourceCommandHandler : IRequestHandler<DeleteIdentityResourceCommand, int>

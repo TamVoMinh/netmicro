@@ -22,7 +22,7 @@ namespace Nmro.IAM.Core.UseCases.PersistedGrants.Commands
         }
         public async Task<int> Handle(CleanUpGrantsCommand request, CancellationToken cancellationToken)
         {
-            Expression<Func<Domain.Entities.PersistedGrant, bool>> predicate = x => x.Expiration <= request.Now;
+            Expression<Func<Core.Entities.PersistedGrant, bool>> predicate = x => x.Expiration <= request.Now;
 
             var persistedGrants = await _context.PersistedGrants.Where(predicate).ToListAsync();
 

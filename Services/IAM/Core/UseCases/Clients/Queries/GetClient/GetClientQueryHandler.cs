@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Nmro.IAM.Core.Interfaces;
-using Nmro.IAM.Core.UseCases.Clients.Models.Mappers;
+using Nmro.IAM.Core.UseCases.Clients.Dtos.Mappers;
 
 namespace Nmro.IAM.Core.UseCases.Clients.Queries
 {
-    public class GetClientQueryHandler : IRequestHandler<GetClientQuery, Models.Client>
+    public class GetClientQueryHandler : IRequestHandler<GetClientQuery, Dtos.Client>
     {
         private readonly IIAMDbcontext _context;
         public GetClientQueryHandler(IIAMDbcontext context)
@@ -16,9 +16,9 @@ namespace Nmro.IAM.Core.UseCases.Clients.Queries
             _context = context;
         }
 
-        public async Task<Models.Client> Handle(GetClientQuery request, CancellationToken cancellationToken)
+        public async Task<Dtos.Client> Handle(GetClientQuery request, CancellationToken cancellationToken)
         {
-           IQueryable<Domain.Entities.Client> baseQuery = _context.Clients
+           IQueryable<Core.Entities.Client> baseQuery = _context.Clients
             .Where(x => x.Id == request.Id)
             .Take(1);
 

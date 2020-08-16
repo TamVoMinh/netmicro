@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
 using Nmro.IAM.Core.Interfaces;
-using Nmro.IAM.Domain.Entities;
+using Nmro.IAM.Core.Entities;
 namespace Nmro.IAM.Core.UseCases.ApiResources.Commands
 {
     public class DeleteApiResourceCommandHandler : IRequestHandler<DeleteApiResourceCommand, int>

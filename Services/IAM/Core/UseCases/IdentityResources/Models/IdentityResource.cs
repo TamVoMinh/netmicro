@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using Nmro.Common.Extentions;
-using Nmro.IAM.Core.Models;
+using Nmro.IAM.Core.Dtos;
 
-namespace Nmro.IAM.Core.UseCases.IdentityResources.Models
+namespace Nmro.IAM.Core.UseCases.IdentityResources.Dtos
 {
     /// <summary>
     /// Models a user identity resource.

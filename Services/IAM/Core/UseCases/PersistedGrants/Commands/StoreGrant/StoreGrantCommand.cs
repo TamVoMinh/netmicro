@@ -1,5 +1,5 @@
 using MediatR;
-using Nmro.IAM.Core.UseCases.PersistedGrants.Models;
+using Nmro.IAM.Core.UseCases.PersistedGrants.Dtos;
 
 namespace Nmro.IAM.Core.UseCases.PersistedGrants.Commands
 {

@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Nmro.IAM.Core.UseCases.ApiResources.Models;
-using Nmro.IAM.Core.UseCases.IdentityResources.Models;
+using Nmro.IAM.Core.UseCases.ApiResources.Dtos;
+using Nmro.IAM.Core.UseCases.IdentityResources.Dtos;
 
 
-namespace Nmro.IAM.Core.UseCases.Aggregations.Models
+namespace Nmro.IAM.Core.UseCases.Aggregations.Dtos
 {
     public class AllResources
     {

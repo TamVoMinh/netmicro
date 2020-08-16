@@ -5,18 +5,18 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Nmro.IAM.Core.Interfaces;
 using System.Collections.Generic;
-using Nmro.IAM.Core.UseCases.IdentityResources.Models.Mappers;
+using Nmro.IAM.Core.UseCases.IdentityResources.Dtos.Mappers;
 
 namespace Nmro.IAM.Core.UseCases.IdentityResources.Queries
 {
-    public class ListIdentityResourcesByScopesQueryHandler : IRequestHandler<ListIdentityResourcesByScopesQuery, IEnumerable<Models.IdentityResource>>
+    public class ListIdentityResourcesByScopesQueryHandler : IRequestHandler<ListIdentityResourcesByScopesQuery, IEnumerable<Dtos.IdentityResource>>
     {
         private readonly IIAMDbcontext _context;
         public ListIdentityResourcesByScopesQueryHandler(IIAMDbcontext context)
         {
             _context = context;
         }
-        public async Task<IEnumerable<Models.IdentityResource>> Handle(ListIdentityResourcesByScopesQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<Dtos.IdentityResource>> Handle(ListIdentityResourcesByScopesQuery request, CancellationToken cancellationToken)
         {
              var scopes = request.Scopes.ToArray();
 

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
-namespace Nmro.IAM.Core.UseCases.ApiResources.Models.Mappers
+namespace Nmro.IAM.Core.UseCases.ApiResources.Dtos.Mappers
 {
     /// <summary>
     /// Defines entity/model mapping for scopes.
@@ -13,14 +13,14 @@ namespace Nmro.IAM.Core.UseCases.ApiResources.Models.Mappers
         /// </summary>
         public ScopeMapperProfile()
         {
-            CreateMap<Domain.Entities.ApiScopeProperty, KeyValuePair<string, string>>()
+            CreateMap<Core.Entities.ApiScopeProperty, KeyValuePair<string, string>>()
                 .ReverseMap();
-            CreateMap<Domain.Entities.ApiScopeClaim, string>()
+            CreateMap<Core.Entities.ApiScopeClaim, string>()
                .ConstructUsing(x => x.Type)
                .ReverseMap()
                .ForMember(dest => dest.Type, opt => opt.MapFrom(src => src));
-            CreateMap<Domain.Entities.ApiScope, Models.ApiScope>(MemberList.Destination)
-                .ConstructUsing(src => new Models.ApiScope())
+            CreateMap<Core.Entities.ApiScope, Dtos.ApiScope>(MemberList.Destination)
+                .ConstructUsing(src => new Dtos.ApiScope())
                 .ForMember(x => x.Properties, opts => opts.MapFrom(x => x.Properties))
                 .ForMember(x => x.UserClaims, opts => opts.MapFrom(x => x.UserClaims))
                 .ReverseMap();
