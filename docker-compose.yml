@@ -4,7 +4,7 @@ services:
     image: slnbased
     build:
       context: .
-      dockerfile: BuildingBlocks/SlnBased/Dockerfile
+      dockerfile: Bblocks/SlnBased/Dockerfile
 
   oidc:
     networks:
