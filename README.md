@@ -2,7 +2,7 @@
 
 ## Overview
 
-![Architect](Docs/Images/architect.png)
+![Architect](docs/images/architect.png)
 
 ## Getting started
 
@@ -33,7 +33,11 @@
 1. Run Up Postgres database
 
     ```powershell
-        .\cli\nmro.sh up -d db-postgres
+        .\devops\cli\nmro.sh up -d db-postgres
+    ```
+
+    ```shell
+        sh devops/cli/nmro.sh up -d db-postgres
     ```
 
 1. Drop existing schema **Skip this at first time**.
@@ -76,8 +80,6 @@
 1. [Landing site](http://nmro.local/) (Hybrid-Flow for tradtional website)
 1. [Consul](http://infosys.nmro.local/)
 1. [Kibana](http://infosys.nmro.local/elk/)
-1. [Dotnet Healthchecks tool](http://infosys.nmro.local/netmon/health)
-1. [Hangfire Dashboard](http://infosys.nmro.local/netmon/hangfire)
 1. [Redis Db](http://infosys.nmro.local/redis/)
 1. [Control-centre](http://control-centre.nmro.local/) (auth code flow with PKCE for angular app)
 1. [Swagger-ui](http://docs.nmro.local/)

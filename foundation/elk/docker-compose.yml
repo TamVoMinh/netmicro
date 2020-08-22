@@ -1,0 +1,105 @@
+version: '3.5'
+services:
+  elasticsearch:
+    image: ${DOCKER_REGISTRY:-nmro}/foundation/elk-elasticsearch
+    build:
+      context: foundation/elk/elasticsearch/
+      dockerfile: Dockerfile
+      args:
+        ELK_VERSION: $ELK_VERSION
+    volumes:
+      - ./foundation/elk/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+      - esdata:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      ES_JAVA_OPTS: "-Xmx512m -Xms256m"
+
+  logstash:
+    image: ${DOCKER_REGISTRY:-nmro}/foundation/elk-logstash
+    build:
+      context: foundation/elk/Logstash/
+      dockerfile: Dockerfile
+      args:
+        ELK_VERSION: $ELK_VERSION
+    volumes:
+      - ./foundation/elk/Logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+      - ./foundation/elk/Logstash/pipeline:/usr/share/logstash/pipeline:ro
+      - ./foundation/elk/Logstash/templates:/usr/share/logstash/templates:ro
+    ports:
+      - "5000:5000/udp"
+      - "5002:5002/udp"
+      - "9600:9600"
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+      LS_NOTIFY_HOOK: $LS_NOTIFY_HOOK
+      LOGSPOUT: ignore
+      DROP_NON_JSON: 'false'
+      STDOUT: 'true'
+    privileged: true
+    depends_on:
+      - elasticsearch
+
+  kibana:
+    image: ${DOCKER_REGISTRY:-nmro}/foundation/elk-kibana
+    build:
+      context: foundation/elk/Kibana/
+      dockerfile: Dockerfile
+      args:
+        ELK_VERSION: $ELK_VERSION
+    volumes:
+      - ./foundation/elk/Kibana/config/:/usr/share/kibana/config:ro
+    environment:
+      LOGSPOUT: ignore
+    depends_on:
+      - elasticsearch
+
+  apm-server:
+    image: ${DOCKER_REGISTRY:-nmro}/foundation/elk-apm-server
+    build:
+      context: foundation/elk/Apm/
+      dockerfile: Dockerfile
+      args:
+        ELK_VERSION: $ELK_VERSION
+    volumes:
+      - ./foundation/elk/Apm/config/apm-server.yml:/usr/share/apm-server/apm-server.yml:ro
+    ports:
+      - "8200:8200"
+    environment:
+      LOGSPOUT: ignore
+    depends_on:
+      - elasticsearch
+
+  curator:
+    image: ${DOCKER_REGISTRY:-nmro}/foundation/elk-curator
+    build:
+      context: foundation/elk/Curator/
+      dockerfile: Dockerfile
+    environment:
+      ELASTICSEARCH_HOST: elasticsearch
+      CRON: 0 0 * * *
+      CONFIG_FILE: /usr/share/curator/config/curator.yml
+      COMMAND: /usr/share/curator/config/delete_log_files_curator.yml
+      UNIT_COUNT: 1
+      LOGSPOUT: ignore
+    depends_on:
+      - elasticsearch
+
+  logspout:
+    image: ${DOCKER_REGISTRY:-nmro}/foundation/elk-logspout
+    build:
+      context: foundation/elk/Logspout
+      dockerfile: Dockerfile
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      ROUTE_URIS: logstash://logstash:5000
+      LOGSTASH_TAGS: docker-nmro
+    depends_on:
+      - logstash
+    restart: on-failure
+
+volumes:
+  esdata:
+    driver: local

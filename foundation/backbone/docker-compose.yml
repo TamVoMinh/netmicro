@@ -1,0 +1,37 @@
+version: '3.5'
+
+services:
+
+  consul:
+    image: ${DOCKER_REGISTRY:-nmro}/backbone/service-discovery
+    build:
+      context: .
+      dockerfile: foundation/backbone/discovery/Dockerfile
+    command: agent -server -bootstrap-expect 1 -ui -client 0.0.0.0
+    ports:
+      - 53:53/udp
+      - 8500:8500
+
+  proxy:
+    image: ${DOCKER_REGISTRY:-nmro}/backbone/proxy
+    build:
+      context: .
+      dockerfile: foundation/backbone/reverseproxy/Dockerfile
+      args:
+        PUBLIC_ORIGIN: ${PUBLIC_ORIGIN:-nmro.local}
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./foundation/backbone/reverseproxy/html:/etc/nginx/html:ro
+    depends_on:
+      - consul
+
+  apigateway:
+    image: ${DOCKER_REGISTRY:-nmro}/backbone/apigateway
+    build:
+      context: .
+      dockerfile: foundation/backbone/ApiGateway/Dockerfile
+    depends_on:
+      - monorepo
+      - consul

@@ -1,10 +1,10 @@
 version: '3.5'
 services:
-  slnbased:
-    image: slnbased
+  monorepo:
+    image: monorepo
     build:
       context: .
-      dockerfile: BuildingBlocks/SlnBased/Dockerfile
+      dockerfile: devops/docker/monorepo/Dockerfile
 
   oidc:
     networks:
