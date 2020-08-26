@@ -15,4 +15,4 @@ RUN dotnet publish --no-restore -c Release -o /artifact
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /artifact .
-ENTRYPOINT ["dotnet", "Nmro.Oidc.dll"]
+ENTRYPOINT ["dotnet", "Nmro.Security.Oidc.dll"]

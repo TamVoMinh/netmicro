@@ -19,8 +19,8 @@ services:
     depends_on:
       - monorepo
       - consul
-  iam-async-worker:
-    image: ${DOCKER_REGISTRY:-nmro}/services/iam-async-worker
+  iam-worker:
+    image: ${DOCKER_REGISTRY:-nmro}/services/iam-worker
     build:
       context: .
       dockerfile: business/security/IAM/Faces/Worker/Dockerfile
