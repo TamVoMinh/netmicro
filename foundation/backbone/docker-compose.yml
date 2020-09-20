@@ -22,6 +22,8 @@ services:
     ports:
       - 80:80
       - 443:443
+    environment:
+      LOGSPOUT: ignore
     volumes:
       - ./foundation/backbone/reverseproxy/html:/etc/nginx/html:ro
     depends_on:

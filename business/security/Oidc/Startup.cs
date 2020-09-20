@@ -8,6 +8,9 @@ using Nmro.Oidc.Application;
 using Nmro.Hosting;
 using Elastic.Apm.AspNetCore;
 using Elastic.Apm.DiagnosticSource;
+using System.Security.Cryptography.X509Certificates;
+using Microsoft.AspNetCore.DataProtection;
+using StackExchange.Redis;
 
 namespace Nmro.Oidc
 {
@@ -28,12 +31,15 @@ namespace Nmro.Oidc
 
             services.AddCors(options => AllOrigins.Bind(options));
 
+            services
+                .AddDataProtection()
+                .PersistKeysToStackExchangeRedis(ConnectionMultiplexer.Connect(Configuration.GetConnectionString("RedisConnection")), "Oidc-DataProtection-Keys");
 
             services.AddUserStore();
 
             services
                 .AddIdentityServer()
-                .AddDeveloperSigningCredential()
+                .AddSigningCredential(new X509Certificate2("oidc.nmro.local.pfx"))
                 .AddIdentityServer4Stores(Configuration);
 
             services.AddStackExchangeRedisCache(options =>
@@ -62,12 +68,6 @@ namespace Nmro.Oidc
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                //see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-                app.UseHttpsRedirection();
             }
 
             app.UseCors(AllOrigins.PolicyName);

@@ -52,3 +52,9 @@ Web/Health/healthchecksdb
 #nuget packages
 packages/
 pkgs/
+
+#crypto
+*.crt
+*.key
+*.csr
+.srl

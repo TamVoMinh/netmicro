@@ -5,6 +5,8 @@ services:
     build:
       context: .
       dockerfile: business/security/Oidc/Dockerfile
+    volumes:
+      - ./devops/certs/self-signed/oidc/oidc.nmro.local.pfx:/app/oidc.nmro.local.pfx:ro
     depends_on:
       - monorepo
       - consul
