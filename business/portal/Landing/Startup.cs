@@ -8,6 +8,8 @@ using Nmro.Hosting.ServiceDiscovery;
 using Nmro.Hosting.OidcClients;
 using Nmro.Hosting;
 using Elastic.Apm.NetCoreAll;
+using StackExchange.Redis;
+using Microsoft.AspNetCore.DataProtection;
 
 namespace Nmro.Portal.Landing
 {
@@ -29,6 +31,10 @@ namespace Nmro.Portal.Landing
             }
 
             services.AddNmroLogging();
+
+            services
+                .AddDataProtection()
+                .PersistKeysToStackExchangeRedis(ConnectionMultiplexer.Connect(Configuration.GetConnectionString("RedisConnection")), "Landing-DataProtection-Keys");
 
             services.AddControllersWithViews();
 

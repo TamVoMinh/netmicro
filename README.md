@@ -15,13 +15,13 @@
     ```powershell
         > set-executionpolicy unrestricted
         # Then cd to root folder and execute
-        > DevOnly\Scripts\dns.local.ps1
+        > devops\scripts\dns.local.ps1
     ```
 
 1. Copy & rename environment variable
 
     ```powershell
-        > Copy-Item -Path DevOnly\Scripts\variables.env.template -Destination .env
+        > Copy-Item -Path devops\scripts\variables.env.template -Destination .env
     ```
 
 1. Restore solution nuget packages to local folder (To speed up build without downloading next time)
@@ -33,11 +33,11 @@
 1. Run Up Postgres database
 
     ```powershell
-        .\devops\cli\nmro.sh up -d db-postgres
+        > .\devops\cli\nmro.sh up -d db-postgres
     ```
 
     ```shell
-        sh devops/cli/nmro.sh up -d db-postgres
+        $ sh devops/cli/nmro.sh up -d db-postgres
     ```
 
 1. Drop existing schema **Skip this at first time**.
@@ -60,7 +60,11 @@
 
     ```powershell
         # First time of running, it will take around 20mins for downloading images & build
-        cli\nmro.sh up -d
+        > .\cli\nmro.sh up -d
+    ```
+
+    ```sh
+        $ sh devops/cli/nmro.sh up -d
     ```
 
 1. Known issues:
@@ -78,9 +82,9 @@
 ### Playground with
 
 1. [Landing site](http://nmro.local/) (Hybrid-Flow for tradtional website)
-1. [Consul](http://infosys.nmro.local/)
-1. [Kibana](http://infosys.nmro.local/elk/)
-1. [Redis Db](http://infosys.nmro.local/redis/)
+1. [Consul](http://isys.nmro.local/)
+1. [Kibana](http://isys.nmro.local/elk/)
+1. [Redis Db](http://isys.nmro.local/redis/)
 1. [Control-centre](http://control-centre.nmro.local/) (auth code flow with PKCE for angular app)
 1. [Swagger-ui](http://docs.nmro.local/)
 
