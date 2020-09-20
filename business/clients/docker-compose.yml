@@ -1,0 +1,26 @@
+version: '3.5'
+services:
+  api-docs:
+    image: ${DOCKER_REGISTRY:-nmro}/clients/api-docs
+    build:
+      context: .
+      dockerfile: business/clients/docs/Dockerfile
+    volumes:
+      - ./business/Clients/nginx/default.conf:/etc/nginx/nginx.conf:ro
+
+  dashboard:
+    image: ${DOCKER_REGISTRY:-nmro}/clients/dashboard
+    build:
+      context: .
+      dockerfile: business/clients/dashboard/Dockerfile
+    volumes:
+      - ./business/clients/nginx/default.conf:/etc/nginx/nginx.conf:ro
+
+  control-centre:
+    image: ${DOCKER_REGISTRY:-nmro}/clients/control-center
+    build:
+      context: .
+      dockerfile: business/clients/ng/control-center/Dockerfile
+    volumes:
+      - ./business/clients/nginx/default.conf:/etc/nginx/nginx.conf:ro
+

@@ -1,0 +1,13 @@
+version: '3.5'
+services:
+  landing:
+    image: ${DOCKER_REGISTRY:-nmro}/portal/landing
+    build:
+      context: .
+      dockerfile: business/portal/Landing/Dockerfile
+    environment:
+      IdentityUrl: http://oidc.${PUBLIC_ORIGIN:-nmro.local}
+      CallBackUrl: http://${PUBLIC_ORIGIN:-nmro.local}
+    depends_on:
+      - monorepo
+      - consul
