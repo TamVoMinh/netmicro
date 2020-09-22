@@ -1,6 +1,8 @@
-# README
+# Introduction
+Without any business need, there is no reason for a software architecture to be existed. Here the skeleton architecture project is started with an generic business model which get inspiring by
+![Generic business capacity](https://bizzdesign.com/wp-content/uploads/2016/06/Blog-ArchiMate_3_Capability_Mapping.png)
 
-## Overview
+There are many ways to create a solution structure project. We are using monorepo. It's follow on business architecture model to struct folder that will help increase the ubiquitous language capacity cross organization from business stackholder to engineer. Basically, they will be grouped as blocks as follow diagram.
 
 ![Architect](docs/images/architect.png)
 
