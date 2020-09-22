@@ -1,5 +1,5 @@
 # Introduction
-Without any business need, there is no reason for a software architecture to be existed. Here the skeleton architecture project is started with an generic business model which get inspiring by
+Without any business need, there is no reason for a software architecture to be existed. Here the skeleton architecture project is started with an generic business model which get inspiring by [Capability Map](https://bizzdesign.com/blog/archimate-3-0-capability-mapping/)
 ![Generic business capacity](https://bizzdesign.com/wp-content/uploads/2016/06/Blog-ArchiMate_3_Capability_Mapping.png)
 
 There are many ways to create a solution structure project. We are using monorepo. It's follow on business architecture model to struct folder that will help increase the ubiquitous language capacity cross organization from business stackholder to engineer. Basically, they will be grouped as blocks as follow diagram.
@@ -10,7 +10,7 @@ There are many ways to create a solution structure project. We are using monorep
 
 ### How to setup development environment
 
-### How to run up the system
+1. Clone source
 
 1. Add local dns
 
@@ -31,6 +31,7 @@ There are many ways to create a solution structure project. We are using monorep
     ```powershell
         >  dotnet restore .\Nmro.sln
     ```
+### How to run up the system
 
 1. Run Up Postgres database
 
