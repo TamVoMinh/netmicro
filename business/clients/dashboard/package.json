@@ -10,7 +10,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "hex-to-rgba": "^2.0.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "notistack": "^0.9.9",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
