@@ -6,6 +6,9 @@ using Nmro.Oidc.Infrastructure.IamClient.Models;
 using Flurl.Http;
 using Flurl;
 using Microsoft.Extensions.Options;
+using System.Net;
+using Microsoft.Extensions.Logging;
+
 namespace Nmro.Oidc.Infrastructure.IamClient
 {
     public class RestOidc : IRestOidc
@@ -13,10 +16,13 @@ namespace Nmro.Oidc.Infrastructure.IamClient
         private readonly string _origin;
         private readonly IOptions<AppSettings> _appSetting;
 
-        public RestOidc(IOptions<AppSettings> appsetting)
+        private readonly ILogger<RestOidc> _logger;
+
+        public RestOidc(IOptions<AppSettings> appsetting, ILogger<RestOidc> logger)
         {
             _appSetting = appsetting;
             _origin = appsetting.Value?.IdentityApiEndpoint ?? "http://iam-api/iam";
+            _logger = logger;
         }
 
         public async Task<IEnumerable<Models.PersistedGrant>> AllGrants(string subjectId)
@@ -67,7 +73,10 @@ namespace Nmro.Oidc.Infrastructure.IamClient
 
         public async Task<PersistedGrant> GetGrant(string key)
         {
-            string apiEndpoint =  _origin.AppendPathSegments("oidc","grants", key);
+
+            _logger.LogTrace("URL {0}", WebUtility.UrlEncode(key));
+
+            string apiEndpoint =  _origin.AppendPathSegments("oidc","grants", WebUtility.UrlEncode(key));
 
             return await apiEndpoint.GetAsync().ReceiveJson<PersistedGrant>();
         }

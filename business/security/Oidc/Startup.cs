@@ -11,7 +11,7 @@ using Elastic.Apm.DiagnosticSource;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.DataProtection;
 using StackExchange.Redis;
-
+using System;
 namespace Nmro.Oidc
 {
     public class Startup
@@ -27,6 +27,8 @@ namespace Nmro.Oidc
         {
             services.AddNmroLogging();
 
+            services.ConfigureNonBreakingSameSiteCookies();
+
             services.Configure<AppSettings>(Configuration);
 
             services.AddCors(options => AllOrigins.Bind(options));
@@ -41,6 +43,13 @@ namespace Nmro.Oidc
                 .AddIdentityServer()
                 .AddSigningCredential(new X509Certificate2("oidc.nmro.local.pfx"))
                 .AddIdentityServer4Stores(Configuration);
+
+            services.AddAuthentication("oidc")
+                .AddCookie("oidc", options =>
+                {
+                    options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+                    options.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.None;
+                });
 
             services.AddStackExchangeRedisCache(options =>
             {
@@ -77,6 +86,8 @@ namespace Nmro.Oidc
             app.UseIdentityServer();
 
             app.UseRouting();
+
+            app.UseCookiePolicy();
 
             app.UseAuthentication();
 

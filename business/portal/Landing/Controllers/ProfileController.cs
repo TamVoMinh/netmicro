@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Nmro.Portal.Landing.Controllers
 {
-    [Authorize(AuthenticationSchemes = "OpenIdConnect")]
+    [Authorize(AuthenticationSchemes = "oidc")]
     public class ProfileController : Controller
     {
         private readonly ILogger<ProfileController> _logger;

@@ -1,3 +1,4 @@
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -28,7 +29,7 @@ namespace Nmro.Security.IAM.Faces.API.Controllers
         [HttpGet("{key}")]
         [SwaggerOperation("Get a grant")]
         public async Task<PersistedGrant> GetGrant([FromRoute] string key)
-            => await Mediator.Send(new GetGrantQuery{ Key = key });
+            => await Mediator.Send(new GetGrantQuery{ Key = WebUtility.UrlDecode(key) });
 
         [HttpDelete("{key}")]
         [SwaggerOperation("Delete a grant")]
