@@ -34,7 +34,7 @@ namespace Nmro.Security.IAM.Faces.API.Controllers
         [HttpDelete("{key}")]
         [SwaggerOperation("Delete a grant")]
         public async Task<int> RemoveGrant([FromRoute] string key)
-            => await Mediator.Send(new RemoveGrantCommand{ TokenKey = key });
+            => await Mediator.Send(new RemoveGrantCommand{ TokenKey = WebUtility.UrlDecode(key) });
 
         [HttpDelete]
         [SwaggerOperation("Delete All related Grants")]

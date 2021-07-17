@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Nmro.Portal.Landing.Controllers
 {
-    [Authorize(AuthenticationSchemes = "oidc")]
+    [Authorize(AuthenticationSchemes = OpenIdConnectDefaults.AuthenticationScheme)]
     public class AccountController : Controller
     {
         private readonly ILogger<AccountController> _logger;
@@ -19,7 +19,6 @@ namespace Nmro.Portal.Landing.Controllers
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        [Authorize(AuthenticationSchemes = "oidc")]
         public Task<RedirectToActionResult> SignIn(string returnUrl)
         {
             return Task.FromResult(RedirectToAction(nameof(HomeController.Index), "Home"));

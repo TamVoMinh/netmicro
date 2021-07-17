@@ -12,6 +12,8 @@ using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.DataProtection;
 using StackExchange.Redis;
 using System;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+
 namespace Nmro.Oidc
 {
     public class Startup
@@ -44,8 +46,8 @@ namespace Nmro.Oidc
                 .AddSigningCredential(new X509Certificate2("oidc.nmro.local.pfx"))
                 .AddIdentityServer4Stores(Configuration);
 
-            services.AddAuthentication("oidc")
-                .AddCookie("oidc", options =>
+            services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+                .AddCookie(OpenIdConnectDefaults.AuthenticationScheme, options =>
                 {
                     options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
                     options.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.None;
