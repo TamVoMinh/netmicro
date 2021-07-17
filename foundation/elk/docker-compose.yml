@@ -62,8 +62,6 @@ services:
       dockerfile: Dockerfile
       args:
         ELK_VERSION: $ELK_VERSION
-    volumes:
-      - ./foundation/elk/Apm/config/apm-server.yml:/usr/share/apm-server/apm-server.yml:ro
     ports:
       - "8200:8200"
     environment:

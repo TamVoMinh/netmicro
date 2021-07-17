@@ -1,6 +1,6 @@
 using System;
+using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,15 +15,22 @@ namespace Nmro.Hosting.OidcClients
                 throw new ArgumentNullException(typeof(OidcOptions).Name);
             }
 
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
             var sessionCookieLifetime = configuration.GetValue("SessionCookieLifetimeMinutes", 60);
 
             services.AddAuthentication(options =>
             {
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = "oidc";
             })
-            .AddCookie(setup => setup.ExpireTimeSpan = TimeSpan.FromMinutes(sessionCookieLifetime))
-            .AddOpenIdConnect(options =>
+            .AddCookie(
+                setup => {
+                    setup.ExpireTimeSpan = TimeSpan.FromMinutes(sessionCookieLifetime);
+                    setup.Cookie.SameSite =  Microsoft.AspNetCore.Http.SameSiteMode.Unspecified;
+                }
+            )
+            .AddOpenIdConnect("oidc", options =>
             {
                 options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.Authority = oidcOptions.Authority;

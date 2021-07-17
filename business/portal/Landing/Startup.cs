@@ -10,6 +10,7 @@ using Nmro.Hosting;
 using Elastic.Apm.NetCoreAll;
 using StackExchange.Redis;
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Http;
 
 namespace Nmro.Portal.Landing
 {
@@ -29,6 +30,8 @@ namespace Nmro.Portal.Landing
             if(Environment.IsDevelopment()){
                 IdentityModelEventSource.ShowPII = true;
             }
+
+            services.ConfigureNonBreakingSameSiteCookies();
 
             services.AddNmroLogging();
 
@@ -69,6 +72,8 @@ namespace Nmro.Portal.Landing
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseCookiePolicy();
 
             app.UseAuthentication();
 

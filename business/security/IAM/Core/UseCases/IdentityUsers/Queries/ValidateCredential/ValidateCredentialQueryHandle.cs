@@ -1,7 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Nmro.Security.IAM.Core.Interfaces;
 using Nmro.Security.IAM.Core.UseCases.Users.Dtos;
