@@ -73,9 +73,6 @@ namespace Nmro.Oidc.Infrastructure.IamClient
 
         public async Task<PersistedGrant> GetGrant(string key)
         {
-
-            _logger.LogTrace("URL {0}", WebUtility.UrlEncode(key));
-
             string apiEndpoint =  _origin.AppendPathSegments("oidc","grants", WebUtility.UrlEncode(key));
 
             return await apiEndpoint.GetAsync().ReceiveJson<PersistedGrant>();
@@ -94,7 +91,7 @@ namespace Nmro.Oidc.Infrastructure.IamClient
 
         public async Task<int> RemoveGrant(string key)
         {
-            string apiEndpoint =  _origin.AppendPathSegments("oidc","grants", key);
+            string apiEndpoint =  _origin.AppendPathSegments("oidc","grants", WebUtility.UrlEncode(key));
             return await apiEndpoint.DeleteAsync().ReceiveJson<int>();
         }
 
