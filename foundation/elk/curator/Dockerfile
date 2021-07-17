@@ -1,6 +1,6 @@
 FROM alpine:3.8
 
-ENV CURATOR_VERSION=5.7.6
+ENV CURATOR_VERSION=5.8.4
 
 RUN apk --update add --no-cache tini python py-pip \
   && pip install elasticsearch-curator==${CURATOR_VERSION}
